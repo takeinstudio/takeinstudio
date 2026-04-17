@@ -30,8 +30,8 @@ function Hero() {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 sm:pt-28 pb-8">
+        <div className="max-w-4xl mx-auto text-center space-y-3 sm:space-y-5">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
           >
             Web Development & <br />
             <span className="text-primary">Mobile App Development</span>
@@ -69,7 +69,7 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-white/80 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-white/80 text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
             Websites, Mobile Apps & Branding for modern businesses that demand excellence. We turn visions into pixel-perfect reality.
           </motion.p>
@@ -80,8 +80,8 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
           >
-            <button 
-              onClick={() => setShowAudit(true)} 
+            <button
+              onClick={() => setShowAudit(true)}
               className="glow-btn bg-primary text-primary-foreground flex items-center justify-center gap-2 text-sm px-8"
             >
               Get Free Website Audit <ArrowRight size={16} />
@@ -328,7 +328,7 @@ function CTABanner() {
 export default function HomePage() {
   return (
     <>
-      <SEO 
+      <SEO
         title="Bhubaneswar's Top Web & Mobile App Development Company"
         description="TakeIN Studio is a premier digital agency in Bhubaneswar. We provide high-end web development, mobile app development, and UI/UX design services globally."
         faqSchema={[

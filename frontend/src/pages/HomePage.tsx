@@ -13,7 +13,7 @@ function Hero() {
   const [showAudit, setShowAudit] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative h-screen flex items-center overflow-hidden">
       <AuditModal isOpen={showAudit} onClose={() => setShowAudit(false)} />
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
@@ -30,14 +30,14 @@ function Hero() {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 sm:pt-28 pb-8">
-        <div className="max-w-4xl mx-auto text-center space-y-3 sm:space-y-5">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 sm:pt-20">
+        <div className="max-w-4xl mx-auto text-center space-y-2 sm:space-y-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1">
               Global Remote Studio • Serving Clients Worldwide
             </span>
           </motion.div>
@@ -46,24 +46,24 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-[1.1] tracking-tight text-white px-2"
           >
             We Build Websites & Apps <br />
             <span className="text-primary">That Actually Grow Your Business</span>
             <br />
-            <span className="text-xl sm:text-2xl opacity-80">Engineered for Digital Mastery</span>
+            <span className="text-base sm:text-xl opacity-80 mt-1 block font-medium">Engineered for Digital Mastery</span>
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="pt-2"
+            className="pt-1"
           >
-            <p className="text-white/80 text-xs font-bold uppercase tracking-[0.3em] mb-4">
+            <p className="text-white/80 text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] mb-2 sm:mb-4">
               Premium • Modern • High-Performance
               <br />
-              <span className="text-primary mt-2 block animate-pulse">Limited free audits available this month</span>
+              <span className="text-primary mt-1 block animate-pulse">Limited free audits available this month</span>
             </p>
           </motion.div>
 
@@ -71,7 +71,7 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-white/90 text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-white/90 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
           >
             High-performance websites, mobile apps, and digital platforms designed for modern businesses — built to convert, scale, and perform.
           </motion.p>
@@ -80,26 +80,26 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col items-center space-y-4 pt-4"
+            className="flex flex-col items-center space-y-4 pt-2 sm:pt-4"
           >
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center w-full max-w-md mx-auto">
               <button
                 onClick={() => setShowAudit(true)}
-                className="glow-btn bg-primary text-primary-foreground flex flex-1 items-center justify-center gap-2 text-sm px-8 py-4 font-bold rounded-2xl"
+                className="glow-btn bg-primary text-primary-foreground flex flex-1 items-center justify-center gap-2 text-xs px-6 py-3.5 font-bold rounded-2xl"
               >
-                Book a Free Call <ArrowRight size={16} />
+                Book a Free Call <ArrowRight size={14} />
               </button>
               <Link 
                 to="/contact" 
-                className="glow-btn bg-white/10 backdrop-blur-md text-white border border-white/20 flex flex-1 items-center justify-center gap-2 text-sm px-8 py-4 font-bold rounded-2xl hover:bg-white/20 transition-all"
+                className="glow-btn bg-white/10 backdrop-blur-md text-white border border-white/20 flex flex-1 items-center justify-center gap-2 text-xs px-6 py-3.5 font-bold rounded-2xl hover:bg-white/20 transition-all"
               >
-                Send Project Details <Sparkles size={16} />
+                Send Project Details <Sparkles size={14} />
               </Link>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] text-white/50 uppercase tracking-[0.2em] font-bold">
-              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ Free Consultation</span>
-              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ No Obligation</span>
-              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ Serving Clients Globally</span>
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-all">✔ Free Consultation</span>
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-all">✔ No Obligation</span>
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-all">✔ Serving Clients Globally</span>
             </div>
           </motion.div>
         </div>

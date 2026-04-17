@@ -146,17 +146,25 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Ultra-thin & Themed */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--cream));
+  background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
-  border-radius: 10px;
+  background: hsl(var(--primary) / 0.4);
+  border-radius: 20px;
+  transition: all 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Ensure content fits perfectly on 1080p */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
 }

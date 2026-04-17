@@ -30,14 +30,14 @@ function Hero() {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="container mx-auto section-padding relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12">
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2">
               #1 Digital Agency in Bhubaneswar
             </span>
           </motion.div>
@@ -46,7 +46,7 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
           >
             Web Development & <br />
             <span className="text-primary">Mobile App Development</span>
@@ -69,7 +69,7 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed"
+            className="text-white/80 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed"
           >
             Websites, Mobile Apps & Branding for modern businesses that demand excellence. We turn visions into pixel-perfect reality.
           </motion.p>

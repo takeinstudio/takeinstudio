@@ -8,7 +8,7 @@ export default function FitZoneProject() {
     <div className="bg-cream min-h-screen">
       <SEO 
         title="FitZone Gym App Case Study | Mobile App Development" 
-        description="See how TakeIN Studio built the FitZone Gym App, delivering a premium fitness tracking experience for Bhubaneswar's top fitness brand."
+        description="See how TakeIN Studio built the FitZone Gym App, delivering a premium fitness tracking experience for a leading high-end fitness brand."
       />
 
       <section className="pt-32 pb-20 px-4">
@@ -21,7 +21,7 @@ export default function FitZoneProject() {
             <span className="text-primary text-xs font-bold uppercase tracking-widest mb-4 block underline decoration-2 underline-offset-4">Success Story</span>
             <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">FitZone Gym App</h1>
             <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl leading-relaxed">
-              Transforming traditional fitness management into a seamless, high-performance mobile experience for Bhubaneswar's largest gym chain.
+              Transforming traditional fitness management into a seamless, high-performance mobile experience for an upscale fitness brand.
             </p>
           </header>
 
@@ -42,7 +42,7 @@ export default function FitZoneProject() {
                   <h3 className="font-display font-bold text-2xl">The Problem</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  FitZone was struggling with fragmented member management, manual booking systems, and low member engagement outside the gym. They needed a premium digital hub that reflected their upscale brand identity in Bhubaneswar.
+                  FitZone was struggling with fragmented member management, manual booking systems, and low member engagement. They needed a premium digital hub that reflected their upscale brand identity and positioned them as a leader in the fitness space.
                 </p>
               </div>
               <div className="space-y-4">

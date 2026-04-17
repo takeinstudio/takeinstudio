@@ -8,7 +8,7 @@ export default function MediCareProject() {
     <div className="bg-cream min-h-screen">
       <SEO 
         title="MediCare Portal Case Study | Healthcare Web Platform" 
-        description="Explore how TakeIN Studio developed the MediCare Portal — a secure, fast, and patient-centric healthcare platform for a major hospital in Odisha."
+        description="Explore how TakeIN Studio developed the MediCare Portal — a secure, fast, and patient-centric healthcare platform for a major healthcare institution."
       />
 
       <section className="pt-32 pb-20 px-4">
@@ -21,7 +21,7 @@ export default function MediCareProject() {
             <span className="text-accent text-xs font-bold uppercase tracking-widest mb-4 block underline decoration-2 underline-offset-4">Web Transformation</span>
             <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">MediCare Portal</h1>
             <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl leading-relaxed">
-              Designing a secure, high-speed, and patient-first digital ecosystem for one of Odisha's premier healthcare institutions.
+              Designing a secure, high-speed, and patient-first digital ecosystem for a premier healthcare institution.
             </p>
           </header>
 

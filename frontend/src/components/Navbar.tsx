@@ -32,10 +32,13 @@ export default function Navbar() {
           scrolled ? "bg-white/90 dark:bg-black/90 scale-95" : "bg-white/80 dark:bg-black/80"
         }`}
       >
-        <Link to="/" className="font-display text-base sm:text-lg font-bold tracking-tight">
-          <span className="text-primary">TakeIN</span>{" "}
-          <span className="text-foreground font-extrabold">Studio</span>
-        </Link>
+        <div className="flex flex-col">
+          <Link to="/" className="font-display text-base sm:text-lg font-bold tracking-tight leading-none">
+            <span className="text-primary">TakeIN</span>{" "}
+            <span className="text-foreground font-extrabold">Studio</span>
+          </Link>
+          <span className="text-[8px] uppercase tracking-[0.2em] font-bold text-muted-foreground/60 ml-px">Global Digital Agency</span>
+        </div>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-4">
@@ -55,9 +58,9 @@ export default function Navbar() {
           ))}
           <Link
             to="/contact"
-            className="bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full hover:scale-105 transition-all"
+            className="bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full hover:scale-105 transition-all shadow-lg shadow-primary/20"
           >
-            Start
+            Book a Free Call
           </Link>
         </div>
 
@@ -95,9 +98,9 @@ export default function Navbar() {
               ))}
               <Link
                 to="/contact"
-                className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest text-center mt-1 py-3 rounded-xl"
+                className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest text-center mt-1 py-3 rounded-xl shadow-lg shadow-primary/20"
               >
-                Start Project
+                Book a Free Call
               </Link>
             </div>
           </motion.div>

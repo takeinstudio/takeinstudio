@@ -18,7 +18,10 @@ import { useEffect } from "react";
 // Service Pages
 import WebDevBhubaneswar from "@/pages/services/WebDevBhubaneswar";
 import AppDevBhubaneswar from "@/pages/services/AppDevBhubaneswar";
+import WebDevGlobal from "@/pages/services/WebDevGlobal";
+import AppDevGlobal from "@/pages/services/AppDevGlobal";
 import UXDesignAgency from "@/pages/services/UXDesignAgency";
+import Locations from "@/pages/Locations";
 
 // Blog
 import WebsiteCostBhubaneswar from "@/pages/blog/WebsiteCostBhubaneswar";
@@ -66,6 +69,9 @@ const App = () => (
               <Route path="/contact" element={<ContactPage />} />
               
               {/* Service Pages */}
+              <Route path="/web-development" element={<WebDevGlobal />} />
+              <Route path="/mobile-app-development" element={<AppDevGlobal />} />
+              <Route path="/locations" element={<Locations />} />
               <Route path="/web-development-bhubaneswar" element={<WebDevBhubaneswar />} />
               <Route path="/mobile-app-development-bhubaneswar" element={<AppDevBhubaneswar />} />
               <Route path="/ui-ux-design-agency" element={<UXDesignAgency />} />

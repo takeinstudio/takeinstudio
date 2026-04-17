@@ -37,8 +37,8 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2">
-              #1 Premium Digital Agency
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2">
+              Global Remote Studio • Serving Clients Worldwide
             </span>
           </motion.div>
 
@@ -48,10 +48,10 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
           >
-            Web Development & <br />
-            <span className="text-primary">Mobile App Development</span>
+            We Build Websites & Apps <br />
+            <span className="text-primary">That Actually Grow Your Business</span>
             <br />
-            Engineered for Digital Growth
+            <span className="text-xl sm:text-2xl opacity-80">Engineered for Digital Mastery</span>
           </motion.h1>
 
           <motion.div
@@ -60,8 +60,10 @@ function Hero() {
             transition={{ duration: 1, delay: 0.5 }}
             className="pt-2"
           >
-            <p className="text-white/60 text-xs font-bold uppercase tracking-[0.3em] mb-4">
+            <p className="text-white/80 text-xs font-bold uppercase tracking-[0.3em] mb-4">
               Premium • Modern • High-Performance
+              <br />
+              <span className="text-primary mt-2 block animate-pulse">Limited free audits available this month</span>
             </p>
           </motion.div>
 
@@ -69,26 +71,36 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-white/80 text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-white/90 text-xs sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Websites, Mobile Apps & Branding for modern businesses that demand excellence. We turn visions into pixel-perfect reality.
+            High-performance websites, mobile apps, and digital platforms designed for modern businesses — built to convert, scale, and perform.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+            className="flex flex-col items-center space-y-4 pt-4"
           >
-            <button
-              onClick={() => setShowAudit(true)}
-              className="glow-btn bg-primary text-primary-foreground flex items-center justify-center gap-2 text-sm px-8"
-            >
-              Get Free Website Audit <ArrowRight size={16} />
-            </button>
-            <Link to="/work" className="glow-btn bg-white/10 backdrop-blur-md text-white border border-white/20 flex items-center justify-center gap-2 text-sm px-8 hover:bg-white/20">
-              View Showcase <FolderKanban size={16} />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto">
+              <button
+                onClick={() => setShowAudit(true)}
+                className="glow-btn bg-primary text-primary-foreground flex flex-1 items-center justify-center gap-2 text-sm px-8 py-4 font-bold rounded-2xl"
+              >
+                Book a Free Call <ArrowRight size={16} />
+              </button>
+              <Link 
+                to="/contact" 
+                className="glow-btn bg-white/10 backdrop-blur-md text-white border border-white/20 flex flex-1 items-center justify-center gap-2 text-sm px-8 py-4 font-bold rounded-2xl hover:bg-white/20 transition-all"
+              >
+                Send Project Details <Sparkles size={16} />
+              </Link>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] text-white/50 uppercase tracking-[0.2em] font-bold">
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ Free Consultation</span>
+              <span className="flex items-center gap-1.5">✔ No Obligation</span>
+              <span className="flex items-center gap-1.5">✔ Global Availability</span>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -120,10 +132,10 @@ function ClientLogos() {
 
 /* ─── Services ─── */
 const services = [
-  { icon: Globe, title: "Web Development", path: "/web-development-bhubaneswar", desc: "Blazing-fast, SEO-optimised websites that convert visitors into loyal customers." },
-  { icon: Smartphone, title: "Mobile Apps", path: "/mobile-app-development-bhubaneswar", desc: "Native and cross-platform apps with silky-smooth UX and offline-first architecture." },
-  { icon: Palette, title: "UI/UX Design", path: "/ui-ux-design-agency", desc: "Research-driven interfaces that balance beauty with usability at every touch point." },
-  { icon: Award, title: "Branding", path: "/contact", desc: "Cohesive brand identities — from logos to guidelines — that leave lasting impressions." },
+  { icon: Globe, title: "Web Development", path: "/web-development", desc: "High-performance, SEO-optimized digital experiences engineered for conversion and scale." },
+  { icon: Smartphone, title: "Mobile Apps", path: "/mobile-app-development", desc: "Silky-smooth Android and iOS applications with offline-first architecture and modern UX." },
+  { icon: LayoutDashboard, title: "Custom Software", path: "/contact", desc: "Specialized ERPs, booking systems, and internal platforms tailored to your business logic." },
+  { icon: Zap, title: "UI/UX Strategy", path: "/ui-ux-design-agency", desc: "Research-driven interfaces that balance premium aesthetics with intuitive user journeys." },
 ];
 
 function Services() {
@@ -194,6 +206,87 @@ const testimonials = [
   { name: "James Rodriguez", role: "Founder, NovaTech", text: "Working with TakeIN felt like having an in-house team. They delivered our mobile app ahead of schedule and it's genuinely beautiful.", rating: 5 },
   { name: "Amara Osei", role: "CMO, PureForm", text: "The branding they created for us is exactly what we needed — modern, bold, and totally aligned with our vision. Couldn't be happier.", rating: 5 },
 ];
+
+/* ─── Pricing ─── */
+function Pricing() {
+  return (
+    <section className="section-padding bg-cream-dark/20" id="pricing">
+      <div className="container mx-auto">
+        <SectionHeading 
+          badge="Pricing & Plans" 
+          title="Flexible Support for Ambitious Goals" 
+          subtitle="Designed to match your vision, whether you're starting small or building at scale." 
+        />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Custom Projects */}
+          <AnimatedSection delay={0.1}>
+            <div className="clay-card p-10 h-full flex flex-col items-center text-center space-y-6 group border border-white/5 shadow-sm hover:shadow-xl transition-all duration-500">
+              <div className="w-16 h-16 rounded-2xl bg-accent/5 flex items-center justify-center text-accent">
+                <FolderKanban size={32} />
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-display text-2xl font-bold">Custom Projects</h3>
+                <p className="text-muted-foreground text-sm px-4">Flexible solutions for specific business needs and unique scopes.</p>
+              </div>
+              <ul className="text-sm space-y-3 font-medium text-foreground/70">
+                <li>✔ Flexible Scope</li>
+                <li>✔ Fast Delivery</li>
+                <li>✔ Upgrade Path</li>
+              </ul>
+              <div className="pt-6">
+                <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-1">Starting From</p>
+                <p className="text-3xl font-display font-bold text-primary">{formatPrice(300)}</p>
+              </div>
+              <Link to="/contact" className="glow-btn bg-white border border-border text-foreground hover:bg-muted w-full py-4 text-sm font-bold shadow-sm">
+                Get Custom Quote
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          {/* Premium Projects */}
+          <AnimatedSection delay={0.2}>
+            <div className="clay-card p-10 h-full flex flex-col items-center text-center space-y-6 group relative border border-primary/20 shadow-xl shadow-primary/5 transition-all duration-500 overflow-hidden">
+               {/* Shine effect */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 blur-3xl rounded-full" />
+              
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                <Sparkles size={32} />
+              </div>
+              <div className="space-y-2">
+                <div className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-2 animate-pulse">Most Popular</div>
+                <h3 className="font-display text-2xl font-bold">Premium Projects</h3>
+                <p className="text-muted-foreground text-sm px-4">High-performance digital solutions built for conversion and scale.</p>
+              </div>
+              <ul className="text-sm space-y-3 font-medium text-foreground/70">
+                <li>✔ Modern UI/UX</li>
+                <li>✔ Scalable Architecture</li>
+                <li>✔ Custom Integrations</li>
+                <li>✔ High-Performance Build</li>
+              </ul>
+              <div className="pt-6">
+                <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-1">Starting From</p>
+                <p className="text-3xl font-display font-bold text-primary">{formatPrice(800)}</p>
+              </div>
+              <button 
+                onClick={() => (window.location.href='/contact')}
+                className="glow-btn bg-primary text-primary-foreground w-full py-4 text-sm font-bold shadow-glow hover:scale-[1.02] transition-all"
+              >
+                Book a Free Call
+              </button>
+            </div>
+          </AnimatedSection>
+        </div>
+        
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground text-xs font-medium italic">
+            “Every project is unique — let's discuss your requirements and build the right solution for you.”
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Testimonials() {
   return (
@@ -333,8 +426,8 @@ export default function HomePage() {
         description="TakeIN Studio is a premier digital agency. We provide high-end web development, mobile app development, and UI/UX design services globally."
         faqSchema={[
           {
-            question: "Who is the best web development company in Bhubaneswar?",
-            answer: "TakeIN Studio is widely recognized as a top-tier web and app development agency in Bhubaneswar, offering premium design and high-performance code."
+            question: "Who is the best web development agency for premium projects?",
+            answer: "TakeIN Studio is widely recognized as a top-tier digital agency specializing in premium design and high-performance code for global clients."
           },
           {
             question: "Do you offer free website audits?",
@@ -346,6 +439,7 @@ export default function HomePage() {
       <ClientLogos />
       <Services />
       <PortfolioPreview />
+      <Pricing />
       <Testimonials />
       <Stats />
       <CTABanner />

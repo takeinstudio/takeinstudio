@@ -12,12 +12,21 @@ const footerLinks = [
     ],
   },
   {
-    title: "Services",
+    title: "Global Services",
     links: [
-      { name: "Web Development", href: "#" },
-      { name: "Mobile Apps", href: "#" },
-      { name: "UI/UX Design", href: "#" },
-      { name: "Branding", href: "#" },
+      { name: "Web Development", href: "/web-development" },
+      { name: "Mobile App Development", href: "/mobile-app-development" },
+      { name: "UI/UX Design Agency", href: "/ui-ux-design-agency" },
+      { name: "Our Process", href: "/about" },
+    ],
+  },
+  {
+    title: "Regional Sites",
+    links: [
+      { name: "Web Dev (Bhubaneswar)", href: "/web-development-bhubaneswar" },
+      { name: "App Dev (Bhubaneswar)", href: "/mobile-app-development-bhubaneswar" },
+      { name: "Best Agency Odisha", href: "/locations" },
+      { name: "Service Areas", href: "/locations" },
     ],
   },
   {
@@ -63,7 +72,7 @@ export default function Footer() {
               <span className="text-primary">TakeIN</span> Studio
             </h3>
             <p className="text-white/80 text-sm leading-relaxed max-w-sm">
-              We craft premium digital experiences that elevate brands and drive growth. Let's build something extraordinary together.
+              TakeIN Studio — Global Digital Agency. We craft premium digital experiences that elevate brands and drive growth worldwide, rooted in performance and precision.
             </p>
             <div className="flex gap-3 pt-2">
               {socials.map((s, i) => (

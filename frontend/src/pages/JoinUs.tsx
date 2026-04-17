@@ -49,14 +49,14 @@ export default function JoinUs() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 shadow-soft">
-              Hiring Experts — 2026 Batch
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 shadow-soft font-display">
+              Join the TakeIN Network — Elite Talent Circle
             </span>
             <h1 className="font-display text-5xl sm:text-7xl font-bold leading-tight tracking-tight mb-8">
-              Build the <span className="text-primary italic">Future</span> <br /> With Us
+              Join the <span className="text-primary italic">TakeIN Network</span>
             </h1>
             <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-              Join a premium network of creators, developers, and innovators. We don't just hire — we curate an elite collective.
+              Work on real client projects, build your portfolio, and grow as a freelancer alongside a curated network of designers and developers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="#form" className="glow-btn bg-primary text-primary-foreground flex items-center justify-center gap-2 text-lg px-8 py-4">
@@ -112,6 +112,51 @@ export default function JoinUs() {
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* For Students & Freelancers */}
+      <section className="section-padding bg-foreground text-background relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/noise.png')] opacity-10 pointer-events-none" />
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection>
+              <h2 className="font-display text-4xl sm:text-5xl font-bold mb-6">Start Your <span className="text-primary italic">Freelance Journey</span></h2>
+              <p className="text-background/70 text-lg mb-8 leading-relaxed">
+                Whether you're a student or an aspiring freelancer, TakeIN Studio gives you the opportunity to work on real-world projects, gain experience, and build a strong portfolio.
+              </p>
+              <p className="text-background/70 text-lg mb-10 leading-relaxed font-medium border-l-2 border-primary pl-6">
+                We connect you with live projects, guide your growth, and help you become industry-ready while earning and learning.
+              </p>
+              <div className="flex gap-4">
+                <a href="#form" className="bg-primary text-primary-foreground px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg shadow-primary/20">
+                  Join the Circle
+                </a>
+              </div>
+            </AnimatedSection>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="h-40 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                   <Star className="text-primary mb-2" size={24} />
+                   <p className="text-xs font-bold uppercase tracking-widest">Live Projects</p>
+                </div>
+                <div className="h-40 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                   <Users className="text-primary mb-2" size={24} />
+                   <p className="text-xs font-bold uppercase tracking-widest">Elite Mentorship</p>
+                </div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <div className="h-40 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                   <Rocket className="text-primary mb-2" size={24} />
+                   <p className="text-xs font-bold uppercase tracking-widest">Rapid Growth</p>
+                </div>
+                <div className="h-40 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                   <CheckCircle2 className="text-primary mb-2" size={24} />
+                   <p className="text-xs font-bold uppercase tracking-widest">Portfolio Ready</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

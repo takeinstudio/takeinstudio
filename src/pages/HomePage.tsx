@@ -5,11 +5,16 @@ import { formatPrice } from "@/lib/currency";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import { useEffect, useState, useRef } from "react";
+import SEO from "@/components/SEO";
+import AuditModal from "@/components/AuditModal";
 
 /* ─── Hero ─── */
 function Hero() {
+  const [showAudit, setShowAudit] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
+      <AuditModal isOpen={showAudit} onClose={() => setShowAudit(false)} />
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -33,7 +38,7 @@ function Hero() {
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase mb-6">
-              Digital Agency — Crafting the Future
+              #1 Digital Agency in Bhubaneswar
             </span>
           </motion.div>
 
@@ -41,13 +46,24 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white px-2"
           >
-            We Build{" "}
-            <span className="text-primary">Premium</span>
+            Web Development & <br />
+            <span className="text-primary">Mobile App Development</span>
             <br />
-            Digital Experiences
+            Company in Bhubaneswar
           </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="pt-2"
+          >
+            <p className="text-white/60 text-xs font-bold uppercase tracking-[0.3em] mb-4">
+              Premium • Modern • High-Performance
+            </p>
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -64,11 +80,14 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
           >
-            <Link to="/work" className="glow-btn bg-primary text-primary-foreground flex items-center justify-center gap-2 text-sm">
-              View Our Work <ArrowRight size={16} />
-            </Link>
-            <Link to="/contact" className="glow-btn bg-card text-foreground border border-border flex items-center justify-center gap-2 text-sm">
-              Book a Project <Sparkles size={16} />
+            <button 
+              onClick={() => setShowAudit(true)} 
+              className="glow-btn bg-primary text-primary-foreground flex items-center justify-center gap-2 text-sm px-8"
+            >
+              Get Free Website Audit <ArrowRight size={16} />
+            </button>
+            <Link to="/work" className="glow-btn bg-white/10 backdrop-blur-md text-white border border-white/20 flex items-center justify-center gap-2 text-sm px-8 hover:bg-white/20">
+              View Showcase <FolderKanban size={16} />
             </Link>
           </motion.div>
         </div>
@@ -101,27 +120,27 @@ function ClientLogos() {
 
 /* ─── Services ─── */
 const services = [
-  { icon: Globe, title: "Web Development", desc: "Blazing-fast, SEO-optimised websites that convert visitors into loyal customers." },
-  { icon: Smartphone, title: "Mobile Apps", desc: "Native and cross-platform apps with silky-smooth UX and offline-first architecture." },
-  { icon: Palette, title: "UI/UX Design", desc: "Research-driven interfaces that balance beauty with usability at every touch point." },
-  { icon: Award, title: "Branding", desc: "Cohesive brand identities — from logos to guidelines — that leave lasting impressions." },
+  { icon: Globe, title: "Web Development", path: "/web-development-bhubaneswar", desc: "Blazing-fast, SEO-optimised websites that convert visitors into loyal customers." },
+  { icon: Smartphone, title: "Mobile Apps", path: "/mobile-app-development-bhubaneswar", desc: "Native and cross-platform apps with silky-smooth UX and offline-first architecture." },
+  { icon: Palette, title: "UI/UX Design", path: "/ui-ux-design-agency", desc: "Research-driven interfaces that balance beauty with usability at every touch point." },
+  { icon: Award, title: "Branding", path: "/contact", desc: "Cohesive brand identities — from logos to guidelines — that leave lasting impressions." },
 ];
 
 function Services() {
   return (
-    <section className="section-padding">
+    <section className="section-padding" id="services">
       <div className="container mx-auto">
-        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="We combine strategy, design, and technology to deliver solutions that grow businesses." />
+        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="We combine strategy, design, and technology to deliver solutions that grow businesses in Bhubaneswar." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s, i) => (
             <AnimatedSection key={s.title} delay={i * 0.1}>
-              <div className="clay-card p-8 h-full group hover:-translate-y-2 transition-all duration-500 cursor-default">
+              <Link to={s.path} className="clay-card p-8 h-full group hover:-translate-y-2 transition-all duration-500 block">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500">
                   <s.icon size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
                 </div>
                 <h3 className="font-display font-bold text-lg mb-3">{s.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
-              </div>
+              </Link>
             </AnimatedSection>
           ))}
         </div>
@@ -309,6 +328,20 @@ function CTABanner() {
 export default function HomePage() {
   return (
     <>
+      <SEO 
+        title="Bhubaneswar's Top Web & Mobile App Development Company"
+        description="TakeIN Studio is a premier digital agency in Bhubaneswar. We provide high-end web development, mobile app development, and UI/UX design services globally."
+        faqSchema={[
+          {
+            question: "Who is the best web development company in Bhubaneswar?",
+            answer: "TakeIN Studio is widely recognized as a top-tier web and app development agency in Bhubaneswar, offering premium design and high-performance code."
+          },
+          {
+            question: "Do you offer free website audits?",
+            answer: "Yes, we provide free comprehensive website audits covering SEO, performance, and UI/UX improvements."
+          }
+        ]}
+      />
       <Hero />
       <ClientLogos />
       <Services />

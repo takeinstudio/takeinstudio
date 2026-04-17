@@ -38,7 +38,7 @@ function Hero() {
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2">
-              #1 Digital Agency in Bhubaneswar
+              #1 Premium Digital Agency
             </span>
           </motion.div>
 
@@ -51,7 +51,7 @@ function Hero() {
             Web Development & <br />
             <span className="text-primary">Mobile App Development</span>
             <br />
-            Company in Bhubaneswar
+            Engineered for Digital Growth
           </motion.h1>
 
           <motion.div
@@ -130,7 +130,7 @@ function Services() {
   return (
     <section className="section-padding" id="services">
       <div className="container mx-auto">
-        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="We combine strategy, design, and technology to deliver solutions that grow businesses in Bhubaneswar." />
+        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="We combine strategy, design, and technology to deliver solutions that grow ambitious brands globally." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s, i) => (
             <AnimatedSection key={s.title} delay={i * 0.1}>
@@ -329,8 +329,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Bhubaneswar's Top Web & Mobile App Development Company"
-        description="TakeIN Studio is a premier digital agency in Bhubaneswar. We provide high-end web development, mobile app development, and UI/UX design services globally."
+        title="Premier Web & Mobile App Development Studio"
+        description="TakeIN Studio is a premier digital agency. We provide high-end web development, mobile app development, and UI/UX design services globally."
         faqSchema={[
           {
             question: "Who is the best web development company in Bhubaneswar?",

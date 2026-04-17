@@ -27,7 +27,7 @@ export default function WorkPage() {
     <>
       <SEO 
         title="Our Work | Premium Portfolio of TakeIN Studio"
-        description="Explore the best web and app development projects built by TakeIN Studio. Case studies from gym apps to medical portals in Bhubaneswar."
+        description="Explore the best web and app development projects built by TakeIN Studio — from high-performance fitness apps to enterprise-grade medical portals."
       />
       <section className="section-padding pt-32 sm:pt-40">
         <div className="container mx-auto">

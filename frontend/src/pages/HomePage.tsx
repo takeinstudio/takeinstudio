@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award } from "lucide-react";
+import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap } from "lucide-react";
 import { formatPrice } from "@/lib/currency";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -98,8 +98,8 @@ function Hero() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] text-white/50 uppercase tracking-[0.2em] font-bold">
               <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ Free Consultation</span>
-              <span className="flex items-center gap-1.5">✔ No Obligation</span>
-              <span className="flex items-center gap-1.5">✔ Global Availability</span>
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ No Obligation</span>
+              <span className="flex items-center gap-1.5 focus-within:text-white transition-colors duration-300">✔ Serving Clients Globally</span>
             </div>
           </motion.div>
         </div>
@@ -163,9 +163,9 @@ function Services() {
 
 /* ─── Portfolio Preview ─── */
 const projects = [
-  { title: "FitZone Gym App", category: "Mobile App", color: "from-primary/20 to-accent/20" },
-  { title: "MediCare Portal", category: "Web Platform", color: "from-accent/20 to-primary/10" },
-  { title: "Luxe Interiors", category: "Branding", color: "from-warm-light to-primary/10" },
+  { title: "Aura Platform", category: "Full-Stack SaaS", color: "from-primary/20 to-accent/20" },
+  { title: "Prism Core", category: "FinTech System", color: "from-accent/20 to-primary/10" },
+  { title: "Nexa Health", category: "Medical Platform", color: "from-warm-light to-primary/10" },
 ];
 
 function PortfolioPreview() {
@@ -401,10 +401,10 @@ function CTABanner() {
             </div>
             <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
-                Ready to <span className="text-primary">Elevate</span> Your Brand?
+                Ready to <span className="text-primary">Scale</span> Your Business?
               </h2>
               <p className="text-muted-foreground text-lg">
-                Let's collaborate to create something extraordinary. Your next digital masterpiece starts with a conversation.
+                Let's collaborate to create something extraordinary. We help startups and enterprises build their next digital masterpiece.
               </p>
               <Link to="/contact" className="glow-btn bg-primary text-primary-foreground inline-flex items-center gap-2">
                 Start Your Project <ArrowRight size={16} />

@@ -7,8 +7,8 @@ export default function FitZoneProject() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="FitZone Gym App Case Study | Mobile App Development" 
-        description="See how TakeIN Studio built the FitZone Gym App, delivering a premium fitness tracking experience for a leading high-end fitness brand."
+        title="Aura Platform Case Study | Premium SaaS Development" 
+        description="See how TakeIN Studio built Aura Platform, a high-performance SaaS ecosystem engineered for scalability and modern user engagement."
       />
 
       <section className="pt-32 pb-20 px-4">
@@ -19,20 +19,20 @@ export default function FitZoneProject() {
 
           <header className="mb-16">
             <span className="text-primary text-xs font-bold uppercase tracking-widest mb-4 block underline decoration-2 underline-offset-4">Success Story</span>
-            <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">FitZone Gym App</h1>
+            <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">Aura Platform (SaaS)</h1>
             <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl leading-relaxed">
-              Transforming traditional fitness management into a seamless, high-performance mobile experience for an upscale fitness brand.
+              Engineering a high-performance SaaS ecosystem designed to scale user engagement and automate complex business workflows.
             </p>
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
             <AnimatedSection className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl overflow-hidden flex items-center justify-center p-12">
               <div className="w-full h-full bg-white/40 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 flex flex-col items-center justify-center space-y-4">
-                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white text-3xl font-bold">FZ</div>
+                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white text-3xl font-bold">AP</div>
                 <div className="w-2/3 h-2 bg-primary/20 rounded-full overflow-hidden">
                   <div className="w-3/4 h-full bg-primary" />
                 </div>
-                <p className="text-xs font-bold text-primary italic uppercase tracking-widest">Premium Fitness Experience</p>
+                <p className="text-xs font-bold text-primary italic uppercase tracking-widest">Premium SaaS Foundation</p>
               </div>
             </AnimatedSection>
             <div className="space-y-12">
@@ -41,18 +41,18 @@ export default function FitZoneProject() {
                   <Target size={24} />
                   <h3 className="font-display font-bold text-2xl">The Problem</h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  FitZone was struggling with fragmented member management, manual booking systems, and low member engagement. They needed a premium digital hub that reflected their upscale brand identity and positioned them as a leader in the fitness space.
-                </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The client faced Fragmented workflow management and low user retention in their legacy environment. They required a premium digital foundation that could bridge the gap between complex functionality and an effortless user experience.
+                  </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-accent">
                   <Lightbulb size={24} />
                   <h3 className="font-display font-bold text-2xl">The Solution</h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  We built a custom-designed mobile app using React Native and Supabase. Features included real-time class booking, personalized workout trackers, and a sleek gamified progress dashboard to keep members motivated.
-                </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We engineered a custom SaaS architecture focused on real-time data synchronization and modular component design. The platform features advanced analytics dashboards, automated user onboarding, and a silky-smooth React-based interface.
+                  </p>
               </div>
             </div>
           </div>

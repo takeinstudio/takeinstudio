@@ -7,8 +7,8 @@ export default function MediCareProject() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="MediCare Portal Case Study | Healthcare Web Platform" 
-        description="Explore how TakeIN Studio developed the MediCare Portal — a secure, fast, and patient-centric healthcare platform for a major healthcare institution."
+        title="Prism Core Case Study | FinTech Infrastructure & Security" 
+        description="See how TakeIN Studio engineered Prism Core — a secure, high-performance FinTech ecosystem designed for complex financial transactions and scale."
       />
 
       <section className="pt-32 pb-20 px-4">
@@ -19,9 +19,9 @@ export default function MediCareProject() {
 
           <header className="mb-16">
             <span className="text-accent text-xs font-bold uppercase tracking-widest mb-4 block underline decoration-2 underline-offset-4">Web Transformation</span>
-            <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">MediCare Portal</h1>
+            <h1 className="font-display text-4xl sm:text-6xl font-bold mb-6">Prism Core (FinTech)</h1>
             <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl leading-relaxed">
-              Designing a secure, high-speed, and patient-first digital ecosystem for a premier healthcare institution.
+              Engineering a secure, high-speed, and architecturally robust FinTech ecosystem for complex financial operations.
             </p>
           </header>
 
@@ -32,27 +32,27 @@ export default function MediCareProject() {
                   <Shield size={24} />
                   <h3 className="font-display font-bold text-2xl">The Problem</h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  The institution lacked a centralized digital portal for patient data, appointment scheduling, and remote consultation. Their existing legacy system was slow, insecure, and confusing for both patients and staff.
-                </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The institution faced Fragmented transaction processing and security vulnerabilities in their legacy FinTech environment. They required a centralized, secure core that could handle millions of transactions with zero latency.
+                  </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-accent">
                   <Heart size={24} />
                   <h3 className="font-display font-bold text-2xl">The Solution</h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  We engineered a HIPAA-compliant (standard) web portal using Next.js for blazing-fast speed and a robust cloud backend. We prioritized accessibility, ensuring elderly patients could easily navigate the appointment system.
-                </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We engineered a secure, architecturally sound FinTech portal using Next.js and a high-performance distributed backend. We prioritized end-to-end encryption and real-time transaction monitoring, ensuring systemic stability at scale.
+                  </p>
               </div>
             </div>
             <AnimatedSection className="aspect-[4/5] bg-gradient-to-br from-accent/20 to-primary/20 rounded-3xl overflow-hidden flex items-center justify-center p-12 order-1 md:order-2">
               <div className="w-full h-full bg-white/40 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 flex flex-col items-center justify-center space-y-4">
-                <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center text-white text-3xl font-bold">MC</div>
+                <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center text-white text-3xl font-bold">PC</div>
                 <div className="w-2/3 h-2 bg-accent/20 rounded-full overflow-hidden">
                   <div className="w-1/2 h-full bg-accent" />
                 </div>
-                <p className="text-xs font-bold text-accent italic uppercase tracking-widest">Healthcare Redefined</p>
+                <p className="text-xs font-bold text-accent italic uppercase tracking-widest">FinTech Infrastructure</p>
               </div>
             </AnimatedSection>
           </div>

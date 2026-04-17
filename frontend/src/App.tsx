@@ -13,6 +13,9 @@ import AdminLoginPage from "@/pages/AdminLoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import JoinUs from "@/pages/JoinUs";
 import NotFound from "@/pages/NotFound";
+import PrivacyPolicy from "@/pages/legal/Privacy";
+import TermsOfService from "@/pages/legal/Terms";
+import CookiePolicy from "@/pages/legal/Cookies";
 import { useEffect } from "react";
 
 // Service Pages
@@ -85,6 +88,12 @@ const App = () => (
 
               <Route path="/admin" element={<AdminLoginPage />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              
+              {/* Legal */}
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/cookies" element={<CookiePolicy />} />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

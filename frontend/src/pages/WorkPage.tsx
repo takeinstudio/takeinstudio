@@ -5,18 +5,15 @@ import SEO from "@/components/SEO";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 
-const categories = ["All", "Institutions", "Gyms", "Medical", "Construction", "Interior Design", "NGOs"];
+const categories = ["All", "SaaS", "FinTech", "HealthTech", "ERP Systems", "Luxury", "Enterprise"];
 
 const projects = [
-  { title: "Oxford Academy Portal", category: "Institutions", desc: "Full-stack student management platform with real-time dashboards.", color: "from-primary/20 to-accent/10" },
-  { title: "FitZone Pro", path: "/projects/fitzone-gym-app", category: "Gyms", desc: "Membership app with workout tracking, bookings, and social features.", color: "from-accent/20 to-primary/10" },
-  { title: "MediCare Connect", path: "/projects/medicare-portal", category: "Medical", desc: "Telemedicine platform connecting patients with specialists globally.", color: "from-warm-light to-accent/15" },
-  { title: "BuildRight Co.", category: "Construction", desc: "Project management suite for construction firms with 3D site views.", color: "from-primary/15 to-warm-light" },
-  { title: "Luxe Interiors", category: "Interior Design", desc: "Immersive portfolio with AR room visualiser and booking system.", color: "from-accent/10 to-primary/20" },
-  { title: "HopeFoundation", category: "NGOs", desc: "Donation platform with impact tracking and transparent reporting.", color: "from-warm-light to-primary/10" },
-  { title: "Peak Performance", category: "Gyms", desc: "Cross-platform gym chain app with 200+ video workouts.", color: "from-primary/20 to-accent/20" },
-  { title: "SmartClinic", category: "Medical", desc: "AI-powered diagnostic assistant for rural healthcare providers.", color: "from-accent/15 to-warm-light" },
-  { title: "UrbanBuild", category: "Construction", desc: "Real-time fleet and equipment tracking for major contractors.", color: "from-primary/10 to-accent/20" },
+  { title: "Aura Platform", path: "/projects/fitzone-gym-app", category: "SaaS", desc: "High-performance student & resource management ecosystem for global scale.", color: "from-primary/20 to-accent/10" },
+  { title: "Prism Core", path: "/projects/medicare-portal", category: "FinTech", desc: "Secure financial transaction hub designed for zero-latency operations.", color: "from-accent/20 to-primary/10" },
+  { title: "Vertex Build", category: "ERP Systems", desc: "Construction project management suite with real-time site analytics.", color: "from-primary/15 to-warm-light" },
+  { title: "Nexa Health", category: "HealthTech", desc: "AI-powered diagnostic assistant for modern healthcare providers.", color: "from-accent/15 to-warm-light" },
+  { title: "Luxe Estates", category: "Luxury", desc: "Immersive real estate portfolio with immersive visual storytelling.", color: "from-accent/10 to-primary/20" },
+  { title: "Vault Financial", category: "Enterprise", desc: "Internal asset tracking and reporting system for global firms.", color: "from-warm-light to-primary/10" },
 ];
 
 export default function WorkPage() {

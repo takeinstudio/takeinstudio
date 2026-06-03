@@ -17,6 +17,7 @@ import ContactPage from "@/pages/ContactPage";
 import AdminLoginPage from "@/pages/AdminLoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import JoinUs from "@/pages/JoinUs";
+import ApplicationPage from "@/pages/ApplicationPage";
 import NotFound from "@/pages/NotFound";
 import PrivacyPolicy from "@/pages/legal/Privacy";
 import TermsOfService from "@/pages/legal/Terms";
@@ -54,9 +55,9 @@ function ScrollToTop() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
-  const isAdmin = pathname.startsWith("/admin");
+  const hideNavFooter = pathname.startsWith("/admin") || pathname.startsWith("/apply");
 
-  if (isAdmin) return <>{children}</>;
+  if (hideNavFooter) return <>{children}</>;
 
   return (
     <>
@@ -84,6 +85,7 @@ const App = () => (
               <Route path="/pricing" element={<PricingPage />} />
               <Route path="/faqs" element={<FaqsPage />} />
               <Route path="/career" element={<CareerPage />} />
+              <Route path="/apply" element={<ApplicationPage />} />
               <Route path="/join" element={<JoinUs />} />
               <Route path="/contact" element={<ContactPage />} />
 

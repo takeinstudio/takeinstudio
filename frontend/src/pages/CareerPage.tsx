@@ -18,31 +18,31 @@ const whyChooseUs = [
 
 const openPositions = [
   {
-    title: "Frontend Developer Intern",
+    title: "Frontend Developer",
     icon: Code,
     location: "Remote / Hybrid",
-    duration: "3-6 Months",
+    duration: "Full-Time / Contract",
     skills: ["React", "HTML/CSS", "JavaScript", "Tailwind CSS"],
   },
   {
-    title: "UI/UX Design Intern",
+    title: "UI/UX Designer",
     icon: Layout,
     location: "Remote",
-    duration: "3-6 Months",
+    duration: "Full-Time / Contract",
     skills: ["Figma", "Wireframing", "UI Design", "Prototyping"],
   },
   {
-    title: "Digital Marketing Intern",
+    title: "Digital Marketing Specialist",
     icon: PenTool,
     location: "Remote",
-    duration: "3-6 Months",
+    duration: "Full-Time / Contract",
     skills: ["SEO", "Social Media", "Content Marketing", "Google Ads"],
   },
   {
-    title: "Video Editing Intern",
+    title: "Video Editor",
     icon: Video,
     location: "Remote",
-    duration: "3-6 Months",
+    duration: "Full-Time / Contract",
     skills: ["Premiere Pro", "After Effects", "Content Editing", "Motion Graphics"],
   }
 ];
@@ -55,9 +55,9 @@ const culture = [
 ];
 
 const faqs = [
-  { q: "Do you offer internships?", a: "Yes, we frequently offer 3-6 month internships across various departments with the possibility of a full-time offer based on performance." },
-  { q: "Is remote work available?", a: "Many of our positions and internships offer flexible remote or hybrid work arrangements depending on the role." },
-  { q: "Will interns receive certificates?", a: "Absolutely. All interns receive a completion certificate, a letter of recommendation, and real portfolio pieces." },
+  { q: "What kind of roles do you offer?", a: "We offer full-time, part-time, and contract roles across engineering, design, marketing, and management. We value talent over rigid structures." },
+  { q: "Is remote work available?", a: "Many of our positions offer flexible remote or hybrid work arrangements depending on the role." },
+  { q: "Do you hire freelancers or contractors?", a: "Yes, occasionally we hire contractors for specific projects. Feel free to apply and mention your preference." },
   { q: "What skills are required?", a: "Required skills vary by position. Check individual job descriptions for specific technical requirements. We highly value passion and willingness to learn." },
   { q: "How long is the hiring process?", a: "Our process is streamlined. You can expect to hear back within 1-2 weeks after your initial application." }
 ];
@@ -170,12 +170,14 @@ export default function CareerPage() {
                     </div>
                   </div>
 
-                  <a 
-                    href="mailto:careers@takeinstudio.com" 
+                  <Link 
+                    to="/apply" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full py-3 rounded-xl bg-primary/10 text-primary font-bold text-sm tracking-wide hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2"
                   >
                     Apply Now <ArrowRight size={16} />
-                  </a>
+                  </Link>
                 </div>
               </AnimatedSection>
             ))}
@@ -295,12 +297,14 @@ export default function CareerPage() {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a 
-                    href="mailto:careers@takeinstudio.com"
+                  <Link 
+                    to="/apply"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-primary font-bold tracking-wide hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
                   >
                     Apply Now <ArrowRight size={18} />
-                  </a>
+                  </Link>
                   <Link 
                     to="/contact"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-transparent border-2 border-white/30 text-white font-bold tracking-wide hover:bg-white/10 transition-all flex items-center justify-center gap-2"

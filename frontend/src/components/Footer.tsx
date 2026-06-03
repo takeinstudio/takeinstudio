@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ArrowRight, Rocket, MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Heart } from "lucide-react";
+
+const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+);
 
 const servicesLinks = [
   { name: "Website Development", href: "/services" },
@@ -13,7 +18,7 @@ const servicesLinks = [
 
 const companyLinks = [
   { name: "About Us", href: "/about" },
-  { name: "Portfolio", href: "/work" },
+  { name: "Our Portfolio", href: "/work" },
   { name: "Pricing", href: "/pricing" },
   { name: "FAQs", href: "/faqs" },
   { name: "Careers", href: "/career" },
@@ -22,7 +27,7 @@ const companyLinks = [
 
 const quickLinks = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/work" },
   { name: "Pricing", href: "/pricing" },
@@ -31,116 +36,97 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-[#FFFDFB] text-gray-800 pt-32 overflow-hidden border-t border-gray-100">
+    <footer className="relative w-full bg-[#FCFBF9] text-gray-800 pt-16 overflow-hidden">
       
       {/* ── Background Elements ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
         
         {/* Soft floating glow orbs */}
-        <motion.div 
-          animate={{ x: [0, 60, 0], y: [0, -40, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 -right-20 w-[600px] h-[600px] bg-[#FF6B00]/[0.04] blur-[120px] rounded-full" 
-        />
-        <motion.div 
-          animate={{ x: [0, -50, 0], y: [0, 60, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 -left-32 w-[500px] h-[500px] bg-[#FF6B00]/[0.03] blur-[100px] rounded-full" 
-        />
-        <motion.div 
-          animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-amber-500/[0.02] blur-[150px] rounded-full" 
-        />
+        <div className="absolute -top-[10%] -left-[5%] w-[500px] h-[500px] bg-[#FF6B00] rounded-full blur-[140px] opacity-[0.12]" />
+        <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-[#FF6B00] rounded-full blur-[160px] opacity-[0.08]" />
+        <div className="absolute bottom-[0%] left-[30%] w-[400px] h-[400px] bg-[#FF6B00] rounded-full blur-[120px] opacity-[0.06]" />
+        <div className="absolute bottom-[5%] right-[5%] w-[250px] h-[250px] bg-[#FF6B00] rounded-full blur-[90px] opacity-[0.1]" />
 
-        {/* Abstract Curved Line Patterns */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.2]" xmlns="http://www.w3.org/2000/svg">
-          <path d="M-200 300 C 400 100, 800 600, 1600 300" stroke="url(#footer-grad)" strokeWidth="1" fill="none" />
-          <path d="M-100 500 C 500 800, 900 200, 1800 500" stroke="url(#footer-grad)" strokeWidth="0.5" fill="none" />
-          <path d="M-300 700 C 300 400, 1000 900, 1900 700" stroke="url(#footer-grad)" strokeWidth="1" fill="none" />
+        {/* Abstract Curved Line Patterns - Waves */}
+        <svg className="absolute top-[20%] left-0 w-full h-[80%]" preserveAspectRatio="none" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 300C200 300 300 150 600 200C900 250 1000 50 1440 150L1440 800L0 800Z" fill="url(#wave-grad-1)" opacity="0.3" />
+          <path d="M0 400C300 200 400 300 700 250C1000 200 1100 100 1440 200L1440 800L0 800Z" fill="url(#wave-grad-2)" opacity="0.2" />
+          <path d="M0 500C400 400 500 500 800 400C1100 300 1200 300 1440 400L1440 800L0 800Z" fill="url(#wave-grad-3)" opacity="0.1" />
+          
+          <path d="M0 150C250 50 400 250 750 200C1100 150 1250 0 1440 100" stroke="url(#line-grad)" strokeWidth="1.5" opacity="0.5" />
+          <path d="M0 250C300 350 450 150 800 200C1150 250 1300 100 1440 150" stroke="url(#line-grad)" strokeWidth="1" opacity="0.3" />
+
           <defs>
-            <linearGradient id="footer-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="wave-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.06" />
+              <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.01" />
+            </linearGradient>
+            <linearGradient id="wave-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.01" />
+            </linearGradient>
+            <linearGradient id="wave-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#FFFDFB" stopOpacity="1" />
+            </linearGradient>
+            <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#FF6B00" stopOpacity="0" />
-              <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.6" />
               <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
 
-        {/* Subtle Dotted Pattern Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(#FF6B00_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03]" />
+        {/* Dotted Patterns */}
+        <div className="absolute top-20 left-[12%] w-[80px] h-[80px] bg-[radial-gradient(#FF6B00_2px,transparent_2px)] [background-size:12px_12px] opacity-20" />
+        <div className="absolute top-24 right-[12%] w-[80px] h-[80px] bg-[radial-gradient(#FF6B00_2px,transparent_2px)] [background-size:12px_12px] opacity-20" />
+        <div className="absolute bottom-[35%] left-[5%] w-4 h-4 rounded-full border border-[#FF6B00] opacity-30" />
+        <div className="absolute bottom-[20%] right-[25%] w-3 h-3 rounded-full border border-[#FF6B00] opacity-30" />
       </div>
 
       {/* ── Top CTA Section ── */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center pb-24 md:pb-32 border-b border-gray-100 mb-20">
-        
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="w-16 h-16 rounded-full bg-gradient-to-br from-[#FF6B00]/10 to-[#FF6B00]/20 border border-[#FF6B00]/20 flex items-center justify-center text-[#FF6B00] mb-8 shadow-lg shadow-[#FF6B00]/5"
-        >
-          <Rocket size={26} className="ml-0.5 -mt-0.5" />
-        </motion.div>
-        
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-[4rem] font-black text-gray-900 mb-6 font-display tracking-tight leading-tight"
-        >
-          Ready to Build Something <br className="hidden sm:block"/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#ff8c3a]">Amazing?</span>
-        </motion.h2>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
-        >
-          Let's turn your ideas into websites, mobile apps, <br className="hidden sm:block"/> AI automations and digital experiences that grow your brand.
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <Link to="/contact" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FF6B00] to-[#ff8c3a] text-white px-10 py-5 rounded-full font-bold text-sm tracking-widest uppercase shadow-[0_10px_40px_-10px_rgba(255,107,0,0.6)] hover:shadow-[0_15px_50px_-10px_rgba(255,107,0,0.8)] hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden relative">
-            <span className="relative z-10 flex items-center gap-2">Start Your Project <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" /></span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
+      <div className="relative z-10 w-full max-w-[850px] mx-auto px-4 sm:px-6 mt-8 mb-20">
+        <div className="bg-white rounded-[32px] sm:rounded-[40px] shadow-[0_20px_60px_-15px_rgba(255,107,0,0.15)] relative px-6 py-14 sm:py-16 text-center border border-white">
+          
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full shadow-[0_10px_30px_rgba(255,107,0,0.15)] flex items-center justify-center">
+            <Send className="text-[#FF6B00] ml-[-2px] mt-[2px]" size={24} />
+          </div>
+          
+          <h2 className="text-[2rem] sm:text-[2.75rem] font-black text-gray-900 mb-4 font-display tracking-tight leading-[1.2]">
+            Ready to Build Something <br className="hidden sm:block"/>
+            <span className="text-[#FF6B00]">Amazing</span>?
+          </h2>
+          
+          <p className="text-gray-500 text-[14px] sm:text-[15px] max-w-[450px] mx-auto mb-8 font-medium leading-relaxed">
+            Let's turn your ideas into websites, mobile apps, <br className="hidden sm:block"/> AI automations and digital experiences that grow your brand.
+          </p>
+          
+          <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[#FF6B00] text-white px-8 py-3.5 sm:py-4 rounded-full font-bold text-[12px] sm:text-[13px] tracking-widest shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:shadow-[0_12px_30px_-8px_rgba(255,107,0,1)] hover:-translate-y-1 transition-all duration-300">
+            START YOUR PROJECT <ArrowRight size={16} strokeWidth={2.5} />
           </Link>
-        </motion.div>
+          
+        </div>
       </div>
 
       {/* ── Footer Links Grid ── */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-6 mb-16">
         
         {/* Column 1: Brand & About */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="lg:col-span-4 flex flex-col items-start lg:pr-10"
-        >
-          <Link to="/" className="inline-block mb-6">
-            <img src="/logo/logo_text.png" alt="TakeIN Studio" className="h-10 md:h-12 object-contain" />
+        <div className="lg:col-span-4 flex flex-col items-start lg:pr-6">
+          <Link to="/" className="inline-block mb-4">
+            <img src="/logo/logo_text.png" alt="TakeIN Studio" className="h-9 sm:h-10 object-contain" />
           </Link>
-          <p className="text-[15px] text-gray-500 leading-relaxed font-medium mb-10 max-w-sm">
+          <p className="text-[13px] text-gray-500 leading-relaxed font-medium mb-6 max-w-[280px]">
             We build modern digital solutions that help brands grow, automate and succeed in the digital world.
           </p>
           
           {/* Social Icons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             {[
               { icon: Instagram, href: "https://instagram.com" },
               { icon: Linkedin, href: "https://linkedin.com" },
               { icon: Facebook, href: "https://facebook.com" },
-              { icon: MessageCircle, href: "https://wa.me/918908233590" },
+              { icon: WhatsAppIcon, href: "https://wa.me/918908233590" },
               { icon: Mail, href: "mailto:info@takeinstudio.com" },
             ].map((s, i) => (
               <a
@@ -148,143 +134,116 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-gray-400 hover:text-[#FF6B00] hover:border-[#FF6B00]/30 hover:shadow-[0_0_20px_rgba(255,107,0,0.15)] hover:-translate-y-1.5 transition-all duration-300 group"
+                className="w-10 h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-gray-600 hover:text-[#FF6B00] transition-colors"
               >
-                <s.icon size={18} className="group-hover:scale-110 transition-transform" />
+                <s.icon size={16} />
               </a>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Column 2: Services */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="lg:col-span-2 lg:ml-auto"
-        >
-          <h4 className="font-extrabold text-gray-900 mb-6 uppercase tracking-widest text-xs">Services</h4>
-          <ul className="space-y-4">
+        <div className="lg:col-span-2">
+          <h4 className="font-extrabold text-gray-900 mb-5 text-[12px] tracking-widest">SERVICES</h4>
+          <ul className="space-y-3.5">
             {servicesLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.href}
-                  className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors inline-block hover:-translate-y-0.5"
-                >
+                <Link to={link.href} className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors flex items-center gap-2.5">
+                  <ChevronRight size={12} strokeWidth={3} className="text-[#FF6B00] shrink-0" />
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li className="pt-3">
-              <Link to="/services" className="text-sm font-bold text-[#FF6B00] flex items-center gap-1.5 hover:gap-2 transition-all group">
-                View All Services <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            <li className="pt-2">
+              <Link to="/services" className="text-[13px] font-bold text-[#FF6B00] flex items-center gap-1.5 hover:gap-2 transition-all">
+                View All Services <ArrowRight size={14} strokeWidth={2.5} />
               </Link>
             </li>
           </ul>
-        </motion.div>
+        </div>
 
         {/* Column 3: Company */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="lg:col-span-2 lg:ml-auto"
-        >
-          <h4 className="font-extrabold text-gray-900 mb-6 uppercase tracking-widest text-xs">Company</h4>
-          <ul className="space-y-4">
+        <div className="lg:col-span-2">
+          <h4 className="font-extrabold text-gray-900 mb-5 text-[12px] tracking-widest">COMPANY</h4>
+          <ul className="space-y-3.5">
             {companyLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.href}
-                  className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors inline-block hover:-translate-y-0.5"
-                >
+                <Link to={link.href} className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors flex items-center gap-2.5">
+                  <ChevronRight size={12} strokeWidth={3} className="text-[#FF6B00] shrink-0" />
                   {link.name}
                 </Link>
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
         {/* Column 4: Quick Links */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="lg:col-span-2 lg:ml-auto"
-        >
-          <h4 className="font-extrabold text-gray-900 mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
-          <ul className="space-y-4">
+        <div className="lg:col-span-2">
+          <h4 className="font-extrabold text-gray-900 mb-5 text-[12px] tracking-widest">QUICK LINKS</h4>
+          <ul className="space-y-3.5">
             {quickLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.href}
-                  className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors inline-block hover:-translate-y-0.5"
-                >
+                <Link to={link.href} className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors flex items-center gap-2.5">
+                  <ChevronRight size={12} strokeWidth={3} className="text-[#FF6B00] shrink-0" />
                   {link.name}
                 </Link>
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
         {/* Column 5: Contact Us */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="lg:col-span-2 flex flex-col items-start lg:ml-auto"
-        >
-          <h4 className="font-extrabold text-gray-900 mb-6 uppercase tracking-widest text-xs">Contact Us</h4>
-          <ul className="space-y-5">
-            <li className="flex items-center gap-4 group">
-              <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-gray-400 group-hover:text-[#FF6B00] group-hover:border-[#FF6B00]/30 transition-all shrink-0">
-                <Mail size={16} />
+        <div className="lg:col-span-2">
+          <h4 className="font-extrabold text-gray-900 mb-5 text-[12px] tracking-widest">CONTACT US</h4>
+          <ul className="space-y-4">
+            <li className="flex items-center gap-3.5">
+              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
+                <Mail size={14} strokeWidth={2.5} />
               </div>
-              <a href="mailto:info@takeinstudio.com" className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors">info@takeinstudio.com</a>
+              <a href="mailto:takeinstudio@gmail.com" className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors">takeinstudio@gmail.com</a>
             </li>
-            <li className="flex items-center gap-4 group">
-              <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-gray-400 group-hover:text-[#FF6B00] group-hover:border-[#FF6B00]/30 transition-all shrink-0">
-                <Phone size={16} />
+            <li className="flex items-center gap-3.5">
+              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
+                <Phone size={14} strokeWidth={2.5} />
               </div>
-              <div className="flex flex-col gap-1">
-                <a href="tel:+918908233590" className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors">+91 89082 33590</a>
-                <a href="tel:+919124442040" className="text-[15px] font-medium text-gray-500 hover:text-[#FF6B00] transition-colors">+91 91244 42040</a>
-              </div>
+              <a href="tel:+918908233590" className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors">+91 89082 33590</a>
             </li>
-            <li className="flex items-start gap-4 group pt-1">
-              <div className="w-10 h-10 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-gray-400 group-hover:text-[#FF6B00] group-hover:border-[#FF6B00]/30 transition-all shrink-0 mt-0.5">
-                <MapPin size={16} />
+            <li className="flex items-center gap-3.5">
+              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
+                <Phone size={14} strokeWidth={2.5} />
               </div>
-              <span className="text-[15px] font-medium text-gray-500 leading-relaxed">
+              <a href="tel:+919124442040" className="text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors">+91 91244 42040</a>
+            </li>
+            <li className="flex items-start gap-3.5">
+              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0 mt-0.5">
+                <MapPin size={14} strokeWidth={2.5} />
+              </div>
+              <span className="text-[13px] font-medium text-gray-600 leading-[1.6]">
                 TakeIN Studio, India<br/>
-                <span className="text-[13px] text-gray-400">Serving clients worldwide</span>
+                <span className="text-[12px] text-gray-400">Serving clients worldwide</span>
               </span>
             </li>
           </ul>
-        </motion.div>
+        </div>
       </div>
 
       {/* ── Bottom Bar ── */}
-      <div className="relative z-10 border-t border-gray-200/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row justify-between items-center gap-6 text-[13px] font-medium text-gray-500">
-          <p>© {new Date().getFullYear()} TakeIN Studio. All rights reserved.</p>
+      <div className="relative z-10 border-t border-[#FF6B00]/10 mt-8">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-medium text-gray-500">
+          <p>© 2026 <span className="text-[#FF6B00]">TakeIN Studio</span>. All rights reserved.</p>
           
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/privacy-policy" className="hover:text-[#FF6B00] transition-colors">Privacy Policy</Link>
-            <span className="text-gray-300 hidden sm:inline">•</span>
-            <Link to="/terms" className="hover:text-[#FF6B00] transition-colors">Terms & Conditions</Link>
-            <span className="text-gray-300 hidden sm:inline">•</span>
+            <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />
+            <Link to="/terms" className="hover:text-[#FF6B00] transition-colors">Terms &amp; Conditions</Link>
+            <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />
             <Link to="/refund-policy" className="hover:text-[#FF6B00] transition-colors">Refund Policy</Link>
-            <span className="text-gray-300 hidden sm:inline">•</span>
+            <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />
             <Link to="/cookie-policy" className="hover:text-[#FF6B00] transition-colors">Cookie Policy</Link>
           </div>
 
-          <p className="flex items-center gap-1.5 font-medium">
-            ❤ Proudly Built in India
+          <p className="flex items-center gap-1.5">
+            <Heart size={13} className="fill-[#FF6B00] text-[#FF6B00]" /> Proudly Built in India
           </p>
         </div>
       </div>
@@ -292,4 +251,3 @@ export default function Footer() {
     </footer>
   );
 }
-

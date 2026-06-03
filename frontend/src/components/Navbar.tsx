@@ -6,11 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { name: "HOME", path: "/" },
   { name: "ABOUT US", path: "/about" },
-  { name: "PORTFOLIOS", path: "/work" },
-  { name: "OFFERINGS", path: "/services" },
+  { name: "SERVICES", path: "/services" },
+  { name: "PORTFOLIO", path: "/work" },
   { name: "PRICING", path: "/pricing" },
   { name: "FAQS", path: "/faqs" },
-  { name: "CAREER", path: "/career" },
+  { name: "CAREERS", path: "/career" },
 ];
 
 export default function Navbar() {
@@ -31,7 +31,7 @@ export default function Navbar() {
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className={`px-6 h-16 sm:h-20 flex items-center justify-between rounded-full transition-all duration-500 shadow-[0_12px_40px_rgba(0,0,0,0.06)] bg-white/95 backdrop-blur-md border border-gray-100/50 ${scrolled ? "scale-95 shadow-[0_12px_45px_rgba(255,107,0,0.08)] border-primary/10" : ""
+        className={`px-6 h-16 sm:h-13 flex items-center justify-between rounded-full transition-all duration-500 shadow-[0_12px_40px_rgba(0,0,0,0.06)] bg-white/95 backdrop-blur-md border border-gray-100/50 ${scrolled ? "scale-95 shadow-[0_12px_45px_rgba(255,107,0,0.08)] border-primary/10" : ""
           }`}
       >
         <div>

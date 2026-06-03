@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, CheckCircle2, ShieldCheck, Share2, Smartphone, Code } from "lucide-react";
+import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, CheckCircle2, ShieldCheck, Share2, Smartphone, Code, Bot, Wrench } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -9,94 +9,133 @@ const services = [
     id: "web-development",
     title: "Website Design & Development",
     icon: Monitor,
-    description: "Responsive, ultra-fast, and modern websites optimized for conversion, branding, and search engines. Full hosting configuration and SEO setup included.",
+    description: "We create fast, responsive, and conversion-focused websites that strengthen your brand, enhance user experience, and help your business grow online. From corporate websites to custom e-commerce platforms, we deliver complete digital solutions.",
     offerings: [
       "Business & portfolio websites",
-      "School/college & coaching websites",
+      "School, college & coaching websites",
       "Hospital & NGO websites",
-      "Custom E-commerce websites",
+      "Custom e-commerce stores",
       "High-speed cloud hosting setup",
       "Advanced SEO optimization",
       "Clean semantic architecture",
-      "Domain and SSL configuration"
+      "Domain & SSL configuration"
     ]
   },
   {
     id: "app-development",
     title: "App Development",
     icon: Smartphone,
-    description: "Silky-smooth Android and iOS applications with robust backends and modern UX, built for scale.",
+    description: "Build powerful mobile applications that deliver seamless user experiences across Android and iOS. Our apps are designed for performance, scalability, and long-term business growth.",
     offerings: [
-      "iOS & Android mobile apps",
+      "Android & iOS applications",
       "Cross-platform development",
-      "Custom backend & API",
+      "Custom backend development",
+      "API integration",
       "App Store & Play Store deployment",
-      "UI/UX application design"
+      "UI/UX design & prototyping"
     ]
   },
   {
     id: "custom-software",
     title: "Custom Software",
     icon: Code,
-    description: "Specialized ERP systems, booking platforms, and internal tools tailored to your business.",
+    description: "Transform your operations with tailored software solutions designed around your unique workflows, business goals, and operational requirements.",
     offerings: [
       "ERP & CRM systems",
       "Custom booking platforms",
-      "Internal dashboards & tools",
+      "Internal dashboards",
+      "Business management tools",
       "API development & integration",
       "Workflow automation"
     ]
   },
   {
-    id: "video-editing",
-    title: "Video Editing Services",
-    icon: Video,
-    description: "Cinematic, engaging video editing and dynamic motion graphics to capture attention on social media and ads.",
+    id: "ai-automation",
+    title: "AI Automation & Chatbot Solutions",
+    icon: Bot,
+    description: "Leverage AI-powered automation to improve customer engagement, automate repetitive tasks, and streamline business operations while providing round-the-clock support.",
     offerings: [
-      "Promotional videos",
-      "Reels & Shorts editing",
-      "YouTube video editing",
-      "Educational video editing",
-      "Advertisement videos",
-      "Motion graphics"
-    ]
-  },
-  {
-    id: "graphic-design",
-    title: "Graphic Design",
-    icon: Palette,
-    description: "Stunning corporate identity, logos, and marketing collateral designed to communicate your brand values.",
-    offerings: [
-      "Logo design",
-      "Posters & banners",
-      "Social media creatives",
-      "Brochures",
-      "Visiting cards"
+      "Website AI chatbots",
+      "WhatsApp Business automation",
+      "AI customer support systems",
+      "Lead generation & qualification bots",
+      "Appointment booking automation",
+      "CRM & API integrations",
+      "Knowledge base assistants",
+      "Workflow automation"
     ]
   },
   {
     id: "digital-branding-smm",
-    title: "Digital Branding & SMM",
+    title: "Digital Branding & Social Media Management",
     icon: Megaphone,
-    description: "End-to-end digital positioning, cohesive brand aesthetics, and content strategies to dominate your market. Handle Instagram/Facebook pages to boost engagement, grow your audience, and build brand loyalty.",
+    description: "Build a strong and memorable brand presence through strategic content, consistent visual identity, and engaging social media management that drives audience growth and customer loyalty.",
     offerings: [
       "Social media management",
-      "Brand identity & Ad creatives",
-      "Content creation",
-      "Gyms, Cafes & Local businesses",
-      "Institutes & Influencers"
+      "Brand identity development",
+      "Content creation & planning",
+      "Ad creatives & campaign assets",
+      "Instagram & Facebook growth",
+      "Local business branding",
+      "Institute & influencer branding"
     ]
   },
   {
     id: "seo-marketing",
     title: "SEO & Marketing",
     icon: TrendingUp,
-    description: "Data-driven SEO campaigns and paid search marketing to drive organic traffic and qualified leads.",
+    description: "Increase your online visibility and generate qualified leads through data-driven SEO strategies, targeted advertising campaigns, and performance-focused digital marketing.",
     offerings: [
       "Google SEO",
-      "Local SEO",
-      "Instagram/Facebook marketing",
-      "Google Ads"
+      "Local SEO optimization",
+      "Google Business Profile optimization",
+      "Google Ads management",
+      "Instagram & Facebook marketing",
+      "Keyword research & strategy"
+    ]
+  },
+  {
+    id: "graphic-design",
+    title: "Graphic Design",
+    icon: Palette,
+    description: "Create visually compelling brand assets that communicate professionalism, build recognition, and leave a lasting impression across digital and print platforms.",
+    offerings: [
+      "Logo design",
+      "Posters & banners",
+      "Social media creatives",
+      "Brochures & flyers",
+      "Business cards",
+      "Marketing collateral"
+    ]
+  },
+  {
+    id: "video-editing",
+    title: "Video Editing Services",
+    icon: Video,
+    description: "Capture attention and tell your story with professionally edited videos designed for social media, advertising, education, and brand promotion.",
+    offerings: [
+      "Promotional videos",
+      "Reels & Shorts editing",
+      "YouTube video editing",
+      "Educational videos",
+      "Advertisement videos",
+      "Motion graphics & animations"
+    ]
+  },
+  {
+    id: "website-maintenance",
+    title: "Website Maintenance & Support Plans",
+    icon: Wrench,
+    description: "Keep your website secure, optimized, and running smoothly with proactive maintenance, regular updates, technical support, and performance monitoring.",
+    offerings: [
+      "Website maintenance",
+      "Security monitoring",
+      "Regular backups",
+      "Content updates",
+      "Performance optimization",
+      "Bug fixes & troubleshooting",
+      "Hosting management",
+      "Monthly maintenance reports"
     ]
   }
 ];
@@ -202,7 +241,7 @@ export default function ServicesPage() {
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-6">
             <h2 className="font-display text-2xl font-bold mb-2">Tailored Institution Solutions</h2>
-            <p className="text-muted-foreground text-sm">We build specialized digital ecosystems designed specifically for:</p>
+            <p className="text-muted-foreground text-sm">We build specialized digital ecosystems, AI automation, and maintenance services designed specifically for:</p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-2.5 max-w-5xl mx-auto">

@@ -8,6 +8,8 @@ const categories = [
   { id: "web-development", name: "Web Development" },
   { id: "app-development", name: "App Development" },
   { id: "custom-software", name: "Custom Software" },
+  { id: "ai-automation", name: "AI Automation" },
+  { id: "website-maintenance", name: "Maintenance & Support" },
   { id: "video-editing", name: "Video Editing" },
   { id: "graphic-design", name: "Graphic Design" },
   { id: "digital-branding-smm", name: "Branding & SMM" },
@@ -365,6 +367,106 @@ const pricingData: Record<string, any[]> = {
         "Dedicated engineering team"
       ],
       cta: "Contact Architect",
+      popular: false
+    }
+  ],
+  "ai-automation": [
+    {
+      name: "Starter",
+      price: "₹14,999",
+      equivalent: "$180",
+      description: "Basic intelligent AI chatbot for websites or WhatsApp to handle standard customer queries.",
+      features: [
+        "Website AI chatbot",
+        "Basic WhatsApp automation",
+        "Standard FAQ knowledge base",
+        "Lead capture functionality",
+        "Up to 500 monthly interactions",
+        "30 Days Support"
+      ],
+      cta: "Automate Now",
+      popular: false
+    },
+    {
+      name: "Business",
+      price: "₹24,999",
+      equivalent: "$300",
+      description: "Advanced AI automation system with CRM integrations and complex conversation flows.",
+      features: [
+        "Advanced WhatsApp & Web Bots",
+        "Lead generation & qualification bots",
+        "Appointment booking automation",
+        "CRM & API integrations",
+        "Custom knowledge base",
+        "90 Days Maintenance"
+      ],
+      cta: "Scale Support",
+      popular: true
+    },
+    {
+      name: "Premium",
+      price: "₹49,999+",
+      equivalent: "Custom Tier",
+      description: "Enterprise-grade intelligent automation covering all customer touchpoints and internal workflows.",
+      features: [
+        "Omnichannel AI support systems",
+        "Complex workflow automation",
+        "Internal knowledge base assistants",
+        "Advanced analytics & reporting",
+        "Unlimited custom integrations",
+        "Dedicated account manager"
+      ],
+      cta: "Contact Architect",
+      popular: false
+    }
+  ],
+  "website-maintenance": [
+    {
+      name: "Basic",
+      price: "₹2,999/mo",
+      equivalent: "$36/mo",
+      description: "Essential ongoing maintenance to keep your website secure, fast, and operational.",
+      features: [
+        "Monthly security monitoring",
+        "Regular weekly backups",
+        "Basic performance optimization",
+        "Core plugin & theme updates",
+        "Uptime monitoring",
+        "Basic monthly report"
+      ],
+      cta: "Start Basic",
+      popular: false
+    },
+    {
+      name: "Growth",
+      price: "₹4,999/mo",
+      equivalent: "$60/mo",
+      description: "Proactive management with content updates and faster technical support.",
+      features: [
+        "Daily automated backups",
+        "Advanced security monitoring",
+        "Up to 2 hrs content updates/mo",
+        "Priority bug fixes & troubleshooting",
+        "Database optimization",
+        "Detailed monthly reporting"
+      ],
+      cta: "Get Growth",
+      popular: true
+    },
+    {
+      name: "Enterprise",
+      price: "₹9,999/mo",
+      equivalent: "$120/mo",
+      description: "Comprehensive care plan for complex platforms requiring constant updates and high security.",
+      features: [
+        "Real-time security & backups",
+        "Unlimited content updates",
+        "Full hosting management",
+        "Dedicated technical support",
+        "Custom performance tuning",
+        "Weekly strategy & reports"
+      ],
+      cta: "Get Enterprise",
       popular: false
     }
   ]

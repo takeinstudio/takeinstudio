@@ -16,6 +16,8 @@ const servicesLinks = [
   { name: "Digital Branding", href: "/services" },
   { name: "SEO & Marketing", href: "/services" },
   { name: "Social Media Management", href: "/services" },
+  { name: "AI Automation & Chatbot Solutions", href: "/services" },
+  { name: "Website Maintenance & Support Plans", href: "/services" },
 ];
 
 const quickLinks = [

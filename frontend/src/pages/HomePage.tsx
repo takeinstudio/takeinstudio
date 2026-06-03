@@ -59,6 +59,7 @@ function ParallaxShape({
 const heroServices = [
   { icon: Globe, title: "Web Development", tagline: "Modern & Responsive" },
   { icon: Smartphone, title: "App Development", tagline: "Fast & Intuitive" },
+  { icon: LayoutDashboard, title: "Custom Software", tagline: "Tailored Solutions" },
   { icon: Play, title: "Video Editing", tagline: "Creative & Engaging" },
   { icon: TrendingUp, title: "SEO Solutions", tagline: "Rank & Grow" },
   { icon: Palette, title: "Branding", tagline: "Identity & Design" },

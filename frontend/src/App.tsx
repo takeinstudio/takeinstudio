@@ -21,6 +21,8 @@ import NotFound from "@/pages/NotFound";
 import PrivacyPolicy from "@/pages/legal/Privacy";
 import TermsOfService from "@/pages/legal/Terms";
 import CookiePolicy from "@/pages/legal/Cookies";
+import RefundPolicy from "@/pages/legal/RefundPolicy";
+import CancellationPolicy from "@/pages/legal/CancellationPolicy";
 import { useEffect } from "react";
 
 // Service Pages
@@ -108,9 +110,11 @@ const App = () => (
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
 
               {/* Legal */}
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/terms" element={<TermsOfService />} />
-              <Route path="/cookies" element={<CookiePolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-and-conditions" element={<TermsOfService />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/cancellation-policy" element={<CancellationPolicy />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

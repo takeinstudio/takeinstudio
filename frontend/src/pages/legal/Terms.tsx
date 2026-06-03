@@ -7,7 +7,7 @@ export default function TermsOfService() {
         <AnimatedSection>
           <h1 className="font-display text-4xl sm:text-5xl font-bold mb-8">Terms of Service</h1>
           <div className="prose prose-invert max-w-none space-y-6 text-muted-foreground">
-            <p className="text-lg text-foreground/80 font-medium">Last updated: {new Date().toLocaleDateString()}</p>
+            <p className="text-lg text-foreground/80 font-medium">Last updated: {`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`}</p>
             
             <section className="space-y-4">
               <h2 className="text-xl font-bold text-foreground">1. Agreement to Terms</h2>

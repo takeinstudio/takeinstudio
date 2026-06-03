@@ -72,7 +72,7 @@ function Hero() {
 
   return (
     <section className="relative w-full min-h-[85vh] sm:min-h-[calc(100vh-80px)] pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white flex items-center border-b border-border/20">
-      
+
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] z-0" />
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0" />
@@ -80,7 +80,7 @@ function Hero() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          
+
           {/* Left Content */}
           <motion.div
             variants={containerVariants}
@@ -145,7 +145,7 @@ function Hero() {
               transition={{ rotate: { duration: 15, repeat: Infinity, ease: "linear" }, scale: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
               className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"
             />
-            
+
             {/* Central Logo */}
             <motion.div
               animate={{ y: [-8, 8, -8] }}
@@ -214,8 +214,8 @@ function TechnologyShowcase() {
         <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6">Trusted Technologies</p>
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {techStack.map((tech, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-1 transition-all duration-300 cursor-default group"
             >
               <tech.icon size={16} className="text-gray-400 group-hover:text-primary transition-colors" />

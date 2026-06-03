@@ -1,43 +1,29 @@
 import { useState } from "react";
-import { Send, Mail, Phone, MapPin } from "lucide-react";
+import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { toast } from "sonner";
-
-import { formatPriceRange } from "@/lib/currency";
-
-const budgetOptions = [
-  formatPriceRange(5000, 10000),
-  formatPriceRange(10000, 25000),
-  formatPriceRange(25000, 50000),
-  "Custom Premium Plan"
-];
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactPage() {
-  const [activeTab, setActiveTab] = useState<"call" | "details">("call");
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ 
-    name: "", 
-    email: "", 
-    phone: "", 
-    business: "", 
-    budget: "", 
-    message: "",
-    date: "",
-    timeSlot: ""
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    budget: "",
+    message: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate API call for now — will connect to backend in Phase 3
     setTimeout(() => {
       setLoading(false);
-      toast.success(
-        activeTab === "call" 
-          ? "Call request received! Check your email for the Google Meet link shortly 🚀" 
-          : "Details received! We'll review and get back within 24 hours."
-      );
-      setForm({ name: "", email: "", phone: "", business: "", budget: "", message: "", date: "", timeSlot: "" });
+      toast.success("Message received! We'll get back to you within 24 hours 🚀");
+      setShowSuccess(true);
+      setForm({ name: "", company: "", email: "", phone: "", budget: "", message: "" });
     }, 1500);
   };
 
@@ -45,152 +31,306 @@ export default function ContactPage() {
     setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const inputClass =
-    "w-full px-5 py-3.5 rounded-xl bg-card/60 backdrop-blur-sm border border-border/50 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all duration-300 text-sm";
+    "w-full px-4 py-3 rounded-xl bg-card border border-border/60 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/60 transition-all duration-300 text-sm";
+
+  const labelClass = "block text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1.5";
 
   return (
     <>
-      <section className="section-padding pt-32 sm:pt-40">
-        <div className="container mx-auto max-w-5xl">
-          <AnimatedSection className="text-center mb-14">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
-              Global Remote Studio
+      {/* Hero */}
+      <section className="px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12">
+        <div className="container mx-auto max-w-6xl">
+          <AnimatedSection className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[11px] font-bold tracking-widest uppercase mb-5">
+              Get In Touch
             </span>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold">
-              Let's <span className="text-primary">Collaborate</span>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-4">
+              Let's <span className="text-primary">Work Together</span>
             </h1>
-            <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-              Trusted by businesses globally. Choose how you want to start your journey.
+            <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
+              Share your project details and we'll get back to you within <strong>24 hours</strong> with a free consultation.
             </p>
-
-            <div className="flex justify-center mt-10">
-              <div className="inline-flex p-1 bg-muted rounded-2xl border border-border/50">
-                <button 
-                  onClick={() => setActiveTab("call")}
-                  className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "call" ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:text-foreground"}`}
-                >
-                  Book a Strategy Call
-                </button>
-                <button 
-                  onClick={() => setActiveTab("details")}
-                  className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "details" ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:text-foreground"}`}
-                >
-                  Send Project Details
-                </button>
-              </div>
-            </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-            {/* Form */}
-            <AnimatedSection className="lg:col-span-3">
-              <form onSubmit={handleSubmit} className="glass-card p-8 sm:p-10 space-y-5 relative overflow-hidden">
-                {activeTab === "call" ? (
-                  <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest ml-1 text-muted-foreground">Full Name</label>
-                        <input value={form.name} onChange={update("name")} placeholder="Your Name" required className={inputClass} />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest ml-1 text-muted-foreground">Email Address</label>
-                        <input value={form.email} onChange={update("email")} type="email" placeholder="john@example.com" required className={inputClass} />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest ml-1 text-muted-foreground">Preferred Date</label>
-                        <input type="date" value={form.date} onChange={update("date")} required className={inputClass} />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-widest ml-1 text-muted-foreground">Time Slot</label>
-                        <select value={form.timeSlot} onChange={update("timeSlot")} required className={inputClass}>
-                          <option value="">Select Time</option>
-                          <option value="Morning (9AM - 12PM)">Morning (9AM - 12PM)</option>
-                          <option value="Afternoon (12PM - 4PM)">Afternoon (12PM - 4PM)</option>
-                          <option value="Evening (4PM - 8PM)">Evening (4PM - 8PM)</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-widest ml-1 text-muted-foreground">Anything specific to discuss?</label>
-                      <textarea
-                        value={form.message}
-                        onChange={update("message")}
-                        placeholder="Goals, pain points, or project vision..."
-                        rows={4}
-                        className={`${inputClass} resize-none`}
-                      />
-                    </div>
-                    <button type="submit" disabled={loading} className="glow-btn bg-primary text-primary-foreground w-full flex items-center justify-center gap-2 py-4 text-sm font-bold shadow-glow disabled:opacity-50">
-                      {loading ? "Requesting Call..." : "Confirm Strategy Call"} <ArrowRight size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <input value={form.name} onChange={update("name")} placeholder="Your Name" required className={inputClass} />
-                      <input value={form.email} onChange={update("email")} type="email" placeholder="Email Address" required className={inputClass} />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <input value={form.phone} onChange={update("phone")} placeholder="Phone Number" className={inputClass} />
-                      <select value={form.budget} onChange={update("budget")} className={inputClass} required>
-                        <option value="">Project Budget</option>
-                        <option value="10k-25k">₹10,000 - ₹25,000 ($300 - $800)</option>
-                        <option value="25k-50k">₹25,000 - ₹50,000 ($800 - $1.5k)</option>
-                        <option value="50k+">₹50,000+ ($1.5k+)</option>
-                        <option value="custom">Custom Scale</option>
-                      </select>
-                    </div>
-                    <textarea
-                      value={form.message}
-                      onChange={update("message")}
-                      placeholder="Tell us about your project requirements..."
-                      rows={5}
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+
+            {/* Form — takes 2/3 width */}
+            <AnimatedSection className="lg:col-span-2">
+              <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
+
+                {/* Section label */}
+                <div className="border-b border-border/40 pb-4">
+                  <h2 className="font-display font-bold text-lg">Your Information</h2>
+                  <p className="text-muted-foreground text-xs mt-1">Tell us who you are so we can reach you.</p>
+                </div>
+
+                {/* Row 1: Name + Company */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className={labelClass}>
+                      <span className="flex items-center gap-1.5"><User size={11} /> Your Name</span>
+                    </label>
+                    <input
+                      value={form.name}
+                      onChange={update("name")}
+                      placeholder=""
                       required
-                      className={`${inputClass} resize-none`}
+                      className={inputClass}
                     />
-                    <button type="submit" disabled={loading} className="glow-btn bg-primary text-primary-foreground w-full flex items-center justify-center gap-2 py-4 text-sm font-bold shadow-glow disabled:opacity-50">
-                      {loading ? "Sending Details..." : "Send Project Details"} <Send size={16} />
-                    </button>
                   </div>
-                )}
-                
-                <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-[10px] text-muted-foreground font-bold uppercase tracking-widest border-t border-border/30">
+                  <div>
+                    <label className={labelClass}>
+                      <span className="flex items-center gap-1.5"><Building2 size={11} /> Company / Brand Name</span>
+                    </label>
+                    <input
+                      value={form.company}
+                      onChange={update("company")}
+                      placeholder=""
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Email + Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className={labelClass}>
+                      <span className="flex items-center gap-1.5"><Mail size={11} /> Email Address</span>
+                    </label>
+                    <input
+                      value={form.email}
+                      onChange={update("email")}
+                      type="email"
+                      placeholder=""
+                      required
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelClass}>
+                      <span className="flex items-center gap-1.5"><Phone size={11} /> Phone Number</span>
+                    </label>
+                    <input
+                      value={form.phone}
+                      onChange={update("phone")}
+                      type="tel"
+                      placeholder=""
+                      required
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="border-b border-border/40 pb-4 pt-1">
+                  <h2 className="font-display font-bold text-lg">Project Details</h2>
+                  <p className="text-muted-foreground text-xs mt-1">Describe what you're looking to build or achieve.</p>
+                </div>
+
+                {/* Budget */}
+                <div>
+                  <label className={labelClass}>Estimated Budget Range</label>
+                  <select
+                    value={form.budget}
+                    onChange={update("budget")}
+                    className={inputClass}
+                    required
+                  >
+                    <option value="">Select a budget range</option>
+                    <option value="under-5000">Under ₹5,000</option>
+                    <option value="5000-15000">₹5,000 – ₹15,000</option>
+                    <option value="15000-40000">₹15,000 – ₹40,000</option>
+                    <option value="40000+">₹40,000+</option>
+                    <option value="custom">Custom / Not Sure</option>
+                  </select>
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className={labelClass}>
+                    <span className="flex items-center gap-1.5"><MessageSquare size={11} /> Describe Your Project</span>
+                  </label>
+                  <textarea
+                    value={form.message}
+                    onChange={update("message")}
+                    placeholder="Tell us about your project — what service do you need (website, video editing, branding, SEO etc.), your goals, timeline, and any specific requirements..."
+                    rows={5}
+                    required
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
+                >
+                  {loading ? "Sending..." : "Send Query"}
+                  <Send size={15} />
+                </button>
+
+                {/* Trust badges */}
+                <div className="flex flex-wrap items-center justify-center gap-5 pt-2 border-t border-border/30 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                   <span>✔ Free Consultation</span>
                   <span>✔ No Obligation</span>
-                  <span>✔ Global Availability</span>
+                  <span>✔ Reply in 24 hrs</span>
                 </div>
               </form>
             </AnimatedSection>
 
-            {/* Info */}
-            <AnimatedSection delay={0.15} className="lg:col-span-2 space-y-6">
-              <div className="clay-card p-8 space-y-6">
-                <h3 className="font-display font-bold text-lg">Global Presence</h3>
-                {[
-                  { icon: Mail, label: "takeinstudio@gmail.com" },
-                  { icon: Globe, label: "Available Worldwide (US, UK, Asia)" },
-                  { icon: Clock, label: "Response within 24 Hours" },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon size={18} className="text-primary" />
+            {/* Sidebar Info — 1/3 width */}
+            <AnimatedSection delay={0.15} className="space-y-5">
+
+              {/* Contact Details */}
+              <div className="clay-card p-6 space-y-5">
+                <h3 className="font-display font-bold text-base border-b border-border/40 pb-3">Contact Details</h3>
+                
+                {/* Email */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Mail size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Email</p>
+                    <a href="mailto:takeinstudio@gmail.com" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
+                      takeinstudio@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Phone size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
+                    <div className="flex flex-col gap-0.5 mt-0.5">
+                      <a href="tel:+918908233590" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
+                        +91 89082 33590
+                      </a>
+                      <a href="tel:+919124442040" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
+                        +91 91244 42040
+                      </a>
                     </div>
-                    <span className="text-sm text-muted-foreground">{item.label}</span>
+                  </div>
+                </div>
+
+                {/* Instagram */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Instagram size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Instagram</p>
+                    <a href="https://instagram.com/takein_studio" target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
+                      takein_studio
+                    </a>
+                  </div>
+                </div>
+
+                {/* Reach */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Globe size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Reach</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5">Worldwide (US, UK, India & Asia)</p>
+                  </div>
+                </div>
+
+                {/* Response */}
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Clock size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Response</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5">Within 24 hours</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* How We Work */}
+              <div className="clay-card p-6 space-y-3">
+                <h3 className="font-display font-bold text-base border-b border-border/40 pb-3">How We Work</h3>
+                {[
+                  { step: "01", text: "You submit this form" },
+                  { step: "02", text: "We review your requirements" },
+                  { step: "03", text: "Free strategy call scheduled" },
+                  { step: "04", text: "We start building together!" },
+                ].map((s) => (
+                  <div key={s.step} className="flex items-center gap-3">
+                    <span className="w-7 h-7 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0">{s.step}</span>
+                    <p className="text-sm text-muted-foreground">{s.text}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="clay-card p-8 space-y-4">
-                <h3 className="font-display font-bold text-lg">Digital Workspace</h3>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <p>Operating as a Global Remote Studio, we collaborate with clients via <strong>Google Meet, Slack, and Trello</strong>. Distance is no barrier to excellence.</p>
+              {/* Collaboration tools */}
+              <div className="clay-card p-6">
+                <h3 className="font-display font-bold text-base border-b border-border/40 pb-3 mb-3">We Collaborate Via</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Google Meet", "Slack", "Trello", "WhatsApp", "Offline Meet (if local)"].map((tool) => (
+                    <span key={tool} className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs font-semibold text-primary shadow-md">
+                      {tool}
+                    </span>
+                  ))}
                 </div>
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccess && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSuccess(false)}
+              className="absolute inset-0 bg-foreground/60 backdrop-blur-md"
+            />
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-md bg-card border border-border/50 p-8 rounded-3xl shadow-2xl flex flex-col items-center text-center overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted text-muted-foreground transition-all"
+              >
+                <X size={20} />
+              </button>
+
+              {/* Success Content */}
+              <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
+                <CheckCircle2 size={36} className="text-green-500 animate-bounce" />
+              </div>
+              <h2 className="font-display text-2xl font-bold mb-2">Message Sent!</h2>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                Thank you! Your query has been successfully submitted. We'll review your details and get back to you within 24 hours.
+              </p>
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-bold text-sm shadow-lg hover:bg-primary/90 hover:scale-[1.02] transition-all"
+              >
+                Done
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

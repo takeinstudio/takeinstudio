@@ -68,7 +68,7 @@ const Admin = () => {
               {/* Header */}
               <div className="flex flex-col items-center gap-4 text-center">
                 <div className="flex items-center gap-3 mb-2">
-                  <img src="/logo.png" alt="TakeIN Studio" className="h-10 w-auto" />
+                  <img src="/logo/logo_no_text.png" alt="TakeIN Studio" className="h-10 w-auto mix-blend-multiply rounded-xl" />
                   <span className="text-xl font-bold text-gradient tracking-tight">TakeIN Studio</span>
                 </div>
                 <div className="w-14 h-14 rounded-2xl bg-gradient-cyan flex items-center justify-center shadow-lg">

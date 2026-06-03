@@ -12,9 +12,9 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           setTimeout(onComplete, 400);
           return 100;
         }
-        return prev + 2;
+        return prev + 1;
       });
-    }, 30);
+    }, 146); // 100 iterations of 146ms = ~14.6s loading, with a 400ms buffer, total exactly 15 seconds
     return () => clearInterval(timer);
   }, [onComplete]);
 

@@ -9,8 +9,10 @@ interface Props {
 }
 
 export default function SectionHeading({ badge, title, subtitle, className = "", light }: Props) {
+  const hasMargin = className.includes("mb-");
+  const marginClasses = hasMargin ? "" : "mb-6 sm:mb-8";
   return (
-    <AnimatedSection className={`text-center max-w-3xl mx-auto mb-12 sm:mb-16 ${className}`}>
+    <AnimatedSection className={`text-center max-w-3xl mx-auto ${marginClasses} ${className}`}>
       {badge && (
         <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 ${
           light ? "bg-primary-foreground/10 text-primary-foreground/80" : "bg-primary/10 text-primary"

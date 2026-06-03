@@ -70,19 +70,28 @@ export default function SEO({
           "@type": "Organization",
           "name": "TakeIN Studio",
           "url": "https://takeinstudio.com",
-          "logo": "https://takeinstudio.com/logo.png",
+          "logo": "https://takeinstudio.com/logo/logo.png",
           "sameAs": [
             "https://twitter.com/takeinstudio",
             "https://www.linkedin.com/company/takeinstudio",
-            "https://www.instagram.com/takeinstudio"
+            "https://www.instagram.com/takein_studio"
           ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+91-XXXXXXXXXX",
-            "contactType": "customer service",
-            "areaServed": "IN",
-            "availableLanguage": "en"
-          }
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+91-8908233590",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": "en"
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+91-9124442040",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": "en"
+            }
+          ]
         })}
       </script>
     </Helmet>

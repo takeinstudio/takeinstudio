@@ -5,9 +5,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { HelmetProvider } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingSidebar from "@/components/FloatingSidebar";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import WorkPage from "@/pages/WorkPage";
+import ServicesPage from "@/pages/ServicesPage";
+import PricingPage from "@/pages/PricingPage";
+import FaqsPage from "@/pages/FaqsPage";
+import CareerPage from "@/pages/CareerPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminLoginPage from "@/pages/AdminLoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
@@ -32,6 +37,10 @@ import WebsiteCostBhubaneswar from "@/pages/blog/WebsiteCostBhubaneswar";
 // Projects
 import FitZoneProject from "@/pages/projects/FitZoneProject";
 import MediCareProject from "@/pages/projects/MediCareProject";
+import VertexBuildProject from "@/pages/projects/VertexBuildProject";
+import NexaHealthProject from "@/pages/projects/NexaHealthProject";
+import LuxeLoungesProject from "@/pages/projects/LuxeLoungesProject";
+import VaultMediaProject from "@/pages/projects/VaultMediaProject";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +59,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
+      <FloatingSidebar />
       <main>{children}</main>
       <Footer />
     </>
@@ -68,9 +78,13 @@ const App = () => (
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/work" element={<WorkPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/faqs" element={<FaqsPage />} />
+              <Route path="/career" element={<CareerPage />} />
               <Route path="/join" element={<JoinUs />} />
               <Route path="/contact" element={<ContactPage />} />
-              
+
               {/* Service Pages */}
               <Route path="/web-development" element={<WebDevGlobal />} />
               <Route path="/mobile-app-development" element={<AppDevGlobal />} />
@@ -85,15 +99,19 @@ const App = () => (
               {/* Projects */}
               <Route path="/projects/fitzone-gym-app" element={<FitZoneProject />} />
               <Route path="/projects/medicare-portal" element={<MediCareProject />} />
+              <Route path="/projects/vertex-build-erp" element={<VertexBuildProject />} />
+              <Route path="/projects/nexa-health-portal" element={<NexaHealthProject />} />
+              <Route path="/projects/luxe-lounges-portal" element={<LuxeLoungesProject />} />
+              <Route path="/projects/vault-media-server" element={<VaultMediaProject />} />
 
               <Route path="/admin" element={<AdminLoginPage />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              
+
               {/* Legal */}
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/cookies" element={<CookiePolicy />} />
-              
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Heart } from "lucide-react";
+import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Globe } from "lucide-react";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -243,7 +243,7 @@ export default function Footer() {
           </div>
 
           <p className="flex items-center gap-1.5">
-            <Heart size={13} className="fill-[#FF6B00] text-[#FF6B00]" /> Proudly Built in India
+            <Globe size={13} className="text-[#FF6B00]" /> Empowering Global Brands
           </p>
         </div>
       </div>

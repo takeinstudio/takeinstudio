@@ -479,6 +479,15 @@ function Services() {
             </AnimatedSection>
           ))}
         </div>
+        
+        <div className="mt-12 sm:mt-16 flex justify-center">
+          <AnimatedSection delay={0.6}>
+            <Link to="/services" className="inline-flex items-center justify-center gap-2 bg-white border border-border text-foreground hover:bg-primary hover:text-white hover:border-primary px-8 py-3.5 sm:py-4 rounded-full font-bold text-[12px] sm:text-[13px] tracking-widest shadow-sm hover:shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:-translate-y-1 transition-all duration-300">
+              VIEW ALL SERVICES <ArrowUpRight size={16} strokeWidth={2.5} />
+            </Link>
+          </AnimatedSection>
+        </div>
+
       </div>
     </section>
   );

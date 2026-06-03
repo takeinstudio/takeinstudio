@@ -235,7 +235,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/privacy-policy" className="hover:text-[#FF6B00] transition-colors">Privacy Policy</Link>
             <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />
-            <Link to="/terms" className="hover:text-[#FF6B00] transition-colors">Terms &amp; Conditions</Link>
+            <Link to="/terms-and-conditions" className="hover:text-[#FF6B00] transition-colors">Terms &amp; Conditions</Link>
             <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />
             <Link to="/refund-policy" className="hover:text-[#FF6B00] transition-colors">Refund Policy</Link>
             <div className="w-1 h-1 rounded-full bg-[#FF6B00]" />

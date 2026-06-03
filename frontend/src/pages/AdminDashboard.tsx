@@ -121,6 +121,17 @@ export default function AdminDashboard() {
   const [filterType, setFilterType] = useState("");
   const [selectedEnquiry, setSelectedEnquiry] = useState<any | null>(null);
 
+  // Load enquiries from persistent store
+  useEffect(() => {
+    const loaded = localStorage.getItem("takein_enquiries");
+    if (loaded) {
+      setEnquiries(JSON.parse(loaded));
+    } else {
+      localStorage.setItem("takein_enquiries", JSON.stringify(initialEnquiries));
+      setEnquiries(initialEnquiries);
+    }
+  }, [activeTab]);
+
   // FAQ Messaging System states
   const [userQuestions, setUserQuestions] = useState<any[]>([]);
   const [selectedUserQuestion, setSelectedUserQuestion] = useState<any | null>(null);

@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, Link } from "react-router-dom";
 import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 export default function ContactPage() {
+  const [searchParams] = useSearchParams();
+  const selectedPlan = searchParams.get("plan");
+  const selectedService = searchParams.get("service");
+  const selectedPrice = searchParams.get("price");
+
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState({
@@ -16,9 +23,60 @@ export default function ContactPage() {
     message: ""
   });
 
+  const getMessageBody = () => {
+    let body = `Name: ${form.name}
+`;
+    if (form.company) body += `Company: ${form.company}
+`;
+    body += `Email: ${form.email}
+`;
+    body += `Phone: ${form.phone}
+`;
+    if (selectedPlan) {
+      body += `
+--- Selected Plan ---
+Service: ${selectedService}
+Plan: ${selectedPlan}
+Price: ${selectedPrice}
+----------------------
+
+`;
+    }
+    body += `Budget: ${form.budget}
+
+Project Details:
+${form.message}`;
+    return encodeURIComponent(body);
+  };
+
+  const handleEmail = () => {
+    window.location.href = `mailto:takeinstudio@gmail.com?subject=New Inquiry from ${form.name}&body=${getMessageBody()}`;
+  };
+
+  const handleWhatsApp = () => {
+    window.open(`https://wa.me/918908233590?text=${getMessageBody()}`, "_blank");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    
+    // Save to localStorage for Admin Dashboard
+    const newEnquiry = {
+      id: "enq-" + Math.floor(Math.random() * 1000000),
+      name: form.name,
+      company: form.company || "N/A",
+      type: selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry",
+      budget: selectedPrice ? selectedPrice : form.budget,
+      email: form.email,
+      desc: form.message,
+      date: new Date().toISOString().split('T')[0],
+      status: "New"
+    };
+    
+    const existing = JSON.parse(localStorage.getItem("takein_enquiries") || "[]");
+    localStorage.setItem("takein_enquiries", JSON.stringify([newEnquiry, ...existing]));
+
     setTimeout(() => {
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");
@@ -26,8 +84,7 @@ export default function ContactPage() {
       setForm({ name: "", company: "", email: "", phone: "", budget: "", message: "" });
     }, 1500);
   };
-
-  const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const inputClass =
@@ -59,8 +116,32 @@ export default function ContactPage() {
             <AnimatedSection className="lg:col-span-2">
               <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
 
+
                 {/* Section label */}
+                {selectedPlan && (
+                  <div className="bg-primary/5 border border-primary/20 p-5 rounded-2xl mb-6 relative overflow-hidden">
+                    <div className="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl" />
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-[10px] uppercase font-bold tracking-widest text-primary mb-1">Selected Plan</h3>
+                        <p className="font-display font-bold text-xl text-foreground capitalize">{decodeURIComponent(selectedPlan).replace(/-/g, " ")}</p>
+                        <p className="text-sm font-semibold text-muted-foreground mt-1 capitalize">{decodeURIComponent(selectedService || "").replace(/-/g, " ")}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground mb-1">Price</p>
+                        <p className="font-display font-bold text-lg text-foreground">{decodeURIComponent(selectedPrice || "")}</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-primary/10 flex justify-end">
+                      <Link to="/pricing" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                        Change Plan
+                      </Link>
+                    </div>
+                  </div>
+                )}
+                
                 <div className="border-b border-border/40 pb-4">
+
                   <h2 className="font-display font-bold text-lg">Your Information</h2>
                   <p className="text-muted-foreground text-xs mt-1">Tell us who you are so we can reach you.</p>
                 </div>
@@ -161,15 +242,35 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
-                >
-                  {loading ? "Sending..." : "Send Query"}
-                  <Send size={15} />
-                </button>
+                
+                {/* Actions */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full sm:col-span-2 flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
+                  >
+                    {loading ? "Sending to Dashboard..." : "Submit to Admin Dashboard"}
+                    <Send size={16} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleEmail}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-card border-2 border-border text-foreground font-bold text-xs tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                  >
+                    <Mail size={14} /> Send via Email
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleWhatsApp}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#25D366]/10 border-2 border-[#25D366]/30 text-[#075E54] font-bold text-xs tracking-wide hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-all duration-300"
+                  >
+                    <MessageSquare size={14} /> Direct WhatsApp
+                  </button>
+                </div>
+
 
                 {/* Trust badges */}
                 <div className="flex flex-wrap items-center justify-center gap-5 pt-2 border-t border-border/30 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">

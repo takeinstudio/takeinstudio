@@ -21,7 +21,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Basic",
       price: "₹6,999",
-      equivalent: "$84",
+      internationalPrice: "$199",
       description: "Ideal for startups and local businesses seeking a premium web presence quickly and securely. Includes 5 UI/UX slides.",
       features: [
         "Custom 3-Page Website Design",
@@ -39,7 +39,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Premium Webdesign",
       price: "₹14,999",
-      equivalent: "$180",
+      internationalPrice: "$599",
       description: "Full website design with rich animations and API integrations.",
       features: [
         "Up to 8 Pages tailored UI system",
@@ -57,7 +57,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Enterprise Custom",
       price: "Custom",
-      equivalent: "Custom Tier",
+      internationalPrice: "Custom Tier",
       description: "For corporate structures needing zero-trust security setups, high-concurrency microservices, and design systems.",
       features: [
         "Unlimited pages & platform builds",
@@ -75,7 +75,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Reels & Shorts",
       price: "₹999",
-      equivalent: "$12",
+      internationalPrice: "$49",
       description: "High-retention short-form video editing for Instagram Reels, TikTok, and YouTube Shorts.",
       features: [
         "Up to 60 seconds duration",
@@ -91,7 +91,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "YouTube Standard",
       price: "₹3,999",
-      equivalent: "$48",
+      internationalPrice: "$199",
       description: "Professional long-form video editing designed for YouTube creators and educational content.",
       features: [
         "Up to 15 minutes duration",
@@ -107,7 +107,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Cinematic & Ads",
       price: "Custom",
-      equivalent: "Project Based",
+      internationalPrice: "Project Based",
       description: "High-end cinematic editing and motion graphics for promotional videos and commercial ads.",
       features: [
         "Advanced VFX & Motion Graphics",
@@ -125,7 +125,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Social Media Kit",
       price: "₹499",
-      equivalent: "$6",
+      internationalPrice: "$29",
       description: "Eye-catching graphic creatives for your daily social media posts and stories.",
       features: [
         "1 Custom Post/Story Design",
@@ -141,7 +141,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Brand Identity",
       price: "₹999",
-      equivalent: "$12",
+      internationalPrice: "$49",
       description: "Professional logo design and foundational branding assets for new businesses.",
       features: [
         "3 Custom Logo Concepts",
@@ -157,7 +157,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Full Corporate Kit",
       price: "Custom",
-      equivalent: "Project Based",
+      internationalPrice: "Project Based",
       description: "Complete corporate design covering brochures, presentations, UI kits, and extensive branding.",
       features: [
         "Comprehensive Brand Guidelines",
@@ -175,7 +175,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Core Branding",
       price: "₹1,499",
-      equivalent: "$18",
+      internationalPrice: "$99",
       description: "Establish a consistent and professional digital presence across your primary platforms.",
       features: [
         "Brand Audit & Consultation",
@@ -191,7 +191,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Growth Strategy",
       price: "₹4,999",
-      equivalent: "$60",
+      internationalPrice: "$299",
       description: "Aggressive digital positioning and cohesive brand aesthetics to dominate your market.",
       features: [
         "Advanced Content Strategy",
@@ -207,7 +207,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Complete Makeover",
       price: "Custom",
-      equivalent: "Project Based",
+      internationalPrice: "Project Based",
       description: "End-to-end brand transformation including repositioning, full content production, and PR.",
       features: [
         "Complete Rebranding Strategy",
@@ -225,7 +225,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Local SEO Starter",
       price: "₹3,999",
-      equivalent: "$48",
+      internationalPrice: "$199",
       description: "Get your local business ranking on Google Maps and local search results.",
       features: [
         "Google My Business Optimization",
@@ -241,7 +241,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "National SEO Growth",
       price: "₹7,999",
-      equivalent: "$96",
+      internationalPrice: "$399",
       description: "Comprehensive SEO campaigns to drive organic traffic and qualified leads on a larger scale.",
       features: [
         "In-depth Technical SEO Audit",
@@ -257,7 +257,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Full Ad Management",
       price: "Custom",
-      equivalent: "Retainer",
+      internationalPrice: "Retainer",
       description: "Data-driven paid search and social media marketing campaigns for maximum ROI.",
       features: [
         "Google, Meta & LinkedIn Ads",
@@ -275,7 +275,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Starter App",
       price: "₹24,999",
-      equivalent: "$300",
+      internationalPrice: "$899",
       description: "Ideal for small businesses needing a robust mobile presence on Android and iOS.",
       features: [
         "Cross-platform (React Native/Flutter)",
@@ -291,7 +291,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Pro Application",
       price: "₹49,999",
-      equivalent: "$600",
+      internationalPrice: "$1499",
       description: "Advanced applications with custom backends, payments, and rich animations.",
       features: [
         "Custom UI/UX App Design",
@@ -307,7 +307,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Enterprise Native",
       price: "Custom",
-      equivalent: "Project Based",
+      internationalPrice: "Project Based",
       description: "Complex scalable applications tailored for massive user bases and enterprise workflows.",
       features: [
         "Native Android & Swift iOS",
@@ -325,7 +325,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Starter Automation",
       price: "₹19,999",
-      equivalent: "$240",
+      internationalPrice: "$699",
       description: "Simple internal tools and automation scripts to streamline repetitive tasks.",
       features: [
         "Single workflow automation",
@@ -340,7 +340,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Business Platform",
       price: "₹59,999",
-      equivalent: "$720",
+      internationalPrice: "$1999",
       description: "Custom booking platforms and specialized internal tools tailored to your business.",
       features: [
         "Custom booking/management system",
@@ -356,7 +356,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Enterprise ERP",
       price: "Custom",
-      equivalent: "Project Based",
+      internationalPrice: "Project Based",
       description: "Full-scale ERP and CRM systems to manage your entire business operations.",
       features: [
         "Comprehensive ERP/CRM modules",
@@ -374,7 +374,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Starter",
       price: "₹14,999",
-      equivalent: "$180",
+      internationalPrice: "$599",
       description: "Basic intelligent AI chatbot for websites or WhatsApp to handle standard customer queries.",
       features: [
         "Website AI chatbot",
@@ -390,7 +390,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Business",
       price: "₹24,999",
-      equivalent: "$300",
+      internationalPrice: "$899",
       description: "Advanced AI automation system with CRM integrations and complex conversation flows.",
       features: [
         "Advanced WhatsApp & Web Bots",
@@ -406,7 +406,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Premium",
       price: "₹49,999+",
-      equivalent: "Custom Tier",
+      internationalPrice: "Custom Tier",
       description: "Enterprise-grade intelligent automation covering all customer touchpoints and internal workflows.",
       features: [
         "Omnichannel AI support systems",
@@ -424,7 +424,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Basic",
       price: "₹2,999/mo",
-      equivalent: "$36/mo",
+      internationalPrice: "$36/mo",
       description: "Essential ongoing maintenance to keep your website secure, fast, and operational.",
       features: [
         "Monthly security monitoring",
@@ -440,7 +440,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Growth",
       price: "₹4,999/mo",
-      equivalent: "$60/mo",
+      internationalPrice: "$60/mo",
       description: "Proactive management with content updates and faster technical support.",
       features: [
         "Daily automated backups",
@@ -456,7 +456,7 @@ const pricingData: Record<string, any[]> = {
     {
       name: "Enterprise",
       price: "₹9,999/mo",
-      equivalent: "$120/mo",
+      internationalPrice: "$120/mo",
       description: "Comprehensive care plan for complex platforms requiring constant updates and high security.",
       features: [
         "Real-time security & backups",
@@ -479,56 +479,29 @@ export default function PricingPage() {
   const [hoveredTier, setHoveredTier] = useState<string | null>(null);
   const location = useLocation();
 
-  const [usdRate, setUsdRate] = useState<number | null>(null);
   const [isOutsideIndia, setIsOutsideIndia] = useState<boolean>(false);
 
   useEffect(() => {
     // Determine location using IP API
-    fetch('https://get.geojs.io/v1/ip/country.json')
+    fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => {
-        if (data && data.country && data.country !== 'IN') {
+        if (data && data.country_code && data.country_code !== 'IN') {
           setIsOutsideIndia(true);
-          // Fetch real-time rate
-          return fetch('https://open.er-api.com/v6/latest/INR');
-        }
-        return null;
-      })
-      .then(res => {
-        if (res) return res.json();
-        return null;
-      })
-      .then(data => {
-        if (data && data.rates && data.rates.USD) {
-          setUsdRate(data.rates.USD);
         }
       })
       .catch(err => {
-        console.error("Failed to fetch location or exchange rate", err);
+        console.error("Failed to fetch location", err);
+        // Fallback to USD pricing if blocked
+        setIsOutsideIndia(true);
       });
   }, []);
 
-  const renderPrice = (t: any) => {
-    if (isOutsideIndia && usdRate && t.price && t.price.includes('₹')) {
-      const match = t.price.match(/₹([\d,]+)/);
-      if (match) {
-        const num = parseFloat(match[1].replace(/,/g, ''));
-        const usdPrice = Math.round(num * usdRate);
-        const suffix = t.price.includes('/mo') ? '/mo' : (t.price.includes('+') ? '+' : '');
-        return `$${usdPrice}${suffix}`;
-      }
+  const getPriceValue = (t: any) => {
+    if (isOutsideIndia && t.internationalPrice) {
+      return t.internationalPrice;
     }
     return t.price;
-  };
-
-  const renderEquivalent = (t: any) => {
-    // If it's a custom text equivalent (like 'Custom Tier', 'Project Based'), keep it
-    if (t.equivalent && !t.equivalent.includes("$")) {
-      return t.equivalent;
-    }
-    
-    // Default: don't show any secondary equivalent price for standard pricing
-    return null;
   };
 
   useEffect(() => {
@@ -603,10 +576,7 @@ export default function PricingPage() {
                     <p className="text-muted-foreground text-[11px] leading-snug mb-4 h-10">{t.description}</p>
 
                     <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-3xl font-bold font-display">{renderPrice(t)}</span>
-                      {renderEquivalent(t) && (
-                        <span className="text-[10px] text-muted-foreground">({renderEquivalent(t)})</span>
-                      )}
+                      <span className="text-3xl font-bold font-display">{getPriceValue(t)}</span>
                     </div>
 
                     <div className="border-t border-border/30 pt-4 mb-5">
@@ -623,7 +593,7 @@ export default function PricingPage() {
                   </div>
 
                   <Link
-                    to={`/contact?plan=${t.name.toLowerCase().replace(/\s+/g, "-")}&service=${activeTab}`}
+                    to={`/contact?plan=${encodeURIComponent(t.name)}&service=${encodeURIComponent(activeTab)}&price=${encodeURIComponent(getPriceValue(t))}`}
                     className="w-full py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest text-center transition-all flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:scale-[1.02]"
                   >
                     Connect with us <ArrowRight size={12} />

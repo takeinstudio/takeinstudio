@@ -12,6 +12,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/lib/currency";
 import { toast } from "sonner";
+import axios from "axios";
 
 // Static mock data representing inquiries
 const initialEnquiries = [
@@ -121,15 +122,28 @@ export default function AdminDashboard() {
   const [filterType, setFilterType] = useState("");
   const [selectedEnquiry, setSelectedEnquiry] = useState<any | null>(null);
 
-  // Load enquiries from persistent store
+  // Load enquiries from backend API
   useEffect(() => {
-    const loaded = localStorage.getItem("takein_enquiries");
-    if (loaded) {
-      setEnquiries(JSON.parse(loaded));
-    } else {
-      localStorage.setItem("takein_enquiries", JSON.stringify(initialEnquiries));
-      setEnquiries(initialEnquiries);
-    }
+    const fetchLeads = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/leads");
+        if (response.data && response.data.success && response.data.data.length > 0) {
+          // Map MongoDB _id to id if necessary, or just use as is
+          const fetchedEnquiries = response.data.data.map((lead: any) => ({
+            ...lead,
+            id: lead._id
+          }));
+          setEnquiries(fetchedEnquiries);
+        } else {
+          setEnquiries(initialEnquiries);
+        }
+      } catch (err) {
+        console.error("Failed to fetch leads from backend, falling back to mock data", err);
+        setEnquiries(initialEnquiries);
+      }
+    };
+    
+    fetchLeads();
   }, [activeTab]);
 
   // FAQ Messaging System states

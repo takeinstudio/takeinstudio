@@ -4,6 +4,7 @@ import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckC
 import AnimatedSection from "@/components/AnimatedSection";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 
 export default function ContactPage() {
@@ -76,9 +77,8 @@ ${form.message}`;
     e.preventDefault();
     setLoading(true);
     
-    // Save to localStorage for Admin Dashboard
+    // Send to Node.js backend
     const newEnquiry = {
-      id: "enq-" + Math.floor(Math.random() * 1000000),
       name: form.name,
       company: form.company || "N/A",
       type: selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry",
@@ -89,15 +89,18 @@ ${form.message}`;
       status: "New"
     };
     
-    const existing = JSON.parse(localStorage.getItem("takein_enquiries") || "[]");
-    localStorage.setItem("takein_enquiries", JSON.stringify([newEnquiry, ...existing]));
-
-    setTimeout(() => {
+    try {
+      await axios.post("http://localhost:5000/api/leads", newEnquiry);
+      
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");
       setShowSuccess(true);
       setForm({ name: "", company: "", email: "", phone: "", budget: "", message: "" });
-    }, 1500);
+    } catch (error) {
+      console.error("Submission error", error);
+      setLoading(false);
+      toast.error("Failed to submit inquiry. Is the backend running?");
+    }
   };
 const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [field]: e.target.value }));

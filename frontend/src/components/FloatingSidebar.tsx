@@ -17,6 +17,7 @@ const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
 
 export default function FloatingSidebar() {
   const [showPhoneMenu, setShowPhoneMenu] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const socialLinks = [
     {
@@ -46,7 +47,17 @@ export default function FloatingSidebar() {
   ];
 
   return (
-    <div className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-[99] flex flex-col items-center">
+    <div 
+      className={`fixed top-1/2 -translate-y-1/2 z-[99] flex items-center transition-transform duration-300 ease-in-out md:translate-x-0 md:right-4 ${isMobileOpen ? "right-3 translate-x-0" : "right-0 translate-x-full"}`}
+    >
+      {/* Mobile Toggle Button */}
+      <button 
+        className="md:hidden absolute right-full top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-12 bg-white border border-gray-200 border-r-0 rounded-l-xl shadow-[-4px_0_10px_rgba(0,0,0,0.05)] text-gray-500 hover:text-primary transition-colors"
+        onClick={() => setIsMobileOpen(!isMobileOpen)}
+      >
+        <ChevronLeft size={16} className={`transition-transform duration-300 ${isMobileOpen ? "rotate-180" : ""}`} />
+      </button>
+
       {/* Social Links Stack - Unified into a single clean vertical pill */}
       <div className="flex flex-col gap-2.5 p-2 rounded-full bg-white border border-gray-100 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
         {socialLinks.map((link) => (

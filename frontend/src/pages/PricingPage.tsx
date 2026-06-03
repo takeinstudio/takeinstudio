@@ -7,6 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 const categories = [
   { id: "web-development", name: "Web Development" },
   { id: "app-development", name: "App Development" },
+  { id: "custom-software", name: "Custom Software" },
   { id: "video-editing", name: "Video Editing" },
   { id: "graphic-design", name: "Graphic Design" },
   { id: "digital-branding-smm", name: "Branding & SMM" },
@@ -315,6 +316,55 @@ const pricingData: Record<string, any[]> = {
         "Dedicated Engineering Team"
       ],
       cta: "Contact Team",
+      popular: false
+    }
+  ],
+  "custom-software": [
+    {
+      name: "Starter Automation",
+      price: "₹19,999",
+      equivalent: "$240",
+      description: "Simple internal tools and automation scripts to streamline repetitive tasks.",
+      features: [
+        "Single workflow automation",
+        "Basic internal dashboard",
+        "Third-party API integration (up to 2)",
+        "User authentication",
+        "30 Days Support"
+      ],
+      cta: "Automate Tasks",
+      popular: false
+    },
+    {
+      name: "Business Platform",
+      price: "₹59,999",
+      equivalent: "$720",
+      description: "Custom booking platforms and specialized internal tools tailored to your business.",
+      features: [
+        "Custom booking/management system",
+        "Role-based access control",
+        "Payment gateway integration",
+        "Automated email/SMS notifications",
+        "Data analytics dashboard",
+        "90 Days Maintenance"
+      ],
+      cta: "Build Platform",
+      popular: true
+    },
+    {
+      name: "Enterprise ERP",
+      price: "Custom",
+      equivalent: "Project Based",
+      description: "Full-scale ERP and CRM systems to manage your entire business operations.",
+      features: [
+        "Comprehensive ERP/CRM modules",
+        "Legacy system migration",
+        "Advanced data visualization",
+        "Custom mobile app companion",
+        "High-availability cloud setup",
+        "Dedicated engineering team"
+      ],
+      cta: "Contact Architect",
       popular: false
     }
   ]

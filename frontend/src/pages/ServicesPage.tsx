@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, CheckCircle2, ShieldCheck, Share2, Smartphone } from "lucide-react";
+import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, CheckCircle2, ShieldCheck, Share2, Smartphone, Code } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -32,6 +32,19 @@ const services = [
       "Custom backend & API",
       "App Store & Play Store deployment",
       "UI/UX application design"
+    ]
+  },
+  {
+    id: "custom-software",
+    title: "Custom Software",
+    icon: Code,
+    description: "Specialized ERP systems, booking platforms, and internal tools tailored to your business.",
+    offerings: [
+      "ERP & CRM systems",
+      "Custom booking platforms",
+      "Internal dashboards & tools",
+      "API development & integration",
+      "Workflow automation"
     ]
   },
   {

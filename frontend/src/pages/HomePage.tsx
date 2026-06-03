@@ -71,7 +71,7 @@ function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-[90vh] sm:min-h-screen pt-28 pb-16 lg:pt-36 overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white flex items-center border-b border-border/20">
+    <section className="relative w-full min-h-[85vh] sm:min-h-[calc(100vh-80px)] pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white flex items-center border-b border-border/20">
       
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] z-0" />

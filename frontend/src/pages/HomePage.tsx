@@ -152,7 +152,7 @@ function Hero() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative z-10 w-48 sm:w-64"
             >
-              <img src="/logo/logo_no_text.png" alt="TakeIN Studio" className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)] mix-blend-multiply" />
+              <img src="/logo/logo_text.png" alt="TakeIN Studio" className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)] mix-blend-multiply" />
             </motion.div>
 
             {/* Floating Stat Cards */}

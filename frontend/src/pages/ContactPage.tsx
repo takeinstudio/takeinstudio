@@ -60,7 +60,8 @@ ${form.message}`;
       toast.error("Please fill in all required fields first.");
       return;
     }
-    window.location.href = `mailto:takeinstudio@gmail.com?subject=New Inquiry from ${form.name}&body=${getMessageBody()}`;
+    const subject = encodeURIComponent(`New Inquiry from ${form.name}`);
+    window.location.href = `mailto:takeinstudio@gmail.com?subject=${subject}&body=${getMessageBody()}`;
   };
 
   const handleWhatsApp = () => {

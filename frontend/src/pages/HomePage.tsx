@@ -138,7 +138,7 @@ function Hero() {
           </motion.div>
 
           {/* Right Side Visual */}
-          <div className="relative w-full flex items-center justify-center min-h-[400px] lg:min-h-[550px] mt-10 lg:mt-0">
+          <div className="relative w-full flex items-center justify-center sm:min-h-[400px] lg:min-h-[550px] mt-10 lg:mt-0">
             {/* Ambient Glow behind Logo */}
             <motion.div
               animate={{ rotate: 360, scale: [1, 1.05, 1] }}
@@ -146,44 +146,45 @@ function Hero() {
               className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"
             />
 
-            {/* Central Logo */}
+            {/* Central Logo - Hidden on Mobile */}
             <motion.div
               animate={{ y: [-8, 8, -8] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-48 sm:w-64"
+              className="relative z-10 w-48 sm:w-64 hidden sm:block"
             >
               <img src="/logo/logo_text.png" alt="TakeIN Studio" className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)] mix-blend-multiply" />
             </motion.div>
 
-            {/* Floating Stat Cards */}
-            <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute -left-2 sm:-left-4 top-10 sm:top-16 z-20">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
-                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
-              </div>
-            </motion.div>
+            {/* Floating Stat Cards - Grid on Mobile */}
+            <div className="relative z-20 grid grid-cols-2 gap-3 w-full sm:w-auto sm:block">
+              <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="sm:absolute sm:-left-4 sm:top-16">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full sm:w-40 hover:scale-105 transition-transform h-full">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
+                </div>
+              </motion.div>
 
-            <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute -right-2 sm:-right-4 top-0 sm:top-10 z-20">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
-                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Industries Served</p>
-              </div>
-            </motion.div>
+              <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="sm:absolute sm:-right-4 sm:top-10">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full sm:w-40 hover:scale-105 transition-transform h-full">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Industries Served</p>
+                </div>
+              </motion.div>
 
-            <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="absolute -left-0 sm:-left-4 bottom-16 sm:bottom-24 z-20">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">99%</h3>
-                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Client Satisfaction</p>
-              </div>
-            </motion.div>
+              <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="sm:absolute sm:-left-4 sm:bottom-24">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full sm:w-40 hover:scale-105 transition-transform h-full">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">99%</h3>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Client Satisfaction</p>
+                </div>
+              </motion.div>
 
-            <motion.div animate={{ y: [4, -4, 4] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }} className="absolute -right-0 sm:-right-4 bottom-8 sm:bottom-16 z-20">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">24/7</h3>
-                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Support Available</p>
-              </div>
-            </motion.div>
-
+              <motion.div animate={{ y: [4, -4, 4] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }} className="sm:absolute sm:-right-4 sm:bottom-16">
+                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full sm:w-40 hover:scale-105 transition-transform h-full">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">24/7</h3>
+                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Support Available</p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

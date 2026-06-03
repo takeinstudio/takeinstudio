@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video } from "lucide-react";
+import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video, CheckCircle2, Code2, Monitor, Layout, Rocket, Settings, Bot, ShieldCheck, Paintbrush, Cloud, Database } from "lucide-react";
 import { formatPrice } from "@/lib/currency";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -56,285 +56,173 @@ function ParallaxShape({
 }
 
 /* ─── Hero ─── */
-const heroServices = [
-  { icon: Globe, title: "Web Development", tagline: "Modern & Responsive" },
-  { icon: Smartphone, title: "App Development", tagline: "Fast & Intuitive" },
-  { icon: LayoutDashboard, title: "Custom Software", tagline: "Tailored Solutions" },
-  { icon: Play, title: "Video Editing", tagline: "Creative & Engaging" },
-  { icon: TrendingUp, title: "SEO Solutions", tagline: "Rank & Grow" },
-  { icon: Palette, title: "Branding", tagline: "Identity & Design" },
-];
-
 function Hero() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Smooth springs for mouse controls
-  const mouseXSpring = useSpring(x, { stiffness: 120, damping: 25 });
-  const mouseYSpring = useSpring(y, { stiffness: 120, damping: 25 });
-
-  // Map mouse movement to tilt rotation (between -12 and 12 degrees)
-  const rotateX = useTransform(mouseYSpring, [-200, 200], [12, -12]);
-  const rotateY = useTransform(mouseXSpring, [-200, 200], [-12, 12]);
-
-  // Map mouse movement to opposite slight translate for parallax layers
-  const translateX = useTransform(mouseXSpring, [-200, 200], [-6, 6]);
-  const translateY = useTransform(mouseYSpring, [-200, 200], [-6, 6]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left - width / 2;
-    const mouseY = e.clientY - rect.top - height / 2;
-    x.set(mouseX);
-    y.set(mouseY);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  // Entrance animations for the left column items
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 90,
-        damping: 14,
-      },
-    },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } },
   };
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-gradient-to-br from-white via-orange-50/20 to-white border-b border-border/30 pt-28 pb-8 flex flex-col justify-center">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none z-0" />
+    <section className="relative w-full min-h-[90vh] sm:min-h-screen pt-28 pb-16 lg:pt-36 overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white flex items-center border-b border-border/20">
+      
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] z-0" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-amber-500/5 blur-[150px] rounded-full pointer-events-none z-0 animate-pulse" style={{ animationDuration: '8s' }} />
 
-      {/* Ambient glowing mesh blur blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-orange-100/30 rounded-full blur-[100px] pointer-events-none z-0" />
-      <div className="absolute top-1/2 right-1/4 w-[450px] h-[450px] bg-primary/[0.04] rounded-full blur-[130px] pointer-events-none z-0 animate-pulse" style={{ animationDuration: '6s' }} />
-
-      {/* Bottom-right corner orange wave */}
-      <div className="absolute bottom-0 right-0 w-[55%] h-[45%] pointer-events-none z-0 overflow-hidden opacity-90">
-        <svg className="w-full h-full" viewBox="0 0 600 400" preserveAspectRatio="none">
-          <path d="M0 400 C150 200, 350 250, 600 100 L600 400 Z" fill="url(#heroWave)" />
-          <defs>
-            <linearGradient id="heroWave" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.07" />
-              <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.01" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      {/* Floating Shapes gently drifting */}
-      <motion.div
-        animate={{ y: [0, -12, 0], rotate: [0, 4, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-28 left-6 sm:left-10 pointer-events-none select-none z-0"
-      >
-        <span className="text-primary/25 font-display text-3xl sm:text-4xl font-light">+</span>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [0, 12, 0], rotate: [0, -4, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-[52%] left-4 sm:left-8 pointer-events-none select-none z-0"
-      >
-        <span className="font-mono text-primary/20 text-2xl sm:text-3xl font-extrabold">&lt;/&gt;</span>
-      </motion.div>
-
-      {/* Dot grid — upper right area */}
-      <div className="absolute top-32 right-[42%] grid grid-cols-4 gap-2 opacity-15 pointer-events-none z-0 hidden lg:grid">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />
-        ))}
-      </div>
-
-      {/* Dot grid — bottom right */}
-      <div className="absolute bottom-24 right-8 grid grid-cols-3 gap-2 opacity-10 pointer-events-none z-0 hidden lg:grid">
-        {Array.from({ length: 9 }).map((_, i) => (
-          <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />
-        ))}
-      </div>
-
-      {/* ─── Main Content Grid ─── */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center w-full">
-
-          {/* ── Left Column ── */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-6 flex flex-col items-start text-left space-y-6"
+            className="flex flex-col items-start text-left space-y-6 lg:pr-10"
           >
             <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50/70 border border-orange-100/50 text-primary text-[10px] sm:text-[11px] font-black uppercase tracking-widest shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                PREMIUM DIGITAL STUDIO
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest shadow-sm">
+                <Rocket size={14} className="text-primary" /> Premium Digital Agency
               </span>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h1 className="font-display text-[2.5rem] sm:text-5xl lg:text-[3.6rem] xl:text-[4.2rem] font-black leading-[1.08] tracking-tight text-foreground">
-                The Future of<br />
-                Your Brand<br />
-                <span className="text-primary bg-gradient-to-r from-orange-500 to-primary bg-clip-text text-transparent">
-                  Starts Here
-                </span>
+              <h1 className="font-display text-[2.5rem] sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-gray-900">
+                Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">Websites</span>, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">Apps</span> & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">AI Solutions</span> That Drive Real Business Growth
               </h1>
             </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="w-20 h-1 bg-gradient-to-r from-orange-500 to-primary rounded-full"
-            />
-
             <motion.div variants={itemVariants}>
-              <p className="text-muted-foreground text-sm sm:text-[15px] leading-relaxed font-medium max-w-md">
-                We craft custom digital experiences that reflect your brand's identity, amplify your message, and create lasting impressions in a crowded online world.
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed font-medium max-w-lg">
+                We help startups, businesses, educational institutions, healthcare organizations, and growing brands build powerful digital experiences through web development, mobile apps, AI automation, branding, and performance marketing.
               </p>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 mt-2">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  to="/contact"
-                  className="bg-gradient-to-r from-orange-500 to-primary text-white text-[10px] sm:text-xs font-black uppercase tracking-widest px-7 py-3.5 shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 rounded-full flex items-center gap-2"
-                >
-                  START YOUR PROJECT <ArrowRight size={14} />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  to="/work"
-                  className="bg-white border border-gray-200 text-foreground hover:bg-muted text-[10px] sm:text-xs font-black uppercase tracking-widest px-7 py-3.5 transition-all duration-300 rounded-full flex items-center gap-2 shadow-sm"
-                >
-                  EXPLORE OUR WORK <span className="text-muted-foreground font-light ml-1">—</span> <ArrowRight size={14} className="text-muted-foreground" />
-                </Link>
-              </motion.div>
+            {/* Trust Indicators */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2 pb-2">
+              {["Custom Solutions", "Fast Delivery", "Mobile Responsive", "SEO Optimized"].map((trust, i) => (
+                <span key={i} className="flex items-center gap-1.5 text-xs font-bold text-gray-700">
+                  <CheckCircle2 size={14} className="text-primary" /> {trust}
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4">
+              <Link
+                to="/contact"
+                className="w-full sm:w-auto glow-btn bg-primary text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                Start Your Project <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/work"
+                className="w-full sm:w-auto bg-white border border-gray-200 text-gray-900 text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
+              >
+                View Portfolio
+              </Link>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <p className="text-gray-500 text-[10px] sm:text-[11px] font-medium pt-2 flex items-center gap-2">
+                <ShieldCheck size={14} className="text-green-500" /> Trusted by startups, institutions, local businesses, and growing brands across India.
+              </p>
             </motion.div>
           </motion.div>
 
-          {/* ── Right Column — Logo ── */}
-          <div className="lg:col-span-6 flex items-center justify-center relative mt-10 lg:mt-0">
-            {/* Soft rotating glowing aura behind logo */}
+          {/* Right Side Visual */}
+          <div className="relative w-full flex items-center justify-center min-h-[400px] lg:min-h-[550px] mt-10 lg:mt-0">
+            {/* Ambient Glow behind Logo */}
             <motion.div
               animate={{ rotate: 360, scale: [1, 1.05, 1] }}
               transition={{ rotate: { duration: 15, repeat: Infinity, ease: "linear" }, scale: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-              className="absolute w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] bg-primary/8 rounded-full blur-[90px] sm:blur-[130px] pointer-events-none z-0"
+              className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"
             />
-
-            {/* 3D Logo + Brand Text */}
+            
+            {/* Central Logo */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-              className="flex flex-col items-center justify-center relative select-none w-full max-w-lg"
+              animate={{ y: [-8, 8, -8] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-48 sm:w-64"
             >
-              {/* Interactive 3D Monogram container */}
-              <div
-                className="w-64 h-64 sm:w-80 sm:h-80 lg:w-[360px] lg:h-[360px] flex items-center justify-center cursor-pointer relative"
-                style={{ perspective: 1000 }}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-              >
-                {/* Monogram wrapper */}
-                <motion.div
-                  style={{
-                    rotateX,
-                    rotateY,
-                    translateX,
-                    translateY,
-                    transformStyle: "preserve-3d",
-                  }}
-                  className="w-full h-full flex items-center justify-center relative"
-                >
-                  {/* Subtle 3D dynamic drop shadow */}
-                  <motion.div
-                    style={{
-                      x: useTransform(x, [-200, 200], [10, -10]),
-                      y: useTransform(y, [-200, 200], [10, -10]),
-                    }}
-                    className="absolute inset-4 rounded-full bg-primary/10 blur-xl pointer-events-none"
-                  />
+              <img src="/logo/logo_no_text.png" alt="TakeIN Studio" className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)] mix-blend-multiply" />
+            </motion.div>
 
-                  <img
-                    src="/logo/logo_no_text.png"
-                    alt="TakeIN Studio Logo"
-                    className="max-w-full max-h-full object-contain filter drop-shadow-[0_25px_60px_rgba(255,107,0,0.22)] mix-blend-multiply rounded-3xl"
-                    style={{ transform: "translateZ(30px)" }}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Text Lockup under Logo */}
-              <div className="mt-6 flex flex-col items-center text-center">
-                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground flex items-center justify-center drop-shadow-sm select-none">
-                  <span>Take</span>
-                  <span className="text-primary">IN</span>
-                  <span className="font-medium text-foreground/80 ml-2">Studio</span>
-                </h2>
-                <div className="flex items-center gap-1.5 mt-4 w-44 sm:w-52">
-                  <div className="h-[2.5px] bg-primary flex-1 rounded-full" />
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                </div>
+            {/* Floating Stat Cards */}
+            <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute -left-2 sm:-left-4 top-10 sm:top-16 z-20">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
+                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
               </div>
             </motion.div>
-          </div>
 
-        </div>
-
-        {/* ── Inline Service Indicators (inside hero) ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-14 sm:mt-18 mb-4 border-t border-border/20 pt-6"
-        >
-          <div className="flex flex-row flex-wrap md:flex-nowrap items-center justify-start md:divide-x divide-border/60 max-w-5xl gap-y-4 md:gap-y-0">
-            {heroServices.map((s, index) => (
-              <div
-                key={s.title}
-                className={`flex flex-row items-center gap-3.5 group ${index === 0
-                  ? "pr-6 md:pr-8"
-                  : index === heroServices.length - 1
-                    ? "pl-6 md:pl-8"
-                    : "px-6 md:px-8"
-                  }`}
-              >
-                <div className="text-primary shrink-0 group-hover:scale-115 group-hover:rotate-6 transition-all duration-300">
-                  <s.icon size={24} strokeWidth={1.8} />
-                </div>
-                <div className="min-w-0 text-left">
-                  <p className="font-display font-bold text-xs sm:text-sm text-foreground leading-tight truncate">
-                    {s.title}
-                  </p>
-                  <p className="text-muted-foreground text-[10px] sm:text-xs font-semibold leading-tight truncate mt-1">
-                    {s.tagline}
-                  </p>
-                </div>
+            <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute -right-2 sm:-right-4 top-0 sm:top-10 z-20">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
+                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Industries Served</p>
               </div>
-            ))}
+            </motion.div>
+
+            <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="absolute -left-0 sm:-left-4 bottom-16 sm:bottom-24 z-20">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">99%</h3>
+                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Client Satisfaction</p>
+              </div>
+            </motion.div>
+
+            <motion.div animate={{ y: [4, -4, 4] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }} className="absolute -right-0 sm:-right-4 bottom-8 sm:bottom-16 z-20">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">24/7</h3>
+                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Support Available</p>
+              </div>
+            </motion.div>
+
           </div>
-        </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+/* ─── Technology Showcase ─── */
+function TechnologyShowcase() {
+  const techStack = [
+    { name: "React", icon: Code2 },
+    { name: "Next.js", icon: Globe },
+    { name: "Node.js", icon: Monitor },
+    { name: "WordPress", icon: Layout },
+    { name: "Shopify", icon: Settings },
+    { name: "Flutter", icon: Smartphone },
+    { name: "Figma", icon: Paintbrush },
+    { name: "Firebase", icon: Database },
+    { name: "OpenAI", icon: Bot },
+    { name: "Google Cloud", icon: Cloud },
+  ];
+
+  return (
+    <section className="pt-16 pb-8 bg-transparent text-center px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl">
+        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6">Trusted Technologies</p>
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          {techStack.map((tech, i) => (
+            <div 
+              key={i} 
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-1 transition-all duration-300 cursor-default group"
+            >
+              <tech.icon size={16} className="text-gray-400 group-hover:text-primary transition-colors" />
+              <span className="text-xs font-bold text-gray-600 group-hover:text-gray-900 transition-colors">{tech.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -822,6 +710,7 @@ export default function HomePage() {
         ]}
       />
       <Hero />
+      <TechnologyShowcase />
       <ActiveLaunchSection />
       <Services />
       <Pricing />

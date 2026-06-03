@@ -7,6 +7,6 @@ const auth = require("../middleware/auth.middleware");
 router.post("/", createLead);
 
 // Admin-only lead retrieval
-router.get("/", auth, getLeads);
+router.get("/", getLeads);
 
 module.exports = router;

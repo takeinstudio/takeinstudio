@@ -5,15 +5,7 @@ const Lead = require("../models/Lead");
 // @access  Public
 exports.createLead = async (req, res) => {
   try {
-    const { name, email, website, businessType, budget } = req.body;
-
-    const lead = await Lead.create({
-      name,
-      email,
-      website,
-      businessType,
-      budget,
-    });
+    const lead = await Lead.create(req.body);
 
     res.status(201).json({
       success: true,

@@ -49,11 +49,25 @@ ${form.message}`;
     return encodeURIComponent(body);
   };
 
+  const validateForm = () => {
+    if (!form.name || !form.email || !form.phone || !form.message) return false;
+    if (!selectedPlan && !form.budget) return false;
+    return true;
+  };
+
   const handleEmail = () => {
+    if (!validateForm()) {
+      toast.error("Please fill in all required fields first.");
+      return;
+    }
     window.location.href = `mailto:takeinstudio@gmail.com?subject=New Inquiry from ${form.name}&body=${getMessageBody()}`;
   };
 
   const handleWhatsApp = () => {
+    if (!validateForm()) {
+      toast.error("Please fill in all required fields first.");
+      return;
+    }
     window.open(`https://wa.me/918908233590?text=${getMessageBody()}`, "_blank");
   };
 
@@ -210,22 +224,24 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                 </div>
 
                 {/* Budget */}
-                <div>
-                  <label className={labelClass}>Estimated Budget Range</label>
-                  <select
-                    value={form.budget}
-                    onChange={update("budget")}
-                    className={inputClass}
-                    required
-                  >
-                    <option value="">Select a budget range</option>
-                    <option value="under-5000">Under ₹5,000</option>
-                    <option value="5000-15000">₹5,000 – ₹15,000</option>
-                    <option value="15000-40000">₹15,000 – ₹40,000</option>
-                    <option value="40000+">₹40,000+</option>
-                    <option value="custom">Custom / Not Sure</option>
-                  </select>
-                </div>
+                {!selectedPlan && (
+                  <div>
+                    <label className={labelClass}>Estimated Budget Range</label>
+                    <select
+                      value={form.budget}
+                      onChange={update("budget")}
+                      className={inputClass}
+                      required
+                    >
+                      <option value="">Select a budget range</option>
+                      <option value="under-5000">Under ₹5,000</option>
+                      <option value="5000-15000">₹5,000 – ₹15,000</option>
+                      <option value="15000-40000">₹15,000 – ₹40,000</option>
+                      <option value="40000+">₹40,000+</option>
+                      <option value="custom">Custom / Not Sure</option>
+                    </select>
+                  </div>
+                )}
 
                 {/* Description */}
                 <div>

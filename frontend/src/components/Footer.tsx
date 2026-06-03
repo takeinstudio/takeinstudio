@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Globe } from "lucide-react";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
@@ -35,6 +35,9 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const location = useLocation();
+  const isCareerPage = location.pathname === '/career' || location.pathname === '/careers';
+
   return (
     <footer className="relative w-full bg-[#FCFBF9] text-gray-800 pt-16 overflow-hidden">
       
@@ -85,28 +88,30 @@ export default function Footer() {
       </div>
 
       {/* ── Top CTA Section ── */}
-      <div className="relative z-10 w-full max-w-[850px] mx-auto px-4 sm:px-6 mt-8 mb-20">
-        <div className="bg-white rounded-[32px] sm:rounded-[40px] shadow-[0_20px_60px_-15px_rgba(255,107,0,0.15)] relative px-6 py-14 sm:py-16 text-center border border-white">
-          
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full shadow-[0_10px_30px_rgba(255,107,0,0.15)] flex items-center justify-center">
-            <Send className="text-[#FF6B00] ml-[-2px] mt-[2px]" size={24} />
+      {!isCareerPage && (
+        <div className="relative z-10 w-full max-w-[850px] mx-auto px-4 sm:px-6 mt-8 mb-20">
+          <div className="bg-white rounded-[32px] sm:rounded-[40px] shadow-[0_20px_60px_-15px_rgba(255,107,0,0.15)] relative px-6 py-14 sm:py-16 text-center border border-white">
+            
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full shadow-[0_10px_30px_rgba(255,107,0,0.15)] flex items-center justify-center">
+              <Send className="text-[#FF6B00] ml-[-2px] mt-[2px]" size={24} />
+            </div>
+            
+            <h2 className="text-[2rem] sm:text-[2.75rem] font-black text-gray-900 mb-4 font-display tracking-tight leading-[1.2]">
+              Ready to Build Something <br className="hidden sm:block"/>
+              <span className="text-[#FF6B00]">Amazing</span>?
+            </h2>
+            
+            <p className="text-gray-500 text-[14px] sm:text-[15px] max-w-[450px] mx-auto mb-8 font-medium leading-relaxed">
+              Let's turn your ideas into websites, mobile apps, <br className="hidden sm:block"/> AI automations and digital experiences that grow your brand.
+            </p>
+            
+            <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[#FF6B00] text-white px-8 py-3.5 sm:py-4 rounded-full font-bold text-[12px] sm:text-[13px] tracking-widest shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:shadow-[0_12px_30px_-8px_rgba(255,107,0,1)] hover:-translate-y-1 transition-all duration-300">
+              START YOUR PROJECT <ArrowRight size={16} strokeWidth={2.5} />
+            </Link>
+            
           </div>
-          
-          <h2 className="text-[2rem] sm:text-[2.75rem] font-black text-gray-900 mb-4 font-display tracking-tight leading-[1.2]">
-            Ready to Build Something <br className="hidden sm:block"/>
-            <span className="text-[#FF6B00]">Amazing</span>?
-          </h2>
-          
-          <p className="text-gray-500 text-[14px] sm:text-[15px] max-w-[450px] mx-auto mb-8 font-medium leading-relaxed">
-            Let's turn your ideas into websites, mobile apps, <br className="hidden sm:block"/> AI automations and digital experiences that grow your brand.
-          </p>
-          
-          <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-[#FF6B00] text-white px-8 py-3.5 sm:py-4 rounded-full font-bold text-[12px] sm:text-[13px] tracking-widest shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:shadow-[0_12px_30px_-8px_rgba(255,107,0,1)] hover:-translate-y-1 transition-all duration-300">
-            START YOUR PROJECT <ArrowRight size={16} strokeWidth={2.5} />
-          </Link>
-          
         </div>
-      </div>
+      )}
 
       {/* ── Footer Links Grid ── */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-6 mb-16">

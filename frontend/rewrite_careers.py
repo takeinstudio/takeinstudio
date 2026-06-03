@@ -1,4 +1,4 @@
-import { useState } from "react";
+tsx_code = """import { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   Rocket, Lightbulb, Users, Globe, 
@@ -375,3 +375,9 @@ export default function CareerPage() {
     </>
   );
 }
+"""
+
+with open('src/pages/CareerPage.tsx', 'w', encoding='utf-8') as f:
+    f.write(tsx_code)
+
+print("CareerPage successfully rewritten.")

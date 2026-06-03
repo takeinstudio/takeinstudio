@@ -36,7 +36,7 @@ export default function Navbar() {
       >
         <div>
           <Link to="/" className="font-display text-base sm:text-lg tracking-tight leading-none flex items-center gap-2.5">
-            <img src="/logo/logo_no_text.png" alt="TakeIN Studio Logo" className="h-12 sm:h-16 w-auto mix-blend-multiply rounded-md object-contain scale-110 translate-y-1" />
+            <img src="/logo/logo_no_text.png" alt="TakeIN Studio Logo" className="h-8 sm:h-10 w-auto mix-blend-multiply rounded-md object-contain" />
             <div className="flex items-center">
               <span className="text-foreground font-black tracking-tight">Take</span>
               <span className="text-primary font-black tracking-tight">IN</span>

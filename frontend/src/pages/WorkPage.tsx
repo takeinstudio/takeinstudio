@@ -112,8 +112,8 @@ export default function WorkPage() {
   return (
     <>
       <SEO 
-        title="Our Services | TakeIN Studio Portfolios"
-        description="Explore our specialized digital solutions across Education, Photography, HealthTech, ERP Systems, Hotels & Bars, and Video Editing."
+        title="Our Portfolios | Best Web Design Agency in Bhubaneswar, Odisha"
+        description="Explore our specialized digital solutions across Education, Photography, HealthTech, ERP Systems, Hotels & Bars, and Video Editing. Built in Bhubaneswar, serving globally."
       />
       <section className="section-padding pt-32 sm:pt-40">
         <div className="container mx-auto">

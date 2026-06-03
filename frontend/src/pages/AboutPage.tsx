@@ -126,8 +126,8 @@ export default function AboutPage() {
   return (
     <>
       <SEO 
-        title="About Us | TakeIN Studio" 
-        description="Learn about TakeIN Studio — a global digital agency engineering modern websites, mobile apps, and scalable web software with high-end aesthetics."
+        title="About Us | Top Digital Agency in Bhubaneswar, Odisha & Globally" 
+        description="Learn about TakeIN Studio — a leading digital agency in Bhubaneswar (BBSR), Odisha, providing modern websites, mobile apps, and scalable web software globally."
       />
 
       {/* Hero: Space-Optimized Split Layout */}

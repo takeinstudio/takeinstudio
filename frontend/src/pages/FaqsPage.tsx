@@ -101,8 +101,8 @@ export default function FaqsPage() {
   return (
     <>
       <SEO 
-        title="Frequently Asked Questions | TakeIN Studio" 
-        description="Find answers to common questions about our web design, pricing, custom integrations, and branding systems. Submit your own questions directly to our team."
+        title="FAQs | Top Digital Agency in Bhubaneswar, Odisha & Global" 
+        description="Find answers to common questions about our web design, app development, pricing, and custom integrations. TakeIN Studio, based in Bhubaneswar, Odisha."
       />
 
       <section className="relative w-full min-h-screen overflow-hidden bg-gradient-to-br from-background via-cream to-background border-b border-border/40 pt-28 pb-16 flex flex-col justify-center">

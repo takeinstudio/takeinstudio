@@ -33,8 +33,8 @@ export default function JoinUs() {
   return (
     <div ref={containerRef} className="relative bg-cream min-h-screen overflow-hidden">
       <SEO 
-        title="Join the Elite Network" 
-        description="Apply to work with TakeIN Studio. We are looking for world-class designers, developers, and innovators to build the future."
+        title="Join the Elite Network | Tech Jobs in Bhubaneswar, Odisha & Remote" 
+        description="Apply to work with TakeIN Studio in Bhubaneswar (BBSR) or globally. We are looking for world-class designers, developers, and innovators to build the future."
       />
 
       {/* Floating Blobs */}

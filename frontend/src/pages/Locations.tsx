@@ -8,8 +8,8 @@ export default function Locations() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Our Global Presence | TakeIN Studio" 
-        description="TakeIN Studio serves businesses globally while being rooted in Bhubaneswar, Odisha. Explore our local and international service tracks."
+        title="Our Global Presence | Digital Agency in Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio serves businesses globally while being firmly rooted in Bhubaneswar (BBSR), Odisha. Explore our local and international service tracks for web and app development."
       />
 
       {/* Hero */}

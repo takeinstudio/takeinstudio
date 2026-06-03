@@ -13,8 +13,8 @@ export default function UXDesignAgency() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Premium UI/UX Design Agency | Product Design Experts" 
-        description="TakeIN Studio is a premier UI/UX design agency. We create research-driven, beautiful, and intuitive interfaces that humanize your brand."
+        title="Premium UI/UX Design Agency in Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio is a premier UI/UX design agency in Bhubaneswar (BBSR), Odisha. We create intuitive, world-class interfaces for local and global brands."
         faqSchema={faq}
       />
 

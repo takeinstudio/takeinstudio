@@ -13,8 +13,8 @@ export default function WebDevBhubaneswar() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Web Development Company in Bhubaneswar" 
-        description="TakeIN Studio is the leading web development company in Bhubaneswar. We build premium, SEO-optimized, and high-converting websites for local and global brands."
+        title="Top Web Development Company in Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio is the leading web development company in Bhubaneswar (BBSR), Odisha. We build premium, SEO-optimized websites for local and global brands."
         faqSchema={faq}
       />
 

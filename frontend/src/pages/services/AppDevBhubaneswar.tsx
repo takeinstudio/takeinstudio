@@ -14,8 +14,8 @@ export default function AppDevBhubaneswar() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Mobile App Development Services in Bhubaneswar" 
-        description="TakeIN Studio is the top mobile app development company in Bhubaneswar. We build native and cross-platform Android & iOS apps with premium UX."
+        title="Mobile App Development Company in Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio is a top mobile app development company in Bhubaneswar (BBSR), Odisha. We build premium iOS & Android apps for local and global clients."
         faqSchema={faq}
       />
 

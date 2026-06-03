@@ -19,8 +19,8 @@ export default function WebDevGlobal() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Premium Web Development Services | TakeIN Studio" 
-        description="We design and develop high-performance websites and digital platforms for modern businesses worldwide. Build with TakeIN Studio."
+        title="Premium Web Development Services | Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio designs and develops high-performance websites for businesses in Bhubaneswar, Odisha and worldwide."
         faqSchema={faq}
       />
 

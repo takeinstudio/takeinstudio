@@ -19,8 +19,8 @@ export default function AppDevGlobal() {
   return (
     <div className="bg-cream min-h-screen">
       <SEO 
-        title="Mobile App Development Services | TakeIN Studio" 
-        description="We design and develop high-performance mobile apps for startups and businesses worldwide. Android, iOS & cross-platform solutions by TakeIN Studio."
+        title="Mobile App Development Services | Bhubaneswar, Odisha & Global" 
+        description="TakeIN Studio develops high-performance Android & iOS mobile apps for startups and businesses in Bhubaneswar, Odisha, and worldwide."
         faqSchema={faq}
       />
 

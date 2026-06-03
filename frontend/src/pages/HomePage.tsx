@@ -696,8 +696,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Premier Web & Mobile App Development Studio"
-        description="TakeIN Studio is a premier digital agency. We provide high-end web development, mobile app development, and UI/UX design services globally."
+        title="Premier Web & Mobile App Development Studio in Bhubaneswar, Odisha & Global"
+        description="TakeIN Studio is a top digital agency in Bhubaneswar (BBSR), Odisha. We offer premium web development, mobile app development, and UI/UX design services locally and globally."
         faqSchema={[
           {
             question: "Who is the best web development agency for premium projects?",

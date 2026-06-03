@@ -483,24 +483,43 @@ export default function PricingPage() {
   const [isOutsideIndia, setIsOutsideIndia] = useState<boolean>(false);
 
   useEffect(() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      // If the user's timezone is not India, we assume they are outside India
-      if (tz !== 'Asia/Kolkata' && tz !== 'Asia/Calcutta') {
-        setIsOutsideIndia(true);
-        fetch('https://open.er-api.com/v6/latest/INR')
-          .then(res => res.json())
-          .then(data => {
-            if (data && data.rates && data.rates.USD) {
-              setUsdRate(data.rates.USD);
-            }
-          })
-          .catch(err => console.error("Failed to fetch exchange rate", err));
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    // Determine location using IP API
+    fetch('https://get.geojs.io/v1/ip/country.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.country && data.country !== 'IN') {
+          setIsOutsideIndia(true);
+          // Fetch real-time rate
+          return fetch('https://open.er-api.com/v6/latest/INR');
+        }
+        return null;
+      })
+      .then(res => {
+        if (res) return res.json();
+        return null;
+      })
+      .then(data => {
+        if (data && data.rates && data.rates.USD) {
+          setUsdRate(data.rates.USD);
+        }
+      })
+      .catch(err => {
+        console.error("Failed to fetch location or exchange rate", err);
+      });
   }, []);
+
+  const renderPrice = (t: any) => {
+    if (isOutsideIndia && usdRate && t.price && t.price.includes('₹')) {
+      const match = t.price.match(/₹([\d,]+)/);
+      if (match) {
+        const num = parseFloat(match[1].replace(/,/g, ''));
+        const usdPrice = Math.round(num * usdRate);
+        const suffix = t.price.includes('/mo') ? '/mo' : (t.price.includes('+') ? '+' : '');
+        return `$${usdPrice}${suffix}`;
+      }
+    }
+    return t.price;
+  };
 
   const renderEquivalent = (t: any) => {
     // If it's a custom text equivalent (like 'Custom Tier', 'Project Based'), keep it
@@ -508,18 +527,7 @@ export default function PricingPage() {
       return t.equivalent;
     }
     
-    // If it's a price and user is outside India, calculate dynamic USD price
-    if (isOutsideIndia && usdRate && t.price) {
-      const match = t.price.match(/₹([\d,]+)/);
-      if (match) {
-        const num = parseFloat(match[1].replace(/,/g, ''));
-        const usdPrice = Math.round(num * usdRate);
-        const suffix = t.price.includes('/mo') ? '/mo' : (t.price.includes('+') ? '+' : '');
-        return `~$${usdPrice}${suffix}`;
-      }
-    }
-    
-    // Default: don't show the hardcoded $ price if they are in India or haven't loaded the dynamic price
+    // Default: don't show any secondary equivalent price for standard pricing
     return null;
   };
 
@@ -595,7 +603,7 @@ export default function PricingPage() {
                     <p className="text-muted-foreground text-[11px] leading-snug mb-4 h-10">{t.description}</p>
 
                     <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-3xl font-bold font-display">{t.price}</span>
+                      <span className="text-3xl font-bold font-display">{renderPrice(t)}</span>
                       {renderEquivalent(t) && (
                         <span className="text-[10px] text-muted-foreground">({renderEquivalent(t)})</span>
                       )}

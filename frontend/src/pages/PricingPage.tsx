@@ -17,57 +17,80 @@ const categories = [
 ];
 
 const pricingData: Record<string, any[]> = {
-  "web-development": [
+      "web-development": [
     {
-      name: "Basic",
-      price: "₹6,999",
-      internationalPrice: "$199",
-      description: "Ideal for startups and local businesses seeking a premium web presence quickly and securely. Includes 5 UI/UX slides.",
+      name: "Starter",
+      price: "₹4,999",
+      internationalPrice: "$499",
+      description: "Get your business online quickly and securely.",
+      bestFor: "Portfolios, photographers, freelancers, local businesses",
       features: [
-        "Custom 3-Page Website Design",
-        "Tailwind-native responsive layout",
-        "Full SEO Setup & Meta Tags",
-        "Free Hosting Setup & Domain Link",
-        "Contact Form Integration",
-        "Mobile-first optimization",
-        "60 Days standard maintenance",
-        "5 UI/UX Slides",
+        "Modern responsive website",
+        "Mobile optimization",
+        "Contact form integration",
+        "Basic SEO setup",
+        "WhatsApp integration",
+        "Domain & hosting connection",
+        "30 days support"
       ],
-      cta: "Launch Now",
+      cta: "Start Project",
       popular: false
     },
     {
-      name: "Premium Webdesign",
+      name: "Professional",
       price: "₹14,999",
-      internationalPrice: "$599",
-      description: "Full website design with rich animations and API integrations.",
+      internationalPrice: "$1,499",
+      description: "A premium digital experience tailored for growing brands.",
+      bestFor: "Small businesses, restaurants, agencies, clinics",
       features: [
-        "Up to 8 Pages tailored UI system",
-        "Advanced motion design & transitions",
-        "Advanced SEO & Speed Optimization",
-        "Cloud Hosting & Domain Setup",
-        "Headless CMS integration",
-        "Contact forms & database dashboards",
-        "Custom backend API integrations",
-        "120 Days dedicated team support"
+        "Premium custom website",
+        "Advanced UI/UX",
+        "Smooth animations",
+        "SEO optimization",
+        "CMS integration",
+        "Gallery/blog management",
+        "Lead capture forms",
+        "Performance optimization",
+        "60 days support"
       ],
-      cta: "Scale Studio",
+      cta: "Go Professional",
       popular: true
     },
     {
-      name: "Enterprise Custom",
-      price: "Custom",
-      internationalPrice: "Custom Tier",
-      description: "For corporate structures needing zero-trust security setups, high-concurrency microservices, and design systems.",
+      name: "Business",
+      price: "₹29,999",
+      internationalPrice: "$3,999",
+      description: "Advanced architectures requiring dynamic operations.",
+      bestFor: "Schools, startups, organizations, dashboard-based websites",
       features: [
-        "Unlimited pages & platform builds",
-        "Dedicated senior engineers & architect",
-        "Real-time analytics & database pipelines",
-        "Penetration testing & secure hosting",
-        "Custom CRM/ERP connection layers",
-        "SLA support with 24-hour response"
+        "Everything in Professional",
+        "Admin dashboard",
+        "Dynamic content management",
+        "Database integration",
+        "API integrations",
+        "Business workflows",
+        "Analytics setup",
+        "Priority support"
       ],
-      cta: "Contact Architect",
+      cta: "Scale Business",
+      popular: false
+    },
+    {
+      name: "Enterprise Custom",
+      price: "Contact Sales",
+      internationalPrice: "Contact Sales",
+      description: "Massive scale custom software and automation.",
+      bestFor: "SaaS, AI platforms, large-scale business systems",
+      features: [
+        "Custom software architecture",
+        "AI integrations",
+        "Business automation",
+        "CRM/ERP integrations",
+        "Internal dashboards",
+        "Scalable infrastructure",
+        "Long-term support plans"
+      ],
+      cta: "Contact Sales",
       popular: false
     }
   ],
@@ -271,53 +294,77 @@ const pricingData: Record<string, any[]> = {
       popular: false
     }
   ],
-  "app-development": [
+    "app-development": [
     {
-      name: "Starter App",
+      name: "MVP App",
       price: "₹24,999",
-      internationalPrice: "$899",
-      description: "Ideal for small businesses needing a robust mobile presence on Android and iOS.",
+      internationalPrice: "$1,499",
+      description: "Launch your core mobile application quickly.",
+      bestFor: "Startups, creators, validation-stage products",
       features: [
-        "Cross-platform (React Native/Flutter)",
-        "Up to 5 Core Screens",
-        "Basic Firebase Backend",
-        "User Authentication",
-        "App Store Submission",
-        "30 Days Free Support"
+        "Cross-platform mobile app",
+        "Modern UI",
+        "User authentication",
+        "Firebase integration",
+        "Basic backend",
+        "App deployment assistance",
+        "30 days support"
       ],
-      cta: "Build App",
+      cta: "Launch MVP",
       popular: false
     },
     {
-      name: "Pro Application",
-      price: "₹49,999",
-      internationalPrice: "$1499",
-      description: "Advanced applications with custom backends, payments, and rich animations.",
+      name: "Business App",
+      price: "₹59,999",
+      internationalPrice: "$4,999",
+      description: "Production-ready apps designed for seamless user experiences.",
+      bestFor: "Businesses requiring production-ready apps",
       features: [
-        "Custom UI/UX App Design",
-        "Node.js/Python Backend",
-        "Payment Gateway Integration",
-        "Push Notifications & Chat",
-        "Admin Dashboard Included",
-        "90 Days Maintenance & Support"
+        "Premium UI/UX",
+        "Custom backend",
+        "Database integration",
+        "Push notifications",
+        "Payment gateway integration",
+        "Admin dashboard",
+        "Analytics setup",
+        "60 days support"
       ],
-      cta: "Scale Mobile",
+      cta: "Build Business App",
       popular: true
     },
     {
-      name: "Enterprise Native",
-      price: "Custom",
-      internationalPrice: "Project Based",
-      description: "Complex scalable applications tailored for massive user bases and enterprise workflows.",
+      name: "Growth App",
+      price: "₹1,49,999",
+      internationalPrice: "$9,999",
+      description: "Scalable mobile systems with advanced real-time functionality.",
+      bestFor: "Scalable apps with advanced functionality",
       features: [
-        "Native Android & Swift iOS",
-        "Microservices Architecture",
-        "Advanced Security & Encryption",
-        "AI/ML Integrations",
-        "Continuous CI/CD Pipeline",
-        "Dedicated Engineering Team"
+        "Everything in Business",
+        "Role-based access",
+        "API integrations",
+        "Real-time functionality",
+        "Advanced dashboards",
+        "Performance optimization",
+        "Priority support"
       ],
-      cta: "Contact Team",
+      cta: "Scale App",
+      popular: false
+    },
+    {
+      name: "Enterprise Application",
+      price: "Contact Sales",
+      internationalPrice: "Contact Sales",
+      description: "Ecosystems and multi-platform networks.",
+      bestFor: "Large-scale products and ecosystems",
+      features: [
+        "AI-powered applications",
+        "Multi-platform ecosystems",
+        "Enterprise integrations",
+        "Advanced automation",
+        "Scalable architecture",
+        "Dedicated project planning"
+      ],
+      cta: "Contact Sales",
       popular: false
     }
   ],
@@ -479,26 +526,13 @@ export default function PricingPage() {
   const [hoveredTier, setHoveredTier] = useState<string | null>(null);
   const location = useLocation();
 
-  const [isOutsideIndia, setIsOutsideIndia] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Determine location using IP API
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.country_code && data.country_code !== 'IN') {
-          setIsOutsideIndia(true);
-        }
-      })
-      .catch(err => {
-        console.error("Failed to fetch location", err);
-        // Fallback to USD pricing if blocked
-        setIsOutsideIndia(true);
-      });
-  }, []);
+  const [region, setRegion] = useState<"IN" | "INTL">("IN");
 
   const getPriceValue = (t: any) => {
-    if (isOutsideIndia && t.internationalPrice) {
+    if (t.price === "Contact Sales" || t.internationalPrice === "Contact Sales") {
+        return "Contact Sales";
+    }
+    if (region === "INTL" && t.internationalPrice) {
       return t.internationalPrice;
     }
     return t.price;
@@ -533,6 +567,34 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Region Toggle */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-8 pt-4">
+        <div className="container mx-auto flex justify-center">
+          <div className="bg-card border border-border/50 p-1.5 rounded-full flex items-center shadow-lg shadow-primary/5">
+            <button
+              onClick={() => setRegion("IN")}
+              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                region === "IN" 
+                  ? "bg-primary text-primary-foreground shadow-md scale-105" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <span className="text-lg">🇮🇳</span> India
+            </button>
+            <button
+              onClick={() => setRegion("INTL")}
+              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                region === "INTL" 
+                  ? "bg-primary text-primary-foreground shadow-md scale-105" 
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <span className="text-lg">🌍</span> International
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Categories Tabs */}
       <section className="px-4 sm:px-6 lg:px-8 pb-4">
         <div className="container mx-auto max-w-5xl">
@@ -556,7 +618,7 @@ export default function PricingPage() {
       {/* Pricing Tiers */}
       <section className="px-4 sm:px-6 lg:px-8 pb-8 pt-2 bg-muted/10">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className={`grid grid-cols-1 md:grid-cols-2 ${currentTiers.length === 4 ? "lg:grid-cols-4 max-w-6xl" : "lg:grid-cols-3 max-w-5xl"} gap-4 mx-auto`}>
             {currentTiers.map((t, i) => (
               <AnimatedSection key={`${activeTab}-${t.name}`} delay={i * 0.1}>
                 <div
@@ -578,6 +640,12 @@ export default function PricingPage() {
                     <div className="flex items-baseline gap-2 mb-4">
                       <span className="text-3xl font-bold font-display">{getPriceValue(t)}</span>
                     </div>
+
+                    {t.bestFor && (
+                      <p className="text-[10px] text-muted-foreground italic mb-4 leading-snug">
+                        <span className="font-semibold text-foreground not-italic">Best For: </span>{t.bestFor}
+                      </p>
+                    )}
 
                     <div className="border-t border-border/30 pt-4 mb-5">
                       <p className="text-[10px] font-bold text-foreground uppercase tracking-widest mb-3">Included Features</p>
@@ -602,6 +670,15 @@ export default function PricingPage() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Pricing Disclaimer */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <p className="text-[10px] sm:text-xs text-muted-foreground italic leading-relaxed border-t border-border/50 pt-4">
+            <span className="font-bold">Pricing Disclaimer:</span> Development services only. Domain registration, hosting, cloud services, API usage fees, App Store/Play Store fees, third-party subscriptions, and premium software licenses are billed separately and are not included in project pricing.
+          </p>
         </div>
       </section>
 

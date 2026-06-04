@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Crisp clear white background */
+    --foreground: 22 15% 10%; /* Clear off-black slate text */
+
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 22 15% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 22 15% 10%;
+
+    --primary: 22 100% 50%; /* Vibrant Tech Orange */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 22 100% 97.5%; /* Clean ultra-light soft orange tint */
+    --secondary-foreground: 22 100% 25%;
+
+    --muted: 22 20% 97%;
+    --muted-foreground: 22 10% 45%;
+
+    --accent: 22 100% 50%; /* Vibrant Tech Orange Accent */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 22 25% 91%; /* Crisp clear warm border */
+    --input: 22 25% 91%;
+    --ring: 22 100% 50%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 22 15% 10%;
+    --sidebar-primary: 22 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 22 100% 97.5%;
+    --sidebar-accent-foreground: 22 100% 25%;
+    --sidebar-border: 22 25% 91%;
+    --sidebar-ring: 22 100% 50%;
+
+    --cream: 22 100% 98.5%; /* Soft luminous warm white */
+    --cream-dark: 22 40% 94%; /* Clear light sand cream */
+    --warm: 22 100% 50%; /* Vibrant Studio Orange */
+    --warm-light: 22 100% 96.5%; /* Extremely soft luminous orange tint */
+    --glass: 0 0% 100% / 0.65;
+    --glass-border: 0 0% 100% / 0.4;
+    --shadow-soft: 0 8px 32px -8px hsl(22 100% 50% / 0.05);
+    --shadow-glow: 0 0 40px -10px hsl(22 100% 50% / 0.15);
+    --shadow-clay: 8px 8px 20px hsl(22 20% 93%), -8px -8px 20px hsl(0 0% 100%);
+  }
+
+  .dark {
+    --background: 22 30% 6%; /* Luminous Carbon-Black with soft warm undertone */
+    --foreground: 30 20% 98%;
+    --card: 22 20% 10%; /* Carbon-slate cards */
+    --card-foreground: 30 20% 98%;
+    --popover: 22 20% 10%;
+    --popover-foreground: 30 20% 98%;
+    --primary: 22 100% 50%; /* Luminous orange highlights */
+    --primary-foreground: 0 0% 4%;
+    --secondary: 22 20% 14%;
+    --secondary-foreground: 30 20% 98%;
+    --muted: 22 20% 14%;
+    --muted-foreground: 22 10% 65%;
+    --accent: 22 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 22 20% 16%;
+    --input: 22 20% 16%;
+    --ring: 22 100% 50%;
+    --cream: 22 30% 6%;
+    --cream-dark: 22 20% 10%;
+    --shadow-clay: 8px 8px 20px hsl(22 40% 3%), -8px -8px 20px hsl(22 20% 15%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/40 rounded-2xl;
+    box-shadow: var(--shadow-soft);
+  }
+  .clay-card {
+    @apply bg-card rounded-2xl border-0;
+    box-shadow: var(--shadow-clay);
+  }
+  .glow-btn {
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold transition-all duration-300;
+    box-shadow: 0 4px 15px -3px hsl(var(--primary) / 0.4);
+  }
+  .glow-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.5);
+  }
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10;
+  }
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+  .floating-delayed {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+.animate-blob {
+  animation: blob 7s ease-in-out infinite;
+}
+
+.animate-blob-delayed {
+  animation: blob 7s ease-in-out 3s infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - Ultra-thin & Themed */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.4);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Ensure content fits perfectly on 1080p */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* Global Compact Sizing & Layout Space Compression Overrides */
+.pt-32 {
+  padding-top: 5rem !important; /* Reduces large top gaps under Navbar */
+}
+@media (min-width: 640px) {
+  .sm\:pt-40 {
+    padding-top: 6rem !important;
+  }
+}
+.pt-40 {
+  padding-top: 6rem !important;
+}
+.pb-20 {
+  padding-bottom: 3.5rem !important; /* Compresses large bottom gaps */
+}
+
+/* Aesthetic Background Patterns */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, hsl(var(--primary) / 0.08) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.08) 1.2px, transparent 1.2px);
+  background-size: 48px 48px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(hsl(var(--primary) / 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.bg-circuit-lines {
+  background-image: radial-gradient(circle at 1px 1px, hsl(var(--border) / 0.3) 1px, transparent 0);
+  background-size: 40px 40px;
+}

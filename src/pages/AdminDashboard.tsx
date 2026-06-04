@@ -117,7 +117,13 @@ export default function AdminDashboard() {
       setData({
         leads: resLeads.data || [],
         careers: resCareers.data || [],
-        pricing: resPricing.data || [],
+        pricing: (resPricing.data || []).sort((a: any, b: any) => {
+          const getNum = (p: string) => {
+            if (!p || p === "Contact Sales" || p === "Custom") return 99999999;
+            return parseInt(p.replace(/[^0-9]/g, '')) || 0;
+          };
+          return getNum(a.price_in) - getNum(b.price_in);
+        }),
         services: resServices.data || [],
         jobs: resJobs.data || [],
         testimonials: resTestimonials.data || []

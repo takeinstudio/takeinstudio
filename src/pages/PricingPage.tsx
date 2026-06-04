@@ -547,7 +547,15 @@ export default function PricingPage() {
         if (error) throw error;
         
         if (Array.isArray(data) && data.length > 0) {
-          setDbPricing(data);
+          // Sort pricing tiers by price in ascending order
+          const sortedData = data.sort((a: any, b: any) => {
+            const getNum = (p: string) => {
+              if (!p || p === "Contact Sales" || p === "Custom") return 99999999;
+              return parseInt(p.replace(/[^0-9]/g, '')) || 0;
+            };
+            return getNum(a.price_in) - getNum(b.price_in);
+          });
+          setDbPricing(sortedData);
           
           // Set active tab based on URL param if valid
           const params = new URLSearchParams(location.search);
@@ -711,7 +719,7 @@ export default function PricingPage() {
                     t.popular ? "border-primary shadow-xl scale-[1.02] bg-gradient-to-b from-primary/10 to-transparent" : "border-border/50 hover:border-primary/50"
                   }`}
                 >
-                  {t.popular && (
+                  {!!t.popular && (
                     <div className="absolute top-0 right-0 left-0 flex justify-center">
                       <span className="bg-primary text-primary-foreground text-[9px] uppercase font-bold tracking-widest px-3 py-0.5 rounded-b-lg flex items-center gap-1 shadow-sm">
                         <Sparkles size={10} /> Most Popular

@@ -98,3 +98,12 @@ CREATE POLICY "Allow public read-write on leads" ON public.leads FOR ALL USING (
 CREATE POLICY "Allow public read-write on testimonials" ON public.testimonials FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read-write on jobs" ON public.jobs FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read-write on careers" ON public.careers FOR ALL USING (true) WITH CHECK (true);
+
+-- Grant privileges to anon and authenticated roles
+GRANT ALL ON TABLE public.content TO anon, authenticated;
+GRANT ALL ON TABLE public.pricing TO anon, authenticated;
+GRANT ALL ON TABLE public.services TO anon, authenticated;
+GRANT ALL ON TABLE public.leads TO anon, authenticated;
+GRANT ALL ON TABLE public.testimonials TO anon, authenticated;
+GRANT ALL ON TABLE public.jobs TO anon, authenticated;
+GRANT ALL ON TABLE public.careers TO anon, authenticated;

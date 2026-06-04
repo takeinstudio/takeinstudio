@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Check, Info, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import SEO from "@/components/SEO";
 
 
 
@@ -637,6 +638,11 @@ export default function PricingPage() {
 
   return (
     <div className="pt-20">
+      <SEO 
+        title="Pricing & Plans" 
+        description="Transparent pricing for every stage. Choose the plan that fits your goals, budget, and business needs. From portfolio websites to enterprise solutions." 
+        canonical="https://takeinstudio.com/pricing"
+      />
       
       {/* Compact Hero */}
       <section className="px-4 sm:px-6 lg:px-8 pt-8 pb-4">

@@ -4,6 +4,7 @@ import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, C
 import { useState, useEffect } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
+import SEO from "@/components/SEO";
 
 export const servicesData = [
   {
@@ -205,6 +206,11 @@ export default function ServicesPage() {
 
   return (
     <>
+      <SEO 
+        title="Our Services" 
+        description="From websites and mobile apps to AI automation and branding, we help businesses launch faster, operate smarter, and scale with confidence." 
+        canonical="https://takeinstudio.com/services"
+      />
       {/* Hero Section */}
       <section className="px-4 sm:px-6 lg:px-8 py-8 pt-24 sm:pt-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background pointer-events-none" />

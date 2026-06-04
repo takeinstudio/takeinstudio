@@ -5,6 +5,7 @@ import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckC
 import AnimatedSection from "@/components/AnimatedSection";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import SEO from "@/components/SEO";
 
 
 
@@ -117,6 +118,11 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
 
   return (
     <>
+      <SEO 
+        title="Contact Us" 
+        description="Get in touch with TakeIN Studio. We offer free consultations and reply within 24 hours to help you start your digital project." 
+        canonical="https://takeinstudio.com/contact"
+      />
       {/* Hero */}
       <section className="px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12">
         <div className="container mx-auto max-w-6xl">

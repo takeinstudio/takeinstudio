@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase';
 import { useEffect, useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Star, MessageSquare, CheckCircle2, User, Loader2 } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const API_BASE = window.location.hostname === "localhost" ? "http://localhost:8000" : "/api";
 
@@ -54,6 +55,11 @@ export default function TestimonialsPage() {
 
   return (
       <div className="pt-32 pb-24 min-h-screen bg-background relative overflow-hidden">
+        <SEO 
+          title="Client Testimonials" 
+          description="Read what our clients have to say about working with TakeIN Studio." 
+          canonical="https://takeinstudio.com/testimonials"
+        />
         {/* Background Effects */}
         <div className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
         

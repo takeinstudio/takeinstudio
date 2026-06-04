@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 
 const whyChooseUs = [
   { icon: Building, title: "Real Client Work", desc: "Work on websites, applications, AI solutions, branding projects, and business systems used by actual clients." },
@@ -27,10 +27,11 @@ const hiringProcess = [
 export default function CareerPage() {
   return (
     <>
-      <Helmet>
-        <title>Careers | TakeIN Studio</title>
-        <meta name="description" content="Explore career opportunities, internships, and growth-focused roles at TakeIN Studio. Join our team of developers, designers, marketers, and creators." />
-      </Helmet>
+      <SEO 
+        title="Careers" 
+        description="Explore career opportunities, internships, and growth-focused roles at TakeIN Studio. Join our team of developers, designers, marketers, and creators." 
+        canonical="https://takeinstudio.com/careers"
+      />
 
       {/* Hero Section */}
       <section className="px-4 sm:px-6 lg:px-8 py-8 pt-24 sm:pt-32 relative overflow-hidden">

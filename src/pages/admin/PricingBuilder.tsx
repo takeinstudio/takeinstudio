@@ -12,6 +12,25 @@ export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, 
 
   const pricingList = data.pricing || [];
 
+  const [localPricing, setLocalPricing] = useState<any[]>([]);
+
+  useEffect(() => {
+    setLocalPricing(pricingList.filter((p: any) => p.category === activeCategory));
+  }, [pricingList, activeCategory]);
+
+  const handleReorder = async (newOrder: any[]) => {
+    setLocalPricing(newOrder);
+    try {
+      // Bulk update the sort_order in supabase
+      for(let i = 0; i < newOrder.length; i++) {
+         await supabase.from('pricing').update({ sort_order: i }).eq('id', newOrder[i].id);
+      }
+      fetchData(); // Refresh global state quietly
+    } catch (err) {
+      console.error("Failed to save order", err);
+    }
+  };
+
   const [hasAttemptedAutoLoad, setHasAttemptedAutoLoad] = useState(false);
 
   useEffect(() => {
@@ -51,7 +70,8 @@ export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, 
       price_intl: "$99",
       is_popular: 0,
       features: ["Feature 1", "Feature 2"],
-      cta_text: "Get Started"
+      cta_text: "Get Started",
+      sort_order: localPricing.length // Put it at the end
     });
   };
 
@@ -135,23 +155,29 @@ export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, 
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12 items-stretch">
-          {filteredPricing.map((tier: any) => {
+        <Reorder.Group as="div" axis="x" layoutScroll values={localPricing} onReorder={handleReorder} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-12 items-stretch">
+          {localPricing.map((tier: any) => {
             const isEditing = selectedPricing?.id === tier.id;
             const displayData = isEditing ? draftPricing : tier;
-            return <PricingCardPreview key={tier.id} data={displayData} isEditing={isEditing} onClick={() => handleEdit(tier)} region={region} />;
+            return (
+              <Reorder.Item key={tier.id} value={tier} className="h-full cursor-grab active:cursor-grabbing">
+                <PricingCardPreview data={displayData} isEditing={isEditing} onClick={() => handleEdit(tier)} region={region} />
+              </Reorder.Item>
+            );
           })}
           {selectedPricing?.id === "new" && (
-            <PricingCardPreview key="new" data={draftPricing} isEditing={true} onClick={() => {}} region={region} />
+            <div className="opacity-70">
+              <PricingCardPreview key="new" data={draftPricing} isEditing={true} onClick={() => {}} region={region} />
+            </div>
           )}
-          {filteredPricing.length === 0 && !selectedPricing && (
+          {localPricing.length === 0 && !selectedPricing && (
              <div className="col-span-full py-16 text-center bg-card border border-dashed border-border/60 rounded-3xl flex flex-col items-center justify-center gap-4">
                <p className="text-muted-foreground text-sm font-medium">No pricing plans created for {categories.find(c => c.id === activeCategory)?.name} yet.</p>
                <Loader2 className="animate-spin text-primary w-6 h-6"/>
                <p className="text-xs text-muted-foreground">Auto-loading default pricing...</p>
              </div>
           )}
-        </div>
+        </Reorder.Group>
       </div>
 
       {/* Editor Drawer */}
@@ -247,7 +273,7 @@ function PricingCardPreview({ data, isEditing, onClick, region }: any) {
   return (
     <div 
       onClick={onClick}
-      className={`clay-card p-6 h-full flex flex-col cursor-pointer border-2 transition-all duration-300 relative overflow-hidden bg-card ${
+      className={`clay-card p-5 h-full flex flex-col cursor-pointer border-2 transition-all duration-300 relative overflow-hidden bg-card ${
         isEditing ? "border-primary shadow-xl ring-4 ring-primary/10" :
         data.is_popular == 1 ? "border-primary/50 shadow-lg bg-gradient-to-b from-primary/5 to-transparent hover:border-primary" : "border-border/50 hover:border-primary/30"
       }`}
@@ -267,19 +293,19 @@ function PricingCardPreview({ data, isEditing, onClick, region }: any) {
       )}
 
       <div className={`mt-${data.is_popular == 1 ? '4' : '0'}`}>
-        <h3 className="font-display font-bold text-xl mb-1 text-foreground">{data.name}</h3>
+        <h3 className="font-display font-bold text-lg mb-1 text-foreground">{data.name}</h3>
         <div className="flex items-baseline gap-2 mt-4 mb-3">
-          <span className={`text-3xl font-black font-display tracking-tight ${data.is_popular == 1 ? "text-primary" : "text-foreground"}`}>
+          <span className={`text-2xl font-black font-display tracking-tight ${data.is_popular == 1 ? "text-primary" : "text-foreground"}`}>
             {price}
           </span>
         </div>
-        <p className="text-muted-foreground text-xs leading-relaxed mb-6 min-h-[48px]">{data.description}</p>
+        <p className="text-muted-foreground text-[11px] leading-relaxed mb-5 min-h-[44px]">{data.description}</p>
         
-        <div className="border-t border-border/50 pt-5 mb-6">
-          <ul className="space-y-3">
+        <div className="border-t border-border/50 pt-4 mb-5">
+          <ul className="space-y-2.5">
             {features.map((f: string, i: number) => (
-              <li key={i} className="flex items-start gap-2.5 text-xs text-muted-foreground leading-tight">
-                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+              <li key={i} className="flex items-start gap-2 text-[11px] text-muted-foreground leading-tight">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-[2px] flex-shrink-0" />
                 <span>{f}</span>
               </li>
             ))}
@@ -287,7 +313,7 @@ function PricingCardPreview({ data, isEditing, onClick, region }: any) {
         </div>
       </div>
 
-      <div className={`w-full py-3 rounded-xl text-xs font-bold tracking-wide text-center transition-all mt-auto ${data.is_popular == 1 ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary'}`}>
+      <div className={`w-full py-2.5 rounded-xl text-xs font-bold tracking-wide text-center transition-all mt-auto ${data.is_popular == 1 ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary'}`}>
         {data.cta_text || "Get Started"}
       </div>
     </div>

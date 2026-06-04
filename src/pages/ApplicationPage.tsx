@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase';
 import { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UploadCloud, CheckCircle2, ArrowLeft, Loader2, X } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import AnimatedSection from "@/components/AnimatedSection";
 
 export default function ApplicationPage() {
@@ -97,9 +97,7 @@ export default function ApplicationPage() {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-        <Helmet>
-          <title>Application Submitted | TakeIN Studio</title>
-        </Helmet>
+        <SEO title="Application Submitted" description="Your application to TakeIN Studio has been submitted successfully." />
         <AnimatedSection>
           <div className="bg-white rounded-3xl p-8 sm:p-12 max-w-md w-full text-center shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100">
             <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -123,9 +121,7 @@ export default function ApplicationPage() {
 
   return (
     <div className="min-h-screen bg-[#fafafa] flex flex-col py-10 px-4 sm:px-6 lg:px-8">
-      <Helmet>
-        <title>Apply Now | TakeIN Studio Careers</title>
-      </Helmet>
+      <SEO title="Apply Now - Careers" description="Apply for a role at TakeIN Studio and join our team of creators and builders." />
 
       <div className="max-w-4xl w-full mx-auto flex-1 flex flex-col">
         

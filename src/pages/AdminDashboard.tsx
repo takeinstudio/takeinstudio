@@ -118,6 +118,9 @@ export default function AdminDashboard() {
         leads: resLeads.data || [],
         careers: resCareers.data || [],
         pricing: (resPricing.data || []).sort((a: any, b: any) => {
+          if ((a.sort_order || 0) !== (b.sort_order || 0)) {
+            return (a.sort_order || 0) - (b.sort_order || 0);
+          }
           const getNum = (p: string) => {
             if (!p || p === "Contact Sales" || p === "Custom") return 99999999;
             return parseInt(p.replace(/[^0-9]/g, '')) || 0;

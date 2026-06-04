@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS public.pricing (
     price_intl text,
     is_popular integer DEFAULT 0,
     features text,
-    cta_text text DEFAULT 'Get Started'
+    cta_text text DEFAULT 'Get Started',
+    sort_order integer DEFAULT 0
 );
 
 -- 3. Services Table

@@ -19,14 +19,32 @@ import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
-  const [token, setToken] = useState(localStorage.getItem("admin_token"));
   const [activeTab, setActiveTab] = useState("overview");
-
 
   // Data State
   const [data, setData] = useState<any>({ leads: [], careers: [], pricing: [], services: [], content: [], jobs: [], testimonials: [] });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start loading true
   const [unlocking, setUnlocking] = useState(false);
+
+  useEffect(() => {
+    // Check Authentication on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate("/admin");
+      }
+    });
+
+    // Listen for auth changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT' || !session) {
+        navigate("/admin");
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [navigate]);
 
   // Modals state
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
@@ -110,15 +128,15 @@ export default function AdminDashboard() {
       setCmsContent(resContent.data?.reduce((acc: any, curr: any) => ({ ...acc, [curr.section_key]: curr.text_value }), {}) || {});
     } catch (err: any) {
       console.error(err);
-      // Only logout on 401 if not hardcoded session
-      if (err.response?.status === 401 && token !== 'hardcoded_admin_session_2026') handleLogout();
+      // Removed the hardcoded bypass.
+      // If fetching fails due to RLS, they need to log in again.
+      if (err.response?.status === 401) handleLogout();
     }
     setLoading(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("admin_token");
-    setToken(null);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     navigate("/admin");
   };
 

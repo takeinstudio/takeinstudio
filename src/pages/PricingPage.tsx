@@ -540,26 +540,34 @@ export default function PricingPage() {
   const [region, setRegion] = useState<"IN" | "INTL">("IN");
 
   useEffect(() => {
-    setLoading(true);
-    supabase.from('pricing').select('*')
-      .then(res => {
-        if (Array.isArray(res.data) && res.data.length > 0) {
-          setDbPricing(res.data);
+    const fetchPricing = async () => {
+      setLoading(true);
+      try {
+        const { data, error } = await supabase.from('pricing').select('*');
+        if (error) throw error;
+        
+        if (Array.isArray(data) && data.length > 0) {
+          setDbPricing(data);
           
           // Set active tab based on URL param if valid
           const params = new URLSearchParams(location.search);
           const serviceParam = params.get("service");
           if (serviceParam) {
             const normalizedParam = serviceParam.replace(/-/g, ' ').toLowerCase();
-            const matchingCategory = res.data.find((p: any) => p.category.toLowerCase() === normalizedParam);
+            const matchingCategory = data.find((p: any) => p.category.toLowerCase() === normalizedParam);
             if (matchingCategory) {
               setActiveTab(matchingCategory.category);
             }
           }
         }
-      })
-      .catch(err => console.error("CMS fetch error", err))
-      .finally(() => setLoading(false));
+      } catch (err) {
+        console.error("CMS fetch error", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchPricing();
   }, [location.search]);
 
   let displayCategories = [...categories];
@@ -600,15 +608,23 @@ export default function PricingPage() {
   const currentTiers = dbPricing.length > 0
     ? dbPricing
         .filter((p: any) => p.category === activeTab)
-        .map((p: any) => ({
-          name: p.name,
-          price: p.price_in,
-          internationalPrice: p.price_intl,
-          description: p.description,
-          features: p.features || [],
-          cta: p.cta_text || "Contact Sales",
-          popular: p.is_popular
-        }))
+        .map((p: any) => {
+          let parsedFeatures = [];
+          try {
+            parsedFeatures = typeof p.features === 'string' ? JSON.parse(p.features || '[]') : (p.features || []);
+          } catch (e) {
+            console.error("Failed to parse features for", p.name, e);
+          }
+          return {
+            name: p.name,
+            price: p.price_in,
+            internationalPrice: p.price_intl,
+            description: p.description,
+            features: parsedFeatures,
+            cta: p.cta_text || "Contact Sales",
+            popular: p.is_popular
+          };
+        })
     : (pricingData[activeTab] || pricingData["web-development"]);
 
   return (

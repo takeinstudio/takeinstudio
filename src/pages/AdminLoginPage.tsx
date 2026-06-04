@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 
 
 
+import { supabase } from '@/lib/supabase';
+
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,15 +17,24 @@ export default function AdminLoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Hardcoded credentials — no API dependency
-    if (username === 'takein@46' && password === '46@take') {
-      localStorage.setItem("admin_token", "hardcoded_admin_session_2026");
-      toast.success("Welcome back, Administrator!");
-      navigate("/admin/dashboard");
-    } else {
-      toast.error("Invalid administrator credentials.");
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: username, // Using username field for email
+        password: password,
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        toast.success("Welcome back, Administrator!");
+        navigate("/admin/dashboard");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Invalid administrator credentials.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const features = [

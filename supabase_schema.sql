@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS public.careers (
     created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Enable RLS and setup permissive policies for public access (Since it's an admin dashboard without auth limits yet)
+-- Enable RLS
 ALTER TABLE public.content ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.pricing ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
@@ -91,13 +91,33 @@ ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.jobs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.careers ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Allow public read-write on content" ON public.content FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on pricing" ON public.pricing FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on services" ON public.services FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on leads" ON public.leads FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on testimonials" ON public.testimonials FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on jobs" ON public.jobs FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public read-write on careers" ON public.careers FOR ALL USING (true) WITH CHECK (true);
+-- 1. Content Table: Public Read, Admin Write
+CREATE POLICY "Allow public read on content" ON public.content FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access on content" ON public.content FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 2. Pricing Table: Public Read, Admin Write
+CREATE POLICY "Allow public read on pricing" ON public.pricing FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access on pricing" ON public.pricing FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 3. Services Table: Public Read, Admin Write
+CREATE POLICY "Allow public read on services" ON public.services FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access on services" ON public.services FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 4. Leads Table: Public Insert, Admin Read/Write (Public cannot read leads)
+CREATE POLICY "Allow public insert on leads" ON public.leads FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow authenticated full access on leads" ON public.leads FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 5. Testimonials Table: Public Read, Admin Write
+CREATE POLICY "Allow public read on testimonials" ON public.testimonials FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access on testimonials" ON public.testimonials FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 6. Jobs Table: Public Read, Admin Write
+CREATE POLICY "Allow public read on jobs" ON public.jobs FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access on jobs" ON public.jobs FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 7. Careers Table: Public Insert, Admin Read/Write (Public cannot read applications)
+CREATE POLICY "Allow public insert on careers" ON public.careers FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow authenticated full access on careers" ON public.careers FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
 
 -- Grant privileges to anon and authenticated roles
 GRANT ALL ON TABLE public.content TO anon, authenticated;

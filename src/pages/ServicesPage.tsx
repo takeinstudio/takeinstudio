@@ -183,11 +183,16 @@ export default function ServicesPage() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
+        const { data, error } = await supabase.from('services').select('*');
+        if (error) throw error;
         
-        const res = await supabase.from('services').select('*');
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setDbServices(data);
+        if (data && data.length > 0) {
+          const parsed = data.map((s: any) => ({
+            ...s,
+            offerings: typeof s.offerings === 'string' ? JSON.parse(s.offerings || '[]') : (s.offerings || []),
+            buttons: typeof s.buttons === 'string' ? JSON.parse(s.buttons || '[]') : (s.buttons || [])
+          }));
+          setDbServices(parsed);
         }
       } catch (err) {
         console.error("Failed to fetch services", err);

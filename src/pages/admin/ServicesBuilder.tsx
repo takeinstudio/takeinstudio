@@ -10,7 +10,7 @@ export const getIconComponent = (iconName: string) => {
   return icons[iconName] || Monitor;
 };
 
-export default function ServicesBuilder({ data, fetchData, token, unlockDefaultServices, unlocking }: any) {
+export default function ServicesBuilder({ data, fetchData, unlockDefaultServices, unlocking }: any) {
   const [selectedService, setSelectedService] = useState<any>(null);
   const [draftService, setDraftService] = useState<any>(null);
   const [saving, setSaving] = useState(false);

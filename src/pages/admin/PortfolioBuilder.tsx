@@ -32,7 +32,7 @@ const defaultPortfolio = [
   }
 ];
 
-export default function PortfolioBuilder({ data, fetchData, token, unlockDefaultPortfolio, unlocking }: any) {
+export default function PortfolioBuilder({ data, fetchData, unlockDefaultPortfolio, unlocking }: any) {
   const [items, setItems] = useState<any[]>(defaultPortfolio);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [draftItem, setDraftItem] = useState<any>(null);

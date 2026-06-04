@@ -3,7 +3,7 @@ import { Plus, Settings, X, Save, Edit, Trash2, Sparkles, Loader2, Key, CheckCir
 import { supabase } from '@/lib/supabase';
 import { Reorder } from "framer-motion";
 
-export default function PricingBuilder({ data, fetchData, token, unlockDefaultPricing, unlocking }: any) {
+export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, unlocking }: any) {
   const [selectedPricing, setSelectedPricing] = useState<any>(null);
   const [draftPricing, setDraftPricing] = useState<any>(null);
   const [saving, setSaving] = useState(false);

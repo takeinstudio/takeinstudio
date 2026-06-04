@@ -99,15 +99,12 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    if (token) {
-      fetchData();
-    }
-  }, [token]);
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const [resLeads, resCareers, resPricing, resServices, resContent, resJobs, resTestimonials] = await Promise.all([
         supabase.from('leads').select('*').order('created_at', { ascending: false }),
         supabase.from('careers').select('*').order('created_at', { ascending: false }),
@@ -246,7 +243,6 @@ export default function AdminDashboard() {
 
   const savePricing = async () => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const payload = {
         ...editingPricing,
         features: editingPricing.features.split("\n").filter((f: string) => f.trim() !== ""),
@@ -267,7 +263,6 @@ export default function AdminDashboard() {
   const deletePricing = async (id: number) => {
     if (!window.confirm("Are you sure you want to delete this pricing tier?")) return;
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       await supabase.from('pricing').delete().eq('id', id);
       fetchData();
     } catch (err) {
@@ -290,7 +285,6 @@ export default function AdminDashboard() {
 
   const saveService = async () => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const payload = {
         ...editingService,
         offerings: Array.isArray(editingService.offerings) ? editingService.offerings : editingService.offerings.split("\n").map((f: string) => f.trim()).filter(Boolean),
@@ -311,7 +305,6 @@ export default function AdminDashboard() {
   const deleteService = async (id: number) => {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       await supabase.from('services').delete().eq('id', id);
       fetchData();
     } catch (err) {
@@ -334,7 +327,6 @@ export default function AdminDashboard() {
 
   const saveJob = async () => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const payload = {
         ...editingJob,
         requirements: Array.isArray(editingJob.requirements) ? editingJob.requirements : editingJob.requirements.split("\n").map((r: string) => r.trim()).filter(Boolean)
@@ -354,7 +346,6 @@ export default function AdminDashboard() {
   const deleteJob = async (id: number) => {
     if (!window.confirm("Are you sure you want to delete this job posting?")) return;
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       await supabase.from('jobs').delete().eq('id', id);
       fetchData();
     } catch (err) {
@@ -374,7 +365,6 @@ export default function AdminDashboard() {
 
   const saveTestimonial = async () => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       if (editingTestimonial.id) {
         await supabase.from('testimonials').update(editingTestimonial).eq('id', editingTestimonial.id);
       } else {
@@ -390,7 +380,6 @@ export default function AdminDashboard() {
   const deleteTestimonial = async (id: number) => {
     if (!window.confirm("Are you sure you want to delete this testimonial?")) return;
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       await supabase.from('testimonials').delete().eq('id', id);
       fetchData();
     } catch (err) {
@@ -400,7 +389,6 @@ export default function AdminDashboard() {
 
   const toggleTestimonialApproval = async (testimonial: any) => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       await supabase.from('testimonials').update({ ...testimonial, is_approved: testimonial.is_approved == 1 ? 0 : 1 }).eq('id', testimonial.id);
       fetchData();
     } catch (err) {
@@ -445,9 +433,6 @@ export default function AdminDashboard() {
   };
 
   // --- LOGIN SCREEN REDIRECT ---
-  if (!token) {
-    return <Navigate to="/admin" replace />;
-  }
 
   // --- DASHBOARD LAYOUT ---
   return (
@@ -511,20 +496,20 @@ export default function AdminDashboard() {
           {activeTab === "overview" && <OverviewBuilder data={data} setActiveTab={setActiveTab} />}
 
           {/* Page Builder Tab */}
-          {activeTab === "pages" && <HomePageBuilder data={data} fetchData={fetchData} token={token} />}
+          {activeTab === "pages" && <HomePageBuilder data={data} fetchData={fetchData} />}
 
           {/* Pricing Tab */}
           {activeTab === "pricing" && (
-            <PricingBuilder data={data} fetchData={fetchData} token={token} unlockDefaultPricing={unlockDefaultPricing} unlocking={unlocking} />
+            <PricingBuilder data={data} fetchData={fetchData} unlockDefaultPricing={unlockDefaultPricing} unlocking={unlocking} />
           )}
           
           {/* Services Tab */}
           {activeTab === "services" && (
-            <ServicesBuilder data={data} fetchData={fetchData} token={token} unlockDefaultServices={unlockDefaultServices} unlocking={unlocking} />
+            <ServicesBuilder data={data} fetchData={fetchData} unlockDefaultServices={unlockDefaultServices} unlocking={unlocking} />
           )}
 
           {/* Portfolio Builder Tab */}
-          {activeTab === "portfolio" && <PortfolioBuilder data={data} fetchData={fetchData} token={token} unlockDefaultPortfolio={unlockDefaultPortfolio} unlocking={unlocking} />}
+          {activeTab === "portfolio" && <PortfolioBuilder data={data} fetchData={fetchData} unlockDefaultPortfolio={unlockDefaultPortfolio} unlocking={unlocking} />}
 
           {/* Other Tabs (Placeholder for brevity, similar to before but darker UI) */}
           {activeTab === "leads" && (
@@ -590,7 +575,7 @@ export default function AdminDashboard() {
 
           {/* Careers Tab */}
           {activeTab === "careers" && (
-            <RecruitmentHubBuilder data={data} fetchData={fetchData} token={token} />
+            <RecruitmentHubBuilder data={data} fetchData={fetchData} />
           )}
 
           {/* Testimonials Tab */}

@@ -71,7 +71,11 @@ ${form.message}`;
   const handleEmail = () => {
     if (!validateForm()) return;
     const subject = encodeURIComponent(`New Inquiry from ${form.name}`);
-    window.location.href = `mailto:takeinstudio@gmail.com?subject=${subject}&body=${getMessageBody()}`;
+    const mailtoLink = `mailto:takeinstudio@gmail.com?subject=${subject}&body=${getMessageBody()}`;
+    const a = document.createElement("a");
+    a.href = mailtoLink;
+    a.target = "_blank";
+    a.click();
   };
 
   const handleWhatsApp = () => {

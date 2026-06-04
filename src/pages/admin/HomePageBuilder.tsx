@@ -115,10 +115,10 @@ export default function HomePageBuilder({ data, fetchData }: any) {
       </div>
 
       {/* 3-Column Workspace */}
-      <div className="flex-1 flex gap-4 min-h-0">
+      <div className="flex-1 flex flex-col xl:flex-row gap-4 min-h-0 overflow-y-auto xl:overflow-visible">
         
         {/* Left Column: Sections List */}
-        <div className="w-[300px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-sm overflow-hidden flex flex-col">
+        <div className="w-full xl:w-[300px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-sm overflow-hidden flex flex-col min-h-[300px] xl:min-h-0">
           <div className="p-4 border-b border-border/50 bg-muted/20">
             <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground">Sections</h3>
           </div>
@@ -153,7 +153,7 @@ export default function HomePageBuilder({ data, fetchData }: any) {
         </div>
 
         {/* Center Column: Live Preview iframe */}
-        <div className="flex-1 bg-muted/20 border border-border/50 rounded-3xl overflow-hidden relative shadow-inner">
+        <div className="flex-1 min-h-[500px] xl:min-h-0 bg-muted/20 border border-border/50 rounded-3xl overflow-hidden relative shadow-inner">
           <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-card border border-border/50 px-4 py-1.5 rounded-full shadow-sm z-10 flex items-center gap-2 text-xs font-bold text-muted-foreground">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Live Preview
           </div>
@@ -167,7 +167,7 @@ export default function HomePageBuilder({ data, fetchData }: any) {
         </div>
 
         {/* Right Column: Settings Drawer */}
-        <div className="w-[350px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-sm overflow-hidden flex flex-col">
+        <div className="w-full xl:w-[350px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-sm overflow-hidden flex flex-col min-h-[400px] xl:min-h-0">
           <div className="p-4 border-b border-border/50 bg-muted/20 flex items-center gap-2">
             <Settings2 size={18} className="text-muted-foreground" />
             <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground">

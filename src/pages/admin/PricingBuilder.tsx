@@ -130,9 +130,9 @@ export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, 
   const filteredPricing = pricingList.filter((p: any) => p.category === activeCategory);
 
   return (
-    <div className="flex gap-6 h-[calc(100vh-140px)] animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)] animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
       {/* Canvas */}
-      <div className={`flex-1 overflow-y-auto pr-4 custom-scrollbar transition-all duration-300 ${selectedPricing ? 'w-2/3' : 'w-full'}`}>
+      <div className={`flex-1 overflow-y-auto pr-2 md:pr-4 custom-scrollbar transition-all duration-300 ${selectedPricing ? 'w-full lg:w-2/3' : 'w-full'}`}>
         
         {/* Top Controls */}
         <div className="flex flex-col gap-4 mb-8 bg-card border border-border/50 p-4 rounded-3xl shadow-sm">
@@ -182,7 +182,7 @@ export default function PricingBuilder({ data, fetchData, unlockDefaultPricing, 
 
       {/* Editor Drawer */}
       {selectedPricing && (
-        <div className="w-[400px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-xl flex flex-col overflow-hidden animate-in slide-in-from-right-8 duration-300">
+        <div className="absolute inset-0 lg:relative lg:inset-auto w-full lg:w-[400px] shrink-0 bg-card border border-border/50 rounded-3xl shadow-2xl lg:shadow-xl flex flex-col overflow-hidden animate-in slide-in-from-right-8 duration-300 z-20">
           <div className="p-5 border-b border-border/50 flex justify-between items-center bg-muted/20">
             <h3 className="font-display font-bold text-lg">{selectedPricing.id === "new" ? "Add Plan" : "Edit Plan"}</h3>
             <button onClick={() => setSelectedPricing(null)} className="p-1.5 hover:bg-muted rounded-full transition-colors text-muted-foreground"><X size={18}/></button>

@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase';
 import { useEffect, useState } from "react";
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import { 
-  LayoutDashboard, LogOut, Users, Briefcase, FileText, Settings, Key, Lock, Send, AlertCircle, Edit, Trash2, Plus, Sparkles, Loader2, Save, X, Eye, ArrowRight, CheckCircle2, Monitor, Video, Palette, Megaphone, TrendingUp, Building, ShieldCheck, Smartphone, Code, Bot, Wrench, MessageSquare
+  LayoutDashboard, LogOut, Users, Briefcase, FileText, Settings, Key, Lock, Send, AlertCircle, Edit, Trash2, Plus, Sparkles, Loader2, Save, X, Eye, ArrowRight, CheckCircle2, Monitor, Video, Palette, Megaphone, TrendingUp, Building, ShieldCheck, Smartphone, Code, Bot, Wrench, MessageSquare, Menu
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import PricingPage, { pricingData } from "./PricingPage"; // For live preview and default data
@@ -20,6 +20,7 @@ import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Data State
   const [data, setData] = useState<any>({ leads: [], careers: [], pricing: [], services: [], content: [], jobs: [], testimonials: [] });
@@ -445,10 +446,22 @@ export default function AdminDashboard() {
 
   // --- DASHBOARD LAYOUT ---
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex flex-col md:flex-row relative">
+      
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border/50 bg-card/90 backdrop-blur-md sticky top-0 z-50">
+        <Link to="/" className="flex items-center gap-2">
+          <div className="bg-primary text-primary-foreground p-1.5 rounded-lg"><Sparkles size={18}/></div>
+          <span className="font-display font-bold text-lg tracking-tight">TakeIN CMS</span>
+        </Link>
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-foreground">
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-64 bg-card/30 border-r border-border/50 flex flex-col backdrop-blur-xl sticky top-0 h-screen">
-        <div className="p-6 border-b border-border/50">
+      <aside className={`w-64 bg-card/95 md:bg-card/30 border-r border-border/50 flex flex-col backdrop-blur-xl fixed md:sticky top-[69px] md:top-0 h-[calc(100vh-69px)] md:h-screen z-40 transition-transform duration-300 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+        <div className="p-6 border-b border-border/50 hidden md:block">
           <Link to="/" className="flex items-center gap-2">
             <div className="bg-primary text-primary-foreground p-1.5 rounded-lg"><Sparkles size={18}/></div>
             <span className="font-display font-bold text-lg tracking-tight">TakeIN CMS</span>
@@ -456,16 +469,16 @@ export default function AdminDashboard() {
         </div>
         
         <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-          <button onClick={() => setActiveTab("overview")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "overview" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Overview</button>
-          <button onClick={() => setActiveTab("pages")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pages" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Page Builder</button>
-          <button onClick={() => setActiveTab("pricing")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
-          <button onClick={() => setActiveTab("services")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
-          <button onClick={() => setActiveTab("portfolio")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
-          <button onClick={() => setActiveTab("leads")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
-          <button onClick={() => setActiveTab("jobs")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "jobs" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Building size={18}/> Job Postings</button>
-          <button onClick={() => setActiveTab("testimonials")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "testimonials" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><MessageSquare size={18}/> Testimonials</button>
-          <button onClick={() => setActiveTab("careers")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "careers" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Users size={18}/> Recruitment Hub</button>
-          <button onClick={() => setActiveTab("settings")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "settings" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Settings size={18}/> Settings</button>
+          <button onClick={() => { setActiveTab("overview"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "overview" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Overview</button>
+          <button onClick={() => { setActiveTab("pages"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pages" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Page Builder</button>
+          <button onClick={() => { setActiveTab("pricing"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
+          <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
+          <button onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
+          <button onClick={() => { setActiveTab("leads"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
+          <button onClick={() => { setActiveTab("jobs"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "jobs" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Building size={18}/> Job Postings</button>
+          <button onClick={() => { setActiveTab("testimonials"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "testimonials" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><MessageSquare size={18}/> Testimonials</button>
+          <button onClick={() => { setActiveTab("careers"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "careers" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Users size={18}/> Recruitment Hub</button>
+          <button onClick={() => { setActiveTab("settings"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "settings" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Settings size={18}/> Settings</button>
         </nav>
         
         <div className="p-4 border-t border-border/50">
@@ -483,7 +496,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        <div className="p-8 max-w-7xl mx-auto">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
           {/* Header */}
           <header className="mb-8 flex justify-between items-end">
             <div>
@@ -522,8 +535,8 @@ export default function AdminDashboard() {
 
           {/* Other Tabs (Placeholder for brevity, similar to before but darker UI) */}
           {activeTab === "leads" && (
-            <div className="bg-card border border-border/50 rounded-2xl overflow-hidden">
-               <table className="w-full text-left text-sm">
+            <div className="bg-card border border-border/50 rounded-2xl overflow-x-auto">
+               <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal min-w-[600px]">
                   <thead className="bg-muted/50 text-muted-foreground text-xs uppercase font-semibold">
                     <tr><th className="p-4">Name</th><th className="p-4">Email</th><th className="p-4">Service</th><th className="p-4">Date</th></tr>
                   </thead>

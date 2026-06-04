@@ -18,12 +18,12 @@ export default function OverviewBuilder({ data, setActiveTab }: { data: any, set
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       
-      <div className="flex justify-between items-center bg-card border border-border/50 p-6 rounded-3xl shadow-sm">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card border border-border/50 p-6 rounded-3xl shadow-sm text-center md:text-left">
         <div>
           <h2 className="font-display font-bold text-2xl text-foreground">Welcome Back!</h2>
           <p className="text-muted-foreground text-sm mt-1">Here is the latest overview of your digital agency.</p>
         </div>
-        <div className="text-right">
+        <div className="md:text-right">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Last Published</p>
           <p className="text-sm font-medium text-foreground">Today, 10:42 AM</p>
         </div>

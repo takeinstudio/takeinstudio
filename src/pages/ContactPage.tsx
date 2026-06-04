@@ -87,11 +87,10 @@ ${form.message}`;
     // Send to Node.js backend
     const newEnquiry = {
       name: form.name,
-      company: form.company || "N/A",
-      type: selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry",
       email: form.email,
-      desc: form.message,
-      date: new Date().toISOString().split('T')[0],
+      phone: form.phone,
+      service: selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry",
+      message: `Company: ${form.company || "N/A"}\n\nProject Details:\n${form.message}`,
       status: "New"
     };
     

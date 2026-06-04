@@ -548,8 +548,11 @@ export default function PricingPage() {
         if (error) throw error;
         
         if (Array.isArray(data) && data.length > 0) {
-          // Sort pricing tiers by price in ascending order
+          // Sort pricing tiers by sort_order, then by price in ascending order
           const sortedData = data.sort((a: any, b: any) => {
+            if ((a.sort_order || 0) !== (b.sort_order || 0)) {
+              return (a.sort_order || 0) - (b.sort_order || 0);
+            }
             const getNum = (p: string) => {
               if (!p || p === "Contact Sales" || p === "Custom") return 99999999;
               return parseInt(p.replace(/[^0-9]/g, '')) || 0;

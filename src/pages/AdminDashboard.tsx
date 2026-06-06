@@ -241,6 +241,32 @@ export default function AdminDashboard() {
     }
   };
 
+  const unlockDefaultTestimonials = async () => {
+    setUnlocking(true);
+    try {
+      const data = [
+        { name: "Rahul Sharma", role: "Founder, EduSpark Academy", text: "TakeIN Studio completely transformed our coaching institute website. The new design looks professional, loads quickly, and has significantly improved student inquiries. Their team was responsive throughout the project and delivered everything on time.", rating: 5, is_approved: 1 },
+        { name: "Priya Mehta", role: "Director, Mehta Healthcare Clinic", text: "We needed a modern website and appointment management system for our clinic. TakeIN Studio delivered exactly what we envisioned. The platform is easy to use, and patient bookings have become much more organized.", rating: 5, is_approved: 1 },
+        { name: "Arjun Patel", role: "Owner, Patel Fitness Hub", text: "Our gym website and membership portal were built professionally and within budget. The team understood our requirements perfectly and provided excellent post-launch support.", rating: 5, is_approved: 1 },
+        { name: "Sneha Roy", role: "Founder, Bloom Boutique", text: "TakeIN Studio developed our e-commerce website and helped us establish a strong online presence. The website is beautiful, user-friendly, and has increased our online sales noticeably.", rating: 5, is_approved: 1 },
+        { name: "Vikram Singh", role: "Managing Director, Singh Realty", text: "The custom website and lead management system built by TakeIN Studio have streamlined our real estate operations. Their attention to detail and professionalism exceeded our expectations.", rating: 5, is_approved: 1 },
+        { name: "Neha Agarwal", role: "Founder, SkillBridge Learning", text: "Our educational platform required a modern website with multiple integrations. The team delivered a polished solution and ensured everything worked flawlessly. Highly recommended for educational institutions.", rating: 5, is_approved: 1 },
+        { name: "Karan Verma", role: "CEO, Verma Enterprises", text: "The mobile application developed by TakeIN Studio has improved customer engagement and simplified our internal processes. Their communication and technical expertise were outstanding throughout the project.", rating: 5, is_approved: 1 },
+        { name: "Ananya Gupta", role: "Founder, Urban Eats Restaurant", text: "We partnered with TakeIN Studio for our restaurant website and ongoing maintenance. Their support team is always available, and our website remains secure, fast, and updated.", rating: 5, is_approved: 1 },
+        { name: "Ritesh Nair", "role": "Operations Head, Nexa Logistics", text: "TakeIN Studio developed a custom business dashboard that helped us automate several manual processes. The solution saved our team countless hours and improved efficiency across departments.", rating: 5, is_approved: 1 },
+        { name: "Pooja Kapoor", "role": "Founder, Kapoor Digital Services", text: "Their website maintenance service has been exceptional. From security updates to performance optimization, everything is handled proactively. We can focus on our business while they manage the technical side.", rating: 5, is_approved: 1 }
+      ];
+      const { error } = await supabase.from('testimonials').insert(data);
+      if (error) throw error;
+      await fetchData();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to insert testimonials.");
+    } finally {
+      setUnlocking(false);
+    }
+  };
+
   // ----- MODALS -----
   const openEditPricing = (tier: any = null) => {
     if (tier) {
@@ -536,6 +562,9 @@ export default function AdminDashboard() {
 
             {activeTab === "testimonials" && (
               <div className="flex gap-3">
+                <button onClick={unlockDefaultTestimonials} disabled={unlocking} className="bg-muted text-foreground hover:bg-muted/80 px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all flex items-center gap-2">
+                  {unlocking ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16}/>} Load Defaults
+                </button>
                 <button onClick={() => openEditTestimonial(null)} className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
                   <Plus size={16}/> Add Testimonial
                 </button>

@@ -21,6 +21,10 @@ export default function HomePageBuilder({ data, fetchData }: any) {
   // Hero Text State
   const [heroTitle, setHeroTitle] = useState("");
   const [heroSubtitle, setHeroSubtitle] = useState("");
+
+  // Testimonials Text State
+  const [testiTitle, setTestiTitle] = useState("");
+  const [testiSubtitle, setTestiSubtitle] = useState("");
   
   // Iframe Refresh Key
   const [refreshKey, setRefreshKey] = useState(0);
@@ -35,15 +39,23 @@ export default function HomePageBuilder({ data, fetchData }: any) {
         const row = dbContent.find(c => c.section_key === 'home_sections');
         if (row) sectionsConfigStr = row.text_value;
         
-        const titleRow = dbContent.find(c => c.section_key === 'home_hero_title');
+        const titleRow = dbContent.find((c: any) => c.section_key === 'home_hero_title');
         if (titleRow) setHeroTitle(titleRow.text_value);
         
-        const subtitleRow = dbContent.find(c => c.section_key === 'home_hero_subtitle');
+        const subtitleRow = dbContent.find((c: any) => c.section_key === 'home_hero_subtitle');
         if (subtitleRow) setHeroSubtitle(subtitleRow.text_value);
+
+        const tTitleRow = dbContent.find((c: any) => c.section_key === 'home_testi_title');
+        if (tTitleRow) setTestiTitle(tTitleRow.text_value);
+        
+        const tSubtitleRow = dbContent.find((c: any) => c.section_key === 'home_testi_subtitle');
+        if (tSubtitleRow) setTestiSubtitle(tSubtitleRow.text_value);
       } else {
         if (dbContent['home_sections']) sectionsConfigStr = dbContent['home_sections'];
         if (dbContent['home_hero_title']) setHeroTitle(dbContent['home_hero_title']);
         if (dbContent['home_hero_subtitle']) setHeroSubtitle(dbContent['home_hero_subtitle']);
+        if (dbContent['home_testi_title']) setTestiTitle(dbContent['home_testi_title']);
+        if (dbContent['home_testi_subtitle']) setTestiSubtitle(dbContent['home_testi_subtitle']);
       }
       
       if (sectionsConfigStr) {
@@ -70,7 +82,9 @@ export default function HomePageBuilder({ data, fetchData }: any) {
       const payloads = [
         { section_key: 'home_sections', text_value: JSON.stringify(sections) },
         { section_key: 'home_hero_title', text_value: heroTitle },
-        { section_key: 'home_hero_subtitle', text_value: heroSubtitle }
+        { section_key: 'home_hero_subtitle', text_value: heroSubtitle },
+        { section_key: 'home_testi_title', text_value: testiTitle },
+        { section_key: 'home_testi_subtitle', text_value: testiSubtitle }
       ];
       
       await supabase.from('content').upsert(payloads, { onConflict: 'section_key' });
@@ -203,6 +217,34 @@ export default function HomePageBuilder({ data, fetchData }: any) {
                 
                 <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-xs text-primary/80 leading-relaxed font-medium">
                   <span className="font-bold">Pro Tip:</span> Click "Publish to Live Site" to save changes and refresh the live preview window.
+                </div>
+              </>
+            ) : activeSection === "testimonials" ? (
+              <>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 block">Section Title</label>
+                    <input 
+                      value={testiTitle} 
+                      onChange={e => setTestiTitle(e.target.value)} 
+                      className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" 
+                      placeholder="What Our Clients Say"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 block">Section Subtitle</label>
+                    <textarea 
+                      value={testiSubtitle} 
+                      onChange={e => setTestiSubtitle(e.target.value)} 
+                      className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" 
+                      rows={3}
+                      placeholder="Don't just take our word for it."
+                    />
+                  </div>
+                </div>
+                
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-xs text-primary/80 leading-relaxed font-medium mt-4">
+                  <span className="font-bold">Note:</span> Actual testimonials are managed in the main "Testimonials" tab on the left.
                 </div>
               </>
             ) : (

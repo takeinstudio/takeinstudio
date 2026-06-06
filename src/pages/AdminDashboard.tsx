@@ -504,9 +504,13 @@ export default function AdminDashboard() {
       
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-border/50 bg-card/90 backdrop-blur-md sticky top-0 z-50">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="bg-primary text-primary-foreground p-1.5 rounded-lg"><Sparkles size={18}/></div>
-          <span className="font-display font-bold text-lg tracking-tight">TakeIN CMS</span>
+        <Link to="/" className="flex items-center gap-2.5">
+          <img src="/logo/logo_no_text.png" alt="TakeIN Logo" className="h-7 w-auto mix-blend-multiply object-contain" />
+          <div className="flex items-center text-xl">
+            <span className="text-foreground font-black tracking-tight">Take</span>
+            <span className="text-primary font-black tracking-tight">IN</span>
+            <span className="text-muted-foreground font-semibold ml-1.5 tracking-normal text-sm self-end pb-0.5 uppercase">Panel</span>
+          </div>
         </Link>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-foreground">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -516,9 +520,13 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <aside className={`w-64 bg-card/95 md:bg-card/30 border-r border-border/50 flex flex-col backdrop-blur-xl fixed md:sticky top-[69px] md:top-0 h-[calc(100vh-69px)] md:h-screen z-40 transition-transform duration-300 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className="p-6 border-b border-border/50 hidden md:block">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="bg-primary text-primary-foreground p-1.5 rounded-lg"><Sparkles size={18}/></div>
-            <span className="font-display font-bold text-lg tracking-tight">TakeIN CMS</span>
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src="/logo/logo_no_text.png" alt="TakeIN Logo" className="h-7 w-auto mix-blend-multiply object-contain" />
+            <div className="flex items-center text-xl">
+              <span className="text-foreground font-black tracking-tight">Take</span>
+              <span className="text-primary font-black tracking-tight">IN</span>
+              <span className="text-muted-foreground font-semibold ml-1.5 tracking-normal text-sm self-end pb-0.5 uppercase">Panel</span>
+            </div>
           </Link>
         </div>
         

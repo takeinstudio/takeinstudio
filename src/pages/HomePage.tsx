@@ -563,44 +563,39 @@ function Pricing() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {/* Custom Projects */}
+          {/* View Pricing Card */}
           <AnimatedSection delay={0.1}>
-            <div className="clay-card p-6 sm:p-8 h-full flex flex-col items-center justify-between text-center space-y-6 group border border-border/40 hover:border-accent/30 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 relative overflow-hidden bg-card/25 backdrop-blur-md rounded-3xl">
-              <div className="space-y-4 flex flex-col items-center">
-                <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent/10 transition-all duration-500">
+            <div className="clay-card p-6 sm:p-8 h-full flex flex-col items-center justify-between text-center space-y-6 group border border-border/40 hover:border-primary/30 shadow-md hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-1.5 relative overflow-hidden bg-card/25 backdrop-blur-md rounded-3xl">
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-primary/5 blur-3xl rounded-full group-hover:scale-125 transition-transform duration-700" />
+              <div className="space-y-4 flex flex-col items-center z-10">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-500">
                   <FolderKanban size={24} />
                 </div>
                 <div className="space-y-2">
-                  <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-[9px] font-extrabold uppercase tracking-wider mb-1">
-                    Tailored Scope
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-[9px] font-extrabold uppercase tracking-wider mb-1">
+                    Transparent Plans
                   </span>
-                  <h3 className="font-display text-2xl font-bold">Custom Projects</h3>
-                  <p className="text-muted-foreground text-sm px-4 leading-relaxed">Flexible digital solutions modeled precisely around your specific business goals, bespoke features, and unique product requirements.</p>
+                  <h3 className="font-display text-2xl font-bold">View Pricing</h3>
+                  <p className="text-muted-foreground text-sm px-4 leading-relaxed">Explore our transparent pricing tiers for web development, app creation, and design services.</p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full">
+              <div className="flex w-full z-10">
                 <Link
-                  to="/pricing?service=web-development"
-                  className="flex-1 glow-btn bg-white border border-border text-foreground hover:bg-muted py-2.5 text-xs font-bold shadow-sm transition-all duration-300 text-center flex items-center justify-center"
+                  to="/pricing"
+                  className="w-full glow-btn bg-white border border-border text-foreground hover:bg-primary hover:text-white hover:border-primary py-3 rounded-xl text-xs font-bold shadow-sm transition-all duration-300 text-center flex items-center justify-center"
                 >
-                  View Pricing
-                </Link>
-                <Link
-                  to="/contact?plan=custom"
-                  className="flex-1 glow-btn bg-primary text-primary-foreground py-2.5 text-xs font-bold shadow-glow hover:scale-[1.02] transition-all text-center flex items-center justify-center"
-                >
-                  Contact Us
+                  Explore Pricing
                 </Link>
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Premium Projects */}
+          {/* Contact Us Card */}
           <AnimatedSection delay={0.2}>
-            <div className="clay-card p-6 sm:p-8 h-full flex flex-col items-center justify-between text-center space-y-6 group relative border border-primary/20 hover:border-primary/40 shadow-xl hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden bg-card/40 backdrop-blur-md rounded-3xl">
+            <div className="clay-card p-6 sm:p-8 h-full flex flex-col items-center justify-between text-center space-y-6 group relative border border-primary/20 hover:border-primary/40 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden bg-card/40 backdrop-blur-md rounded-3xl">
               {/* Shine effect */}
-              <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-3xl rounded-full group-hover:scale-125 transition-transform duration-700" />
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/15 blur-3xl rounded-full group-hover:scale-125 transition-transform duration-700" />
 
               <div className="space-y-4 flex flex-col items-center z-10">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-500">
@@ -608,25 +603,19 @@ function Pricing() {
                 </div>
                 <div className="space-y-2">
                   <div className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-[9px] font-extrabold uppercase tracking-wider mb-2 animate-pulse">
-                    Full-Scale Delivery
+                    Let's Connect
                   </div>
-                  <h3 className="font-display text-2xl font-bold">Premium Projects</h3>
-                  <p className="text-muted-foreground text-sm px-4 leading-relaxed">Complete digital transformations built for fast performance, custom integrations, advanced SEO, and global scalability.</p>
+                  <h3 className="font-display text-2xl font-bold">Contact Us</h3>
+                  <p className="text-muted-foreground text-sm px-4 leading-relaxed">Get in touch to receive a custom estimate, project consultation, or website audit.</p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full z-10">
+              <div className="flex w-full z-10">
                 <Link
-                  to="/pricing?service=web-development"
-                  className="flex-1 glow-btn bg-white border border-border text-foreground hover:bg-muted py-2.5 text-xs font-bold shadow-sm transition-all duration-300 text-center flex items-center justify-center"
+                  to="/contact"
+                  className="w-full glow-btn bg-primary text-primary-foreground py-3 rounded-xl text-xs font-bold shadow-glow hover:scale-[1.02] transition-all text-center flex items-center justify-center"
                 >
-                  View Pricing
-                </Link>
-                <Link
-                  to="/contact?plan=premium"
-                  className="flex-1 glow-btn bg-primary text-primary-foreground py-2.5 text-xs font-bold shadow-glow hover:scale-[1.02] transition-all text-center flex items-center justify-center"
-                >
-                  Contact Us
+                  Get in Touch
                 </Link>
               </div>
             </div>

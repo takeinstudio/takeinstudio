@@ -442,6 +442,34 @@ export default function AdminDashboard() {
     setCmsContent(prev => ({ ...prev, [key]: value }));
   };
 
+  // ----- LEADS METHODS -----
+  const toggleLeadStatus = async (lead: any) => {
+    const newStatus = lead.status === 'Contacted' ? 'New' : 'Contacted';
+    try {
+      await supabase.from('leads').update({ status: newStatus }).eq('id', lead.id);
+      fetchData();
+    } catch (err) {
+      alert("Error updating lead status");
+    }
+  };
+
+  const deleteLead = async (id: number) => {
+    const pwd = window.prompt("Enter password to delete this lead:");
+    if (pwd !== "8908") {
+      alert("Incorrect password!");
+      return;
+    }
+    if (!window.confirm("Are you sure you want to permanently delete this lead?")) return;
+    
+    try {
+      await supabase.from('leads').delete().eq('id', id);
+      fetchData();
+    } catch (err) {
+      alert("Error deleting lead");
+    }
+  };
+
+
   // --- LOGIN SCREEN REDIRECT ---
 
   // --- DASHBOARD LAYOUT ---
@@ -544,11 +572,13 @@ export default function AdminDashboard() {
                       <th className="p-4">Service</th>
                       <th className="p-4">Message</th>
                       <th className="p-4">Date</th>
+                      <th className="p-4">Status</th>
+                      <th className="p-4 text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/50">
                     {data.leads.map((l:any) => (
-                      <tr key={l.id} className="hover:bg-muted/20 transition-colors align-top">
+                      <tr key={l.id} className={`hover:bg-muted/20 transition-colors align-top ${l.status === 'Contacted' ? 'opacity-60 grayscale-[30%]' : ''}`}>
                         <td className="p-4 font-medium whitespace-nowrap">{l.name}</td>
                         <td className="p-4 whitespace-nowrap">
                           <div>{l.email}</div>
@@ -561,6 +591,19 @@ export default function AdminDashboard() {
                           </div>
                         </td>
                         <td className="p-4 text-muted-foreground whitespace-nowrap">{new Date(l.created_at).toLocaleDateString()}</td>
+                        <td className="p-4">
+                          <button 
+                            onClick={() => toggleLeadStatus(l)}
+                            className={`text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors ${l.status === 'Contacted' ? 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20' : 'bg-orange-500/10 text-orange-500 hover:bg-orange-500/20'}`}
+                          >
+                            {l.status === 'Contacted' ? <><CheckCircle2 size={14}/> Contacted</> : <><AlertCircle size={14}/> New</>}
+                          </button>
+                        </td>
+                        <td className="p-4 text-right">
+                          <button onClick={() => deleteLead(l.id)} className="p-2 bg-destructive/10 text-destructive rounded-lg hover:bg-destructive hover:text-destructive-foreground transition-colors" title="Delete Lead">
+                            <Trash2 size={14}/>
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

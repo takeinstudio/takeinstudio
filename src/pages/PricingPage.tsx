@@ -672,7 +672,7 @@ export default function PricingPage() {
       </section>
 
       {/* Region Toggle & Tabs Header */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-4 sticky top-16 z-40 bg-background/95 backdrop-blur-md pt-2 border-b border-border/40">
+      <section className="px-4 sm:px-6 lg:px-8 pb-4 sticky top-0 z-40 bg-background/95 backdrop-blur-md pt-4 border-b border-border/40 transition-all duration-500">
         <div className="container mx-auto flex flex-col items-center gap-4">
           <div className="bg-card border border-border/50 p-1 rounded-full flex items-center shadow-sm">
             <button

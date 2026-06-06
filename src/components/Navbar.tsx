@@ -16,18 +16,30 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setHidden(true); // scrolling down
+      } else {
+        setHidden(false); // scrolling up
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => setMobileOpen(false), [location]);
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500">
+    <nav className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500 ${hidden ? "-top-32" : "top-4"}`}>
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

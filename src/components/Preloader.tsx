@@ -6,8 +6,8 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // We want the preloader to run for about 2.5 seconds
-    const duration = 2500;
+    // We want the preloader to run for about 0.7 seconds
+    const duration = 700;
     const intervalTime = 30; // update progress every 30ms
     const totalSteps = duration / intervalTime;
     let currentStep = 0;

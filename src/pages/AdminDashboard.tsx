@@ -536,16 +536,31 @@ export default function AdminDashboard() {
           {/* Other Tabs (Placeholder for brevity, similar to before but darker UI) */}
           {activeTab === "leads" && (
             <div className="bg-card border border-border/50 rounded-2xl overflow-x-auto">
-               <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal min-w-[600px]">
+               <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal min-w-[800px]">
                   <thead className="bg-muted/50 text-muted-foreground text-xs uppercase font-semibold">
-                    <tr><th className="p-4">Name</th><th className="p-4">Email</th><th className="p-4">Service</th><th className="p-4">Date</th></tr>
+                    <tr>
+                      <th className="p-4">Name</th>
+                      <th className="p-4">Contact</th>
+                      <th className="p-4">Service</th>
+                      <th className="p-4">Message</th>
+                      <th className="p-4">Date</th>
+                    </tr>
                   </thead>
                   <tbody className="divide-y divide-border/50">
                     {data.leads.map((l:any) => (
-                      <tr key={l.id} className="hover:bg-muted/20 transition-colors">
-                        <td className="p-4 font-medium">{l.name}</td><td className="p-4">{l.email}</td>
-                        <td className="p-4"><span className="bg-primary/10 text-primary px-2 py-1 rounded-md text-xs">{l.service}</span></td>
-                        <td className="p-4 text-muted-foreground">{new Date(l.created_at).toLocaleDateString()}</td>
+                      <tr key={l.id} className="hover:bg-muted/20 transition-colors align-top">
+                        <td className="p-4 font-medium whitespace-nowrap">{l.name}</td>
+                        <td className="p-4 whitespace-nowrap">
+                          <div>{l.email}</div>
+                          {l.phone && <div className="text-muted-foreground text-xs mt-1">{l.phone}</div>}
+                        </td>
+                        <td className="p-4"><span className="bg-primary/10 text-primary px-2 py-1 rounded-md text-xs leading-tight inline-block">{l.service}</span></td>
+                        <td className="p-4">
+                          <div className="max-w-[350px] whitespace-pre-wrap text-xs text-muted-foreground bg-muted/30 p-2 rounded-md">
+                            {l.message || "No message"}
+                          </div>
+                        </td>
+                        <td className="p-4 text-muted-foreground whitespace-nowrap">{new Date(l.created_at).toLocaleDateString()}</td>
                       </tr>
                     ))}
                   </tbody>

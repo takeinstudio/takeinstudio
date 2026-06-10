@@ -233,7 +233,6 @@ export default function FaqsPage() {
                         <Mail size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
                         <input
                           type="email"
-                          placeholder="your.email@example.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-background border border-border text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all font-semibold"

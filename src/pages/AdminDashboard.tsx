@@ -13,7 +13,6 @@ import { servicesData } from "./ServicesPage";
 import OverviewBuilder from "./admin/OverviewBuilder";
 import ServicesBuilder from "./admin/ServicesBuilder";
 import PricingBuilder from "./admin/PricingBuilder";
-import HomePageBuilder from "./admin/HomePageBuilder";
 import PortfolioBuilder from "./admin/PortfolioBuilder";
 import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 
@@ -532,7 +531,6 @@ export default function AdminDashboard() {
         
         <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
           <button onClick={() => { setActiveTab("overview"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "overview" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Overview</button>
-          <button onClick={() => { setActiveTab("pages"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pages" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Page Builder</button>
           <button onClick={() => { setActiveTab("pricing"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
           <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
           <button onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
@@ -581,9 +579,6 @@ export default function AdminDashboard() {
           </header>
 
           {activeTab === "overview" && <OverviewBuilder data={data} setActiveTab={setActiveTab} />}
-
-          {/* Page Builder Tab */}
-          {activeTab === "pages" && <HomePageBuilder data={data} fetchData={fetchData} />}
 
           {/* Pricing Tab */}
           {activeTab === "pricing" && (

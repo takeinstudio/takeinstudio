@@ -41,7 +41,7 @@ export default function FloatingSidebar() {
     {
       name: "Facebook",
       icon: <Facebook size={18} />,
-      href: "https://facebook.com",
+      href: "https://www.facebook.com/people/TakeinStudio/61590782905151/",
       color: "bg-[#1877f2] hover:bg-[#166fe5] text-white shadow-[#1877f2]/20",
     },
   ];

@@ -160,7 +160,7 @@ export default function Footer() {
         </div>
 
         {/* Column 4: Quick Links */}
-        <div className="col-span-2 sm:col-span-1 lg:col-span-2 mt-4 sm:mt-0">
+        <div className="col-span-1 lg:col-span-2 mt-4 sm:mt-0">
           <h4 className="font-extrabold text-gray-900 mb-3 sm:mb-5 text-[11px] sm:text-[12px] tracking-widest">QUICK LINKS</h4>
           <ul className="space-y-2.5 sm:space-y-3.5">
             {quickLinks.map((link) => (
@@ -175,7 +175,7 @@ export default function Footer() {
         </div>
 
         {/* Column 5: Contact Us */}
-        <div className="col-span-2 sm:col-span-1 lg:col-span-2 mt-4 sm:mt-0">
+        <div className="col-span-1 lg:col-span-2 mt-4 sm:mt-0">
           <h4 className="font-extrabold text-gray-900 mb-3 sm:mb-5 text-[11px] sm:text-[12px] tracking-widest">CONTACT US</h4>
           <ul className="space-y-2.5 sm:space-y-4">
             <li className="flex items-center gap-3.5">

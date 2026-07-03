@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Globe } from "lucide-react";
+import PhoneUnlockButton from "./PhoneUnlockButton";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -184,18 +185,7 @@ export default function Footer() {
               </div>
               <a href="mailto:takeinstudio@gmail.com" className="text-[12px] sm:text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors whitespace-nowrap">takeinstudio@gmail.com</a>
             </li>
-            <li className="flex items-center gap-3.5">
-              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
-                <Phone size={14} strokeWidth={2.5} />
-              </div>
-              <a href="tel:+918908233590" className="text-[12px] sm:text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors">+91 89082 33590</a>
-            </li>
-            <li className="flex items-center gap-3.5">
-              <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
-                <Phone size={14} strokeWidth={2.5} />
-              </div>
-              <a href="tel:+919124442040" className="text-[12px] sm:text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors">+91 91244 42040</a>
-            </li>
+            <PhoneUnlockButton />
             <li className="flex items-start gap-3.5">
               <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0 mt-0.5">
                 <MapPin size={14} strokeWidth={2.5} />

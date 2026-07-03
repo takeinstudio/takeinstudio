@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -318,22 +319,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Phone size={15} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
-                    <div className="flex flex-col gap-0.5 mt-0.5">
-                      <a href="tel:+918908233590" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
-                        +91 89082 33590
-                      </a>
-                      <a href="tel:+919124442040" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
-                        +91 91244 42040
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <PhoneUnlockButton />
 
                 {/* Instagram */}
                 <div className="flex items-start gap-3">

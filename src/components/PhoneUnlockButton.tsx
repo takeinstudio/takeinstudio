@@ -262,7 +262,6 @@ export default function PhoneUnlockButton() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@example.com"
                         className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                         required
                       />
@@ -272,8 +271,17 @@ export default function PhoneUnlockButton() {
                       disabled={loading || !email}
                       className="w-full glow-btn bg-primary text-primary-foreground py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      {loading ? <Loader2 size={16} className="animate-spin" /> : "Send Code"} 
-                      {!loading && <ArrowRight size={16} />}
+                      {loading ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>Sending code...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Code</span>
+                          <ArrowRight size={16} />
+                        </>
+                      )}
                     </button>
                   </form>
                 ) : (

@@ -1,14 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useUser, useSignIn, useSignUp } from "@clerk/clerk-react";
 import { Phone, Lock, X, ArrowRight, Loader2, CheckCircle2, Mail, Smartphone } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function PhoneUnlockButton() {
-  const { isSignedIn, user } = useUser();
-  const { signIn, isLoaded: isSignInLoaded, setActive } = useSignIn();
-  const { signUp, isLoaded: isSignUpLoaded } = useSignUp();
+  const [session, setSession] = useState<any>(null);
   
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<'contact' | 'verify'>('contact');
@@ -22,23 +19,35 @@ export default function PhoneUnlockButton() {
   // Custom state for Phone.Email bypass
   const [isPhoneVerified, setIsPhoneVerified] = useState(false);
 
-  // Sync to Supabase in the background once signed in (Clerk Flow)
+  // Initialize Supabase Auth Session
   useEffect(() => {
-    if (isSignedIn && user) {
-      const hasEmail = user.emailAddresses && user.emailAddresses.length > 0;
-      
-      if (!hasEmail) return;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Sync to Supabase in the background once signed in
+  useEffect(() => {
+    if (session && session.user) {
+      const user = session.user;
+      if (!user.email) return;
 
       const syncKey = `synced_lead_${user.id}`;
       if (!localStorage.getItem(syncKey)) {
         const syncLead = async () => {
           try {
-            const capturedEmail = hasEmail ? user.emailAddresses[0].emailAddress : 'N/A';
-
             await supabase.from('leads').insert([{
               name: 'Verified Contact Lead',
-              email: capturedEmail,
-              phone: 'Verified via Clerk Email OTP',
+              email: user.email,
+              phone: 'Verified via Supabase Email OTP',
               company: 'N/A',
               message: 'Captured via Contact Unlock Button',
               status: 'New'
@@ -51,7 +60,7 @@ export default function PhoneUnlockButton() {
         syncLead();
       }
     }
-  }, [isSignedIn, user]);
+  }, [session]);
 
   // Phone.Email SDK Injection
   useEffect(() => {
@@ -100,41 +109,21 @@ export default function PhoneUnlockButton() {
 
   const handleSendCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isSignInLoaded || !isSignUpLoaded) return;
+    if (!email) return;
     setError("");
     setLoading(true);
 
     try {
       if (authType === 'email') {
-        const { supportedFirstFactors } = await signIn.create({
-          identifier: email,
-          strategy: "email_code",
+        const { error } = await supabase.auth.signInWithOtp({
+          email: email,
         });
         
-        const emailFactor = supportedFirstFactors?.find(
-          (factor) => factor.strategy === "email_code"
-        );
-        
-        if (emailFactor && emailFactor.strategy === "email_code") {
-          await signIn.prepareFirstFactor({
-            strategy: "email_code",
-            emailAddressId: emailFactor.emailAddressId,
-          });
-          setStep('verify');
-        }
+        if (error) throw error;
+        setStep('verify');
       }
     } catch (err: any) {
-      if (err.errors?.[0]?.code === "form_identifier_not_found") {
-        try {
-          await signUp.create({ emailAddress: email });
-          await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-          setStep('verify');
-        } catch (signupErr: any) {
-          setError(signupErr.errors?.[0]?.message || "Failed to initiate sign up.");
-        }
-      } else {
-        setError(err.errors?.[0]?.message || "Invalid email address.");
-      }
+      setError(err.message || "Failed to send code.");
     } finally {
       setLoading(false);
     }
@@ -142,35 +131,30 @@ export default function PhoneUnlockButton() {
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isSignInLoaded || !isSignUpLoaded) return;
+    if (!code) return;
     setError("");
     setLoading(true);
 
     try {
-      if (signIn.status === "needs_first_factor") {
-        const result = await signIn.attemptFirstFactor({
-          strategy: "email_code",
-          code,
-        });
-        if (result.status === "complete") {
-          await setActive({ session: result.createdSessionId });
-          setIsOpen(false);
-        }
-      } else if (signUp.status === "missing_requirements") {
-        const result = await signUp.attemptEmailAddressVerification({ code });
-        if (result.status === "complete") {
-          await setActive({ session: result.createdSessionId });
-          setIsOpen(false);
-        }
+      const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token: code,
+        type: 'email',
+      });
+      
+      if (error) throw error;
+      
+      if (data.session) {
+        setIsOpen(false);
       }
     } catch (err: any) {
-      setError(err.errors?.[0]?.message || "Invalid or expired code.");
+      setError(err.message || "Invalid or expired code.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (isSignedIn || isPhoneVerified) {
+  if (session || isPhoneVerified) {
     return (
       <div className="flex flex-col gap-3 mt-1">
         <div className="flex items-center gap-3.5 group">

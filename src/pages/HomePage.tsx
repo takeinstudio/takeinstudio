@@ -317,32 +317,13 @@ function PortfolioShowcaseSideBySide() {
   return (
     <div className="space-y-8 mb-10">
       {/* Side-by-Side Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto px-4">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 max-w-7xl mx-auto px-4 pb-4 hide-scrollbar">
         {projects.map((project: any, i: number) => (
-          <AnimatedSection key={project.title + i} delay={i * 0.1} className="h-full">
+          <AnimatedSection key={project.title + i} delay={i * 0.1} className="h-full min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center">
             <Link to={project.website_link || "/work"} className="group block h-full">
               <div className="glass-card h-full overflow-hidden p-4 border border-border/50 shadow-lg relative bg-card/30 backdrop-blur-md rounded-2xl hover:border-primary/20 hover:shadow-primary/5 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between">
                 <div>
-                  {/* High-Fidelity Visual Container */}
-                  <div className={`aspect-[16/10] rounded-xl overflow-hidden relative mb-4 shadow-inner flex items-center justify-center bg-gradient-to-br ${project.color || 'from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900'}`}>
-                    <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-30 blur-md`} />
-                    {project.image && (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
-                    
-                    {/* Fallback Icon if no image */}
-                    {!project.image && (
-                      <div className="z-10 text-white/50 group-hover:text-white/80 transition-colors duration-300">
-                        <Layers size={48} strokeWidth={1} />
-                      </div>
-                    )}
-                  </div>
+
 
                   {/* Content Block */}
                   <div className="space-y-2 text-left">
@@ -439,101 +420,152 @@ const services = [
   {
     icon: Globe,
     title: "Web Development",
-    path: "/services",
+    path: "/services/web-development",
     desc: "High-performance, SEO-optimized digital experiences engineered for conversion and scale.",
-    gradient: "from-primary to-accent",
-    glowColor: "group-hover:shadow-primary/10 group-hover:border-primary/30"
+    gradient: "from-blue-500 to-indigo-500",
   },
   {
     icon: Smartphone,
     title: "App Development",
-    path: "/services",
+    path: "/services/app-development",
     desc: "Silky-smooth Android and iOS applications with robust architecture and modern UX.",
-    gradient: "from-accent to-sky-500",
-    glowColor: "group-hover:shadow-accent/10 group-hover:border-accent/30"
+    gradient: "from-indigo-500 to-purple-500",
   },
   {
     icon: LayoutDashboard,
     title: "Custom Software",
-    path: "/services",
+    path: "/services/custom-software",
     desc: "Specialized ERP systems, booking platforms, and internal tools tailored to your business.",
     gradient: "from-emerald-500 to-teal-500",
-    glowColor: "group-hover:shadow-emerald-500/10 group-hover:border-emerald-500/30"
   },
   {
-    icon: Video,
-    title: "Video Editing",
-    path: "/services",
-    desc: "Cinematic, engaging video editing and dynamic motion graphics to capture attention.",
-    gradient: "from-purple-500 to-pink-500",
-    glowColor: "group-hover:shadow-purple-500/10 group-hover:border-purple-500/30"
+    icon: TrendingUp,
+    title: "SEO & Marketing",
+    path: "/services/seo-marketing",
+    desc: "Data-driven SEO strategies and digital marketing campaigns to accelerate your growth.",
+    gradient: "from-orange-500 to-amber-500",
   },
 ];
 
 function Services() {
-  return (
-    <section className="relative py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden" id="services">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none z-0" />
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
 
-      {/* Parallax background glows & shapes */}
+  return (
+    <section className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-background" id="services">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.15] pointer-events-none z-0" />
+
+      {/* Ambient Parallax Elements */}
       <ParallaxOrb
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-gradient-to-tr from-primary/10 to-purple-500/5 animate-blob-delayed"
-        yRange={[-80, 80]}
+        className="top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-primary/5 to-transparent animate-blob-delayed blur-[100px]"
+        yRange={[-60, 60]}
       />
-      <ParallaxShape className="top-1/6 right-1/10" yRange={[-120, 100]}>
-        <div className="grid grid-cols-3 gap-2 opacity-15">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />
+
+      <div className="container mx-auto relative z-10 max-w-6xl">
+        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="Engineered to break the mold and elevate your brand." />
+        
+        {/* Mobile View: Sticky Stacking Deck (Creative Layout) */}
+        <div className="sm:hidden mt-12 flex flex-col gap-6 pb-20 relative">
+          {services.map((s, i) => (
+            <Link 
+              key={s.title} 
+              to={s.path} 
+              className={`sticky min-h-[280px] bg-card border border-border/50 rounded-3xl p-6 shadow-2xl flex flex-col overflow-hidden transition-transform will-change-transform`}
+              style={{
+                top: `${96 + (i * 20)}px`, // Staggers the stick position so they stack on top of each other
+                zIndex: i + 10,
+              }}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${s.gradient} opacity-[0.08] pointer-events-none`} />
+              
+              <div className="flex items-center justify-between mb-6 relative z-10">
+                <span className="font-mono text-4xl font-black text-primary/20 -ml-2">0{i + 1}</span>
+                <div className={`w-12 h-12 rounded-full bg-gradient-to-tr ${s.gradient} p-[1px] flex items-center justify-center shadow-lg`}>
+                  <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
+                    <s.icon size={20} className="text-foreground" />
+                  </div>
+                </div>
+              </div>
+              
+              <h3 className="font-display text-3xl font-black text-foreground mb-3 relative z-10 tracking-tight leading-none">
+                {s.title}
+              </h3>
+              
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 relative z-10">
+                {s.desc}
+              </p>
+              
+              <div className="mt-auto relative z-10 border-t border-border/40 pt-4 flex items-center justify-between">
+                <span className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground">Learn More</span>
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <ArrowUpRight size={14} className="text-primary" />
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
-      </ParallaxShape>
-      <ParallaxShape className="bottom-1/6 left-1/8" yRange={[-100, 120]}>
-        <span className="text-primary/25 font-display text-4xl font-light">+</span>
-      </ParallaxShape>
 
-      <div className="container mx-auto relative z-10">
-        <SectionHeading badge="What We Do" title="Services Built for Impact" subtitle="From websites and mobile apps to AI automation and branding, we create digital solutions tailored to business growth." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s, i) => (
-            <AnimatedSection key={s.title} delay={i * 0.35}>
-              <Link
-                to={s.path}
-                className={`relative glass-card p-5 h-full group hover:-translate-y-2 hover:shadow-xl transition-all duration-500 block overflow-hidden bg-card/30 backdrop-blur-md border border-border/40 ${s.glowColor} rounded-2xl`}
+        {/* Desktop View: Interactive Reveal Accordion */}
+        <div className="hidden sm:flex mt-16 lg:mt-24 flex-col w-full border-t border-border/40">
+          {services.map((s, i) => {
+            const isHovered = hoveredIndex === i;
+            return (
+              <div 
+                key={s.title}
+                className={`group relative border-b border-border/40 cursor-pointer overflow-hidden transition-colors duration-500 ${isHovered ? 'bg-muted/30' : 'hover:bg-muted/10'}`}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Expanding Top Border Line */}
-                <div className={`absolute top-0 left-0 h-[3px] w-0 bg-gradient-to-r ${s.gradient} group-hover:w-full transition-all duration-500`} />
-
-                {/* Backdrop ambient blur glow orb */}
-                <div className={`absolute -right-8 -bottom-8 w-20 h-20 bg-gradient-to-tr ${s.gradient} opacity-0 blur-2xl group-hover:opacity-10 group-hover:scale-150 transition-all duration-700 rounded-full`} />
-
-                {/* Animated Icon Container */}
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 relative overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-tr ${s.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                  <s.icon size={20} className="text-primary group-hover:text-primary-foreground transition-colors relative z-10" />
+                {/* Background Ambient Glow on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${s.gradient} opacity-0 group-hover:opacity-[0.05] transition-opacity duration-700`} />
+                
+                <div className="px-4 py-8 md:px-8 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+                  {/* Left Side: Massive Typography */}
+                  <div className="flex-1 flex items-center gap-4 sm:gap-8">
+                    <span className={`font-mono text-xl md:text-3xl font-bold transition-colors duration-500 ${isHovered ? 'text-primary' : 'text-muted-foreground/30'}`}>
+                      0{i + 1}
+                    </span>
+                    <h3 className={`font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black transition-colors duration-500 tracking-tight ${isHovered ? 'text-foreground' : 'text-muted-foreground/60'}`}>
+                      {s.title}
+                    </h3>
+                  </div>
+                  
+                  {/* Right Side: Expanding Content & Icon */}
+                  <div className="flex-1 md:max-w-md w-full">
+                    <motion.div 
+                      initial={false}
+                      animate={{ height: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-4 pt-2 md:pt-0">
+                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                          {s.desc}
+                        </p>
+                        <Link to={s.path} className="inline-flex items-center gap-2 mt-6 text-primary font-bold text-xs uppercase tracking-widest hover:text-foreground transition-colors group/link">
+                          Explore Service <ArrowUpRight size={14} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  </div>
+                  
+                  {/* Floating Icon (Hidden on small screens for cleaner typography focus) */}
+                  <div className={`hidden lg:flex w-20 h-20 rounded-full border border-border/60 items-center justify-center transition-all duration-700 transform ${isHovered ? 'bg-primary/10 border-primary/30 scale-100 rotate-0 shadow-[0_0_30px_-5px_rgba(255,107,0,0.3)]' : 'bg-transparent -rotate-12 scale-75 opacity-40'}`}>
+                    <s.icon size={32} className={`transition-colors duration-500 ${isHovered ? 'text-primary' : 'text-muted-foreground'}`} />
+                  </div>
                 </div>
-
-                {/* Header with reveal arrow */}
-                <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors flex items-center gap-1.5">
-                  {s.title}
-                  <ArrowUpRight size={16} className="opacity-0 -translate-x-1.5 translate-y-1.5 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300 text-primary" />
-                </h3>
-
-                {/* Body Text */}
-                <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/90 transition-colors">{s.desc}</p>
-              </Link>
-            </AnimatedSection>
-          ))}
+              </div>
+            );
+          })}
         </div>
         
-        <div className="mt-12 sm:mt-16 flex justify-center">
+        <div className="mt-16 flex justify-center">
           <AnimatedSection delay={0.6}>
-            <Link to="/services" className="inline-flex items-center justify-center gap-2 bg-white border border-border text-foreground hover:bg-primary hover:text-white hover:border-primary px-8 py-3.5 sm:py-4 rounded-full font-bold text-[12px] sm:text-[13px] tracking-widest shadow-sm hover:shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:-translate-y-1 transition-all duration-300">
-              VIEW ALL SERVICES <ArrowUpRight size={16} strokeWidth={2.5} />
+            <Link to="/services" className="inline-flex items-center justify-center gap-2 bg-foreground text-background hover:bg-primary px-8 py-4 rounded-full font-bold text-[13px] tracking-widest shadow-xl hover:shadow-[0_8px_25px_-8px_rgba(255,107,0,0.8)] hover:-translate-y-1 transition-all duration-300 uppercase">
+              View All Capabilities <ArrowUpRight size={16} strokeWidth={2.5} />
             </Link>
           </AnimatedSection>
         </div>
-
       </div>
     </section>
   );
@@ -760,20 +792,20 @@ const stats = [
 
 function Stats() {
   return (
-    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 bg-foreground text-background">
+    <section className="py-6 sm:py-8 px-2 sm:px-6 lg:px-8 bg-foreground text-background">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-12 max-w-4xl mx-auto">
+        <div className="grid grid-cols-3 gap-2 sm:gap-6 lg:gap-12 max-w-4xl mx-auto">
           {stats.map((s, i) => (
-            <AnimatedSection key={s.label} delay={i * 0.1} className="text-center space-y-3">
-              <s.icon size={28} className="mx-auto text-primary" />
-              <p className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold">
+            <AnimatedSection key={s.label} delay={i * 0.1} className="text-center space-y-2 sm:space-y-3">
+              <s.icon size={24} className="mx-auto text-primary w-5 h-5 sm:w-7 sm:h-7" />
+              <p className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold">
                 {s.isCurrency ? (
                   formatPrice(s.value).replace(".00", "") + "+"
                 ) : (
                   <AnimatedCounter target={s.value} suffix={s.suffix} />
                 )}
               </p>
-              <p className="text-background/50 text-sm font-medium">{s.label}</p>
+              <p className="text-background/50 text-[9px] sm:text-sm font-medium uppercase tracking-wider">{s.label}</p>
             </AnimatedSection>
           ))}
         </div>

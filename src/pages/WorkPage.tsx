@@ -102,32 +102,7 @@ export default function WorkPage() {
                    </div>
                 )}
                 
-                <div className={`aspect-[4/3] rounded-xl bg-gradient-to-br ${p.color || 'from-primary/20 to-accent/20'} relative overflow-hidden mb-5 shadow-inner flex items-center justify-center`}>
-                  {p.image && (
-                    <img 
-                      src={p.image} 
-                      alt={p.title} 
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover object-top opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" 
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
-                  
-                  {/* Fallback Icon if no image */}
-                  {!p.image && (
-                    <div className="z-10 text-white/50 group-hover:text-white/80 transition-colors duration-300">
-                      <Layers size={48} strokeWidth={1} />
-                    </div>
-                  )}
 
-                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-500 flex items-center justify-center z-10">
-                    <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-center">
-                      <span className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold shadow-glow">
-                        {p.section === "Featured Client Work" ? "View Case Study" : p.section === "Internal Products" ? "View Product" : "Explore Concept"} <ArrowUpRight size={14} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
                 <div className="flex-1 flex flex-col justify-between relative z-10">
                   <div>
                     <span className="inline-block text-[10px] text-primary font-extrabold uppercase tracking-widest bg-primary/10 px-2.5 py-1 rounded-full">{p.category}</span>

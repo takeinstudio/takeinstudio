@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video, CheckCircle2, Code2, Monitor, Layout, Rocket, Settings, Bot, ShieldCheck, Paintbrush, Cloud, Database } from "lucide-react";
+import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video, CheckCircle2, Code2, Monitor, Layout, Rocket, Settings, Bot, ShieldCheck, Paintbrush, Cloud, Database, Layers } from "lucide-react";
 import { formatPrice } from "@/lib/currency";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -154,12 +154,15 @@ function Hero() {
 
           {/* Right Side Visual */}
           <div className="relative w-full flex items-center justify-center sm:min-h-[400px] lg:min-h-[550px] mt-10 lg:mt-0">
-            {/* Ambient Glow behind Logo */}
+            {/* Ambient Glow behind Logo - Desktop Only for Performance */}
             <motion.div
               animate={{ rotate: 360, scale: [1, 1.05, 1] }}
               transition={{ rotate: { duration: 15, repeat: Infinity, ease: "linear" }, scale: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-              className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"
+              className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0 hidden sm:block"
             />
+            
+            {/* Static Ambient Glow for Mobile */}
+            <div className="absolute w-[280px] h-[280px] bg-primary/10 rounded-full blur-[80px] pointer-events-none z-0 sm:hidden" />
 
             {/* Central Logo - Hidden on Mobile */}
             <motion.div
@@ -171,7 +174,7 @@ function Hero() {
             </motion.div>
 
             {/* Floating Stat Cards - Mobile Grid View */}
-            <div className="z-20 grid grid-cols-2 gap-3 w-full sm:hidden mt-8">
+            <div className="z-20 grid grid-cols-2 gap-3 w-full sm:hidden mt-8 px-2">
               <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
                 <h3 className="font-display text-2xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
                 <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
@@ -269,34 +272,30 @@ const defaultRotatingProjects = [
   {
     title: "Education Platforms",
     category: "Education",
-    desc: "A custom online learning management ecosystem engineered for global universities and student resources.",
-    color: "from-primary/30 to-accent/20",
-    features: ["Virtual Classrooms", "Progress Dashboards", "Seamless Payments"],
-    image: "/aura_learn.png"
+    desc: "Custom e-learning and management platforms designed to simplify education delivery and student tracking.",
+    color: "from-blue-500/20 to-indigo-500/20",
+    features: ["Virtual Classrooms", "Progress Dashboards", "Seamless Payments"]
   },
   {
     title: "Portfolio Websites",
     category: "Photographers",
-    desc: "A premium portfolio showcase, automated scheduling, and instant booking platform for digital creators.",
-    color: "from-accent/30 to-primary/20",
-    features: ["Interactive Galleries", "Client Proofing", "Automated Booking"],
-    image: "/prism_studio.png"
+    desc: "Premium portfolio showcases with integrated booking and scheduling for creative professionals.",
+    color: "from-pink-500/20 to-rose-500/20",
+    features: ["Interactive Galleries", "Client Proofing", "Automated Booking"]
   },
   {
-    title: "Business Management Systems",
+    title: "Business Dashboards",
     category: "ERP Systems",
-    desc: "A complete logistics, supply chain, and metrics hub with real-time site analytics and inventory checks.",
-    color: "from-blue-600/20 to-purple-600/20",
-    features: ["Inventory Control", "Live Cost Analytics", "Task Management"],
-    image: "/vertex_erp.png"
+    desc: "Comprehensive business management systems offering real-time data analytics and task tracking.",
+    color: "from-emerald-500/20 to-teal-500/20",
+    features: ["Inventory Control", "Live Cost Analytics", "Task Management"]
   },
   {
-    title: "Healthcare Solutions",
+    title: "Healthcare Portals",
     category: "HealthTech",
-    desc: "An AI-powered scheduler, patient portal, and secure charting dashboard for modern clinics.",
-    color: "from-emerald-600/20 to-teal-600/20",
-    features: ["Patient Check-ins", "Secure Telehealth", "Billing Integration"],
-    image: "/portfolio_project.png"
+    desc: "Secure patient portals and telehealth dashboards tailored for modern healthcare providers.",
+    color: "from-orange-500/20 to-amber-500/20",
+    features: ["Patient Check-ins", "Secure Telehealth", "Billing Integration"]
   }
 ];
 
@@ -325,15 +324,24 @@ function PortfolioShowcaseSideBySide() {
               <div className="glass-card h-full overflow-hidden p-4 border border-border/50 shadow-lg relative bg-card/30 backdrop-blur-md rounded-2xl hover:border-primary/20 hover:shadow-primary/5 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between">
                 <div>
                   {/* High-Fidelity Visual Container */}
-                  <div className="aspect-[16/10] rounded-xl overflow-hidden relative mb-3 shadow-inner">
-                    <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-20 blur-md`} />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80" />
+                  <div className={`aspect-[16/10] rounded-xl overflow-hidden relative mb-4 shadow-inner flex items-center justify-center bg-gradient-to-br ${project.color || 'from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900'}`}>
+                    <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-30 blur-md`} />
+                    {project.image && (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
+                    
+                    {/* Fallback Icon if no image */}
+                    {!project.image && (
+                      <div className="z-10 text-white/50 group-hover:text-white/80 transition-colors duration-300">
+                        <Layers size={48} strokeWidth={1} />
+                      </div>
+                    )}
                   </div>
 
                   {/* Content Block */}
@@ -353,7 +361,7 @@ function PortfolioShowcaseSideBySide() {
                 {/* Deliverables tags at the bottom */}
                 <div className="mt-3 pt-2 border-t border-border/10">
                   <div className="flex flex-wrap gap-1">
-                    {project.features.slice(0, 2).map((feat) => (
+                    {Array.isArray(project.features) && project.features.slice(0, 2).map((feat: string) => (
                       <span key={feat} className="text-[9px] bg-foreground/5 dark:bg-white/5 border border-border/30 px-2 py-1 rounded-lg font-medium text-muted-foreground">
                         {feat}
                       </span>

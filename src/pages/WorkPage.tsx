@@ -113,6 +113,13 @@ export default function WorkPage() {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
                   
+                  {/* Fallback Icon if no image */}
+                  {!p.image && (
+                    <div className="z-10 text-white/50 group-hover:text-white/80 transition-colors duration-300">
+                      <Layers size={48} strokeWidth={1} />
+                    </div>
+                  )}
+
                   <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-500 flex items-center justify-center z-10">
                     <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-center">
                       <span className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold shadow-glow">

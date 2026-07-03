@@ -120,6 +120,17 @@ export default function PhoneUnlockButton() {
         });
         
         if (error) throw error;
+
+        // Capture the unverified lead immediately!
+        await supabase.from('leads').insert([{
+          name: 'Pending Email Verification',
+          email: email,
+          phone: 'N/A',
+          company: 'N/A',
+          message: 'User requested OTP code but has not verified yet.',
+          status: 'New'
+        }]);
+
         setStep('verify');
       }
     } catch (err: any) {

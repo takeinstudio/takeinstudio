@@ -341,7 +341,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Reach</p>
-                    <p className="text-sm text-foreground font-medium mt-0.5">Worldwide (US, UK, India & Asia)</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5">Mainly Bhubaneswar, India</p>
                   </div>
                 </div>
 

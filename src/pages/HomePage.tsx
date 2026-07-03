@@ -330,6 +330,7 @@ function PortfolioShowcaseSideBySide() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80" />

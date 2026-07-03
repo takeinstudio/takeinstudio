@@ -107,6 +107,7 @@ export default function WorkPage() {
                     <img 
                       src={p.image} 
                       alt={p.title} 
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover object-top opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" 
                     />
                   )}

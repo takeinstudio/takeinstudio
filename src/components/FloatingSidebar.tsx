@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Instagram, Linkedin, Facebook, Phone, MessageSquare, ChevronLeft } from "lucide-react";
+import PhoneUnlockButton from "./PhoneUnlockButton";
 
 // Premium custom SVG WhatsApp Icon
 const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
@@ -119,40 +120,8 @@ export default function FloatingSidebar() {
                     </p>
                   </div>
 
-                  <div className="space-y-2.5">
-                    <a
-                      href="tel:+918908233590"
-                      className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-primary/10 text-xs font-semibold text-foreground transition-all duration-200 group"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <Phone size={12} />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-wide">
-                          Primary Support
-                        </span>
-                        <span className="text-foreground font-semibold group-hover:text-primary transition-colors">
-                          +91 89082 33590
-                        </span>
-                      </div>
-                    </a>
-
-                    <a
-                      href="tel:+919124442040"
-                      className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-primary/10 text-xs font-semibold text-foreground transition-all duration-200 group"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <Phone size={12} />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-wide">
-                          Secondary Support
-                        </span>
-                        <span className="text-foreground font-semibold group-hover:text-primary transition-colors">
-                          +91 91244 42040
-                        </span>
-                      </div>
-                    </a>
+                  <div className="space-y-2.5 p-2">
+                    <PhoneUnlockButton />
                   </div>
                 </div>
               </motion.div>

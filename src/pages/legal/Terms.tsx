@@ -97,7 +97,6 @@ export default function TermsOfService() {
                 <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mt-4">
                   <h4 className="font-bold text-gray-900 mb-2">TakeIN Studio</h4>
                   <p className="mb-1">Bhubaneswar, Odisha, India</p>
-                  <p className="mb-1">Phone: +91 89082 33590</p>
                   <p>Email: <a href="mailto:takeinstudio@gmail.com" className="text-primary hover:underline">takeinstudio@gmail.com</a></p>
                 </div>
               </div>

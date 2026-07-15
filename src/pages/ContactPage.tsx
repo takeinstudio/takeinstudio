@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -87,7 +88,7 @@ ${form.message}`;
     e.preventDefault();
     if (!validateForm()) return;
     setLoading(true);
-    
+
     // Send to Node.js backend
     const newEnquiry = {
       name: form.name,
@@ -97,10 +98,10 @@ ${form.message}`;
       message: `Company: ${form.company || "N/A"}\n\nProject Details:\n${form.message}`,
       status: "New"
     };
-    
+
     try {
       await supabase.from('leads').insert([newEnquiry]);
-      
+
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");
       setShowSuccess(true);
@@ -111,7 +112,7 @@ ${form.message}`;
       toast.error("Failed to submit inquiry. Is the backend running?");
     }
   };
-const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const inputClass =
@@ -121,9 +122,9 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
 
   return (
     <>
-      <SEO 
-        title="Contact Us" 
-        description="Get in touch with TakeIN Studio. We offer free consultations and reply within 24 hours to help you start your digital project." 
+      <SEO
+        title="Contact Us"
+        description="Get in touch with TakeIN Studio. We offer free consultations and reply within 24 hours to help you start your digital project."
         canonical="https://takeinstudio.com/contact"
       />
       {/* Hero */}
@@ -171,7 +172,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                     </div>
                   </div>
                 )}
-                
+
                 <div className="border-b border-border/40 pb-4">
 
                   <h2 className="font-display font-bold text-lg">Your Information</h2>
@@ -258,7 +259,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                   />
                 </div>
 
-                
+
                 {/* Actions */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <button
@@ -303,7 +304,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
               {/* Contact Details */}
               <div className="clay-card p-6 space-y-5">
                 <h3 className="font-display font-bold text-base border-b border-border/40 pb-3">Contact Details</h3>
-                
+
                 {/* Email */}
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -318,22 +319,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Phone size={15} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
-                    <div className="flex flex-col gap-0.5 mt-0.5">
-                      <a href="tel:+918908233590" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
-                        +91 89082 33590
-                      </a>
-                      <a href="tel:+919124442040" className="text-sm text-foreground hover:text-primary transition-colors font-medium">
-                        +91 91244 42040
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <PhoneUnlockButton />
 
                 {/* Instagram */}
                 <div className="flex items-start gap-3">
@@ -355,7 +341,7 @@ const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLT
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Reach</p>
-                    <p className="text-sm text-foreground font-medium mt-0.5">Worldwide (US, UK, India & Asia)</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5">Bhubaneswar, Odisha, India & Global</p>
                   </div>
                 </div>
 

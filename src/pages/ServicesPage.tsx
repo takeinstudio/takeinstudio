@@ -1,6 +1,11 @@
 import { supabase } from '@/lib/supabase';
 import { Link } from "react-router-dom";
-import { Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, CheckCircle2, ShieldCheck, Smartphone, Code, Bot, Wrench } from "lucide-react";
+import { 
+  Monitor, Video, Palette, Megaphone, TrendingUp, Building, ArrowRight, 
+  CheckCircle2, ShieldCheck, Smartphone, Code, Bot, Wrench,
+  ShoppingCart, Briefcase, User, LayoutTemplate, BookOpen, Share2, 
+  FolderOpen, Film, GraduationCap, Heart, MessageSquare, Users
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -178,6 +183,21 @@ const whyChooseUs = [
   "Global Service Standards"
 ];
 
+const websiteTypes = [
+  { name: "E-Commerce", icon: ShoppingCart, desc: "Online stores and digital marketplaces designed for high conversions." },
+  { name: "Business", icon: Briefcase, desc: "Corporate identity and B2B platforms for professional services." },
+  { name: "Personal", icon: User, desc: "Individual profiles, digital resumes, and personal branding." },
+  { name: "Portfolio", icon: LayoutTemplate, desc: "Showcases for creative professionals to display their best work." },
+  { name: "Blog", icon: BookOpen, desc: "Content-driven publishing platforms optimized for readership." },
+  { name: "Social Media", icon: Share2, desc: "Community platforms fostering engagement and networking." },
+  { name: "Directory", icon: FolderOpen, desc: "Categorized listings and robust search-driven portals." },
+  { name: "Entertainment", icon: Film, desc: "Streaming platforms and interactive media consumption sites." },
+  { name: "Educational", icon: GraduationCap, desc: "E-learning platforms and comprehensive course management." },
+  { name: "Non-Profit", icon: Heart, desc: "Charity portals built for awareness and seamless donations." },
+  { name: "Wiki / Forum", icon: MessageSquare, desc: "Collaborative knowledge bases and discussion boards." },
+  { name: "Membership", icon: Users, desc: "Exclusive community-driven sites with gated premium content." },
+];
+
 export default function ServicesPage() {
   const [dbServices, setDbServices] = useState<any[]>([]);
 
@@ -280,6 +300,52 @@ export default function ServicesPage() {
                   </div>
                 </div>
               </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 12 Types of Websites */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 bg-background relative overflow-hidden">
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none -z-10" />
+        
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <AnimatedSection>
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-semibold tracking-wider uppercase mb-4">
+                Web Architecture
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+                The 12 Main Types of Websites
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                Defined by their primary purpose and core functionality, we specialize in building these essential web platforms engineered for maximum impact and fully responsive across all devices.
+              </p>
+            </AnimatedSection>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {websiteTypes.map((type, idx) => {
+              const Icon = type.icon;
+              return (
+                <AnimatedSection key={idx} delay={idx * 0.05}>
+                  <div className="group relative p-5 sm:p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 h-full flex flex-col">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0">
+                      <Icon className="w-16 h-16 text-primary" />
+                    </div>
+                    
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm relative z-10">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+                    
+                    <h3 className="font-display font-bold text-base sm:text-lg mb-2 relative z-10">{type.name}</h3>
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed relative z-10 flex-grow">
+                      {type.desc}
+                    </p>
+                  </div>
+                </AnimatedSection>
               );
             })}
           </div>

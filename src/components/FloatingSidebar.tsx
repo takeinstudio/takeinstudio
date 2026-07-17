@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Instagram, Linkedin, Facebook, Phone, MessageSquare, ChevronLeft } from "lucide-react";
+import { Instagram, Linkedin, Facebook, Phone, MessageSquare, ChevronLeft, Gift } from "lucide-react";
 import PhoneUnlockButton from "./PhoneUnlockButton";
 
 // Premium custom SVG WhatsApp Icon
@@ -26,6 +26,12 @@ export default function FloatingSidebar() {
       icon: <WhatsAppIcon size={18} />,
       href: "https://wa.me/918908233590",
       color: "bg-[#25D366] hover:bg-[#20ba56] text-white shadow-[#25D366]/20",
+    },
+    {
+      name: "Special Offer",
+      icon: <Gift size={18} />,
+      href: "https://www.effectivecpmnetwork.com/uts2wd1e5?key=a408779966bf7cf74dcd7fb5adc39e48",
+      color: "bg-[#FF6B00] hover:bg-[#e66000] text-white shadow-[#FF6B00]/20 hover:scale-110",
     },
     {
       name: "Instagram",

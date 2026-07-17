@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Instagram, Linkedin, Facebook, Mail, Phone, MapPin, ChevronRight, ArrowRight, Send, Globe } from "lucide-react";
 import PhoneUnlockButton from "./PhoneUnlockButton";
+import AdBanner from "./AdBanner";
+import NativeBanner from "./NativeBanner";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -86,6 +88,26 @@ export default function Footer() {
         <div className="absolute top-24 right-[12%] w-[80px] h-[80px] bg-[radial-gradient(#FF6B00_2px,transparent_2px)] [background-size:12px_12px] opacity-20" />
         <div className="absolute bottom-[35%] left-[5%] w-4 h-4 rounded-full border border-[#FF6B00] opacity-30" />
         <div className="absolute bottom-[20%] right-[25%] w-3 h-3 rounded-full border border-[#FF6B00] opacity-30" />
+      </div>
+
+      {/* ── Ads Section ── */}
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-8 flex flex-col items-center gap-4">
+        {/* Native Banner */}
+        <NativeBanner />
+        <div className="flex flex-wrap justify-center gap-4 w-full">
+          {/* 728x90 Banner (hidden on very small screens) */}
+          <div className="hidden md:block">
+            <AdBanner id="7d7b041b468f6fef50648b2c165512dd" width={728} height={90} />
+          </div>
+          {/* 320x50 Banner (visible on small screens) */}
+          <div className="block md:hidden">
+            <AdBanner id="fca570475bcf634800abd5d144f75d6f" width={320} height={50} />
+          </div>
+          {/* 468x60 Banner */}
+          <div className="hidden sm:block md:hidden">
+            <AdBanner id="1a5d5b7d7a5f7e60b761cfa153421406" width={468} height={60} />
+          </div>
+        </div>
       </div>
 
       {/* ── Top CTA Section Removed ── */}

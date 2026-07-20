@@ -16,7 +16,8 @@ export const sendBrevoEmail = async (
     },
     to: [
       { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
-      { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" }
+      { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" },
+      { email: "ashutoshpati7778@gmail.com", name: "Ashutosh Pati" }
     ],
     subject: subject,
     htmlContent: htmlContent

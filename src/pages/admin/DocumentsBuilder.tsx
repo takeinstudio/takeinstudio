@@ -11,6 +11,7 @@ export default function DocumentsBuilder() {
     projectName: "",
     ownerName: "",
     developerName: "",
+    subtitle: "",
     domainCost: "",
     domainPaid: false,
     hostingCost: "",
@@ -136,7 +137,7 @@ export default function DocumentsBuilder() {
         {/* Client Details */}
         <div className="mb-8 space-y-4">
           <h4 className="font-bold text-sm text-foreground/80 border-b pb-2">Client Details</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs font-semibold text-muted-foreground mb-1">Project Name</label>
               <input type="text" name="projectName" value={basicInfo.projectName} onChange={handleBasicChange} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none" />
@@ -148,6 +149,10 @@ export default function DocumentsBuilder() {
             <div>
               <label className="block text-xs font-semibold text-muted-foreground mb-1">Developer Name</label>
               <input type="text" name="developerName" value={basicInfo.developerName} onChange={handleBasicChange} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-muted-foreground mb-1">Project Type / Subtitle</label>
+              <input type="text" name="subtitle" value={basicInfo.subtitle} onChange={handleBasicChange} placeholder="Premium Web Development" className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none" />
             </div>
           </div>
         </div>
@@ -238,7 +243,7 @@ export default function DocumentsBuilder() {
                 </div>
 
                 <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-6">Premium Web Development & CMS Platform</p>
+                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-6">{basicInfo.subtitle || "Premium Web Development & CMS Platform"}</p>
                 
                 <div className="border border-orange-200 rounded-[20px] p-5 text-left w-full max-w-[550px] mx-auto bg-white relative">
                     <div className="flex justify-between items-center mb-5 pb-5 border-b border-gray-100">

@@ -52,11 +52,11 @@ export default function CareerPage() {
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-primary/20 blur-[100px] rounded-full mix-blend-screen" />
         </div>
-        <div className="container mx-auto max-w-5xl relative z-10">
+        <div className="container mx-auto max-w-7xl relative z-10">
           <AnimatedSection>
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex-1 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-bold tracking-widest uppercase mb-4 shadow-sm">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-bold tracking-widest mb-4 shadow-sm">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -91,7 +91,7 @@ export default function CareerPage() {
 
       {/* ── OPEN POSITIONS ── */}
       <section id="open-positions" className="px-4 py-8 bg-white border-b border-gray-100">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="font-display text-xl font-bold text-gray-900">Open Positions</h2>
@@ -139,7 +139,7 @@ export default function CareerPage() {
 
       {/* ── SALES PARTNER PROGRAM ── */}
       <section className="px-4 py-8 bg-gradient-to-br from-orange-50 to-white border-b border-orange-100/50">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="bg-white rounded-2xl border border-orange-100 shadow-sm overflow-hidden flex flex-col md:flex-row">
             <div className="p-6 md:w-1/3 bg-orange-50/30 border-r border-orange-100/50">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-orange-100 text-orange-700 text-[10px] font-bold uppercase tracking-widest mb-3">
@@ -179,7 +179,7 @@ export default function CareerPage() {
 
       {/* Two-Column Layout: Why Join Us & Hiring Process */}
       <section className="px-4 py-8 bg-gray-50/50">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             {/* Why Join Us */}
@@ -223,7 +223,7 @@ export default function CareerPage() {
 
       {/* CTA Banner */}
       <section className="px-4 py-8">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="bg-[#0A0A0A] rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-gray-800">
             <div>
               <h2 className="font-display text-xl font-bold text-white mb-1">Ready to Build the Future?</h2>
@@ -243,7 +243,7 @@ export default function CareerPage() {
 
       {/* Footer Legal */}
       <section className="border-t border-gray-200 py-4 px-4 bg-gray-50 text-center">
-        <div className="container mx-auto max-w-5xl flex justify-center items-center gap-4 text-[10px] text-gray-500 font-medium">
+        <div className="container mx-auto max-w-7xl flex justify-center items-center gap-4 text-[10px] text-gray-500 font-medium">
           <span className="flex items-center gap-1"><FileText size={12} /> Privacy Notice for Applicants</span>
           <span className="text-gray-300">|</span>
           <span className="flex items-center gap-1"><Mail size={12} /> career@takeinstudio.com</span>

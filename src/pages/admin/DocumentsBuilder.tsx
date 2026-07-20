@@ -466,7 +466,7 @@ export default function DocumentsBuilder() {
                 <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" style={{ height: '30px', objectFit: 'contain', marginBottom: '8px' }} />
                 <p style={{ fontSize: '9px', color: '#aaa', marginBottom: '4px' }}>Designed and Developed with precision by</p>
                 <p style={{ fontSize: '16px', fontWeight: 800, color: '#111' }}>{basicInfo.developerName || "Ankit Tripathy"}</p>
-                <p style={{ fontSize: '8px', fontWeight: 700, color: '#ff5722', textTransform: 'uppercase', marginBottom: '10px' }}>TakeIN Studio</p>
+                <p style={{ fontSize: '8px', fontWeight: 700, color: '#ff5722', marginBottom: '10px' }}>TakeIN Studio</p>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', fontSize: '10px', fontWeight: 600, color: '#555', marginBottom: '10px' }}>
                   <span>www.takeinstudio.com</span>
                   <span style={{ color: '#ddd' }}>|</span>

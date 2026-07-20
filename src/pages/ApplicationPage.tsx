@@ -124,7 +124,7 @@ export default function ApplicationPage() {
     <div className="min-h-screen bg-[#fafafa] flex flex-col py-6 px-4 sm:px-6 lg:px-8">
       <SEO title="Apply Now - Careers" description="Apply for a role at TakeIN Studio and join our team of creators and builders." />
 
-      <div className="max-w-3xl w-full mx-auto flex-1 flex flex-col">
+      <div className="max-w-5xl w-full mx-auto flex-1 flex flex-col">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-4 px-1">
@@ -143,206 +143,212 @@ export default function ApplicationPage() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 flex-1 overflow-hidden">
           <div className="bg-primary/5 px-6 sm:px-8 py-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <p className="text-primary font-bold tracking-wider uppercase text-[10px] mb-1">TakeIN Studio Careers</p>
+              <p className="text-primary font-bold tracking-wider text-[10px] mb-1">TakeIN Studio Careers</p>
               <h1 className="font-display text-xl sm:text-2xl font-bold text-gray-900">Submit Application</h1>
             </div>
             <p className="text-gray-500 text-[11px] sm:text-right max-w-xs leading-tight">Complete the application below. Our team will review your profile shortly.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="px-6 sm:px-8 py-6 space-y-6">
+          <form onSubmit={handleSubmit} className="px-6 sm:px-8 py-6 flex flex-col lg:flex-row gap-8 lg:gap-12">
             
-            {/* Section 1: Personal Information */}
-            <div className="space-y-3">
-              <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Personal Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">First Name *</label>
-                  <input required type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Last Name *</label>
-                  <input required type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Email Address *</label>
-                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Phone Number *</label>
-                  <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
-                </div>
-                <div className="space-y-1 md:col-span-2">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Current Location *</label>
-                  <input required type="text" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="City, Country" />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">LinkedIn *</label>
-                  <input required type="url" value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://linkedin.com/in/..." />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">GitHub (Opt)</label>
-                  <input type="url" value={formData.github} onChange={e => setFormData({...formData, github: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://github.com/..." />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Portfolio (Opt)</label>
-                  <input type="url" value={formData.portfolioUrl} onChange={e => setFormData({...formData, portfolioUrl: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://" />
-                </div>
-              </div>
-            </div>
-
-            {/* Section 2: Position Information */}
-            <div className="space-y-3">
-              <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Position Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Role *</label>
-                  <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all appearance-none cursor-pointer">
-                    <option value="" disabled>Select a role...</option>
-                    <option value="Frontend Developer">Frontend Developer</option>
-                    <option value="Full Stack Developer">Full Stack Developer</option>
-                    <option value="UI/UX Designer">UI/UX Designer</option>
-                    <option value="Graphic Designer">Graphic Designer</option>
-                    <option value="Video Editor">Video Editor</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="AI & Automation">AI & Automation</option>
-                    <option value="Business Development">Business Development</option>
-                    <option value="Sales Partner / Cold Calling">Sales Partner / Cold Calling</option>
-                    <option value="General Application">General Application</option>
-                  </select>
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Employment Type *</label>
-                  <select required value={formData.employmentType} onChange={e => setFormData({...formData, employmentType: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all appearance-none cursor-pointer">
-                    <option value="" disabled>Select type...</option>
-                    <option value="Freelance / Contract">Freelance / Contract</option>
-                    <option value="Commission Based">Commission Based</option>
-                  </select>
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Experience *</label>
-                  <input required type="text" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. 3 years" />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Expected Comp *</label>
-                  <input required type="text" value={formData.compensation} onChange={e => setFormData({...formData, compensation: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. 20% Commission" />
-                </div>
-                <div className="space-y-1 sm:col-span-2">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Available Start Date *</label>
-                  <input required type="text" value={formData.startDate} onChange={e => setFormData({...formData, startDate: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. Immediately, or 2 weeks notice" />
+            {/* ── LEFT COLUMN ── */}
+            <div className="flex-1 space-y-6">
+              {/* Section 1: Personal Information */}
+              <div className="space-y-3">
+                <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Personal Information</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">First Name *</label>
+                    <input required type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Last Name *</label>
+                    <input required type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Email Address *</label>
+                    <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Phone Number *</label>
+                    <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Current Location *</label>
+                    <input required type="text" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="City, Country" />
+                  </div>
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">LinkedIn *</label>
+                    <input required type="url" value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://linkedin.com/in/..." />
+                  </div>
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">GitHub (Opt)</label>
+                    <input type="url" value={formData.github} onChange={e => setFormData({...formData, github: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://github.com/..." />
+                  </div>
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Portfolio (Opt)</label>
+                    <input type="url" value={formData.portfolioUrl} onChange={e => setFormData({...formData, portfolioUrl: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="https://" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Section 3: Skills */}
-            <div className="space-y-3">
-              <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Skills</h3>
-              <div className="flex flex-wrap gap-1.5">
-                {availableSkills.map((skill) => {
-                  const isSelected = formData.skills.includes(skill);
-                  return (
-                    <button
-                      key={skill}
-                      type="button"
-                      onClick={() => toggleSkill(skill)}
-                      className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all border ${
-                        isSelected 
-                          ? 'bg-primary text-white border-primary shadow-sm' 
-                          : 'bg-white text-gray-600 border-gray-200 hover:border-primary/40 hover:bg-primary/5'
-                      }`}
+              {/* Section 4: File Uploads (Moved to Left Column) */}
+              <div className="space-y-3 pt-2">
+                <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Documents</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  
+                  {/* Resume Upload */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">
+                      Resume (PDF) 
+                      {formData.role !== "Sales Partner / Cold Calling" && <span className="text-red-500"> *</span>}
+                    </label>
+                    <div 
+                      className="w-full border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 py-3 px-4 flex items-center justify-center gap-3 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                      onClick={() => resumeInputRef.current?.click()}
                     >
-                      {skill} {isSelected && <X size={12} className="inline ml-0.5 mb-0.5" />}
-                    </button>
-                  );
-                })}
+                      <UploadCloud className="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />
+                      <div className="min-w-0">
+                        {resumeName ? (
+                          <p className="text-xs font-semibold text-primary truncate">{resumeName}</p>
+                        ) : (
+                          <p className="text-xs font-medium text-gray-900 truncate">Upload Resume</p>
+                        )}
+                      </div>
+                      <input type="file" className="hidden" ref={resumeInputRef} onChange={handleResumeChange} accept=".pdf" required={formData.role !== "Sales Partner / Cold Calling"} />
+                    </div>
+                  </div>
+
+                  {/* Portfolio Upload */}
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Portfolio (Opt)</label>
+                    <div 
+                      className="w-full border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 py-3 px-4 flex items-center justify-center gap-3 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                      onClick={() => portfolioInputRef.current?.click()}
+                    >
+                      <UploadCloud className="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />
+                      <div className="min-w-0">
+                        {portfolioName ? (
+                          <p className="text-xs font-semibold text-primary truncate">{portfolioName}</p>
+                        ) : (
+                          <p className="text-xs font-medium text-gray-900 truncate">Upload Portfolio</p>
+                        )}
+                      </div>
+                      <input type="file" className="hidden" ref={portfolioInputRef} onChange={handlePortfolioChange} accept=".pdf" />
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
 
-            {/* Section 4: File Uploads */}
-            <div className="space-y-3 border-t border-gray-100 pt-4">
-              <h3 className="font-display font-bold text-sm text-gray-900 pb-1.5">Documents</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                
-                {/* Resume Upload */}
+            {/* ── RIGHT COLUMN ── */}
+            <div className="flex-1 space-y-6">
+              
+              {/* Section 2: Position Information */}
+              <div className="space-y-3">
+                <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Position Information</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1 sm:col-span-2">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Role *</label>
+                    <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled>Select a role...</option>
+                      <option value="Frontend Developer">Frontend Developer</option>
+                      <option value="Full Stack Developer">Full Stack Developer</option>
+                      <option value="UI/UX Designer">UI/UX Designer</option>
+                      <option value="Graphic Designer">Graphic Designer</option>
+                      <option value="Video Editor">Video Editor</option>
+                      <option value="Digital Marketing">Digital Marketing</option>
+                      <option value="AI & Automation">AI & Automation</option>
+                      <option value="Business Development">Business Development</option>
+                      <option value="Sales Partner / Cold Calling">Sales Partner / Cold Calling</option>
+                      <option value="General Application">General Application</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Employment Type *</label>
+                    <select required value={formData.employmentType} onChange={e => setFormData({...formData, employmentType: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all appearance-none cursor-pointer">
+                      <option value="" disabled>Select type...</option>
+                      <option value="Freelance / Contract">Freelance / Contract</option>
+                      <option value="Commission Based">Commission Based</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Experience *</label>
+                    <input required type="text" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. 3 years" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Expected Comp *</label>
+                    <input required type="text" value={formData.compensation} onChange={e => setFormData({...formData, compensation: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. 20% Commission" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Available Start Date *</label>
+                    <input required type="text" value={formData.startDate} onChange={e => setFormData({...formData, startDate: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all" placeholder="e.g. Immediately" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 3: Skills */}
+              <div className="space-y-3 pt-2">
+                <h3 className="font-display font-bold text-sm text-gray-900 border-b border-gray-100 pb-1.5">Skills</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {availableSkills.map((skill) => {
+                    const isSelected = formData.skills.includes(skill);
+                    return (
+                      <button
+                        key={skill}
+                        type="button"
+                        onClick={() => toggleSkill(skill)}
+                        className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-all border ${
+                          isSelected 
+                            ? 'bg-primary text-white border-primary shadow-sm' 
+                            : 'bg-white text-gray-600 border-gray-200 hover:border-primary/40 hover:bg-primary/5'
+                        }`}
+                      >
+                        {skill} {isSelected && <X size={10} className="inline ml-0.5 mb-0.5" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Section 5: Cover Letter & Submit */}
+              <div className="space-y-3 pt-2 border-t border-gray-100 mt-6">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">
-                    Resume (PDF) 
-                    {formData.role !== "Sales Partner / Cold Calling" && <span className="text-red-500"> *</span>}
-                    {formData.role === "Sales Partner / Cold Calling" && <span className="text-gray-400 font-normal normal-case ml-1">(Optional)</span>}
+                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Cover Letter</label>
+                  <textarea rows={3} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all resize-none" placeholder="Briefly tell us about your experience..."></textarea>
+                </div>
+
+                <div className="flex items-start gap-2.5 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
+                  <input 
+                    type="checkbox" 
+                    id="declaration"
+                    checked={formData.declaration}
+                    onChange={e => setFormData({...formData, declaration: e.target.checked})}
+                    className="mt-0.5 w-3.5 h-3.5 text-primary bg-white border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer flex-shrink-0"
+                  />
+                  <label htmlFor="declaration" className="text-[10px] text-gray-600 leading-snug cursor-pointer select-none">
+                    I confirm that the information provided is accurate. False statements may result in disqualification.
                   </label>
-                  <div 
-                    className="w-full border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 py-3 px-4 flex items-center justify-center gap-3 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
-                    onClick={() => resumeInputRef.current?.click()}
-                  >
-                    <UploadCloud className="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />
-                    <div className="min-w-0">
-                      {resumeName ? (
-                        <p className="text-xs font-semibold text-primary truncate">{resumeName}</p>
-                      ) : (
-                        <p className="text-xs font-medium text-gray-900 truncate">Upload Resume (Max 10MB)</p>
-                      )}
-                    </div>
-                    <input type="file" className="hidden" ref={resumeInputRef} onChange={handleResumeChange} accept=".pdf" required={formData.role !== "Sales Partner / Cold Calling"} />
-                  </div>
                 </div>
-
-                {/* Portfolio Upload */}
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Portfolio (Opt)</label>
-                  <div 
-                    className="w-full border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 py-3 px-4 flex items-center justify-center gap-3 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
-                    onClick={() => portfolioInputRef.current?.click()}
-                  >
-                    <UploadCloud className="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />
-                    <div className="min-w-0">
-                      {portfolioName ? (
-                        <p className="text-xs font-semibold text-primary truncate">{portfolioName}</p>
-                      ) : (
-                        <p className="text-xs font-medium text-gray-900 truncate">Upload Portfolio (Max 10MB)</p>
-                      )}
-                    </div>
-                    <input type="file" className="hidden" ref={portfolioInputRef} onChange={handlePortfolioChange} accept=".pdf" />
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Section 5: Cover Letter & Declaration */}
-            <div className="space-y-4 border-t border-gray-100 pt-5">
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Cover Letter</label>
-                <textarea rows={3} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-xs rounded-lg focus:ring-primary focus:border-primary block px-3 py-2 outline-none transition-all resize-y" placeholder="Briefly tell us about your experience..."></textarea>
               </div>
 
-              <div className="flex items-start gap-2.5 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                <input 
-                  type="checkbox" 
-                  id="declaration"
-                  checked={formData.declaration}
-                  onChange={e => setFormData({...formData, declaration: e.target.checked})}
-                  className="mt-0.5 w-3.5 h-3.5 text-primary bg-white border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
-                />
-                <label htmlFor="declaration" className="text-[11px] text-gray-600 leading-snug cursor-pointer select-none">
-                  I confirm that the information provided is accurate. False statements may result in disqualification.
-                </label>
+              {/* Submit Button */}
+              <div className="pt-2">
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-2.5 bg-primary hover:bg-primary/90 text-white font-bold text-sm tracking-wide rounded-lg shadow-md shadow-primary/25 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <><Loader2 size={16} className="animate-spin" /> Submitting...</>
+                  ) : (
+                    "Submit Application"
+                  )}
+                </button>
               </div>
-            </div>
 
-            {/* Submit */}
-            <div className="pt-2">
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full sm:w-auto px-10 py-3 bg-primary hover:bg-primary/90 text-white font-bold text-sm tracking-wide rounded-lg shadow-md shadow-primary/25 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mx-auto"
-              >
-                {isSubmitting ? (
-                  <><Loader2 size={16} className="animate-spin" /> Submitting...</>
-                ) : (
-                  "Submit Application"
-                )}
-              </button>
             </div>
-            
           </form>
         </div>
         

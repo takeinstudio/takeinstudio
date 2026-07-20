@@ -202,7 +202,7 @@ export default function JoinUs() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest ml-1">Why TakeIN Studio?</label>
+                <label className="text-xs font-bold tracking-widest ml-1">Why TakeIN Studio?</label>
                 <textarea className="w-full px-4 py-3 rounded-xl border border-border bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none min-h-[120px]" placeholder="Tell us what excites you about building premium digital experiences..." />
               </div>
 

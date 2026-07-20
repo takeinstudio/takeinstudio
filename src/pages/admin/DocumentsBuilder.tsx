@@ -436,7 +436,7 @@ export default function DocumentsBuilder() {
               <div style={{ background: '#ff5722', padding: '20px 32px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '12px', marginBottom: '20px' }}>
                 <h4 className="heading" style={{ fontSize: '22px', fontWeight: 700 }}>Total Immediate Payable</h4>
                 <div style={{ fontSize: '28px', fontWeight: 800, textAlign: 'right' }}>
-                  &#8377; {displayTotal || "13,499"} <span style={{ fontSize: '13px', fontWeight: 400, opacity: 0.9 }}>+ Domain/Hosting</span>
+                  &#8377; {displayTotal || "13,499"}
                 </div>
               </div>
 

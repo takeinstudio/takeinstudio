@@ -376,7 +376,7 @@ export default function DocumentsBuilder() {
                     <div className="flex justify-center items-center gap-4 mt-4 text-[11px] font-semibold text-gray-600">
                         <span>www.takeinstudio.com</span>
                         <span className="text-gray-300">|</span>
-                        <span>takeinstudio@gmail.com</span>
+                        <span>support@takeinstudio.com</span>
                         <span className="text-gray-300">|</span>
                         <span>+91 89082 33590</span>
                     </div>

@@ -34,7 +34,7 @@ export default function CookiePolicy() {
 
             <section className="space-y-4">
               <h2 className="text-xl font-bold text-foreground">5. More Information</h2>
-              <p>Hopefully that has clarified things for you. If you are still looking for more information, you can contact us at: <strong>takeinstudio@gmail.com</strong></p>
+              <p>Hopefully that has clarified things for you. If you are still looking for more information, you can contact us at: <strong>support@takeinstudio.com</strong></p>
             </section>
           </div>
         </AnimatedSection>

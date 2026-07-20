@@ -73,7 +73,7 @@ ${form.message}`;
   const handleEmail = () => {
     if (!validateForm()) return;
     const subject = encodeURIComponent(`New Inquiry from ${form.name}`);
-    const mailtoLink = `mailto:takeinstudio@gmail.com?subject=${subject}&body=${getMessageBody()}`;
+    const mailtoLink = `mailto:support@takeinstudio.com?subject=${subject}&body=${getMessageBody()}`;
     const a = document.createElement("a");
     a.href = mailtoLink;
     a.target = "_blank";
@@ -329,8 +329,8 @@ ${form.message}`;
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Email</p>
-                    <a href="mailto:takeinstudio@gmail.com" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
-                      takeinstudio@gmail.com
+                    <a href="mailto:support@takeinstudio.com" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
+                      support@takeinstudio.com
                     </a>
                   </div>
                 </div>

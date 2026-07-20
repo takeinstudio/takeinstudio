@@ -26,7 +26,7 @@ export default function RefundPolicy() {
 
             <section className="space-y-4">
               <h2 className="text-xl font-bold text-foreground">4. Contact Us</h2>
-              <p>If you have any questions about this refund policy, please contact us at: <strong>takeinstudio@gmail.com</strong></p>
+              <p>If you have any questions about this refund policy, please contact us at: <strong>support@takeinstudio.com</strong></p>
             </section>
           </div>
         </AnimatedSection>

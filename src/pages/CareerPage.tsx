@@ -62,10 +62,10 @@ export default function CareerPage() {
                 Apply Now <ArrowRight size={18} />
               </Link>
               <a
-                href="mailto:takeinstudio@gmail.com"
+                href="mailto:career@takeinstudio.com"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-foreground border border-border shadow-sm font-bold tracking-wide hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
               >
-                takeinstudio@gmail.com
+                career@takeinstudio.com
               </a>
             </div>
           </AnimatedSection>
@@ -148,7 +148,7 @@ export default function CareerPage() {
                     href="mailto:careers@takeinstudio.com"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-transparent border-2 border-white/30 text-white font-bold tracking-wide hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                   >
-                    takeinstudio@gmail.com
+                    career@takeinstudio.com
                   </a>
                 </div>
               </div>

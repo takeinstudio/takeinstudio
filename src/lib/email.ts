@@ -1,6 +1,7 @@
 export const sendBrevoEmail = async (
   subject: string,
-  htmlContent: string
+  htmlContent: string,
+  senderType: "support" | "noreply" = "support"
 ) => {
   const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
 
@@ -9,10 +10,13 @@ export const sendBrevoEmail = async (
     return false;
   }
 
+  const senderEmail = senderType === "noreply" ? "noreply@takeinstudio.com" : "support@takeinstudio.com";
+  const senderName = senderType === "noreply" ? "TakeIN Studio" : "TakeIN Studio Support";
+
   const payload = {
     sender: {
-      name: "TakeIN Studio Website",
-      email: "no-reply@takeinstudio.com"
+      name: senderName,
+      email: senderEmail
     },
     to: [
       { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
@@ -35,8 +39,7 @@ export const sendBrevoEmail = async (
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Brevo Email Error:", errorData);
+      console.error("Brevo Email Error:", await response.text());
       return false;
     }
     

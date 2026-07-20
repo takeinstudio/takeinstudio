@@ -16,6 +16,7 @@ import PricingBuilder from "./admin/PricingBuilder";
 import PortfolioBuilder from "./admin/PortfolioBuilder";
 import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 import DocumentsBuilder from "./admin/DocumentsBuilder";
+import EmailCenterBuilder from "./admin/EmailCenterBuilder";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -535,6 +536,7 @@ export default function AdminDashboard() {
           <button onClick={() => { setActiveTab("pricing"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
           <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
           <button onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
+          <button onClick={() => { setActiveTab("email-center"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "email-center" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Email Center</button>
           <button onClick={() => { setActiveTab("leads"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
           <button onClick={() => { setActiveTab("documents"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "documents" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Documents</button>
           <button onClick={() => { setActiveTab("jobs"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "jobs" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Building size={18}/> Job Postings</button>
@@ -594,6 +596,7 @@ export default function AdminDashboard() {
 
           {/* Portfolio Builder Tab */}
           {activeTab === "portfolio" && <PortfolioBuilder data={data} fetchData={fetchData} unlockDefaultPortfolio={unlockDefaultPortfolio} unlocking={unlocking} />}
+          {activeTab === "email-center" && <EmailCenterBuilder />}
 
           {/* Documents Tab */}
           {activeTab === "documents" && <DocumentsBuilder />}

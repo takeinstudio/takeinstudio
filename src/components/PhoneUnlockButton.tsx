@@ -18,6 +18,7 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
   const [step, setStep] = useState<'contact' | 'verify'>('contact');
   
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,7 +52,7 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
 
   const handleSendCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !phone) return;
     setError("");
     setLoading(true);
 
@@ -65,7 +66,7 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
       await supabase.from('leads').insert([{
         name: 'Pending Email Verification',
         email: email,
-        phone: 'N/A',
+        phone: phone,
         company: 'N/A',
         message: 'User requested OTP code via Supabase Native Auth.',
         status: 'New'
@@ -97,7 +98,7 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
       await supabase.from('leads').insert([{
         name: 'Verified Contact Lead',
         email: email,
-        phone: 'Verified via Supabase OTP',
+        phone: phone,
         company: 'N/A',
         message: 'Successfully authenticated.',
         status: 'New'
@@ -209,12 +210,27 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
                       />
                     </div>
                   </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1.5">Phone Number</label>
+                    <div className="relative">
+                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/50" size={16} />
+                      <input 
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-muted/30 border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 text-sm transition-all"
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                  </div>
                   
                   {error && <p className="text-destructive text-xs font-medium">{error}</p>}
                   
                   <button 
                     type="submit" 
-                    disabled={loading || !email}
+                    disabled={loading || !email || !phone}
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 transition-all disabled:opacity-50"
                   >
                     {loading ? <Loader2 size={16} className="animate-spin" /> : <>Send Verification Code <ArrowRight size={16} /></>}

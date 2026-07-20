@@ -72,10 +72,11 @@ export default function DocumentsBuilder() {
       
       const opt = {
         margin: [0, 0, 0, 0], 
-        filename: `${basicInfo.projectName ? basicInfo.projectName.replace(/\\s+/g, '_') : 'Project'}_Handover.pdf`,
+        filename: `${basicInfo.projectName ? basicInfo.projectName.replace(/\s+/g, '_') : 'Project'}_Handover.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'css', before: '.html2pdf__page-break' }
       };
 
       try {
@@ -223,7 +224,7 @@ export default function DocumentsBuilder() {
 
       {/* Hidden Template for PDF Generation */}
       <div className="overflow-hidden h-0 w-0 absolute top-[-9999px] left-[-9999px]">
-        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fff8f2] text-gray-800 py-10 px-8 relative print-container" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fff8f2] text-gray-800 relative print-container" style={{ fontFamily: "'Inter', sans-serif" }}>
           
           <style dangerouslySetInnerHTML={{__html: `
             .heading { font-family: 'Playfair Display', serif; }
@@ -231,10 +232,12 @@ export default function DocumentsBuilder() {
             .bg-brand-orange { background-color: #ff5722; }
             .section-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
             .section-title::before { content: ""; display: block; width: 40px; height: 3px; background-color: #ff5722; }
+            .pdf-page { width: 800px; height: 1131px; box-sizing: border-box; overflow: hidden; position: relative; padding: 40px; }
           `}} />
 
           {/* PAGE 1 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 px-10 pt-6 pb-6">
+          <div className="pdf-page">
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 px-10 pt-6 pb-6 h-[1051px]">
             
             {/* Header */}
             <div className="text-center relative overflow-hidden mb-10 pt-2">
@@ -242,8 +245,8 @@ export default function DocumentsBuilder() {
                     <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-24 object-contain drop-shadow-sm" />
                 </div>
 
-                <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-6">{basicInfo.subtitle || "Premium Web Development & CMS Platform"}</p>
+                <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900">Project Proposal & Handover</h1>
+                <p className="text-[10px] text-gray-700 font-bold mb-6">{basicInfo.subtitle || "Premium Web Development & CMS Platform"}</p>
                 
                 <div className="border border-orange-200 rounded-[20px] p-5 text-left w-full max-w-[550px] mx-auto bg-white relative">
                     <div className="flex justify-between items-center mb-5 pb-5 border-b border-gray-100">
@@ -321,7 +324,8 @@ export default function DocumentsBuilder() {
           <div className="html2pdf__page-break"></div>
 
           {/* PAGE 2 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12">
+          <div className="pdf-page">
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12 h-[1051px]">
               <h2 className="section-title">Investment Breakdown</h2>
 
               <div className="border border-[#ffedd5] rounded-3xl overflow-hidden mt-6 relative">
@@ -338,7 +342,7 @@ export default function DocumentsBuilder() {
                       </div>
                       
                       <div className="bg-[#fffbf8] rounded-2xl p-8 pb-10 border border-[#ffedd5]">
-                          <h5 className="text-[10px] uppercase tracking-[0.15em] font-bold text-gray-900 mb-6">Detailed Price Breakdown</h5>
+                          <h5 className="text-[10px] uppercase font-bold text-gray-900 mb-6">Detailed Price Breakdown</h5>
                           
                           <div className="space-y-6 text-[13px] text-gray-700">
                               {/* Live Website Pages */}
@@ -419,7 +423,8 @@ export default function DocumentsBuilder() {
           <div className="html2pdf__page-break"></div>
 
           {/* PAGE 3 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col">
+          <div className="pdf-page">
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col h-[1051px]">
               <div className="p-10 pb-6">
                   <h2 className="section-title mb-4">Domain & Hosting</h2>
                   <div className="border border-[#ffedd5] rounded-2xl overflow-hidden mt-4 mb-6">
@@ -435,12 +440,12 @@ export default function DocumentsBuilder() {
                                       <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
                                   ) : basicInfo.domainCost ? (
                                       <>
-                                          <span className="text-[14px] font-bold text-gray-900 uppercase tracking-wider block mb-1">₹ {basicInfo.domainCost}</span>
+                                          <span className="text-[14px] font-bold text-gray-900 uppercase block mb-1">₹ {basicInfo.domainCost}</span>
                                           <span className="text-[10px] text-gray-500">Subject to renewal</span>
                                       </>
                                   ) : (
                                       <>
-                                          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                          <span className="text-[10px] font-bold text-gray-900 uppercase block mb-1">TO BE CHECKED</span>
                                           <span className="text-[10px] text-gray-500">Exact rates depend on preferred domain</span>
                                       </>
                                   )}
@@ -458,12 +463,12 @@ export default function DocumentsBuilder() {
                                       <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
                                   ) : basicInfo.hostingCost ? (
                                       <>
-                                          <span className="text-[14px] font-bold text-gray-900 uppercase tracking-wider block mb-1">₹ {basicInfo.hostingCost}</span>
+                                          <span className="text-[14px] font-bold text-gray-900 uppercase block mb-1">₹ {basicInfo.hostingCost}</span>
                                           <span className="text-[10px] text-gray-500">Subject to renewal</span>
                                       </>
                                   ) : (
                                       <>
-                                          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                          <span className="text-[10px] font-bold text-gray-900 uppercase block mb-1">TO BE CHECKED</span>
                                           <span className="text-[10px] text-gray-500">Exact rates depend on preferred hosting</span>
                                       </>
                                   )}
@@ -485,32 +490,30 @@ export default function DocumentsBuilder() {
                   <div className="text-center mb-6">
                       <h2 className="heading text-[22px] font-bold text-gray-900 mb-2">More Digital Solutions Built for Growth</h2>
                       <p className="text-[11px] text-gray-500 max-w-lg mx-auto leading-relaxed">From mobile apps to AI automation and branding, TakeIN Studio helps businesses launch faster, operate smarter, and scale with confidence.</p>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3 mb-6">
+                              <div className="grid grid-cols-3 gap-3 mb-6">
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">Website Dev</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">E-COM & BIZ</p>
+                          <p className="text-[9px] uppercase text-gray-500">E-COM & BIZ</p>
                       </div>
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">App Dev</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">IOS & ANDROID</p>
+                          <p className="text-[9px] uppercase text-gray-500">IOS & ANDROID</p>
                       </div>
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">Custom Software</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">CRM & SYSTEMS</p>
+                          <p className="text-[9px] uppercase text-gray-500">CRM & SYSTEMS</p>
                       </div>
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">AI Automation</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">BOTS & FLOWS</p>
+                          <p className="text-[9px] uppercase text-gray-500">BOTS & FLOWS</p>
                       </div>
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">SEO & Marketing</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">TRAFFIC & LEADS</p>
+                          <p className="text-[9px] uppercase text-gray-500">TRAFFIC & LEADS</p>
                       </div>
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">Graphic Design</p>
-                          <p className="text-[9px] uppercase tracking-wider text-gray-500">BRAND IDENTITY</p>
+                          <p className="text-[9px] uppercase text-gray-500">BRAND IDENTITY</p>
                       </div>
                   </div>
               </div>
@@ -519,8 +522,8 @@ export default function DocumentsBuilder() {
               <div className="mt-auto border-t border-gray-100 pt-6 pb-8 text-center relative w-full">
                   <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-[35px] object-contain mx-auto mb-3 drop-shadow-sm" />
                   <p className="text-gray-500 text-[10px] mb-2">Designed and Developed with precision by</p>
-                  <p className="font-extrabold text-gray-900 text-[18px] tracking-tight">{basicInfo.developerName || "Ankit Tripathy"}</p>
-                  <p className="brand-orange font-bold tracking-[0.4em] text-[9px] uppercase mt-1">TakeIN Studio</p>
+                  <p className="font-extrabold text-gray-900 text-[18px]">{basicInfo.developerName || "Ankit Tripathy"}</p>
+                  <p className="brand-orange font-bold text-[9px] uppercase mt-1">TakeIN Studio</p>
 
                   <div className="flex justify-center items-center gap-6 mt-4 text-[11px] font-semibold text-gray-600 mb-6">
                       <span>www.takeinstudio.com</span>
@@ -534,6 +537,7 @@ export default function DocumentsBuilder() {
                       Premium Digital Agency &bull; Building Digital Experiences That Drive Growth
                   </div>
               </div>
+            </div>
           </div>
 
         </div>

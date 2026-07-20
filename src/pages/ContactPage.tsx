@@ -7,6 +7,7 @@ import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
+import { sendBrevoEmail } from "@/lib/email";
 
 
 
@@ -101,6 +102,22 @@ ${form.message}`;
 
     try {
       await supabase.from('leads').insert([newEnquiry]);
+
+      // Send Email Notification
+      sendBrevoEmail(
+        "🚀 NEW PROJECT INQUIRY - TakeIN Studio",
+        `<div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #ff5722;">New Project Inquiry!</h2>
+          <p><strong>Name:</strong> ${form.name}</p>
+          <p><strong>Email:</strong> ${form.email}</p>
+          <p><strong>Phone:</strong> ${form.phone}</p>
+          <p><strong>Company:</strong> ${form.company || "N/A"}</p>
+          <p><strong>Service:</strong> ${selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry"}</p>
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+          <h3 style="color: #666;">Project Details:</h3>
+          <p style="white-space: pre-wrap;">${form.message}</p>
+        </div>`
+      );
 
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");

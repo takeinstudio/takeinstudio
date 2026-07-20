@@ -15,6 +15,7 @@ import ServicesBuilder from "./admin/ServicesBuilder";
 import PricingBuilder from "./admin/PricingBuilder";
 import PortfolioBuilder from "./admin/PortfolioBuilder";
 import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
+import DocumentsBuilder from "./admin/DocumentsBuilder";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -535,6 +536,7 @@ export default function AdminDashboard() {
           <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
           <button onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
           <button onClick={() => { setActiveTab("leads"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
+          <button onClick={() => { setActiveTab("documents"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "documents" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Documents</button>
           <button onClick={() => { setActiveTab("jobs"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "jobs" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Building size={18}/> Job Postings</button>
           <button onClick={() => { setActiveTab("testimonials"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "testimonials" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><MessageSquare size={18}/> Testimonials</button>
           <button onClick={() => { setActiveTab("careers"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "careers" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Users size={18}/> Recruitment Hub</button>
@@ -592,6 +594,9 @@ export default function AdminDashboard() {
 
           {/* Portfolio Builder Tab */}
           {activeTab === "portfolio" && <PortfolioBuilder data={data} fetchData={fetchData} unlockDefaultPortfolio={unlockDefaultPortfolio} unlocking={unlocking} />}
+
+          {/* Documents Tab */}
+          {activeTab === "documents" && <DocumentsBuilder />}
 
           {/* Other Tabs (Placeholder for brevity, similar to before but darker UI) */}
           {activeTab === "leads" && (

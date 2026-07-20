@@ -198,7 +198,7 @@ export default function Footer() {
                 <MapPin size={14} strokeWidth={2.5} />
               </div>
               <span className="text-[12px] sm:text-[13px] font-medium text-gray-600 leading-[1.6]">
-                TakeIN Studio, India<br />
+                Bhubaneswar, Odisha, India<br />
                 <span className="text-[11px] sm:text-[12px] text-gray-400">Serving clients worldwide</span>
               </span>
             </li>

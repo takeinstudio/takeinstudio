@@ -543,9 +543,6 @@ export default function AdminDashboard() {
 
             {activeTab === "testimonials" && (
               <div className="flex gap-3">
-                <button onClick={unlockDefaultTestimonials} disabled={unlocking} className="bg-muted text-foreground hover:bg-muted/80 px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all flex items-center gap-2">
-                  {unlocking ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16}/>} Load Defaults
-                </button>
                 <button onClick={() => openEditTestimonial(null)} className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
                   <Plus size={16}/> Add Testimonial
                 </button>

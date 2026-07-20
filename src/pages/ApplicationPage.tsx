@@ -39,8 +39,9 @@ export default function ApplicationPage() {
 
   const availableSkills = [
     "React", "Next.js", "TypeScript", "Node.js", "Python", 
-    "Flutter", "Figma", "SEO", "Video Editing", "AI Automation", 
-    "Marketing", "Graphic Design"
+    "Flutter", "Figma", "UI/UX Design", "SEO", "Video Editing", 
+    "AI Automation", "Marketing", "Graphic Design", "Cold Calling", 
+    "B2B Sales", "Lead Generation", "WordPress", "Webflow"
   ];
 
   const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,51 +150,51 @@ export default function ApplicationPage() {
           <form onSubmit={handleSubmit} className="px-8 sm:px-12 py-10 space-y-12">
             
             {/* Section 1: Personal Information */}
-            <div className="space-y-6">
-              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-3">Personal Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
+            <div className="space-y-4">
+              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-2">Personal Information</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">First Name <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" />
+                  <input required type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Last Name <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" />
+                  <input required type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Email Address <span className="text-red-500">*</span></label>
-                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" />
+                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Phone Number <span className="text-red-500">*</span></label>
-                  <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" />
+                  <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" />
                 </div>
-                <div className="space-y-2 sm:col-span-2">
+                <div className="space-y-1.5 sm:col-span-2">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Current Location <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="City, Country" />
+                  <input required type="text" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="City, Country" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">LinkedIn Profile <span className="text-red-500">*</span></label>
-                  <input required type="url" value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="https://linkedin.com/in/..." />
+                  <input required type="url" value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="https://linkedin.com/in/..." />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">GitHub Profile (Optional)</label>
-                  <input type="url" value={formData.github} onChange={e => setFormData({...formData, github: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="https://github.com/..." />
+                  <input type="url" value={formData.github} onChange={e => setFormData({...formData, github: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="https://github.com/..." />
                 </div>
-                <div className="space-y-2 sm:col-span-2">
+                <div className="space-y-1.5 sm:col-span-2">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Portfolio Website (Optional)</label>
-                  <input type="url" value={formData.portfolioUrl} onChange={e => setFormData({...formData, portfolioUrl: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="https://" />
+                  <input type="url" value={formData.portfolioUrl} onChange={e => setFormData({...formData, portfolioUrl: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="https://" />
                 </div>
               </div>
             </div>
 
             {/* Section 2: Position Information */}
-            <div className="space-y-6">
-              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-3">Position Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2 sm:col-span-2">
+            <div className="space-y-4">
+              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-2">Position Information</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5 sm:col-span-2">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Role Applying For <span className="text-red-500">*</span></label>
-                  <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all appearance-none cursor-pointer">
+                  <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all appearance-none cursor-pointer">
                     <option value="" disabled>Select a role...</option>
                     <option value="Frontend Developer">Frontend Developer</option>
                     <option value="Full Stack Developer">Full Stack Developer</option>
@@ -203,37 +204,39 @@ export default function ApplicationPage() {
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="AI & Automation">AI & Automation</option>
                     <option value="Business Development">Business Development</option>
+                    <option value="Sales Partner / Cold Calling">Sales Partner / Cold Calling</option>
                     <option value="General Application">General Application</option>
                   </select>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Employment Type <span className="text-red-500">*</span></label>
-                  <select required value={formData.employmentType} onChange={e => setFormData({...formData, employmentType: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all appearance-none cursor-pointer">
+                  <select required value={formData.employmentType} onChange={e => setFormData({...formData, employmentType: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all appearance-none cursor-pointer">
                     <option value="" disabled>Select type...</option>
                     <option value="Full Time">Full Time</option>
                     <option value="Part Time">Part Time</option>
                     <option value="Internship">Internship</option>
                     <option value="Freelance / Contract">Freelance / Contract</option>
+                    <option value="Commission Based">Commission Based</option>
                   </select>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Years of Experience <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="e.g. 3 years" />
+                  <input required type="text" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="e.g. 3 years" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Expected Compensation <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.compensation} onChange={e => setFormData({...formData, compensation: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="e.g. ₹50,000/month or $40/hr" />
+                  <input required type="text" value={formData.compensation} onChange={e => setFormData({...formData, compensation: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="e.g. ₹50,000/month or 20% Commission" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Available Start Date <span className="text-red-500">*</span></label>
-                  <input required type="text" value={formData.startDate} onChange={e => setFormData({...formData, startDate: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3.5 outline-none transition-all" placeholder="e.g. Immediately, or 2 weeks notice" />
+                  <input required type="text" value={formData.startDate} onChange={e => setFormData({...formData, startDate: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all" placeholder="e.g. Immediately, or 2 weeks notice" />
                 </div>
               </div>
             </div>
 
             {/* Section 3: Skills */}
-            <div className="space-y-6">
-              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-3">Skills</h3>
+            <div className="space-y-4">
+              <h3 className="font-display font-bold text-xl text-gray-900 border-b border-gray-100 pb-2">Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {availableSkills.map((skill) => {
                   const isSelected = formData.skills.includes(skill);
@@ -256,40 +259,44 @@ export default function ApplicationPage() {
             </div>
 
             {/* Section 4: File Uploads */}
-            <div className="space-y-6 border-t border-gray-100 pt-8">
-              <h3 className="font-display font-bold text-xl text-gray-900 pb-3">Documents</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4 border-t border-gray-100 pt-6">
+              <h3 className="font-display font-bold text-xl text-gray-900 pb-2">Documents</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
                 {/* Resume Upload */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Resume (PDF) <span className="text-red-500">*</span></label>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">
+                    Resume (PDF) 
+                    {formData.role !== "Sales Partner / Cold Calling" && <span className="text-red-500">*</span>}
+                    {formData.role === "Sales Partner / Cold Calling" && <span className="text-gray-400 font-normal normal-case ml-1">(Optional for Sales)</span>}
+                  </label>
                   <div 
-                    className="w-full border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                    className="w-full border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 p-6 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
                     onClick={() => resumeInputRef.current?.click()}
                   >
-                    <UploadCloud className="mx-auto h-10 w-10 text-gray-400 mb-3 group-hover:text-primary transition-colors" />
+                    <UploadCloud className="mx-auto h-8 w-8 text-gray-400 mb-2 group-hover:text-primary transition-colors" />
                     {resumeName ? (
-                      <p className="text-sm font-semibold text-primary">{resumeName}</p>
+                      <p className="text-sm font-semibold text-primary truncate px-2">{resumeName}</p>
                     ) : (
                       <>
                         <p className="text-sm font-medium text-gray-900">Upload Resume PDF</p>
                         <p className="text-xs text-gray-500 mt-1">Maximum Size: 10 MB</p>
                       </>
                     )}
-                    <input type="file" className="hidden" ref={resumeInputRef} onChange={handleResumeChange} accept=".pdf" required />
+                    <input type="file" className="hidden" ref={resumeInputRef} onChange={handleResumeChange} accept=".pdf" required={formData.role !== "Sales Partner / Cold Calling"} />
                   </div>
                 </div>
 
                 {/* Portfolio Upload */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Portfolio (Optional)</label>
                   <div 
-                    className="w-full border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                    className="w-full border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 p-6 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all group"
                     onClick={() => portfolioInputRef.current?.click()}
                   >
-                    <UploadCloud className="mx-auto h-10 w-10 text-gray-400 mb-3 group-hover:text-primary transition-colors" />
+                    <UploadCloud className="mx-auto h-8 w-8 text-gray-400 mb-2 group-hover:text-primary transition-colors" />
                     {portfolioName ? (
-                      <p className="text-sm font-semibold text-primary">{portfolioName}</p>
+                      <p className="text-sm font-semibold text-primary truncate px-2">{portfolioName}</p>
                     ) : (
                       <>
                         <p className="text-sm font-medium text-gray-900">Upload Portfolio PDF</p>

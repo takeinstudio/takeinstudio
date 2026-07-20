@@ -206,19 +206,23 @@ export default function DocumentsBuilder() {
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-orange"></div>
                 
                 <div className="flex justify-center mb-8">
-                    <img src="/logo/logo_text.png" alt="TakeIN Studio Logo" className="h-28 object-contain drop-shadow-xl" />
+                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-28 object-contain drop-shadow-xl" />
                 </div>
 
                 <h1 className="heading text-4xl md:text-5xl font-bold mb-3 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
                 <p className="text-sm tracking-[0.2em] uppercase brand-orange font-bold mb-10">Premium Web Development & CMS Platform</p>
                 
                 <div className="inline-block border border-orange-200 rounded-xl p-5 bg-white shadow-sm text-left w-full max-w-lg mx-auto">
-                    <div className="flex justify-between items-center mb-3 pb-3 border-b border-gray-100">
-                        <p className="text-sm text-gray-500"><span className="font-bold text-gray-800">Project:</span> {basicInfo.projectName}</p>
-                        <p className="text-sm text-gray-500"><span className="font-bold text-gray-800">Owner:</span> {basicInfo.ownerName}</p>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <img src="/logo/logo_no_text.png" alt="Developer" className="w-10 h-10 rounded-full object-cover border border-orange-200 shadow-sm bg-white p-1" />
+                    <table className="w-full mb-3 pb-3 border-b border-gray-100 border-solid block">
+                        <tbody className="w-full table">
+                            <tr>
+                                <td className="text-left text-sm text-gray-500 w-1/2 align-top"><span className="font-bold text-gray-800 block mb-1">Project:</span> {basicInfo.projectName}</td>
+                                <td className="text-right text-sm text-gray-500 w-1/2 align-top"><span className="font-bold text-gray-800 block mb-1">Owner:</span> {basicInfo.ownerName}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div className="flex items-center gap-3 mt-3">
+                        <img src={`${window.location.origin}/logo/logo_no_text.png`} alt="Developer" className="w-10 h-10 rounded-full object-cover border border-orange-200 shadow-sm bg-white p-1" />
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-0.5">Developed By</p>
                             <p className="text-sm font-bold text-gray-900">{basicInfo.developerName} <span className="brand-orange ml-1">(TakeIN Studio)</span></p>
@@ -236,35 +240,37 @@ export default function DocumentsBuilder() {
                         <h2 className="heading text-2xl text-gray-900 font-bold">Scope of Work & Features</h2>
                     </div>
                     
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="flex flex-wrap -mx-3">
                         {sections.map(section => (
-                            <div key={section.id} className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100 avoid-break">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
-                                    <span className="p-2 bg-orange-100 rounded-lg brand-orange">
-                                        <CheckCircle2 size={18} />
-                                    </span>
-                                    {section.title}
-                                </h3>
-                                <ul className="space-y-3 text-xs text-gray-600">
-                                    {section.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                      const parts = bullet.split(':');
-                                      return (
-                                        <li key={idx} className="flex items-start gap-2">
-                                          <div className="mt-1 w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0"></div>
-                                          <span>
-                                            {parts.length > 1 ? (
-                                              <>
-                                                <strong className="text-gray-900">{parts[0]}:</strong>
-                                                {parts.slice(1).join(':')}
-                                              </>
-                                            ) : (
-                                              bullet
-                                            )}
-                                          </span>
-                                        </li>
-                                      );
-                                    })}
-                                </ul>
+                            <div key={section.id} className="w-1/2 px-3 mb-6 avoid-break">
+                                <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100 h-full">
+                                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
+                                        <span className="p-2 bg-orange-100 rounded-lg brand-orange">
+                                            <CheckCircle2 size={18} />
+                                        </span>
+                                        {section.title}
+                                    </h3>
+                                    <ul className="space-y-3 text-xs text-gray-600">
+                                        {section.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                          const parts = bullet.split(':');
+                                          return (
+                                            <li key={idx} className="flex items-start gap-2">
+                                              <div className="mt-1 w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0"></div>
+                                              <span>
+                                                {parts.length > 1 ? (
+                                                  <>
+                                                    <strong className="text-gray-900">{parts[0]}:</strong>
+                                                    {parts.slice(1).join(':')}
+                                                  </>
+                                                ) : (
+                                                  bullet
+                                                )}
+                                              </span>
+                                            </li>
+                                          );
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -329,7 +335,7 @@ export default function DocumentsBuilder() {
                         <h2 className="heading text-2xl text-gray-900 font-bold">Domain & Hosting</h2>
                     </div>
                     <div className="bg-white border-2 border-orange-100 rounded-2xl overflow-hidden">
-                        <div className="p-6 space-y-4">
+                            <div className="p-6 space-y-4">
                                 {/* Domain */}
                                 <div className="flex justify-between items-center pb-3 border-b border-gray-100 gap-4">
                                     <div>
@@ -337,8 +343,7 @@ export default function DocumentsBuilder() {
                                         <p className="text-[11px] text-gray-500 mt-0.5">Yearly Renewal (e.g., .com, .in)</p>
                                     </div>
                                     <div className="text-xs font-semibold text-gray-800 text-right bg-orange-50 border border-orange-100 px-3 py-2 rounded-lg">
-                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.domainCost}</span> <br/>
-                                        <span className="text-[10px] font-medium text-gray-500">Exact rates depend on preferred domain</span>
+                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.domainCost}</span>
                                     </div>
                                 </div>
 
@@ -349,8 +354,7 @@ export default function DocumentsBuilder() {
                                         <p className="text-[11px] text-gray-500 mt-0.5">Yearly Renewal (Speed, Security & Maintenance)</p>
                                     </div>
                                     <div className="text-xs font-semibold text-gray-800 text-right bg-orange-50 border border-orange-100 px-3 py-2 rounded-lg">
-                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.hostingCost}</span> <br/>
-                                        <span className="text-[10px] font-medium text-gray-500">Exact rates depend on preferred hosting</span>
+                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.hostingCost}</span>
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +368,7 @@ export default function DocumentsBuilder() {
 
                 {/* Footer signature (Avoid break) */}
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center relative pb-6 avoid-break">
-                    <img src="/logo/logo_text.png" alt="Logo" className="h-10 object-contain mx-auto mb-4" />
+                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-10 object-contain mx-auto mb-4" />
                     <p className="text-gray-500 text-[11px] mb-2">Designed and Developed with precision by</p>
                     <p className="font-bold text-gray-900 text-lg tracking-tight">{basicInfo.developerName}</p>
                     <p className="brand-orange font-bold tracking-[0.4em] text-[10px] uppercase mt-1">TakeIN Studio</p>

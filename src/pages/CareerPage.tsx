@@ -77,11 +77,74 @@ export default function CareerPage() {
                 Apply Now <ArrowRight size={18} />
               </Link>
               <a
-                href="mailto:career@takeinstudio.com"
+                href="mailto:takeinstudio@gmail.com"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-foreground border border-border shadow-sm font-bold tracking-wide hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
               >
                 career@takeinstudio.com
               </a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── SALES PARTNER PROGRAM ── */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-white to-orange-50">
+        <div className="container mx-auto max-w-5xl">
+          <AnimatedSection>
+            <div className="bg-white rounded-3xl border border-primary/20 shadow-xl overflow-hidden relative">
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-orange-400"></div>
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+              
+              <div className="p-8 sm:p-12">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-wider mb-6">
+                  <Zap size={14} className="fill-orange-600" /> High Earning Potential
+                </div>
+                
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                  TakeIN Sales Partner <span className="text-primary italic">&</span> Affiliate Program
+                </h2>
+                <p className="text-muted-foreground text-lg mb-10 max-w-2xl leading-relaxed">
+                  You don't need to be a developer to earn with us. Bring clients for web development, apps, or SEO and earn huge commissions instantly. We handle the work, you take the profit.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
+                      <span className="font-black text-xl">20%</span>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2">Flat Commission</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">Earn a massive 20% of the entire project cost for every client you convert. No upper limit.</p>
+                  </div>
+                  
+                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
+                      <Briefcase size={22} />
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2">Work Directly With Us</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">Perform well and get verified as an official TakeIN Sales Partner. We'll train you personally to close bigger deals.</p>
+                  </div>
+                  
+                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 8h20"/><path d="M2 16h20"/></svg>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2">Unlock Rewards & Bonuses</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">Hit monthly targets and unlock cash bonuses, premium tech rewards, and lead-generation tools.</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-gray-100">
+                  <Link
+                    to="/apply?role=Sales Partner / Cold Calling"
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary text-white font-bold tracking-wide hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                  >
+                    Apply for Sales Partner <ArrowRight size={18} />
+                  </Link>
+                  <span className="text-sm text-muted-foreground font-medium text-center sm:text-left">
+                    Send your resume or tell us how you plan to generate leads.
+                  </span>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
@@ -159,68 +222,6 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* ── SALES PARTNER PROGRAM ── */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-white to-orange-50">
-        <div className="container mx-auto max-w-5xl">
-          <AnimatedSection>
-            <div className="bg-white rounded-3xl border border-primary/20 shadow-xl overflow-hidden relative">
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-orange-400"></div>
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-              
-              <div className="p-8 sm:p-12">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-wider mb-6">
-                  <Zap size={14} className="fill-orange-600" /> High Earning Potential
-                </div>
-                
-                <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  TakeIN Sales Partner <span className="text-primary italic">&</span> Affiliate Program
-                </h2>
-                <p className="text-muted-foreground text-lg mb-10 max-w-2xl leading-relaxed">
-                  You don't need to be a developer to earn with us. Bring clients for web development, apps, or SEO and earn huge commissions instantly. We handle the work, you take the profit.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
-                      <span className="font-black text-xl">20%</span>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Flat Commission</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">Earn a massive 20% of the entire project cost for every client you convert. No upper limit.</p>
-                  </div>
-                  
-                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
-                      <Briefcase size={22} />
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Work Directly With Us</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">Perform well and get verified as an official TakeIN Sales Partner. We'll train you personally to close bigger deals.</p>
-                  </div>
-                  
-                  <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm mb-4">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 8h20"/><path d="M2 16h20"/></svg>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2">Unlock Rewards & Bonuses</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">Hit monthly targets and unlock cash bonuses, premium tech rewards, and lead-generation tools.</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-gray-100">
-                  <a
-                    href="mailto:career@takeinstudio.com?subject=Application%20for%20Sales%20Partner%20Program"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary text-white font-bold tracking-wide hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
-                  >
-                    Apply for Sales Partner <ArrowRight size={18} />
-                  </a>
-                  <span className="text-sm text-muted-foreground font-medium text-center sm:text-left">
-                    Send your resume or tell us how you plan to generate leads.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* Why Choose Us */}
       <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-muted/20">
@@ -291,7 +292,7 @@ export default function CareerPage() {
                     Apply Now <ArrowRight size={18} />
                   </Link>
                   <a
-                    href="mailto:career@takeinstudio.com"
+                    href="mailto:takeinstudio@gmail.com"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-transparent border-2 border-white/30 text-white font-bold tracking-wide hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                   >
                     career@takeinstudio.com

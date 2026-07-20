@@ -6,7 +6,7 @@ const contactCards = [
     icon: <Mail size={22} />,
     title: "Email Us",
     value: "support@takeinstudio.com",
-    href: "mailto:support@takeinstudio.com",
+    href: "mailto:takeinstudio@gmail.com",
     isLink: true,
   },
   {

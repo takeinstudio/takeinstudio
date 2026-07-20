@@ -124,7 +124,7 @@ export default function Footer() {
             <PhoneUnlockButton variant="footer-whatsapp" />
             
             <a
-              href="mailto:support@takeinstudio.com"
+              href="mailto:takeinstudio@gmail.com"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-gray-600 hover:text-[#FF6B00] transition-colors"
             >
               <Mail size={15} />
@@ -190,7 +190,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-[#FF6B00] shrink-0">
                 <Mail size={14} strokeWidth={2.5} />
               </div>
-              <a href="mailto:support@takeinstudio.com" className="text-[12px] sm:text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors whitespace-nowrap">support@takeinstudio.com</a>
+              <a href="mailto:takeinstudio@gmail.com" className="text-[12px] sm:text-[13px] font-medium text-gray-600 hover:text-[#FF6B00] transition-colors whitespace-nowrap">support@takeinstudio.com</a>
             </li>
             <PhoneUnlockButton />
             <li className="flex items-start gap-3.5">

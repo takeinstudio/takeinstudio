@@ -124,7 +124,7 @@ export default function ApplicationPage() {
     <div className="min-h-screen bg-[#fafafa] flex flex-col py-6 px-4 sm:px-6 lg:px-8">
       <SEO title="Apply Now - Careers" description="Apply for a role at TakeIN Studio and join our team of creators and builders." />
 
-      <div className="max-w-5xl w-full mx-auto flex-1 flex flex-col">
+      <div className="max-w-7xl w-full mx-auto flex-1 flex flex-col">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-4 px-1">

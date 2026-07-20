@@ -184,206 +184,298 @@ export default function DocumentsBuilder() {
 
       {/* Hidden Template for PDF Generation */}
       <div className="overflow-hidden h-0 w-0 absolute top-[-9999px] left-[-9999px]">
-        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fdfaf7] text-gray-800 p-8 relative print-container" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fff8f2] text-gray-800 py-10 px-8 relative print-container" style={{ fontFamily: "'Inter', sans-serif" }}>
           
           <style dangerouslySetInnerHTML={{__html: `
             .heading { font-family: 'Playfair Display', serif; }
             .brand-orange { color: #ff5722; }
             .bg-brand-orange { background-color: #ff5722; }
-            .avoid-break { page-break-inside: avoid; break-inside: avoid; }
-            .page-break { page-break-before: always; break-before: page; }
+            .page-break { page-break-before: always; break-before: page; margin-top: 40px; }
+            .section-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+            .section-title::before { content: ""; display: block; width: 40px; height: 3px; background-color: #ff5722; }
           `}} />
 
-          {/* Subtle Watermark */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none z-0 overflow-hidden">
-            <h1 className="text-[10rem] font-bold tracking-tighter text-[#ff5722] transform -rotate-12 whitespace-nowrap">TakeIN Studio</h1>
-          </div>
-
-          <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden border border-orange-100 relative z-10">
+          {/* PAGE 1 */}
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12">
             
-            {/* Header (Page 1) */}
-            <div className="bg-gradient-to-b from-orange-50 to-white px-10 pt-16 pb-12 text-center relative overflow-hidden border-b border-orange-100 avoid-break">
-                <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-orange"></div>
-                
-                <div className="flex justify-center mb-8">
-                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-28 object-contain drop-shadow-xl" />
+            {/* Header */}
+            <div className="text-center relative overflow-hidden mb-12 pt-4">
+                <div className="flex justify-center mb-6">
+                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-20 object-contain drop-shadow-sm" />
                 </div>
 
-                <h1 className="heading text-4xl md:text-5xl font-bold mb-3 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
-                <p className="text-sm tracking-[0.2em] uppercase brand-orange font-bold mb-10">Premium Web Development & CMS Platform</p>
+                <h1 className="heading text-4xl font-extrabold mb-3 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
+                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-8">Premium Web Development & CMS Platform</p>
                 
-                <div className="inline-block border border-orange-200 rounded-xl p-5 bg-white shadow-sm text-left w-full max-w-lg mx-auto">
-                    <table className="w-full mb-3 pb-3 border-b border-gray-100 border-solid block">
-                        <tbody className="w-full table">
-                            <tr>
-                                <td className="text-left text-sm text-gray-500 w-1/2 align-top"><span className="font-bold text-gray-800 block mb-1">Project:</span> {basicInfo.projectName}</td>
-                                <td className="text-right text-sm text-gray-500 w-1/2 align-top"><span className="font-bold text-gray-800 block mb-1">Owner:</span> {basicInfo.ownerName}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div className="flex items-center gap-3 mt-3">
-                        <img src={`${window.location.origin}/logo/logo_no_text.png`} alt="Developer" className="w-10 h-10 rounded-full object-cover border border-orange-200 shadow-sm bg-white p-1" />
+                <div className="border border-orange-200 rounded-[20px] p-6 text-left w-full max-w-[550px] mx-auto bg-white relative">
+                    <div className="flex justify-between items-center mb-5 pb-5 border-b border-gray-100">
+                        <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Project:</span> {basicInfo.projectName || "Astha Associate"}</div>
+                        <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Owner:</span> {basicInfo.ownerName || "Pratap Kumar Swain"}</div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <img src={`${window.location.origin}/logo/logo_no_text.png`} alt="Developer" className="w-12 h-12 rounded-full object-cover border border-orange-100 bg-gray-50 p-1.5 shadow-sm" />
                         <div>
-                            <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-0.5">Developed By</p>
-                            <p className="text-sm font-bold text-gray-900">{basicInfo.developerName} <span className="brand-orange ml-1">(TakeIN Studio)</span></p>
+                            <p className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-bold mb-0.5">Developed By</p>
+                            <p className="text-sm font-bold text-gray-900">{basicInfo.developerName || "Ankit Tripathy"} <span className="brand-orange ml-1">(TakeIN Studio)</span></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="p-8 md:p-12 space-y-12">
+            {/* Scope of Work */}
+            <div>
+                <h2 className="section-title">Scope of Work & Features</h2>
                 
-                {/* Scope of Work */}
-                <section>
-                    <div className="flex items-center gap-4 mb-6 avoid-break">
-                        <div className="w-12 h-1 bg-brand-orange"></div>
-                        <h2 className="heading text-2xl text-gray-900 font-bold">Scope of Work & Features</h2>
-                    </div>
-                    
-                    <div className="flex flex-wrap -mx-3">
-                        {sections.map(section => (
-                            <div key={section.id} className="w-1/2 px-3 mb-6 avoid-break">
-                                <div className="bg-orange-50/50 p-6 rounded-2xl border border-orange-100 h-full">
-                                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
-                                        <span className="p-2 bg-orange-100 rounded-lg brand-orange">
-                                            <CheckCircle2 size={18} />
-                                        </span>
-                                        {section.title}
-                                    </h3>
-                                    <ul className="space-y-3 text-xs text-gray-600">
-                                        {section.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                          const parts = bullet.split(':');
-                                          return (
-                                            <li key={idx} className="flex items-start gap-2">
-                                              <div className="mt-1 w-1.5 h-1.5 rounded-full bg-brand-orange flex-shrink-0"></div>
-                                              <span>
-                                                {parts.length > 1 ? (
-                                                  <>
-                                                    <strong className="text-gray-900">{parts[0]}:</strong>
-                                                    {parts.slice(1).join(':')}
-                                                  </>
-                                                ) : (
-                                                  bullet
-                                                )}
-                                              </span>
-                                            </li>
-                                          );
-                                        })}
-                                    </ul>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Force Page Break here for Pricing to ensure it doesn't get cut */}
-                <div className="page-break"></div>
-
-                {/* Pricing Breakdown (Page 2) */}
-                <section>
-                    <div className="flex items-center gap-4 mb-6 avoid-break">
-                        <div className="w-12 h-1 bg-brand-orange"></div>
-                        <h2 className="heading text-2xl text-gray-900 font-bold">Investment Breakdown</h2>
-                    </div>
-
-                    <div className="bg-white border-2 border-orange-100 rounded-2xl overflow-hidden avoid-break">
-                        <div className="p-8">
-                            <div className="pb-6 border-b border-gray-100">
-                                <div className="flex justify-between items-end mb-6 gap-4">
-                                    <div>
-                                        <h4 className="font-bold text-xl text-gray-900 mb-1">One-Time Development Cost</h4>
-                                        <p className="text-xs text-gray-500">Comprehensive Web Platform & Content Management System</p>
-                                    </div>
-                                    <div className="text-3xl font-bold whitespace-nowrap brand-orange tracking-tight">₹ {basicInfo.totalCost}</div>
-                                </div>
-                                
-                                <div className="bg-orange-50/50 rounded-xl p-5 border border-orange-100">
-                                    <h5 className="text-[10px] uppercase tracking-widest brand-orange font-bold mb-4">Detailed Price Breakdown</h5>
-                                    
-                                    <div className="space-y-4 text-xs text-gray-700">
-                                        {sections.map(section => (
-                                          <div key={section.id} className="avoid-break">
-                                              <div className="flex justify-between items-start gap-4 mb-2">
-                                                  <h6 className="text-gray-900 font-bold flex items-center gap-2">{section.title}</h6>
-                                                  <span className="whitespace-nowrap font-bold text-gray-900 text-sm">₹ {section.price}</span>
-                                              </div>
-                                              <div className="space-y-1 pl-4 border-l-2 border-orange-100 text-gray-600 text-[11px]">
-                                                  {section.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                                    const parts = bullet.split(':');
-                                                    return (
-                                                      <p key={idx}>
-                                                        {parts.length > 1 ? (
-                                                          <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                                        ) : bullet}
-                                                      </p>
-                                                    );
-                                                  })}
-                                              </div>
-                                          </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                <div className="grid grid-cols-2 gap-6">
+                    {/* Live Website Pages */}
+                    <div className="bg-[#fffbf8] p-6 rounded-[20px] border border-[#ffedd5] h-full">
+                        <h3 className="text-[17px] font-bold text-gray-900 mb-5 flex items-center gap-3">
+                            <span className="w-8 h-8 rounded-full bg-[#ffedd5] flex items-center justify-center text-[#ff5722]">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                            </span>
+                            Live Website Pages
+                        </h3>
+                        <div className="space-y-4 text-[12px] text-gray-600 leading-relaxed">
+                            {sections[0]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                const parts = bullet.split(':');
+                                return (
+                                  <div key={idx} className="flex items-start gap-2.5">
+                                    <div className="mt-[5px] w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0"></div>
+                                    <span>
+                                      {parts.length > 1 ? (
+                                        <><strong className="text-gray-900 font-bold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+                                      ) : bullet}
+                                    </span>
+                                  </div>
+                                );
+                            })}
                         </div>
                     </div>
-                </section>
-                
-                {/* Domain & Hosting Costs */}
-                <section className="avoid-break">
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className="w-12 h-1 bg-brand-orange"></div>
-                        <h2 className="heading text-2xl text-gray-900 font-bold">Domain & Hosting</h2>
-                    </div>
-                    <div className="bg-white border-2 border-orange-100 rounded-2xl overflow-hidden">
-                            <div className="p-6 space-y-4">
-                                {/* Domain */}
-                                <div className="flex justify-between items-center pb-3 border-b border-gray-100 gap-4">
-                                    <div>
-                                        <h4 className="font-bold text-base text-gray-900">Domain Name Setup</h4>
-                                        <p className="text-[11px] text-gray-500 mt-0.5">Yearly Renewal (e.g., .com, .in)</p>
-                                    </div>
-                                    <div className="text-xs font-semibold text-gray-800 text-right bg-orange-50 border border-orange-100 px-3 py-2 rounded-lg">
-                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.domainCost}</span>
-                                    </div>
-                                </div>
 
-                                {/* Hosting */}
-                                <div className="flex justify-between items-center pt-1 gap-4">
-                                    <div>
-                                        <h4 className="font-bold text-base text-gray-900">Server Hosting Setup</h4>
-                                        <p className="text-[11px] text-gray-500 mt-0.5">Yearly Renewal (Speed, Security & Maintenance)</p>
-                                    </div>
-                                    <div className="text-xs font-semibold text-gray-800 text-right bg-orange-50 border border-orange-100 px-3 py-2 rounded-lg">
-                                        <span className="brand-orange uppercase tracking-wider text-[10px] font-bold">{basicInfo.hostingCost}</span>
-                                    </div>
-                                </div>
-                            </div>
+                    {/* Secure Admin Dashboard */}
+                    <div className="bg-[#fffbf8] p-6 rounded-[20px] border border-[#ffedd5] h-full">
+                        <h3 className="text-[17px] font-bold text-gray-900 mb-5 flex items-center gap-3">
+                            <span className="w-8 h-8 rounded-full bg-[#ffedd5] flex items-center justify-center text-[#ff5722]">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            </span>
+                            Secure Admin Dashboard
+                        </h3>
+                        <div className="space-y-4 text-[12px] text-gray-600 leading-relaxed">
+                            {sections[1]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                const parts = bullet.split(':');
+                                return (
+                                  <div key={idx} className="flex items-start gap-2.5">
+                                    <div className="mt-[5px] w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0"></div>
+                                    <span>
+                                      {parts.length > 1 ? (
+                                        <><strong className="text-gray-900 font-bold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+                                      ) : bullet}
+                                    </span>
+                                  </div>
+                                );
+                            })}
                         </div>
-                        
-                        <div className="bg-brand-orange p-6 text-white flex justify-between items-center gap-4 relative overflow-hidden mt-6 rounded-2xl">
-                            <h4 className="heading font-bold text-xl relative z-10">Total Immediate Payable</h4>
-                            <div className="text-2xl font-bold text-right tracking-tight relative z-10">₹ {basicInfo.totalCost} <span className="inline-block text-xs font-normal text-white/90 ml-1">+ Domain/Hosting</span></div>
-                        </div>
-                </section>
-
-                {/* Footer signature (Avoid break) */}
-                <div className="mt-8 pt-8 border-t border-gray-200 text-center relative pb-6 avoid-break">
-                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-10 object-contain mx-auto mb-4" />
-                    <p className="text-gray-500 text-[11px] mb-2">Designed and Developed with precision by</p>
-                    <p className="font-bold text-gray-900 text-lg tracking-tight">{basicInfo.developerName}</p>
-                    <p className="brand-orange font-bold tracking-[0.4em] text-[10px] uppercase mt-1">TakeIN Studio</p>
-
-                    <div className="flex justify-center items-center gap-4 mt-4 text-[11px] font-semibold text-gray-600">
-                        <span>www.takeinstudio.com</span>
-                        <span className="text-gray-300">|</span>
-                        <span>support@takeinstudio.com</span>
-                        <span className="text-gray-300">|</span>
-                        <span>+91 89082 33590</span>
                     </div>
                 </div>
-
             </div>
           </div>
+
+          <div className="page-break"></div>
+
+          {/* PAGE 2 */}
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12">
+              <h2 className="section-title">Investment Breakdown</h2>
+
+              <div className="border border-[#ffedd5] rounded-3xl overflow-hidden mt-6 relative">
+                  <div className="p-8">
+                      {/* Top Highlight Cost */}
+                      <div className="flex justify-between items-center mb-8">
+                          <div>
+                              <h4 className="font-bold text-[22px] text-gray-900 mb-1">One-Time Development Cost</h4>
+                              <p className="text-[13px] text-gray-500">Comprehensive Web Platform & Content Management System</p>
+                          </div>
+                          <div className="text-4xl font-extrabold whitespace-nowrap text-[#1a1a1a]">
+                              ₹ {basicInfo.totalCost || "13,499"}
+                          </div>
+                      </div>
+                      
+                      <div className="bg-[#fffbf8] rounded-2xl p-8 pb-10 border border-[#ffedd5]">
+                          <h5 className="text-[10px] uppercase tracking-[0.15em] font-bold text-gray-900 mb-6">Detailed Price Breakdown</h5>
+                          
+                          <div className="space-y-6 text-[13px] text-gray-700">
+                              {/* Live Website Pages */}
+                              <div>
+                                  <div className="flex justify-between items-start gap-4 mb-3">
+                                      <h6 className="text-gray-900 font-bold flex items-center gap-2">
+                                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                          Live Website Pages
+                                      </h6>
+                                      <span className="whitespace-nowrap font-bold text-gray-900">₹ {sections[0]?.price || "4,999"}</span>
+                                  </div>
+                                  <div className="space-y-2 pl-[22px] text-gray-600 text-[12px] leading-relaxed">
+                                      {sections[0]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                        const parts = bullet.split(':');
+                                        return (
+                                          <p key={idx}>
+                                            {parts.length > 1 ? (
+                                              <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+                                            ) : bullet}
+                                          </p>
+                                        );
+                                      })}
+                                  </div>
+                              </div>
+                              
+                              {/* Secure Admin Dashboard */}
+                              <div className="pt-6 mt-4">
+                                  <h6 className="text-gray-900 font-bold flex items-center gap-2 mb-4">
+                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                      Secure Admin Dashboard
+                                  </h6>
+                                  <div className="space-y-4 pl-[22px] text-[12px] leading-relaxed">
+                                      {sections[1]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                        const parts = bullet.split(':');
+                                        return (
+                                          <div key={idx} className="flex justify-between gap-4">
+                                              <p className="text-gray-600">
+                                                {parts.length > 1 ? (
+                                                  <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+                                                ) : bullet}
+                                              </p>
+                                              <span className="font-bold text-gray-900 whitespace-nowrap">₹ {idx === 0 ? "1,500" : "1,000"}</span>
+                                          </div>
+                                        );
+                                      })}
+                                  </div>
+                              </div>
+
+                              {/* Advanced Security */}
+                              <div className="pt-6 mt-4">
+                                  <h6 className="text-gray-900 font-bold flex items-center gap-2 mb-4">
+                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
+                                      Advanced Security & Authentication
+                                  </h6>
+                                  <div className="space-y-4 pl-[22px] text-[12px] leading-relaxed">
+                                      {sections[2]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                                        const parts = bullet.split(':');
+                                        return (
+                                          <div key={idx} className="flex justify-between gap-4">
+                                              <p className="text-gray-600">
+                                                {parts.length > 1 ? (
+                                                  <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+                                                ) : bullet}
+                                              </p>
+                                              <span className="font-bold text-gray-900 whitespace-nowrap">₹ {idx === 2 ? "1,000" : "1,500"}</span>
+                                          </div>
+                                        );
+                                      })}
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div className="page-break"></div>
+
+          {/* PAGE 3 */}
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col min-h-[960px]">
+              <div className="p-12 pb-8">
+                  <h2 className="section-title">Domain & Hosting</h2>
+                  <div className="border border-[#ffedd5] rounded-3xl overflow-hidden mt-6 mb-8">
+                      <div className="p-8 space-y-6">
+                          {/* Domain */}
+                          <div className="flex justify-between items-center pb-6 border-b border-gray-100 gap-4">
+                              <div>
+                                  <h4 className="font-bold text-[17px] text-gray-900 mb-1">Domain Name Setup</h4>
+                                  <p className="text-[12px] text-gray-500">Yearly Renewal (e.g., .com, .in)</p>
+                              </div>
+                              <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
+                                  <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                  <span className="text-[10px] text-gray-500">Exact rates depend on preferred domain</span>
+                              </div>
+                          </div>
+
+                          {/* Hosting */}
+                          <div className="flex justify-between items-center gap-4">
+                              <div>
+                                  <h4 className="font-bold text-[17px] text-gray-900 mb-1">Server Hosting Setup</h4>
+                                  <p className="text-[12px] text-gray-500">Yearly Renewal (Speed, Security & Maintenance)</p>
+                              </div>
+                              <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
+                                  <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                  <span className="text-[10px] text-gray-500">Exact rates depend on preferred hosting</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              {/* Total Banner */}
+              <div className="bg-[#ff5722] py-8 px-12 text-white flex justify-between items-center relative overflow-hidden">
+                  <h4 className="heading font-bold text-[28px] relative z-10">Total Immediate Payable</h4>
+                  <div className="text-[40px] font-extrabold text-right tracking-tight relative z-10">
+                      ₹ {basicInfo.totalCost || "13,499"} <span className="text-[14px] font-normal text-white/90 ml-1">+ Domain/Hosting</span>
+                  </div>
+              </div>
+
+              <div className="p-12">
+                  <div className="text-center mb-8">
+                      <h2 className="heading text-[26px] font-bold text-gray-900 mb-2">More Digital Solutions Built for Growth</h2>
+                      <p className="text-[12px] text-gray-500 max-w-lg mx-auto">From mobile apps to AI automation and branding, TakeIN Studio helps businesses launch faster, operate smarter, and scale with confidence.</p>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 mb-12">
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">Website Dev</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">E-COM & BIZ</p>
+                      </div>
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">App Dev</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">IOS & ANDROID</p>
+                      </div>
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">Custom Software</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">CRM & SYSTEMS</p>
+                      </div>
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">AI Automation</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">BOTS & FLOWS</p>
+                      </div>
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">SEO & Marketing</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">TRAFFIC & LEADS</p>
+                      </div>
+                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
+                          <p className="font-bold text-gray-900 text-[13px] mb-1">Graphic Design</p>
+                          <p className="text-[9px] uppercase tracking-wider text-gray-500">BRAND IDENTITY</p>
+                      </div>
+                  </div>
+              </div>
+
+              {/* Footer */}
+              <div className="mt-auto border-t border-gray-100 pt-8 pb-10 text-center relative w-full">
+                  <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-[45px] object-contain mx-auto mb-5 drop-shadow-sm" />
+                  <p className="text-gray-500 text-[12px] mb-3">Designed and Developed with precision by</p>
+                  <p className="font-extrabold text-gray-900 text-[20px] tracking-tight">{basicInfo.developerName || "Ankit Tripathy"}</p>
+                  <p className="brand-orange font-bold tracking-[0.4em] text-[10px] uppercase mt-2">TakeIN Studio</p>
+
+                  <div className="flex justify-center items-center gap-6 mt-6 text-[12px] font-semibold text-gray-600 mb-8">
+                      <span>www.takeinstudio.com</span>
+                      <span className="text-gray-200">|</span>
+                      <span>support@takeinstudio.com</span>
+                      <span className="text-gray-200">|</span>
+                      <span>+91 89082 33590</span>
+                  </div>
+
+                  <div className="bg-[#fffbf8] inline-block py-2.5 px-6 rounded-full border border-[#ffedd5] text-[10px] font-semibold text-gray-800">
+                      Premium Digital Agency &bull; Building Digital Experiences That Drive Growth
+                  </div>
+              </div>
+          </div>
+
         </div>
       </div>
 

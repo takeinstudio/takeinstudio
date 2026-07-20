@@ -127,7 +127,7 @@ export default function AdminDashboard() {
           };
           return getNum(a.price_in) - getNum(b.price_in);
         }),
-        services: resServices.data || [],
+        services: (resServices.data || []).filter((service: any, index: number, self: any[]) => index === self.findIndex((s: any) => s.title === service.title)),
         jobs: resJobs.data || [],
         testimonials: resTestimonials.data || []
       });

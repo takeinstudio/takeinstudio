@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUpRight, GraduationCap, Camera, HeartPulse, HardDrive, Hotel, Film, Layers, X, BookOpen, MessageSquare, Briefcase, Sparkles, Server, CheckCircle2, Search, Code, Rocket, PenTool } from "lucide-react";
+import { ArrowUpRight, GraduationCap, Camera, HeartPulse, HardDrive, Hotel, Film, Layers, X, BookOpen, MessageSquare, Briefcase, Sparkles, Server, CheckCircle2, Search, Code, Rocket, PenTool, ShoppingCart, User, LayoutTemplate, Share2, FolderOpen, Heart, Users } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import SEO from "@/components/SEO";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -29,6 +29,21 @@ const gradientMap: Record<string, string> = {
   "AI Solutions": "from-fuchsia-500 to-pink-500"
 };
 
+const websiteTypes = [
+  { name: "E-Commerce", icon: ShoppingCart, desc: "Online stores and digital marketplaces designed for high conversions." },
+  { name: "Business", icon: Briefcase, desc: "Corporate identity and B2B platforms for professional services." },
+  { name: "Personal", icon: User, desc: "Individual profiles, digital resumes, and personal branding." },
+  { name: "Portfolio", icon: LayoutTemplate, desc: "Showcases for creative professionals to display their best work." },
+  { name: "Blog", icon: BookOpen, desc: "Content-driven publishing platforms optimized for readership." },
+  { name: "Social Media", icon: Share2, desc: "Community platforms fostering engagement and networking." },
+  { name: "Directory", icon: FolderOpen, desc: "Categorized listings and robust search-driven portals." },
+  { name: "Entertainment", icon: Film, desc: "Streaming platforms and interactive media consumption sites." },
+  { name: "Educational", icon: GraduationCap, desc: "E-learning platforms and comprehensive course management." },
+  { name: "Non-Profit", icon: Heart, desc: "Charity portals built for awareness and seamless donations." },
+  { name: "Wiki / Forum", icon: MessageSquare, desc: "Collaborative knowledge bases and discussion boards." },
+  { name: "Membership", icon: Users, desc: "Exclusive community-driven sites with gated premium content." },
+];
+
 const processSteps = [
   { icon: Search, title: "Discovery", desc: "Understanding goals, requirements, and competitive landscape." },
   { icon: PenTool, title: "Design", desc: "Creating wireframes, layouts, and high-fidelity user experiences." },
@@ -41,6 +56,7 @@ export default function WorkPage() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const location = useLocation();
   const { content } = useContent();
+  const isWebsitesCategory = new URLSearchParams(location.search).get("category") === "websites";
 
   const [projects, setProjects] = useState<any[]>([]);
 
@@ -183,6 +199,50 @@ export default function WorkPage() {
                 subtitle="Systems and tools we've built for our own operations." 
               />
             </>
+          )}
+
+          {isWebsitesCategory && (
+            <section className="py-16 bg-background relative overflow-hidden mt-12 rounded-3xl border border-border/50">
+              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none -z-10" />
+              <div className="px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto text-center mb-12">
+                  <AnimatedSection>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-semibold tracking-wider uppercase mb-4">
+                      Web Architecture
+                    </span>
+                    <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+                      The 12 Main Types of Websites
+                    </h2>
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                      Defined by their primary purpose and core functionality, we specialize in building these essential web platforms engineered for maximum impact and fully responsive across all devices.
+                    </p>
+                  </AnimatedSection>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+                  {websiteTypes.map((type, idx) => {
+                    const Icon = type.icon;
+                    return (
+                      <AnimatedSection key={idx} delay={idx * 0.05}>
+                        <div className="group relative p-5 sm:p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 h-full flex flex-col">
+                          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0">
+                            <Icon className="w-16 h-16 text-primary" />
+                          </div>
+                          
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm relative z-10">
+                            <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                          </div>
+                          
+                          <h3 className="font-display font-bold text-base sm:text-lg mb-2 relative z-10">{type.name}</h3>
+                          <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed relative z-10 flex-grow">
+                            {type.desc}
+                          </p>
+                        </div>
+                      </AnimatedSection>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
           )}
 
         </div>

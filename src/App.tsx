@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingSidebar from "@/components/FloatingSidebar";
+import LeadPopup from "@/components/LeadPopup";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import WorkPage from "@/pages/WorkPage";
@@ -64,6 +65,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Navbar />
       <FloatingSidebar />
+      <LeadPopup />
       <main>{children}</main>
       <Footer />
     </>

@@ -84,10 +84,10 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+          className="md:hidden w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </motion.div>
 
@@ -105,7 +105,7 @@ export default function Navbar() {
                 <Link
                   key={l.path}
                   to={l.path}
-                  className={`text-xs font-bold uppercase tracking-widest py-2.5 px-4 rounded-xl transition-all ${location.pathname === l.path
+                  className={`text-sm font-bold uppercase tracking-widest py-3 px-4 rounded-xl transition-all ${location.pathname === l.path
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
                     }`}
@@ -115,7 +115,7 @@ export default function Navbar() {
               ))}
               <Link
                 to="/contact"
-                className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest text-center mt-1 py-3 rounded-xl shadow-lg shadow-primary/20"
+                className="bg-primary text-primary-foreground text-sm font-bold uppercase tracking-widest text-center mt-2 py-3.5 rounded-xl shadow-lg shadow-primary/20"
               >
                 CONTACT US
               </Link>

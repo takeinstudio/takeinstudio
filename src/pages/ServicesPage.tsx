@@ -290,7 +290,7 @@ export default function ServicesPage() {
                         <Link
                           key={i}
                           to={btn.url}
-                          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs rounded-xl font-bold transition-all duration-300 ${
+                          className={`flex-1 flex items-center justify-center gap-1.5 py-3.5 text-sm sm:text-xs rounded-xl font-bold transition-all duration-300 ${
                             btn.variant === 'primary' 
                               ? 'bg-primary text-primary-foreground hover:opacity-90 shadow-sm shadow-primary/20' 
                               : 'bg-card border border-border text-foreground hover:bg-muted'
@@ -329,7 +329,7 @@ export default function ServicesPage() {
             </AnimatedSection>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {websiteTypes.map((type, idx) => {
               const Icon = type.icon;
               return (
@@ -366,9 +366,9 @@ export default function ServicesPage() {
           <div className="flex flex-wrap justify-center gap-2.5 max-w-5xl mx-auto">
             {institutions.map((inst, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.05}>
-                <div className="px-4 py-2 rounded-full border border-border/50 bg-card hover:border-primary/50 hover:bg-primary/5 transition-colors flex items-center gap-1.5 shadow-sm">
+                <div className="px-5 py-2.5 rounded-full border border-border/50 bg-card hover:border-primary/50 hover:bg-primary/5 transition-colors flex items-center gap-1.5 shadow-sm">
                   <Building className="w-3.5 h-3.5 text-primary" />
-                  <span className="font-medium text-xs">{inst}</span>
+                  <span className="font-medium text-sm sm:text-xs">{inst}</span>
                 </div>
               </AnimatedSection>
             ))}

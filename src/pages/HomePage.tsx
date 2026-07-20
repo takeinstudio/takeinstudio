@@ -133,13 +133,13 @@ function Hero() {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4">
               <Link
                 to="/contact"
-                className="w-full sm:w-auto glow-btn bg-primary text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto glow-btn bg-primary text-white text-sm sm:text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Start Your Project <ArrowRight size={16} />
               </Link>
               <Link
                 to="/work"
-                className="w-full sm:w-auto bg-white border border-gray-200 text-gray-900 text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
+                className="w-full sm:w-auto bg-white border border-gray-200 text-gray-900 text-sm sm:text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
               >
                 View Portfolio
               </Link>
@@ -174,22 +174,22 @@ function Hero() {
             </motion.div>
 
             {/* Floating Stat Cards - Mobile Grid View */}
-            <div className="z-20 grid grid-cols-2 gap-3 w-full sm:hidden mt-8 px-2">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <h3 className="font-display text-2xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
-                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
+            <div className="z-20 grid grid-cols-2 gap-4 w-full sm:hidden mt-8 px-2">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Projects Delivered</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <h3 className="font-display text-2xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
-                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider mt-1">Industries Served</p>
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
+                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Industries Served</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <Award size={28} className="text-gray-800" strokeWidth={2.5} />
-                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider mt-2">Client-Focused Delivery</p>
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
+                <Award size={32} className="text-gray-800" strokeWidth={2.5} />
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-3">Client-Focused</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <Settings size={28} className="text-gray-800" strokeWidth={2.5} />
-                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider mt-2">Ongoing Technical Support</p>
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
+                <Settings size={32} className="text-gray-800" strokeWidth={2.5} />
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-3">Technical Support</p>
               </div>
             </div>
 
@@ -255,10 +255,10 @@ function TechnologyShowcase() {
           {techStack.map((tech, i) => (
             <div
               key={i}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-1 transition-all duration-300 cursor-default group"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-1 transition-all duration-300 cursor-default group"
             >
-              <tech.icon size={16} className="text-gray-400 group-hover:text-primary transition-colors" />
-              <span className="text-xs font-bold text-gray-600 group-hover:text-gray-900 transition-colors">{tech.name}</span>
+              <tech.icon size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
+              <span className="text-sm sm:text-xs font-bold text-gray-600 group-hover:text-gray-900 transition-colors">{tech.name}</span>
             </div>
           ))}
         </div>
@@ -470,9 +470,9 @@ function Services() {
             <Link 
               key={s.title} 
               to={s.path} 
-              className={`sticky min-h-[280px] bg-card border border-border/50 rounded-3xl p-6 shadow-2xl flex flex-col overflow-hidden transition-transform will-change-transform`}
+              className={`sticky min-h-[300px] bg-card border border-border/50 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col overflow-hidden transition-transform will-change-transform`}
               style={{
-                top: `${96 + (i * 20)}px`, // Staggers the stick position so they stack on top of each other
+                top: `${96 + (i * 12)}px`, // Staggers the stick position so they stack on top of each other
                 zIndex: i + 10,
               }}
             >

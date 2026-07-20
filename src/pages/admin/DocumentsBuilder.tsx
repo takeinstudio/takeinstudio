@@ -229,12 +229,12 @@ export default function DocumentsBuilder() {
           `}} />
 
           {/* PAGE 1 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-10 pb-6">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 px-10 pt-6 pb-6">
             
             {/* Header */}
             <div className="text-center relative overflow-hidden mb-10 pt-2">
                 <div className="flex justify-center mb-5">
-                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-16 object-contain drop-shadow-sm" />
+                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-24 object-contain drop-shadow-sm" />
                 </div>
 
                 <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
@@ -411,7 +411,7 @@ export default function DocumentsBuilder() {
               </div>
           </div>
 
-          <div className="page-break"></div>
+          <div className="html2pdf__page-break"></div>
 
           {/* PAGE 3 */}
           <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col">

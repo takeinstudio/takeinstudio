@@ -8,6 +8,7 @@ export default function EmailCenterBuilder() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     identity: "support", // "support" or "noreply"
+    recipientType: "single",
     to: "",
     subject: "",
     body: ""
@@ -148,10 +149,12 @@ export default function EmailCenterBuilder() {
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5">Recipient Type</label>
                   <select 
-                    disabled
-                    className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border/60 text-sm text-muted-foreground cursor-not-allowed"
+                    value={form.recipientType}
+                    onChange={update("recipientType")}
+                    className="w-full px-4 py-2.5 rounded-xl bg-background border border-border/60 text-sm focus:outline-none focus:border-primary/50"
                   >
-                    <option>Single Email</option>
+                    <option value="single">Single Email</option>
+                    <option value="multiple">Multiple Emails</option>
                   </select>
                 </div>
               </div>
@@ -159,11 +162,11 @@ export default function EmailCenterBuilder() {
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5">To (Recipient Email)</label>
                 <input 
-                  type="email"
+                  type={form.recipientType === "multiple" ? "text" : "email"}
                   required
                   value={form.to}
                   onChange={update("to")}
-                  placeholder="customer@example.com"
+                  placeholder={form.recipientType === "multiple" ? "client1@example.com, client2@example.com" : "customer@example.com"}
                   className="w-full px-4 py-2.5 rounded-xl bg-background border border-border/60 text-sm focus:outline-none focus:border-primary/50"
                 />
               </div>

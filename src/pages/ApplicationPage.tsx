@@ -212,9 +212,6 @@ export default function ApplicationPage() {
                   <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Employment Type <span className="text-red-500">*</span></label>
                   <select required value={formData.employmentType} onChange={e => setFormData({...formData, employmentType: e.target.value})} className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-primary focus:border-primary block p-3 outline-none transition-all appearance-none cursor-pointer">
                     <option value="" disabled>Select type...</option>
-                    <option value="Full Time">Full Time</option>
-                    <option value="Part Time">Part Time</option>
-                    <option value="Internship">Internship</option>
                     <option value="Freelance / Contract">Freelance / Contract</option>
                     <option value="Commission Based">Commission Based</option>
                   </select>

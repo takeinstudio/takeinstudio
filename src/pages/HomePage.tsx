@@ -85,163 +85,195 @@ function Hero() {
   const heroTitle = getText('home_hero_title', '');
   const heroSubtitle = getText('home_hero_subtitle', '');
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } },
-  };
-
   return (
-    <section className="relative w-full min-h-[85vh] sm:min-h-[calc(100vh-80px)] pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white flex items-center border-b border-border/20">
+    <section className="relative w-full pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-white flex flex-col">
+      {/* Social Side Dock (Fixed on Desktop) */}
+      <div className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-3 bg-white/80 backdrop-blur-md p-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white">
+        <a href="https://wa.me/918908233590" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://instagram.com/takeinstudio" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+        <a href="mailto:xpertenzo.in@gmail.com" className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><Mail size={18} /></a>
+        <a href="tel:+918908233590" className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.007.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.082-1.026-3.492-6.817-2.106 1.039c-2.617 1.29-6.22 8.528 2.247 12.632 8.527 4.133 13.064-.972 13.064-.972l-1.601-.078z"/></svg></a>
+      </div>
 
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] z-0" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-amber-500/5 blur-[150px] rounded-full pointer-events-none z-0 animate-pulse" style={{ animationDuration: '8s' }} />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-
+      {/* Ambient Glow Effects */}
+      <div className="absolute top-0 left-[-10%] w-[600px] h-[600px] bg-orange-100/40 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[700px] h-[700px] bg-amber-50/60 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-[1400px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-4 items-center">
+          
           {/* Left Content */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col items-start text-left space-y-6 lg:pr-10"
-          >
-            <motion.div variants={itemVariants}>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest shadow-sm">
-                <Rocket size={14} className="text-primary" /> Premium Digital Agency
-              </span>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              {heroTitle ? (
-                <h1 className="font-display text-[2.5rem] sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-gray-900">
+          <div className="flex flex-col items-start text-left space-y-7 lg:pr-10">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 text-gray-700 text-[11px] font-bold tracking-widest shadow-[0_2px_10px_rgba(0,0,0,0.05)] uppercase">
+                <Rocket size={14} className="text-[#ff6b00]" /> PREMIUM DIGITAL AGENCY
+             </div>
+             
+             {heroTitle ? (
+                <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tight text-gray-900">
                   {heroTitle}
                 </h1>
-              ) : (
-                <h1 className="font-display text-[2.5rem] sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-gray-900">
-                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">Web Development & App Design</span> Agency in Bhubaneswar
+             ) : (
+                <h1 className="font-display text-[2.75rem] sm:text-6xl lg:text-[4.5rem] font-black leading-[1.05] tracking-tight text-gray-900">
+                  We Build Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b00] to-[#ffa000]">Experiences</span> that Drive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b00] to-[#ffa000]">Real Growth</span>
                 </h1>
-              )}
-            </motion.div>
+             )}
 
-            <motion.div variants={itemVariants}>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed font-medium max-w-lg">
-                {heroSubtitle || "Websites, mobile apps, AI automation, branding, and custom software designed to improve visibility, streamline operations, and create measurable business impact."}
-              </p>
-            </motion.div>
+             <p className="text-gray-500 text-base sm:text-lg leading-relaxed font-medium max-w-[90%]">
+                {heroSubtitle || "From high-performing websites and mobile apps to custom software, AI automation, and powerful branding — we create digital solutions that help your business stand out and scale faster."}
+             </p>
 
-            {/* Trust Indicators */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2 pb-2">
-              {["Business-Focused Solutions", "Modern Technology Stack", "Scalable Architecture", "Long-Term Support"].map((trust, i) => (
-                <span key={i} className="flex items-center gap-1.5 text-xs font-bold text-gray-700">
-                  <CheckCircle2 size={14} className="text-primary" /> {trust}
-                </span>
-              ))}
-            </motion.div>
+             <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2 pb-4">
+                {["Custom Solutions", "Reliable & Secure", "Scalable & Future-Ready", "24/7 Support"].map((trust, i) => (
+                  <span key={i} className="flex items-center gap-1.5 text-[13px] font-bold text-gray-700">
+                    <CheckCircle2 size={16} className="text-[#ff6b00]" /> {trust}
+                  </span>
+                ))}
+             </div>
 
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4">
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto glow-btn bg-primary text-white text-sm sm:text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                Start Your Project <ArrowRight size={16} />
-              </Link>
-              <Link
-                to="/work"
-                className="w-full sm:w-auto bg-white border border-gray-200 text-gray-900 text-sm sm:text-xs font-black uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
-              >
-                View Portfolio
-              </Link>
-            </motion.div>
+             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+               <Link to="/contact" className="w-full sm:w-auto bg-[#ff6b00] text-white text-sm font-bold px-8 py-4 rounded-full shadow-[0_8px_20px_rgba(255,107,0,0.3)] hover:shadow-[0_12px_25px_rgba(255,107,0,0.4)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                 Start Your Project <ArrowRight size={16} />
+               </Link>
+               <Link to="/work" className="w-full sm:w-auto bg-white border border-gray-200 text-gray-800 text-sm font-bold px-8 py-4 rounded-full hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
+                 View Our Work <ArrowUpRight size={16} />
+               </Link>
+             </div>
+          </div>
 
-            <motion.div variants={itemVariants}>
-              <p className="text-gray-500 text-[10px] sm:text-[11px] font-medium pt-2 flex items-center gap-2">
-                <ShieldCheck size={14} className="text-green-500" /> Helping businesses build stronger digital experiences and smarter workflows.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Side Visual */}
-          <div className="relative w-full flex items-center justify-center sm:min-h-[400px] lg:min-h-[550px] mt-10 lg:mt-0">
-            {/* Ambient Glow behind Logo - Desktop Only for Performance */}
-            <motion.div
-              animate={{ rotate: 360, scale: [1, 1.05, 1] }}
-              transition={{ rotate: { duration: 15, repeat: Infinity, ease: "linear" }, scale: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-              className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0 hidden sm:block"
-            />
+          {/* Right Side Visual (Mockups & Floating Cards) */}
+          <div className="relative w-full h-[500px] lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
             
-            {/* Static Ambient Glow for Mobile */}
-            <div className="absolute w-[280px] h-[280px] bg-primary/10 rounded-full blur-[80px] pointer-events-none z-0 sm:hidden" />
+            {/* The CSS Laptop Mockup */}
+            <div className="relative z-10 w-[95%] max-w-[550px] aspect-[16/10] bg-[#1a1a1a] rounded-t-xl rounded-b-sm border-4 border-gray-800 shadow-[0_30px_60px_rgba(0,0,0,0.4)] overflow-hidden flex flex-col transform lg:translate-x-4">
+               {/* Top Bar */}
+               <div className="h-6 bg-[#0f0f0f] w-full flex items-center px-3 gap-1.5">
+                 <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                 <div className="flex-1" />
+                 <div className="w-32 h-3 bg-gray-800 rounded-full" />
+               </div>
+               {/* Screen Content */}
+               <div className="flex-1 w-full bg-[#111111] p-6 lg:p-8 flex flex-col justify-center relative overflow-hidden">
+                 <div className="absolute top-6 left-6 flex items-center gap-2">
+                   <div className="w-6 h-6 rounded bg-[#ff6b00]" />
+                   <div className="text-white font-display font-bold text-sm tracking-widest">TakeIN Studio</div>
+                 </div>
+                 <div className="absolute top-6 right-6 hidden sm:flex gap-4 opacity-50 text-[8px] uppercase tracking-widest text-white font-bold">
+                    <span>Home</span><span>About</span><span>Services</span><span>Portfolio</span><span className="bg-[#ff6b00] px-2 py-0.5 rounded text-white opacity-100">Contact</span>
+                 </div>
 
-            {/* Central Logo - Hidden on Mobile */}
-            <motion.div
-              animate={{ y: [-8, 8, -8] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-48 sm:w-64 hidden sm:block"
+                 <h2 className="text-white text-3xl lg:text-5xl font-black mt-8 leading-tight tracking-tight">WE DESIGN.<br/>WE BUILD.<br/><span className="text-[#ff6b00]">WE GROW.</span></h2>
+                 <p className="text-gray-400 text-[10px] lg:text-xs mt-3 max-w-[60%]">Your Vision. Our Code. Real Results.</p>
+                 <div className="w-24 h-8 bg-[#ff6b00] text-white text-[10px] font-bold rounded mt-6 flex items-center justify-center">Get Started</div>
+                 
+                 {/* Abstract BG code/tech elements */}
+                 <div className="absolute right-[-10%] bottom-[-10%] opacity-[0.03] pointer-events-none transform -rotate-12 scale-150">
+                    <Code2 size={250} />
+                 </div>
+               </div>
+               {/* Laptop Base Keyboard Deck */}
+               <div className="absolute bottom-[-20px] left-[-6%] right-[-6%] h-5 bg-gradient-to-b from-gray-300 to-gray-400 rounded-b-2xl shadow-xl border-t border-gray-200 z-20 flex items-start justify-center">
+                  <div className="w-24 h-2 bg-gray-200 rounded-b-md" />
+               </div>
+            </div>
+
+            {/* The CSS Mobile Mockup */}
+            <motion.div 
+               animate={{ y: [-8, 8, -8] }} 
+               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+               className="absolute z-30 right-[2%] sm:right-[5%] bottom-[5%] lg:bottom-[10%] w-[130px] lg:w-[150px] aspect-[9/19] bg-[#0a0a0a] rounded-[2.5rem] border-[6px] border-[#222] shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
             >
-              <img src="/logo/logo_text.png" alt="TakeIN Studio" className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(255,107,0,0.2)] mix-blend-multiply" />
+               {/* Notch */}
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-4 bg-[#222] rounded-b-xl z-30" />
+               <div className="flex-1 bg-[#111] p-4 pt-10 flex flex-col items-center text-center relative">
+                 <div className="text-[#ff6b00] text-[8px] font-bold uppercase tracking-widest mb-2">Award-Winning</div>
+                 <p className="text-white text-[14px] font-black leading-tight">Driving Growth Through <span className="text-[#ff6b00]">Digital</span> Excellence</p>
+                 <p className="text-gray-500 text-[7px] mt-2 leading-relaxed">We build fast, secure and scalable digital products that grow with your business.</p>
+                 <div className="w-full h-7 bg-[#ff6b00] rounded text-white text-[8px] font-bold flex items-center justify-center mt-4">Get Started</div>
+                 
+                 <div className="mt-auto grid grid-cols-3 gap-2 w-full pt-4 border-t border-gray-800">
+                    <div className="flex flex-col items-center gap-1"><Globe size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">Web Dev</span></div>
+                    <div className="flex flex-col items-center gap-1"><Smartphone size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">App Dev</span></div>
+                    <div className="flex flex-col items-center gap-1"><Bot size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">AI</span></div>
+                 </div>
+               </div>
             </motion.div>
 
-            {/* Floating Stat Cards - Mobile Grid View */}
-            <div className="z-20 grid grid-cols-2 gap-4 w-full sm:hidden mt-8 px-2">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Projects Delivered</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Industries Served</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <Award size={32} className="text-gray-800" strokeWidth={2.5} />
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-3">Client-Focused</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-5 flex flex-col items-center justify-center text-center w-full hover:scale-105 transition-transform h-full">
-                <Settings size={32} className="text-gray-800" strokeWidth={2.5} />
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-3">Technical Support</p>
-              </div>
-            </div>
+            {/* Floating Glass Cards (Like Mockup) */}
+            <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }} className="absolute -left-2 top-0 lg:-left-6 lg:top-8 z-30">
+               <div className="bg-white/90 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-2xl p-4 lg:p-5 flex items-center gap-4 min-w-[190px]">
+                 <div className="bg-orange-50 text-[#ff6b00] p-2.5 rounded-xl"><LayoutDashboard size={24} /></div>
+                 <div>
+                   <h3 className="font-black text-gray-900 text-xl leading-none">50+</h3>
+                   <p className="text-[10px] font-bold text-gray-500 mt-0.5">Projects Delivered</p>
+                 </div>
+               </div>
+            </motion.div>
 
-            {/* Floating Stat Cards - Desktop Absolute View */}
-            <div className="hidden sm:block">
-              <motion.div animate={{ y: [-5, 5, -5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute -left-2 sm:-left-4 top-10 sm:top-16 z-20">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                  <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">50+</h3>
-                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
-                </div>
-              </motion.div>
+            <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute right-0 top-[-20px] lg:right-6 lg:top-[-10px] z-0">
+               <div className="bg-white/90 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-2xl p-4 lg:p-5 flex items-center gap-4 min-w-[190px]">
+                 <div className="bg-orange-50 text-[#ff6b00] p-2.5 rounded-xl"><Monitor size={24} /></div>
+                 <div>
+                   <h3 className="font-black text-gray-900 text-xl leading-none">20+</h3>
+                   <p className="text-[10px] font-bold text-gray-500 mt-0.5">Industries Served</p>
+                 </div>
+               </div>
+            </motion.div>
 
-              <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute -right-2 sm:-right-4 top-0 sm:top-10 z-20">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                  <h3 className="font-display text-3xl font-black text-gray-900 bg-clip-text text-transparent bg-gradient-to-br from-gray-900 to-gray-600">20+</h3>
-                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-1">Industries Served</p>
-                </div>
-              </motion.div>
+            <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute -left-6 bottom-16 lg:-left-12 lg:bottom-28 z-30">
+               <div className="bg-white/90 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-2xl p-4 lg:p-5 flex items-center gap-4 min-w-[190px]">
+                 <div className="bg-orange-50 text-[#ff6b00] p-2.5 rounded-xl"><Star size={24} /></div>
+                 <div>
+                   <h3 className="font-black text-gray-900 text-xl leading-none">100%</h3>
+                   <p className="text-[10px] font-bold text-gray-500 mt-0.5">Client Satisfaction</p>
+                 </div>
+               </div>
+            </motion.div>
 
-              <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="absolute -left-0 sm:-left-4 bottom-16 sm:bottom-24 z-20">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                  <Award size={32} className="text-gray-800" strokeWidth={2.5} />
-                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Client-Focused Delivery</p>
-                </div>
-              </motion.div>
+            <motion.div animate={{ y: [4, -4, 4] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }} className="absolute right-10 bottom-[-20px] lg:right-28 lg:bottom-0 z-30">
+               <div className="bg-white/90 backdrop-blur-xl border border-white shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-2xl p-4 lg:p-5 flex items-center gap-4 min-w-[170px]">
+                 <div className="bg-orange-50 text-[#ff6b00] p-2.5 rounded-xl"><Zap size={24} /></div>
+                 <div>
+                   <h3 className="font-black text-gray-900 text-base leading-tight">On-Time</h3>
+                   <p className="text-[10px] font-bold text-gray-500 mt-0.5">Every Time</p>
+                 </div>
+               </div>
+            </motion.div>
+          </div>
+        </div>
 
-              <motion.div animate={{ y: [4, -4, 4] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }} className="absolute -right-0 sm:-right-4 bottom-8 sm:bottom-16 z-20">
-                <div className="bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center w-36 sm:w-40 hover:scale-105 transition-transform">
-                  <Settings size={32} className="text-gray-800" strokeWidth={2.5} />
-                  <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-2">Ongoing Technical Support</p>
-                </div>
-              </motion.div>
-            </div>
+        {/* Stats Banner below Hero */}
+        <div className="mt-20 lg:mt-32 border-y border-gray-100 py-10 bg-white shadow-[0_10px_50px_rgba(0,0,0,0.02)] rounded-3xl mx-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 border-r border-gray-100 last:border-0 text-center sm:text-left">
+                <Users size={36} className="text-[#ff6b00]" />
+                <div><h3 className="font-black text-3xl text-gray-900">150+</h3><p className="text-xs font-bold text-gray-500 mt-1">Happy Clients</p></div>
+             </div>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 border-r border-gray-100 last:border-0 text-center sm:text-left">
+                <FolderKanban size={36} className="text-[#ff6b00]" />
+                <div><h3 className="font-black text-3xl text-gray-900">250+</h3><p className="text-xs font-bold text-gray-500 mt-1">Projects Completed</p></div>
+             </div>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 border-r border-gray-100 last:border-0 text-center sm:text-left">
+                <Award size={36} className="text-[#ff6b00]" />
+                <div><h3 className="font-black text-3xl text-gray-900">5+</h3><p className="text-xs font-bold text-gray-500 mt-1">Years Experience</p></div>
+             </div>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+                <Star size={36} className="text-[#ff6b00] fill-[#ff6b00]" />
+                <div><h3 className="font-black text-3xl text-gray-900">4.9/5</h3><p className="text-xs font-bold text-gray-500 mt-1">Client Ratings</p></div>
+             </div>
+          </div>
+        </div>
+
+        {/* Trusted By Ticker */}
+        <div className="mt-16 text-center overflow-hidden w-full max-w-5xl mx-auto pb-10">
+          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-10">Trusted By Businesses</p>
+          <div className="flex items-center justify-center gap-8 sm:gap-16 opacity-60 flex-wrap sm:flex-nowrap grayscale hover:grayscale-0 transition-all duration-500">
+             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white text-xs">U</div> UTKAL</span>
+             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Globe size={28}/> EduSmart</span>
+             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Zap size={28}/> FITZONE</span>
+             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Monitor size={28}/> TechNova</span>
           </div>
         </div>
       </div>

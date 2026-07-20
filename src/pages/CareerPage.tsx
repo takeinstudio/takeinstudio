@@ -49,36 +49,38 @@ export default function CareerPage() {
       />
 
       {/* Hero Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-8 pt-24 sm:pt-32 relative overflow-hidden">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 pt-28 sm:pt-36 relative overflow-hidden bg-[#0A0A0A]">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-primary/10 blur-[100px] rounded-full" />
-          <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-orange-600/10 blur-[120px] rounded-full mix-blend-screen" />
         </div>
 
         <div className="container mx-auto text-center max-w-4xl relative z-10">
           <AnimatedSection>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-semibold tracking-wider uppercase mb-6 shadow-sm border border-primary/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white text-[11px] font-bold tracking-widest uppercase mb-8 shadow-2xl">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
               Join TakeIN Studio
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-foreground">
+            </div>
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 text-white tracking-tight">
               Work on Real Projects.<br className="hidden sm:block" />
-              <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80"> Build Real Skills.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-yellow-500"> Build Real Skills.</span>
             </h1>
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 font-medium">
-              We're always interested in meeting talented developers, designers, marketers, and creators who want to work on meaningful digital products.
+            <p className="text-gray-400 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-12 font-medium">
+              We're always interested in meeting talented developers, designers, marketers, and creators who want to build the future of digital products.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/apply"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-primary text-white font-bold tracking-wide hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-white font-bold tracking-wide hover:shadow-[0_0_40px_-10px_rgba(255,87,34,0.6)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
               >
-                Apply Now <ArrowRight size={18} />
+                View Open Roles <ArrowRight size={18} />
               </Link>
               <a
                 href="mailto:takeinstudio@gmail.com"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-foreground border border-border shadow-sm font-bold tracking-wide hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 backdrop-blur-md text-white border border-white/10 shadow-lg font-bold tracking-wide hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 career@takeinstudio.com
               </a>
@@ -175,45 +177,50 @@ export default function CareerPage() {
             ) : (
               jobs.map((job, idx) => (
                 <AnimatedSection key={job.id} delay={idx * 0.08}>
-                  <div className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-border hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 p-6 transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        <Briefcase size={20} />
-                      </div>
-                      <div>
-                        <h3 className="font-display font-bold text-lg text-foreground mb-1">{job.title}</h3>
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground font-medium">
-                          {job.department && (
-                            <span className="flex items-center gap-1">
-                              <Building size={12} /> {job.department}
-                            </span>
-                          )}
-                          {job.location && (
-                            <span className="flex items-center gap-1">
-                              <MapPin size={12} /> {job.location}
-                            </span>
-                          )}
-                          {job.type && (
-                            <span className="flex items-center gap-1">
-                              <Clock size={12} /> {job.type}
-                            </span>
-                          )}
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            {job.status || "Open"}
-                          </span>
+                  <div className="group relative bg-white rounded-2xl border border-gray-100 hover:border-transparent p-6 sm:p-8 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+                    <div className="absolute inset-0 rounded-2xl border-2 border-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                    
+                    <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-6 z-10">
+                      <div className="flex items-start gap-5">
+                        <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 flex-shrink-0 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-500 shadow-sm">
+                          <Briefcase size={24} />
                         </div>
-                        {job.description && (
-                          <p className="text-muted-foreground text-sm mt-2 leading-relaxed max-w-xl line-clamp-2">{job.description}</p>
-                        )}
+                        <div>
+                          <h3 className="font-display font-bold text-xl text-gray-900 mb-2 group-hover:text-primary transition-colors">{job.title}</h3>
+                          <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 font-medium mb-3">
+                            {job.department && (
+                              <span className="flex items-center gap-1 bg-gray-50 px-2.5 py-1 rounded-md">
+                                <Building size={12} /> {job.department}
+                              </span>
+                            )}
+                            {job.location && (
+                              <span className="flex items-center gap-1 bg-gray-50 px-2.5 py-1 rounded-md">
+                                <MapPin size={12} /> {job.location}
+                              </span>
+                            )}
+                            {job.type && (
+                              <span className="flex items-center gap-1 bg-gray-50 px-2.5 py-1 rounded-md">
+                                <Clock size={12} /> {job.type}
+                              </span>
+                            )}
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-widest border border-green-100">
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                              {job.status || "Open"}
+                            </span>
+                          </div>
+                          {job.description && (
+                            <p className="text-gray-600 text-sm leading-relaxed max-w-2xl line-clamp-2">{job.description}</p>
+                          )}
+                        </div>
                       </div>
+                      <Link
+                        to="/apply"
+                        className="flex-shrink-0 px-6 py-3 rounded-xl bg-gray-900 text-white text-sm font-bold opacity-100 sm:opacity-0 sm:-translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:bg-primary group-hover:shadow-[0_0_20px_-5px_rgba(255,87,34,0.5)] transition-all duration-300 flex items-center gap-2"
+                      >
+                        Apply Now <ArrowRight size={16} />
+                      </Link>
                     </div>
-                    <Link
-                      to="/apply"
-                      className="flex-shrink-0 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-bold hover:shadow-md hover:shadow-primary/30 hover:-translate-y-0.5 transition-all flex items-center gap-2"
-                    >
-                      Apply <ArrowRight size={15} />
-                    </Link>
                   </div>
                 </AnimatedSection>
               ))
@@ -223,19 +230,24 @@ export default function CareerPage() {
       </section>
 
 
-      {/* Why Choose Us */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-muted/20">
+      {/* Why Choose Us (Bento Box) */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24 bg-gray-50/50">
         <div className="container mx-auto max-w-6xl">
           <SectionHeading badge="Why TakeIN" title="Why Join Us?" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             {whyChooseUs.map((perk, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.1}>
-                <div className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 h-full group">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <perk.icon size={22} />
+              <AnimatedSection 
+                key={idx} 
+                delay={idx * 0.1}
+                className={idx === 0 || idx === 3 ? "md:col-span-2" : "md:col-span-1"}
+              >
+                <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-500 h-full group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/5 to-transparent rounded-bl-full group-hover:scale-150 transition-transform duration-700" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-orange-500/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(255,87,34,0.4)] transition-all duration-500 relative z-10">
+                    <perk.icon size={26} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display font-bold text-lg mb-2 text-foreground">{perk.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{perk.desc}</p>
+                  <h3 className="font-display font-bold text-2xl mb-3 text-gray-900 relative z-10">{perk.title}</h3>
+                  <p className="text-gray-500 text-base leading-relaxed relative z-10">{perk.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -243,25 +255,28 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Hiring Process */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      {/* Hiring Process (Connected Timeline) */}
+      <section className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 overflow-hidden">
         <div className="container mx-auto max-w-5xl text-center">
           <SectionHeading badge="Simple & Transparent" title="Application Process" />
 
-          <div className="relative mt-16 max-w-4xl mx-auto">
-            <div className="hidden md:block absolute top-6 left-0 w-full h-1 bg-muted z-0 rounded-full overflow-hidden">
-              <div className="h-full bg-primary/20 w-full" />
+          <div className="relative mt-20 max-w-4xl mx-auto">
+            {/* Animated Connecting Line */}
+            <div className="hidden md:block absolute top-8 left-0 w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-primary via-orange-400 to-yellow-500 w-[80%] opacity-50" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 relative z-10">
+            
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-4 relative z-10">
               {hiringProcess.map((item, idx) => (
                 <AnimatedSection key={idx} delay={idx * 0.1}>
-                  <div className="flex flex-col items-center gap-4 group">
-                    <div className="w-12 h-12 rounded-full bg-white border-4 border-muted flex items-center justify-center text-foreground font-bold font-display group-hover:border-primary group-hover:text-primary transition-colors shadow-sm">
-                      {idx + 1}
+                  <div className="flex flex-col items-center gap-5 group">
+                    <div className="w-16 h-16 rounded-2xl bg-white border-2 border-gray-100 shadow-lg flex items-center justify-center text-gray-400 font-bold font-display text-xl group-hover:border-primary group-hover:text-primary group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_-15px_rgba(255,87,34,0.3)] transition-all duration-500 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-primary/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                      <span className="relative z-10">0{idx + 1}</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-foreground leading-tight mb-1">{item.step}</h4>
-                      <p className="text-[11px] text-muted-foreground leading-snug px-2">{item.desc}</p>
+                      <h4 className="font-bold text-base text-gray-900 leading-tight mb-2 group-hover:text-primary transition-colors">{item.step}</h4>
+                      <p className="text-xs text-gray-500 leading-relaxed px-2">{item.desc}</p>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -272,30 +287,31 @@ export default function CareerPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div className="container mx-auto max-w-4xl">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24 pb-32">
+        <div className="container mx-auto max-w-5xl">
           <AnimatedSection>
-            <div className="relative rounded-3xl overflow-hidden bg-primary px-6 py-12 sm:p-16 text-center text-white shadow-2xl">
-              <div className="absolute inset-0 bg-[url('/dots.svg')] opacity-10" />
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] rounded-full" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 blur-[80px] rounded-full" />
-              <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-                <h2 className="font-display text-3xl sm:text-4xl font-bold">Ready to Apply?</h2>
-                <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-8 font-medium">
-                  We're always open to connecting with talented individuals.
+            <div className="relative rounded-[2.5rem] overflow-hidden bg-[#0A0A0A] px-6 py-16 sm:p-20 text-center shadow-2xl border border-white/5">
+              <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.05] mix-blend-overlay" />
+              <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 blur-[100px] rounded-full mix-blend-screen" />
+              <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-600/20 blur-[100px] rounded-full mix-blend-screen" />
+              
+              <div className="relative z-10 max-w-3xl mx-auto space-y-8">
+                <h2 className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">Ready to Build the Future?</h2>
+                <p className="text-gray-400 text-lg sm:text-xl leading-relaxed mb-10 font-medium">
+                  We're always open to connecting with talented individuals who want to create meaningful impact.
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                   <Link
                     to="/apply"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-primary font-bold tracking-wide hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-primary to-orange-500 text-white font-bold text-lg tracking-wide hover:shadow-[0_0_40px_-10px_rgba(255,87,34,0.6)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 border border-white/10"
                   >
-                    Apply Now <ArrowRight size={18} />
+                    Apply Now <ArrowRight size={20} />
                   </Link>
                   <a
                     href="mailto:takeinstudio@gmail.com"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-transparent border-2 border-white/30 text-white font-bold tracking-wide hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-10 py-4 rounded-xl bg-white/5 backdrop-blur-md text-white border border-white/10 font-bold text-lg tracking-wide hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    career@takeinstudio.com
+                    <Mail size={20} /> career@takeinstudio.com
                   </a>
                 </div>
               </div>

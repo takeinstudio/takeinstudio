@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import SEO from "@/components/SEO";
-import AdBanner from "@/components/AdBanner";
 
 export const servicesData = [
   {
@@ -214,7 +213,10 @@ export default function ServicesPage() {
             offerings: typeof s.offerings === 'string' ? JSON.parse(s.offerings || '[]') : (s.offerings || []),
             buttons: typeof s.buttons === 'string' ? JSON.parse(s.buttons || '[]') : (s.buttons || [])
           }));
-          setDbServices(parsed);
+          const uniqueServices = parsed.filter((service, index, self) => 
+            index === self.findIndex((s) => s.title === service.title)
+          );
+          setDbServices(uniqueServices);
         }
       } catch (err) {
         console.error("Failed to fetch services", err);
@@ -303,18 +305,6 @@ export default function ServicesPage() {
               </AnimatedSection>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Ads Section */}
-      <section className="py-8 bg-background border-y border-border/50">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <AdBanner id="b7df7a2635ab450a063af8a02534c2b4" width={300} height={250} />
-            <div className="hidden md:block">
-              <AdBanner id="ca2408be7922173e512a45455a5ba575" width={160} height={300} />
-            </div>
           </div>
         </div>
       </section>

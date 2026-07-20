@@ -105,10 +105,10 @@ export default function EmailCenterBuilder() {
       {/* Mock Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         {[
-          { label: "Sent Today", value: "12", icon: Calendar, color: "text-blue-500", bg: "bg-blue-500/10" },
-          { label: "Sent This Month", value: "148", icon: Send, color: "text-purple-500", bg: "bg-purple-500/10" },
-          { label: "Success Rate", value: "99.8%", icon: CheckCircle2, color: "text-green-500", bg: "bg-green-500/10" },
-          { label: "Failed Deliveries", value: "1", icon: XCircle, color: "text-red-500", bg: "bg-red-500/10" },
+          { label: "Sent Today", value: "0", icon: Calendar, color: "text-blue-500", bg: "bg-blue-500/10" },
+          { label: "Sent This Month", value: "0", icon: Send, color: "text-purple-500", bg: "bg-purple-500/10" },
+          { label: "Success Rate", value: "0%", icon: CheckCircle2, color: "text-green-500", bg: "bg-green-500/10" },
+          { label: "Failed Deliveries", value: "0", icon: XCircle, color: "text-red-500", bg: "bg-red-500/10" },
         ].map((stat, i) => (
           <AnimatedSection key={i} delay={i * 0.1}>
             <div className="bg-card border border-border/50 p-5 rounded-2xl flex items-center gap-4">

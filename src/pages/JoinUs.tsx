@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Star, CheckCircle2, Users, Rocket, Palette } from "lucide-react";
 import SEO from "@/components/SEO";
+import { useState, useEffect } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -27,6 +28,14 @@ export default function JoinUs() {
     offset: ["start start", "end end"]
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
@@ -38,8 +47,12 @@ export default function JoinUs() {
       />
 
       {/* Floating Blobs */}
-      <motion.div style={{ y: y1 }} className="absolute top-20 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-blob" />
-      <motion.div style={{ y: y2 }} className="absolute bottom-40 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-blob-delayed" />
+      {!isMobile && (
+        <>
+          <motion.div style={{ y: y1 }} className="absolute top-20 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-blob" />
+          <motion.div style={{ y: y2 }} className="absolute bottom-40 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-blob-delayed" />
+        </>
+      )}
 
       {/* Hero */}
       <section className="section-padding pt-40 relative z-10">

@@ -36,6 +36,7 @@ const defaultFaqs = [
   }
 ];
 
+import { useState, useEffect } from "react";
 function ParallaxOrb({
   className,
   yRange = [-80, 80],
@@ -48,6 +49,16 @@ function ParallaxOrb({
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], yRange);
   const r = useTransform(scrollY, [0, 1000], rotateRange);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) return null;
 
   return (
     <motion.div

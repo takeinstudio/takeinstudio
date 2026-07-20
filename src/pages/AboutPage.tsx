@@ -6,6 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import SEO from "@/components/SEO";
 import { useContent } from "@/context/ContentContext";
 
+import { useState, useEffect } from "react";
 /* ─── Parallax Scrolling Components ─── */
 function ParallaxOrb({
   className,
@@ -19,6 +20,16 @@ function ParallaxOrb({
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], yRange);
   const r = useTransform(scrollY, [0, 1000], rotateRange);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) return null;
 
   return (
     <motion.div
@@ -42,6 +53,16 @@ function ParallaxShape({
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1500], yRange);
   const r = useTransform(scrollY, [0, 1500], rotateRange);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) return null;
 
   return (
     <motion.div

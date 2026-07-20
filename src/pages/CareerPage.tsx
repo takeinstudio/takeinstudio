@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
-  Rocket, Lightbulb, Users, Globe,
-  MapPin, Clock, ArrowRight, CheckCircle2,
-  HeartHandshake, Sparkles, BookOpen, ChevronDown, Code, PenTool, Layout, Video, Mail, ShieldCheck, FileText,
-  Briefcase, Check, Building
+  Globe, Users, Code, Mail, FileText, Building, MapPin, Clock, ArrowRight, Briefcase, Zap
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import SEO from "@/components/SEO";
+import { supabase } from "@/lib/supabase";
 
 const whyChooseUs = [
   { icon: Building, title: "Real Client Work", desc: "Work on websites, applications, AI solutions, branding projects, and business systems used by actual clients." },
@@ -25,12 +24,28 @@ const hiringProcess = [
 ];
 
 export default function CareerPage() {
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [loadingJobs, setLoadingJobs] = useState(true);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const { data } = await supabase
+        .from("jobs")
+        .select("*")
+        .eq("status", "Open")
+        .order("created_at", { ascending: false });
+      setJobs(data || []);
+      setLoadingJobs(false);
+    };
+    fetchJobs();
+  }, []);
+
   return (
     <>
-      <SEO 
-        title="Careers" 
-        description="Explore career opportunities, internships, and growth-focused roles at TakeIN Studio. Join our team of developers, designers, marketers, and creators." 
-        canonical="https://takeinstudio.com/careers"
+      <SEO
+        title="Careers at TakeIN Studio | Web & App Development Jobs Bhubaneswar"
+        description="Explore career opportunities, internships, and growth-focused roles at TakeIN Studio. Join our team of developers, designers, marketers, and creators in Bhubaneswar."
+        canonical="https://takeinstudio.com/career"
       />
 
       {/* Hero Section */}
@@ -72,8 +87,80 @@ export default function CareerPage() {
         </div>
       </section>
 
+      {/* ── OPEN POSITIONS (Live from Supabase) ── */}
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-white border-t border-b border-border/50">
+        <div className="container mx-auto max-w-5xl">
+          <SectionHeading badge="Now Hiring" title="Open Positions" subtitle="All roles are remote-friendly. Apply once — our team reviews every submission." />
+
+          <div className="mt-12 space-y-4">
+            {loadingJobs ? (
+              <div className="text-center py-16 text-muted-foreground">
+                <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-sm font-medium">Loading positions...</p>
+              </div>
+            ) : jobs.length === 0 ? (
+              <AnimatedSection>
+                <div className="text-center py-16 bg-muted/30 rounded-2xl border border-border/50">
+                  <Briefcase size={40} className="text-muted-foreground mx-auto mb-4 opacity-50" />
+                  <h3 className="font-display font-bold text-lg mb-2">No Open Positions Right Now</h3>
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto">
+                    We're not actively hiring at the moment, but we're always open to great talent.
+                    Send us your portfolio at <strong>career@takeinstudio.com</strong>
+                  </p>
+                </div>
+              </AnimatedSection>
+            ) : (
+              jobs.map((job, idx) => (
+                <AnimatedSection key={job.id} delay={idx * 0.08}>
+                  <div className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-border hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 p-6 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <Briefcase size={20} />
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold text-lg text-foreground mb-1">{job.title}</h3>
+                        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground font-medium">
+                          {job.department && (
+                            <span className="flex items-center gap-1">
+                              <Building size={12} /> {job.department}
+                            </span>
+                          )}
+                          {job.location && (
+                            <span className="flex items-center gap-1">
+                              <MapPin size={12} /> {job.location}
+                            </span>
+                          )}
+                          {job.type && (
+                            <span className="flex items-center gap-1">
+                              <Clock size={12} /> {job.type}
+                            </span>
+                          )}
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            {job.status || "Open"}
+                          </span>
+                        </div>
+                        {job.description && (
+                          <p className="text-muted-foreground text-sm mt-2 leading-relaxed max-w-xl line-clamp-2">{job.description}</p>
+                        )}
+                      </div>
+                    </div>
+                    <Link
+                      to="/apply"
+                      className="flex-shrink-0 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-bold hover:shadow-md hover:shadow-primary/30 hover:-translate-y-0.5 transition-all flex items-center gap-2"
+                    >
+                      Apply <ArrowRight size={15} />
+                    </Link>
+                  </div>
+                </AnimatedSection>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-muted/20 border-t border-b border-border/50">
+      <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-muted/20">
         <div className="container mx-auto max-w-6xl">
           <SectionHeading badge="Why TakeIN" title="Why Join Us?" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -98,11 +185,9 @@ export default function CareerPage() {
           <SectionHeading badge="Simple & Transparent" title="Application Process" />
 
           <div className="relative mt-16 max-w-4xl mx-auto">
-            {/* Connecting line */}
             <div className="hidden md:block absolute top-6 left-0 w-full h-1 bg-muted z-0 rounded-full overflow-hidden">
               <div className="h-full bg-primary/20 w-full" />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 relative z-10">
               {hiringProcess.map((item, idx) => (
                 <AnimatedSection key={idx} delay={idx * 0.1}>
@@ -122,7 +207,7 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Application CTA */}
+      {/* CTA */}
       <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="container mx-auto max-w-4xl">
           <AnimatedSection>
@@ -130,13 +215,11 @@ export default function CareerPage() {
               <div className="absolute inset-0 bg-[url('/dots.svg')] opacity-10" />
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] rounded-full" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 blur-[80px] rounded-full" />
-
               <div className="relative z-10 max-w-2xl mx-auto space-y-6">
                 <h2 className="font-display text-3xl sm:text-4xl font-bold">Ready to Apply?</h2>
                 <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-8 font-medium">
                   We're always open to connecting with talented individuals.
                 </p>
-
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
                     to="/apply"
@@ -145,7 +228,7 @@ export default function CareerPage() {
                     Apply Now <ArrowRight size={18} />
                   </Link>
                   <a
-                    href="mailto:careers@takeinstudio.com"
+                    href="mailto:career@takeinstudio.com"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-transparent border-2 border-white/30 text-white font-bold tracking-wide hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                   >
                     career@takeinstudio.com
@@ -157,13 +240,13 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Bottom Legal/Info Section */}
+      {/* Footer Legal */}
       <section className="border-t border-border/50 py-8 px-4 bg-muted/10">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-xs text-muted-foreground text-center md:text-left">
             <span className="flex items-center gap-1.5 font-medium"><FileText size={14} className="text-primary" /> Privacy Notice for Applicants</span>
             <span className="hidden md:inline text-border">|</span>
-            <span className="flex items-center gap-1.5 font-medium"><Mail size={14} className="text-primary" /> careers@takeinstudio.com</span>
+            <span className="flex items-center gap-1.5 font-medium"><Mail size={14} className="text-primary" /> career@takeinstudio.com</span>
           </div>
         </div>
       </section>

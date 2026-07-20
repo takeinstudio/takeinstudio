@@ -18,7 +18,6 @@ import ContactPage from "@/pages/ContactPage";
 import AdminLoginPage from "@/pages/AdminLoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import TestimonialsPage from "@/pages/TestimonialsPage";
-import JoinUs from "@/pages/JoinUs";
 import ApplicationPage from "@/pages/ApplicationPage";
 import NotFound from "@/pages/NotFound";
 import PrivacyPolicy from "@/pages/legal/Privacy";
@@ -89,7 +88,6 @@ const App = () => (
               <Route path="/faqs" element={<FaqsPage />} />
               <Route path="/career" element={<CareerPage />} />
               <Route path="/apply" element={<ApplicationPage />} />
-              <Route path="/join" element={<JoinUs />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
 

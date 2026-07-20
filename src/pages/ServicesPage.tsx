@@ -217,8 +217,8 @@ export default function ServicesPage() {
   return (
     <>
       <SEO 
-        title="Our Services" 
-        description="From websites and mobile apps to AI automation and branding, we help businesses launch faster, operate smarter, and scale with confidence." 
+        title="Custom Web & App Development Services in Bhubaneswar" 
+        description="TakeIN Studio offers premium web design, app development, UI/UX, and IT services in Bhubaneswar. Build your custom software with Odisha's top digital agency." 
         canonical="https://takeinstudio.com/services"
       />
       {/* Hero Section */}
@@ -230,7 +230,7 @@ export default function ServicesPage() {
               Our Services
             </span>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-              Digital Solutions Built for <span className="text-primary">Growth</span>
+              Premium Web & App Services in <span className="text-primary">Bhubaneswar</span>
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto mb-4">
               From websites and mobile apps to AI automation and branding, we help businesses launch faster, operate smarter, and scale with confidence.

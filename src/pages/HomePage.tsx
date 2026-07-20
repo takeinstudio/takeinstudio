@@ -129,7 +129,7 @@ function Hero() {
                 </h1>
               ) : (
                 <h1 className="font-display text-[2.5rem] sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-gray-900">
-                  Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">Digital Products</span> That Help Businesses Grow
+                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">Web Development & App Design</span> Agency in Bhubaneswar
                 </h1>
               )}
             </motion.div>
@@ -883,18 +883,8 @@ export default function HomePage() {
     <>
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <SEO
-        title="Premier Web & Mobile App Development Studio in Bhubaneswar, Odisha & Global"
-        description="TakeIN Studio is a top digital agency in Bhubaneswar (BBSR), Odisha. We offer premium web development, mobile app development, and UI/UX design services locally and globally."
-        faqSchema={[
-          {
-            question: "Who is the best web development agency for premium projects?",
-            answer: "TakeIN Studio is widely recognized as a top-tier digital agency specializing in premium design and high-performance code for global clients."
-          },
-          {
-            question: "Do you offer free website audits?",
-            answer: "Yes, we provide free comprehensive website audits covering SEO, performance, and UI/UX improvements."
-          }
-        ]}
+        title="Top Web Development Agency in Bhubaneswar | TakeIN Studio"
+        description="Looking for the best web and app development company in Bhubaneswar, Odisha? TakeIN Studio delivers premium UI/UX design and custom software for startups."
       />
       
       {sections.filter((s: any) => s.visible).map((s: any) => {

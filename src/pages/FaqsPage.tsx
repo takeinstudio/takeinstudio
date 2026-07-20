@@ -36,8 +36,6 @@ const defaultFaqs = [
     a: "Typically, we operate on a milestone structure: 50% upfront to initiate wireframing, and 50% upon final verification and launch on your domain."
   }
 ];
-
-import { useState, useEffect } from "react";
 function ParallaxOrb({
   className,
   yRange = [-80, 80],

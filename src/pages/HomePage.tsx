@@ -12,8 +12,6 @@ import { useContent } from "@/context/ContentContext";
 import Preloader from "@/components/Preloader";
 
 const API_BASE = window.location.hostname === "localhost" ? "http://localhost:8000" : "/api";
-
-import { useState, useEffect } from "react";
 /* ─── Parallax Scrolling Components ─── */
 function ParallaxOrb({
   className,

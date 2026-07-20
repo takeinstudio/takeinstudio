@@ -190,24 +190,23 @@ export default function DocumentsBuilder() {
             .heading { font-family: 'Playfair Display', serif; }
             .brand-orange { color: #ff5722; }
             .bg-brand-orange { background-color: #ff5722; }
-            .page-break { page-break-before: always; break-before: page; margin-top: 40px; }
             .section-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
             .section-title::before { content: ""; display: block; width: 40px; height: 3px; background-color: #ff5722; }
           `}} />
 
           {/* PAGE 1 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-10 pb-6">
             
             {/* Header */}
-            <div className="text-center relative overflow-hidden mb-12 pt-4">
-                <div className="flex justify-center mb-6">
-                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-20 object-contain drop-shadow-sm" />
+            <div className="text-center relative overflow-hidden mb-10 pt-2">
+                <div className="flex justify-center mb-5">
+                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-16 object-contain drop-shadow-sm" />
                 </div>
 
-                <h1 className="heading text-4xl font-extrabold mb-3 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-8">Premium Web Development & CMS Platform</p>
+                <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900 tracking-tight">Project Proposal & Handover</h1>
+                <p className="text-[10px] tracking-[0.25em] uppercase text-gray-700 font-bold mb-6">Premium Web Development & CMS Platform</p>
                 
-                <div className="border border-orange-200 rounded-[20px] p-6 text-left w-full max-w-[550px] mx-auto bg-white relative">
+                <div className="border border-orange-200 rounded-[20px] p-5 text-left w-full max-w-[550px] mx-auto bg-white relative">
                     <div className="flex justify-between items-center mb-5 pb-5 border-b border-gray-100">
                         <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Project:</span> {basicInfo.projectName || "Astha Associate"}</div>
                         <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Owner:</span> {basicInfo.ownerName || "Pratap Kumar Swain"}</div>
@@ -280,7 +279,7 @@ export default function DocumentsBuilder() {
             </div>
           </div>
 
-          <div className="page-break"></div>
+          <div className="html2pdf__page-break"></div>
 
           {/* PAGE 2 */}
           <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12">
@@ -381,11 +380,11 @@ export default function DocumentsBuilder() {
           <div className="page-break"></div>
 
           {/* PAGE 3 */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col min-h-[960px]">
-              <div className="p-12 pb-8">
-                  <h2 className="section-title">Domain & Hosting</h2>
-                  <div className="border border-[#ffedd5] rounded-3xl overflow-hidden mt-6 mb-8">
-                      <div className="p-8 space-y-6">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col">
+              <div className="p-10 pb-6">
+                  <h2 className="section-title mb-4">Domain & Hosting</h2>
+                  <div className="border border-[#ffedd5] rounded-2xl overflow-hidden mt-4 mb-6">
+                      <div className="p-6 space-y-4">
                           {/* Domain */}
                           <div className="flex justify-between items-center pb-6 border-b border-gray-100 gap-4">
                               <div>
@@ -414,20 +413,20 @@ export default function DocumentsBuilder() {
               </div>
 
               {/* Total Banner */}
-              <div className="bg-[#ff5722] py-8 px-12 text-white flex justify-between items-center relative overflow-hidden">
-                  <h4 className="heading font-bold text-[28px] relative z-10">Total Immediate Payable</h4>
-                  <div className="text-[40px] font-extrabold text-right tracking-tight relative z-10">
+              <div className="bg-[#ff5722] py-6 px-10 text-white flex justify-between items-center relative overflow-hidden">
+                  <h4 className="heading font-bold text-[24px] relative z-10">Total Immediate Payable</h4>
+                  <div className="text-[32px] font-extrabold text-right tracking-tight relative z-10">
                       ₹ {basicInfo.totalCost || "13,499"} <span className="text-[14px] font-normal text-white/90 ml-1">+ Domain/Hosting</span>
                   </div>
               </div>
 
-              <div className="p-12">
-                  <div className="text-center mb-8">
-                      <h2 className="heading text-[26px] font-bold text-gray-900 mb-2">More Digital Solutions Built for Growth</h2>
-                      <p className="text-[12px] text-gray-500 max-w-lg mx-auto">From mobile apps to AI automation and branding, TakeIN Studio helps businesses launch faster, operate smarter, and scale with confidence.</p>
+              <div className="p-10 pb-4">
+                  <div className="text-center mb-6">
+                      <h2 className="heading text-[22px] font-bold text-gray-900 mb-2">More Digital Solutions Built for Growth</h2>
+                      <p className="text-[11px] text-gray-500 max-w-lg mx-auto leading-relaxed">From mobile apps to AI automation and branding, TakeIN Studio helps businesses launch faster, operate smarter, and scale with confidence.</p>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-4 mb-12">
+                  <div className="grid grid-cols-3 gap-3 mb-6">
                       <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
                           <p className="font-bold text-gray-900 text-[13px] mb-1">Website Dev</p>
                           <p className="text-[9px] uppercase tracking-wider text-gray-500">E-COM & BIZ</p>
@@ -456,13 +455,13 @@ export default function DocumentsBuilder() {
               </div>
 
               {/* Footer */}
-              <div className="mt-auto border-t border-gray-100 pt-8 pb-10 text-center relative w-full">
-                  <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-[45px] object-contain mx-auto mb-5 drop-shadow-sm" />
-                  <p className="text-gray-500 text-[12px] mb-3">Designed and Developed with precision by</p>
-                  <p className="font-extrabold text-gray-900 text-[20px] tracking-tight">{basicInfo.developerName || "Ankit Tripathy"}</p>
-                  <p className="brand-orange font-bold tracking-[0.4em] text-[10px] uppercase mt-2">TakeIN Studio</p>
+              <div className="mt-auto border-t border-gray-100 pt-6 pb-8 text-center relative w-full">
+                  <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-[35px] object-contain mx-auto mb-3 drop-shadow-sm" />
+                  <p className="text-gray-500 text-[10px] mb-2">Designed and Developed with precision by</p>
+                  <p className="font-extrabold text-gray-900 text-[18px] tracking-tight">{basicInfo.developerName || "Ankit Tripathy"}</p>
+                  <p className="brand-orange font-bold tracking-[0.4em] text-[9px] uppercase mt-1">TakeIN Studio</p>
 
-                  <div className="flex justify-center items-center gap-6 mt-6 text-[12px] font-semibold text-gray-600 mb-8">
+                  <div className="flex justify-center items-center gap-6 mt-4 text-[11px] font-semibold text-gray-600 mb-6">
                       <span>www.takeinstudio.com</span>
                       <span className="text-gray-200">|</span>
                       <span>support@takeinstudio.com</span>
@@ -470,7 +469,7 @@ export default function DocumentsBuilder() {
                       <span>+91 89082 33590</span>
                   </div>
 
-                  <div className="bg-[#fffbf8] inline-block py-2.5 px-6 rounded-full border border-[#ffedd5] text-[10px] font-semibold text-gray-800">
+                  <div className="bg-[#fffbf8] inline-block py-2 px-5 rounded-full border border-[#ffedd5] text-[9px] font-semibold text-gray-800">
                       Premium Digital Agency &bull; Building Digital Experiences That Drive Growth
                   </div>
               </div>

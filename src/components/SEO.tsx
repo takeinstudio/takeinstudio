@@ -18,7 +18,7 @@ export default function SEO({
   type = "website",
   url = "https://takeinstudio.com",
   image = "https://takeinstudio.com/logo/og-image.jpg",
-  keywords = "web development, custom website design bhubaneswar, affordable web development agency, professional seo services bhubaneswar, UI/UX design, app development, digital agency, TakeIN Studio, takeinstudio, take in studio"
+  keywords = "web development, custom website design bhubaneswar, affordable web development agency, professional seo services bhubaneswar, UI/UX design, app development, digital agency, TakeIN Studio, takeinstudio, take in studio, takeins tudio, taken studio"
 }: SEOProps) {
   const location = useLocation();
   const currentUrl = url !== "https://takeinstudio.com" 

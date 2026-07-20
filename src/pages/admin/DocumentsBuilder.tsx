@@ -1,12 +1,11 @@
 import React, { useState, useRef } from "react";
-import { FileText, Download, CheckCircle2, Loader2, Plus, Trash2 } from "lucide-react";
+import { FileText, Download, Loader2, Plus, Trash2 } from "lucide-react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
 
 export default function DocumentsBuilder() {
   const [loading, setLoading] = useState(false);
 
-  // Basic Info
   const [basicInfo, setBasicInfo] = useState({
     projectName: "",
     ownerName: "",
@@ -19,7 +18,6 @@ export default function DocumentsBuilder() {
     manualTotal: ""
   });
 
-  // Dynamic Sections
   const [sections, setSections] = useState([
     {
       id: "website",
@@ -59,26 +57,21 @@ export default function DocumentsBuilder() {
   }, [sections, basicInfo]);
 
   const displayTotal = basicInfo.manualTotal || computedTotal;
-
   const templateRef = useRef<HTMLDivElement>(null);
 
   const handleGeneratePDF = () => {
     if (!templateRef.current) return;
     setLoading(true);
-
-    // Give React a small tick to ensure DOM is fully updated
     setTimeout(async () => {
       const element = templateRef.current;
-      
       const opt = {
-        margin: [0, 0, 0, 0], 
+        margin: [0, 0, 0, 0],
         filename: `${basicInfo.projectName ? basicInfo.projectName.replace(/\s+/g, '_') : 'Project'}_Handover.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'css', before: '.html2pdf__page-break' }
+        pagebreak: { mode: 'css', before: '.pdf-page' }
       };
-
       try {
         await html2pdf().from(element).set(opt).save();
       } catch (err) {
@@ -112,6 +105,36 @@ export default function DocumentsBuilder() {
     setSections(sections.filter(s => s.id !== id));
   };
 
+  const renderBullets = (bullets: string) =>
+    bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+      const parts = bullet.split(':');
+      return (
+        <div key={idx} className="flex items-start gap-2.5">
+          <div className="mt-[5px] w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0"></div>
+          <span>
+            {parts.length > 1
+              ? <><strong className="text-gray-900 font-bold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+              : bullet}
+          </span>
+        </div>
+      );
+    });
+
+  const renderBulletsWithPrice = (bullets: string, priceMap: (idx: number) => string) =>
+    bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+      const parts = bullet.split(':');
+      return (
+        <div key={idx} className="flex justify-between gap-4">
+          <p className="text-gray-600">
+            {parts.length > 1
+              ? <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
+              : bullet}
+          </p>
+          <span className="font-bold text-gray-900 whitespace-nowrap">{priceMap(idx)}</span>
+        </div>
+      );
+    });
+
   return (
     <div className="space-y-6 pb-20">
       <div className="bg-card border border-border/50 rounded-3xl p-6 shadow-sm">
@@ -125,7 +148,7 @@ export default function DocumentsBuilder() {
               <p className="text-xs text-muted-foreground">Dynamic Template Builder</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={handleGeneratePDF}
             disabled={loading}
             className="glow-btn bg-primary text-white font-bold px-6 py-2 rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-all flex items-center gap-2"
@@ -161,16 +184,15 @@ export default function DocumentsBuilder() {
         {/* Dynamic Sections */}
         <div className="mb-8 space-y-4">
           <div className="flex justify-between items-end border-b pb-2">
-            <h4 className="font-bold text-sm text-foreground/80">Features & Scope Pricing</h4>
+            <h4 className="font-bold text-sm text-foreground/80">Features &amp; Scope Pricing</h4>
             <button onClick={addSection} className="text-xs bg-muted text-foreground hover:bg-muted/80 px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all">
-              <Plus size={14}/> Add Custom Section
+              <Plus size={14} /> Add Custom Section
             </button>
           </div>
-          
           <div className="space-y-4">
             {sections.map(section => (
               <div key={section.id} className="p-4 border border-border/50 bg-muted/20 rounded-xl relative">
-                <button onClick={() => removeSection(section.id)} className="absolute top-4 right-4 text-destructive hover:text-destructive/80"><Trash2 size={16}/></button>
+                <button onClick={() => removeSection(section.id)} className="absolute top-4 right-4 text-destructive hover:text-destructive/80"><Trash2 size={16} /></button>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3 pr-8">
                   <div>
                     <label className="block text-xs font-semibold text-muted-foreground mb-1">Section Title</label>
@@ -192,7 +214,7 @@ export default function DocumentsBuilder() {
 
         {/* Totals */}
         <div className="space-y-4">
-          <h4 className="font-bold text-sm text-foreground/80 border-b pb-2">Totals & Domain Setup</h4>
+          <h4 className="font-bold text-sm text-foreground/80 border-b pb-2">Totals &amp; Domain Setup</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <div className="flex justify-between items-center mb-1">
@@ -216,7 +238,7 @@ export default function DocumentsBuilder() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-brand-orange mb-1">Total Payable (Auto-Calculated)</label>
-              <input type="text" name="manualTotal" value={basicInfo.manualTotal} onChange={handleBasicChange} placeholder={`₹ ${computedTotal}`} className="w-full bg-orange-50 border border-orange-200 text-brand-orange font-bold rounded-lg px-3 py-2 text-lg focus:border-primary outline-none" />
+              <input type="text" name="manualTotal" value={basicInfo.manualTotal} onChange={handleBasicChange} placeholder={`\u20b9 ${computedTotal}`} className="w-full bg-orange-50 border border-orange-200 text-brand-orange font-bold rounded-lg px-3 py-2 text-lg focus:border-primary outline-none" />
             </div>
           </div>
         </div>
@@ -224,321 +246,245 @@ export default function DocumentsBuilder() {
 
       {/* Hidden Template for PDF Generation */}
       <div className="overflow-hidden h-0 w-0 absolute top-[-9999px] left-[-9999px]">
-        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fff8f2] text-gray-800 relative print-container" style={{ fontFamily: "'Inter', sans-serif" }}>
-          
+        <div ref={templateRef} className="w-[800px] font-sans antialiased bg-[#fff8f2] text-gray-800 relative" style={{ fontFamily: "'Inter', sans-serif" }}>
+
           <style dangerouslySetInnerHTML={{__html: `
             .heading { font-family: 'Playfair Display', serif; }
             .brand-orange { color: #ff5722; }
-            .bg-brand-orange { background-color: #ff5722; }
             .section-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
             .section-title::before { content: ""; display: block; width: 40px; height: 3px; background-color: #ff5722; }
-            .pdf-page { width: 800px; height: 1131px; box-sizing: border-box; overflow: hidden; position: relative; padding: 40px; }
+            .pdf-page { width: 800px; height: 1131px; overflow: hidden; position: relative; box-sizing: border-box; }
           `}} />
 
-          {/* PAGE 1 */}
+          {/* ── PAGE 1 ── */}
           <div className="pdf-page">
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 px-10 pt-6 pb-6 h-[1051px]">
-            
-            {/* Header */}
-            <div className="text-center relative overflow-hidden mb-10 pt-2">
-                <div className="flex justify-center mb-5">
-                    <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" className="h-24 object-contain drop-shadow-sm" />
-                </div>
+            <div style={{ padding: '32px 40px', height: '100%', boxSizing: 'border-box', background: 'white', borderRadius: '16px', border: '1px solid #ffedd5' }}>
 
-                <h1 className="heading text-[32px] font-extrabold mb-2 text-gray-900">Project Proposal & Handover</h1>
-                <p className="text-[10px] text-gray-700 font-bold mb-6">{basicInfo.subtitle || "Premium Web Development & CMS Platform"}</p>
-                
-                <div className="border border-orange-200 rounded-[20px] p-5 text-left w-full max-w-[550px] mx-auto bg-white relative">
-                    <div className="flex justify-between items-center mb-5 pb-5 border-b border-gray-100">
-                        <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Project:</span> {basicInfo.projectName || "Astha Associate"}</div>
-                        <div className="text-sm text-gray-600"><span className="font-bold text-gray-900 mr-2">Owner:</span> {basicInfo.ownerName || "Pratap Kumar Swain"}</div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <img src={`${window.location.origin}/logo/logo_no_text.png`} alt="Developer" className="w-12 h-12 rounded-full object-cover border border-orange-100 bg-gray-50 p-1.5 shadow-sm" />
-                        <div>
-                            <p className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-bold mb-0.5">Developed By</p>
-                            <p className="text-sm font-bold text-gray-900">{basicInfo.developerName || "Ankit Tripathy"} <span className="brand-orange ml-1">(TakeIN Studio)</span></p>
-                        </div>
-                    </div>
+              {/* Header */}
+              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                  <img src={`${window.location.origin}/logo/logo_text.png`} alt="TakeIN Studio Logo" style={{ height: '80px', objectFit: 'contain' }} />
                 </div>
-            </div>
-
-            {/* Scope of Work */}
-            <div>
-                <h2 className="section-title">Scope of Work & Features</h2>
-                
-                <div className="grid grid-cols-2 gap-6">
-                    {/* Live Website Pages */}
-                    <div className="bg-[#fffbf8] p-6 rounded-[20px] border border-[#ffedd5] h-full">
-                        <h3 className="text-[17px] font-bold text-gray-900 mb-5 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-full bg-[#ffedd5] flex items-center justify-center text-[#ff5722]">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-                            </span>
-                            Live Website Pages
-                        </h3>
-                        <div className="space-y-4 text-[12px] text-gray-600 leading-relaxed">
-                            {sections[0]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                const parts = bullet.split(':');
-                                return (
-                                  <div key={idx} className="flex items-start gap-2.5">
-                                    <div className="mt-[5px] w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0"></div>
-                                    <span>
-                                      {parts.length > 1 ? (
-                                        <><strong className="text-gray-900 font-bold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                      ) : bullet}
-                                    </span>
-                                  </div>
-                                );
-                            })}
-                        </div>
+                <h1 className="heading" style={{ fontSize: '30px', fontWeight: 800, marginBottom: '6px', color: '#111' }}>Project Proposal &amp; Handover</h1>
+                <p style={{ fontSize: '10px', color: '#555', fontWeight: 700, marginBottom: '20px' }}>
+                  {basicInfo.subtitle || "Premium Web Development & CMS Platform"}
+                </p>
+                <div style={{ border: '1px solid #fed7aa', borderRadius: '16px', padding: '16px 20px', maxWidth: '500px', margin: '0 auto', background: 'white' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid #f3f4f6' }}>
+                    <span style={{ fontSize: '13px', color: '#555' }}><strong style={{ color: '#111' }}>Project:</strong> {basicInfo.projectName || "—"}</span>
+                    <span style={{ fontSize: '13px', color: '#555' }}><strong style={{ color: '#111' }}>Owner:</strong> {basicInfo.ownerName || "—"}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <img src={`${window.location.origin}/logo/logo_no_text.png`} alt="" style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #ffedd5' }} />
+                    <div>
+                      <p style={{ fontSize: '9px', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '2px' }}>Developed By</p>
+                      <p style={{ fontSize: '13px', fontWeight: 700, color: '#111' }}>
+                        {basicInfo.developerName || "Ankit Tripathy"} <span style={{ color: '#ff5722' }}>(TakeIN Studio)</span>
+                      </p>
                     </div>
-
-                    {/* Secure Admin Dashboard */}
-                    <div className="bg-[#fffbf8] p-6 rounded-[20px] border border-[#ffedd5] h-full">
-                        <h3 className="text-[17px] font-bold text-gray-900 mb-5 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-full bg-[#ffedd5] flex items-center justify-center text-[#ff5722]">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                            </span>
-                            Secure Admin Dashboard
-                        </h3>
-                        <div className="space-y-4 text-[12px] text-gray-600 leading-relaxed">
-                            {sections[1]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                const parts = bullet.split(':');
-                                return (
-                                  <div key={idx} className="flex items-start gap-2.5">
-                                    <div className="mt-[5px] w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0"></div>
-                                    <span>
-                                      {parts.length > 1 ? (
-                                        <><strong className="text-gray-900 font-bold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                      ) : bullet}
-                                    </span>
-                                  </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Scope of Work */}
+              <div>
+                <h2 className="section-title">Scope of Work &amp; Features</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  {/* Col 1 */}
+                  <div style={{ background: '#fffbf8', padding: '20px', borderRadius: '16px', border: '1px solid #ffedd5' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#111', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#ffedd5', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', flexShrink: 0 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                      </span>
+                      Live Website Pages
+                    </h3>
+                    <div style={{ fontSize: '11px', color: '#555', lineHeight: '1.7' }}>
+                      {renderBullets(sections[0]?.bullets || '')}
+                    </div>
+                  </div>
+                  {/* Col 2 */}
+                  <div style={{ background: '#fffbf8', padding: '20px', borderRadius: '16px', border: '1px solid #ffedd5' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#111', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#ffedd5', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', flexShrink: 0 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      </span>
+                      Secure Admin Dashboard
+                    </h3>
+                    <div style={{ fontSize: '11px', color: '#555', lineHeight: '1.7' }}>
+                      {renderBullets(sections[1]?.bullets || '')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          {/* PAGE 2 */}
+          {/* ── PAGE 2 ── */}
           <div className="pdf-page">
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12 h-[1051px]">
+            <div style={{ padding: '32px 40px', height: '100%', boxSizing: 'border-box', background: 'white', borderRadius: '16px', border: '1px solid #ffedd5' }}>
               <h2 className="section-title">Investment Breakdown</h2>
 
-              <div className="border border-[#ffedd5] rounded-3xl overflow-hidden mt-6 relative">
-                  <div className="p-8">
-                      {/* Top Highlight Cost */}
-                      <div className="flex justify-between items-center mb-8">
-                          <div>
-                              <h4 className="font-bold text-[22px] text-gray-900 mb-1">One-Time Development Cost</h4>
-                              <p className="text-[13px] text-gray-500">Comprehensive Web Platform & Content Management System</p>
-                          </div>
-                          <div className="text-4xl font-extrabold whitespace-nowrap text-[#1a1a1a]">
-                              ₹ {displayTotal || "13,499"}
-                          </div>
-                      </div>
-                      
-                      <div className="bg-[#fffbf8] rounded-2xl p-8 pb-10 border border-[#ffedd5]">
-                          <h5 className="text-[10px] uppercase font-bold text-gray-900 mb-6">Detailed Price Breakdown</h5>
-                          
-                          <div className="space-y-6 text-[13px] text-gray-700">
-                              {/* Live Website Pages */}
-                              <div>
-                                  <div className="flex justify-between items-start gap-4 mb-3">
-                                      <h6 className="text-gray-900 font-bold flex items-center gap-2">
-                                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                                          Live Website Pages
-                                      </h6>
-                                      <span className="whitespace-nowrap font-bold text-gray-900">₹ {sections[0]?.price || "4,999"}</span>
-                                  </div>
-                                  <div className="space-y-2 pl-[22px] text-gray-600 text-[12px] leading-relaxed">
-                                      {sections[0]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                        const parts = bullet.split(':');
-                                        return (
-                                          <p key={idx}>
-                                            {parts.length > 1 ? (
-                                              <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                            ) : bullet}
-                                          </p>
-                                        );
-                                      })}
-                                  </div>
-                              </div>
-                              
-                              {/* Secure Admin Dashboard */}
-                              <div className="pt-6 mt-4">
-                                  <h6 className="text-gray-900 font-bold flex items-center gap-2 mb-4">
-                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                      Secure Admin Dashboard
-                                  </h6>
-                                  <div className="space-y-4 pl-[22px] text-[12px] leading-relaxed">
-                                      {sections[1]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                        const parts = bullet.split(':');
-                                        return (
-                                          <div key={idx} className="flex justify-between gap-4">
-                                              <p className="text-gray-600">
-                                                {parts.length > 1 ? (
-                                                  <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                                ) : bullet}
-                                              </p>
-                                              <span className="font-bold text-gray-900 whitespace-nowrap">₹ {idx === 0 ? "1,500" : "1,000"}</span>
-                                          </div>
-                                        );
-                                      })}
-                                  </div>
-                              </div>
-
-                              {/* Advanced Security */}
-                              <div className="pt-6 mt-4">
-                                  <h6 className="text-gray-900 font-bold flex items-center gap-2 mb-4">
-                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
-                                      Advanced Security & Authentication
-                                  </h6>
-                                  <div className="space-y-4 pl-[22px] text-[12px] leading-relaxed">
-                                      {sections[2]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
-                                        const parts = bullet.split(':');
-                                        return (
-                                          <div key={idx} className="flex justify-between gap-4">
-                                              <p className="text-gray-600">
-                                                {parts.length > 1 ? (
-                                                  <><strong className="text-gray-800 font-semibold">{parts[0]}:</strong>{parts.slice(1).join(':')}</>
-                                                ) : bullet}
-                                              </p>
-                                              <span className="font-bold text-gray-900 whitespace-nowrap">₹ {idx === 2 ? "1,000" : "1,500"}</span>
-                                          </div>
-                                        );
-                                      })}
-                                  </div>
-                              </div>
-
-                          </div>
-                      </div>
+              <div style={{ border: '1px solid #ffedd5', borderRadius: '20px', overflow: 'hidden' }}>
+                <div style={{ padding: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                    <div>
+                      <h4 style={{ fontWeight: 700, fontSize: '20px', color: '#111', marginBottom: '4px' }}>One-Time Development Cost</h4>
+                      <p style={{ fontSize: '12px', color: '#888' }}>Comprehensive Web Platform &amp; Content Management System</p>
+                    </div>
+                    <div style={{ fontSize: '32px', fontWeight: 800, color: '#111', whiteSpace: 'nowrap' }}>
+                      &#8377; {displayTotal || "13,499"}
+                    </div>
                   </div>
+
+                  <div style={{ background: '#fffbf8', borderRadius: '16px', padding: '24px', border: '1px solid #ffedd5' }}>
+                    <h5 style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 700, color: '#111', marginBottom: '16px' }}>Detailed Price Breakdown</h5>
+
+                    <div style={{ fontSize: '12px', color: '#555' }}>
+                      {/* Live Website Pages */}
+                      <div style={{ marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                          <strong style={{ color: '#111' }}>Live Website Pages</strong>
+                          <span style={{ fontWeight: 700, color: '#111', whiteSpace: 'nowrap' }}>&#8377; {sections[0]?.price || "4,999"}</span>
+                        </div>
+                        <div style={{ paddingLeft: '16px', lineHeight: '1.7' }}>
+                          {sections[0]?.bullets.split('\n').filter(b => b.trim()).map((bullet, idx) => {
+                            const parts = bullet.split(':');
+                            return <p key={idx}>{parts.length > 1 ? <><strong>{parts[0]}:</strong>{parts.slice(1).join(':')}</> : bullet}</p>;
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Secure Admin Dashboard */}
+                      <div style={{ marginBottom: '16px', paddingTop: '16px', borderTop: '1px solid #f3f4f6' }}>
+                        <h6 style={{ fontWeight: 700, color: '#111', marginBottom: '8px' }}>Secure Admin Dashboard</h6>
+                        <div style={{ paddingLeft: '16px', lineHeight: '1.8' }}>
+                          {renderBulletsWithPrice(sections[1]?.bullets || '', idx => `\u20b9 ${idx === 0 ? "1,500" : "1,000"}`)}
+                        </div>
+                      </div>
+
+                      {/* Advanced Security */}
+                      <div style={{ paddingTop: '16px', borderTop: '1px solid #f3f4f6' }}>
+                        <h6 style={{ fontWeight: 700, color: '#111', marginBottom: '8px' }}>Advanced Security &amp; Authentication</h6>
+                        <div style={{ paddingLeft: '16px', lineHeight: '1.8' }}>
+                          {renderBulletsWithPrice(sections[2]?.bullets || '', idx => `\u20b9 ${idx === 2 ? "1,000" : "1,500"}`)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
 
-          {/* PAGE 3 */}
+          {/* ── PAGE 3 ── */}
           <div className="pdf-page">
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 flex flex-col h-[1051px]">
-              <div className="p-10 pb-6">
-                  <h2 className="section-title mb-4">Domain & Hosting</h2>
-                  <div className="border border-[#ffedd5] rounded-2xl overflow-hidden mt-4 mb-6">
-                      <div className="p-6 space-y-4">
-                          {/* Domain */}
-                          <div className="flex justify-between items-center pb-6 border-b border-gray-100 gap-4">
-                              <div>
-                                  <h4 className="font-bold text-[17px] text-gray-900 mb-1">Domain Name Setup</h4>
-                                  <p className="text-[12px] text-gray-500">Yearly Renewal (e.g., .com, .in)</p>
-                              </div>
-                              <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
-                                  {basicInfo.domainPaid ? (
-                                      <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
-                                  ) : basicInfo.domainCost ? (
-                                      <>
-                                          <span className="text-[14px] font-bold text-gray-900 uppercase block mb-1">₹ {basicInfo.domainCost}</span>
-                                          <span className="text-[10px] text-gray-500">Subject to renewal</span>
-                                      </>
-                                  ) : (
-                                      <>
-                                          <span className="text-[10px] font-bold text-gray-900 uppercase block mb-1">TO BE CHECKED</span>
-                                          <span className="text-[10px] text-gray-500">Exact rates depend on preferred domain</span>
-                                      </>
-                                  )}
-                              </div>
-                          </div>
+            <div style={{ padding: '32px 40px', height: '100%', boxSizing: 'border-box', background: 'white', borderRadius: '16px', border: '1px solid #ffedd5', display: 'flex', flexDirection: 'column' }}>
 
-                          {/* Hosting */}
-                          <div className="flex justify-between items-center gap-4">
-                              <div>
-                                  <h4 className="font-bold text-[17px] text-gray-900 mb-1">Server Hosting Setup</h4>
-                                  <p className="text-[12px] text-gray-500">Yearly Renewal (Speed, Security & Maintenance)</p>
-                              </div>
-                              <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
-                                  {basicInfo.hostingPaid ? (
-                                      <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
-                                  ) : basicInfo.hostingCost ? (
-                                      <>
-                                          <span className="text-[14px] font-bold text-gray-900 uppercase block mb-1">₹ {basicInfo.hostingCost}</span>
-                                          <span className="text-[10px] text-gray-500">Subject to renewal</span>
-                                      </>
-                                  ) : (
-                                      <>
-                                          <span className="text-[10px] font-bold text-gray-900 uppercase block mb-1">TO BE CHECKED</span>
-                                          <span className="text-[10px] text-gray-500">Exact rates depend on preferred hosting</span>
-                                      </>
-                                  )}
-                              </div>
-                          </div>
+              {/* Domain & Hosting */}
+              <div>
+                <h2 className="section-title">Domain &amp; Hosting</h2>
+                <div style={{ border: '1px solid #ffedd5', borderRadius: '16px', overflow: 'hidden', marginBottom: '16px' }}>
+                  <div style={{ padding: '20px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: '1px solid #f3f4f6', gap: '16px' }}>
+                      <div>
+                        <h4 style={{ fontWeight: 700, fontSize: '16px', color: '#111', marginBottom: '2px' }}>Domain Name Setup</h4>
+                        <p style={{ fontSize: '11px', color: '#888' }}>Yearly Renewal (e.g., .com, .in)</p>
                       </div>
+                      <div style={{ textAlign: 'center', background: '#fffbf8', border: '1px solid #ffedd5', padding: '10px 20px', borderRadius: '10px', minWidth: '160px' }}>
+                        {basicInfo.domainPaid ? (
+                          <span style={{ fontSize: '13px', fontWeight: 700, color: '#10b981', textTransform: 'uppercase', display: 'block' }}>PAID</span>
+                        ) : basicInfo.domainCost ? (
+                          <>
+                            <span style={{ fontSize: '13px', fontWeight: 700, color: '#111', display: 'block', marginBottom: '2px' }}>&#8377; {basicInfo.domainCost}</span>
+                            <span style={{ fontSize: '9px', color: '#888' }}>Subject to renewal</span>
+                          </>
+                        ) : (
+                          <>
+                            <span style={{ fontSize: '10px', fontWeight: 700, color: '#111', display: 'block', marginBottom: '2px' }}>TO BE CHECKED</span>
+                            <span style={{ fontSize: '9px', color: '#888' }}>Exact rates depend on preferred domain</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', gap: '16px' }}>
+                      <div>
+                        <h4 style={{ fontWeight: 700, fontSize: '16px', color: '#111', marginBottom: '2px' }}>Server Hosting Setup</h4>
+                        <p style={{ fontSize: '11px', color: '#888' }}>Yearly Renewal (Speed, Security &amp; Maintenance)</p>
+                      </div>
+                      <div style={{ textAlign: 'center', background: '#fffbf8', border: '1px solid #ffedd5', padding: '10px 20px', borderRadius: '10px', minWidth: '160px' }}>
+                        {basicInfo.hostingPaid ? (
+                          <span style={{ fontSize: '13px', fontWeight: 700, color: '#10b981', textTransform: 'uppercase', display: 'block' }}>PAID</span>
+                        ) : basicInfo.hostingCost ? (
+                          <>
+                            <span style={{ fontSize: '13px', fontWeight: 700, color: '#111', display: 'block', marginBottom: '2px' }}>&#8377; {basicInfo.hostingCost}</span>
+                            <span style={{ fontSize: '9px', color: '#888' }}>Subject to renewal</span>
+                          </>
+                        ) : (
+                          <>
+                            <span style={{ fontSize: '10px', fontWeight: 700, color: '#111', display: 'block', marginBottom: '2px' }}>TO BE CHECKED</span>
+                            <span style={{ fontSize: '9px', color: '#888' }}>Exact rates depend on preferred hosting</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
+                </div>
               </div>
 
               {/* Total Banner */}
-              <div className="bg-[#ff5722] py-6 px-10 text-white flex justify-between items-center relative overflow-hidden">
-                  <h4 className="heading font-bold text-[24px] relative z-10">Total Immediate Payable</h4>
-                  <div className="text-[32px] font-extrabold text-right tracking-tight relative z-10">
-                      ₹ {displayTotal || "13,499"} <span className="text-[14px] font-normal text-white/90 ml-1">+ Domain/Hosting</span>
-                  </div>
+              <div style={{ background: '#ff5722', padding: '20px 32px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '12px', marginBottom: '20px' }}>
+                <h4 className="heading" style={{ fontSize: '22px', fontWeight: 700 }}>Total Immediate Payable</h4>
+                <div style={{ fontSize: '28px', fontWeight: 800, textAlign: 'right' }}>
+                  &#8377; {displayTotal || "13,499"} <span style={{ fontSize: '13px', fontWeight: 400, opacity: 0.9 }}>+ Domain/Hosting</span>
+                </div>
               </div>
 
-              <div className="p-10 pb-4">
-                  <div className="text-center mb-6">
-                      <h2 className="heading text-[22px] font-bold text-gray-900 mb-2">More Digital Solutions Built for Growth</h2>
-                      <p className="text-[11px] text-gray-500 max-w-lg mx-auto leading-relaxed">From mobile apps to AI automation and branding, TakeIN Studio helps businesses launch faster, operate smarter, and scale with confidence.</p>
-                              <div className="grid grid-cols-3 gap-3 mb-6">
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">Website Dev</p>
-                          <p className="text-[9px] uppercase text-gray-500">E-COM & BIZ</p>
-                      </div>
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">App Dev</p>
-                          <p className="text-[9px] uppercase text-gray-500">IOS & ANDROID</p>
-                      </div>
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">Custom Software</p>
-                          <p className="text-[9px] uppercase text-gray-500">CRM & SYSTEMS</p>
-                      </div>
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">AI Automation</p>
-                          <p className="text-[9px] uppercase text-gray-500">BOTS & FLOWS</p>
-                      </div>
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">SEO & Marketing</p>
-                          <p className="text-[9px] uppercase text-gray-500">TRAFFIC & LEADS</p>
-                      </div>
-                      <div className="text-center border border-[#ffedd5] rounded-xl p-5 bg-[#fffbf8]">
-                          <p className="font-bold text-gray-900 text-[13px] mb-1">Graphic Design</p>
-                          <p className="text-[9px] uppercase text-gray-500">BRAND IDENTITY</p>
-                      </div>
-                  </div>
+              {/* Services Grid */}
+              <div style={{ marginBottom: '16px' }}>
+                <h2 className="heading" style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '6px', textAlign: 'center' }}>More Digital Solutions Built for Growth</h2>
+                <p style={{ fontSize: '10px', color: '#888', textAlign: 'center', marginBottom: '14px' }}>From mobile apps to AI automation and branding, TakeIN Studio helps you scale with confidence.</p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+                  {[
+                    { name: 'Website Dev', sub: 'E-COM & BIZ' },
+                    { name: 'App Dev', sub: 'IOS & ANDROID' },
+                    { name: 'Custom Software', sub: 'CRM & SYSTEMS' },
+                    { name: 'AI Automation', sub: 'BOTS & FLOWS' },
+                    { name: 'SEO & Marketing', sub: 'TRAFFIC & LEADS' },
+                    { name: 'Graphic Design', sub: 'BRAND IDENTITY' },
+                  ].map((item, i) => (
+                    <div key={i} style={{ textAlign: 'center', border: '1px solid #ffedd5', borderRadius: '10px', padding: '14px 10px', background: '#fffbf8' }}>
+                      <p style={{ fontWeight: 700, color: '#111', fontSize: '12px', marginBottom: '3px' }}>{item.name}</p>
+                      <p style={{ fontSize: '8px', textTransform: 'uppercase', color: '#888' }}>{item.sub}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Footer */}
-              <div className="mt-auto border-t border-gray-100 pt-6 pb-8 text-center relative w-full">
-                  <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" className="h-[35px] object-contain mx-auto mb-3 drop-shadow-sm" />
-                  <p className="text-gray-500 text-[10px] mb-2">Designed and Developed with precision by</p>
-                  <p className="font-extrabold text-gray-900 text-[18px]">{basicInfo.developerName || "Ankit Tripathy"}</p>
-                  <p className="brand-orange font-bold text-[9px] uppercase mt-1">TakeIN Studio</p>
-
-                  <div className="flex justify-center items-center gap-6 mt-4 text-[11px] font-semibold text-gray-600 mb-6">
-                      <span>www.takeinstudio.com</span>
-                      <span className="text-gray-200">|</span>
-                      <span>support@takeinstudio.com</span>
-                      <span className="text-gray-200">|</span>
-                      <span>+91 89082 33590</span>
-                  </div>
-
-                  <div className="bg-[#fffbf8] inline-block py-2 px-5 rounded-full border border-[#ffedd5] text-[9px] font-semibold text-gray-800">
-                      Premium Digital Agency &bull; Building Digital Experiences That Drive Growth
-                  </div>
+              <div style={{ marginTop: 'auto', borderTop: '1px solid #f3f4f6', paddingTop: '16px', textAlign: 'center' }}>
+                <img src={`${window.location.origin}/logo/logo_text.png`} alt="Logo" style={{ height: '30px', objectFit: 'contain', marginBottom: '8px' }} />
+                <p style={{ fontSize: '9px', color: '#aaa', marginBottom: '4px' }}>Designed and Developed with precision by</p>
+                <p style={{ fontSize: '16px', fontWeight: 800, color: '#111' }}>{basicInfo.developerName || "Ankit Tripathy"}</p>
+                <p style={{ fontSize: '8px', fontWeight: 700, color: '#ff5722', textTransform: 'uppercase', marginBottom: '10px' }}>TakeIN Studio</p>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', fontSize: '10px', fontWeight: 600, color: '#555', marginBottom: '10px' }}>
+                  <span>www.takeinstudio.com</span>
+                  <span style={{ color: '#ddd' }}>|</span>
+                  <span>support@takeinstudio.com</span>
+                  <span style={{ color: '#ddd' }}>|</span>
+                  <span>+91 89082 33590</span>
+                </div>
+                <div style={{ display: 'inline-block', background: '#fffbf8', padding: '6px 20px', borderRadius: '999px', border: '1px solid #ffedd5', fontSize: '8px', fontWeight: 600, color: '#333' }}>
+                  Premium Digital Agency &#8226; Building Digital Experiences That Drive Growth
+                </div>
               </div>
+
             </div>
           </div>
 
         </div>
       </div>
-
     </div>
   );
 }

@@ -13,7 +13,6 @@ import { servicesData } from "./ServicesPage";
 import OverviewBuilder from "./admin/OverviewBuilder";
 import ServicesBuilder from "./admin/ServicesBuilder";
 import PricingBuilder from "./admin/PricingBuilder";
-import PortfolioBuilder from "./admin/PortfolioBuilder";
 import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 import DocumentsBuilder from "./admin/DocumentsBuilder";
 import EmailCenterBuilder from "./admin/EmailCenterBuilder";
@@ -214,33 +213,6 @@ export default function AdminDashboard() {
     }
   };
 
-  const unlockDefaultPortfolio = async () => {
-    setUnlocking(true);
-    try {
-      const showcaseData = [
-        { id: "p1", title: "Modern Business Website", category: "Business Websites", desc: "A conversion-focused business website designed to establish credibility, generate leads, and support long-term growth.", color: "from-primary/30 to-accent/20", features: ["Premium UI/UX", "Mobile-first design", "Lead generation forms", "SEO-ready structure"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p2", title: "Professional Service Website", category: "Business Websites", desc: "A service-focused platform built for consultants, agencies, clinics, and local businesses seeking a stronger online presence.", color: "from-accent/30 to-primary/20", features: ["Service showcase", "Appointment requests", "Contact automation", "Analytics integration"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: false },
-        { id: "p3", title: "Learning Management Platform", category: "Education", desc: "A digital learning ecosystem designed for schools, colleges, coaching institutes, and training organizations.", color: "from-blue-500/20 to-indigo-500/20", features: ["Student dashboard", "Course management", "Progress tracking", "Resource library"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p4", title: "Coaching Institute Portal", category: "Education", desc: "A centralized platform for admissions, communication, schedules, and student engagement.", color: "from-indigo-500/20 to-purple-500/20", features: ["Student enrollment", "Batch management", "Attendance tracking", "Parent communication"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: false },
-        { id: "p5", title: "Clinic Management Platform", category: "Healthcare", desc: "A modern healthcare solution focused on patient engagement, appointment scheduling, and operational efficiency.", color: "from-green-500/20 to-teal-500/20", features: ["Appointment booking", "Patient management", "Teleconsultation support", "Digital records"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p6", title: "Photographer Portfolio Experience", category: "Creative Portfolios", desc: "A premium portfolio designed for photographers, creators, and visual storytellers.", color: "from-rose-500/20 to-pink-500/20", features: ["Gallery showcase", "Client proofing", "Booking inquiries", "Mobile optimization"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: false },
-        { id: "p7", title: "Personal Brand Website", category: "Creative Portfolios", desc: "A modern personal branding experience designed for creators, influencers, speakers, and professionals.", color: "from-pink-500/20 to-purple-500/20", features: ["Portfolio showcase", "Media kit", "Lead generation", "Content publishing"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p8", title: "Modern Online Store", category: "E-commerce", desc: "A scalable online store built to increase conversions and simplify product management.", color: "from-orange-500/20 to-amber-500/20", features: ["Product catalog", "Secure checkout", "Order management", "Analytics dashboard"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p9", title: "Business Operations Dashboard", category: "Dashboards & ERP", desc: "A centralized dashboard for monitoring operations, performance, and business workflows.", color: "from-gray-500/20 to-slate-500/20", features: ["Reporting", "Analytics", "User management", "Workflow automation"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p10", title: "ERP Management System", category: "Dashboards & ERP", desc: "A customizable ERP platform designed to streamline business processes and improve operational visibility.", color: "from-slate-500/20 to-gray-500/20", features: ["Department management", "Inventory tracking", "Reporting tools", "Process automation"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: false },
-        { id: "p11", title: "AI Customer Assistant", category: "AI Solutions", desc: "An intelligent chatbot designed to automate customer support and lead qualification.", color: "from-cyan-500/20 to-blue-500/20", features: ["FAQ automation", "Lead capture", "Appointment booking", "CRM integration"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: true },
-        { id: "p12", title: "AI Business Automation", category: "AI Solutions", desc: "An AI-powered workflow system designed to reduce repetitive work and improve efficiency.", color: "from-blue-500/20 to-cyan-500/20", features: ["Process automation", "Internal assistants", "Knowledge base integration", "Analytics & insights"], image: "/placeholder.png", website_link: "", case_study: "", section: "Solution Showcase", featured: false },
-      ];
-      const payload = { section_key: 'portfolio_items', text_value: JSON.stringify(showcaseData) };
-      await supabase.from('content').upsert([payload], { onConflict: 'section_key' });
-      await fetchData();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to unlock default portfolio.");
-    } finally {
-      setUnlocking(false);
-    }
-  };
 
   const unlockDefaultTestimonials = async () => {
     setUnlocking(true);
@@ -535,7 +507,6 @@ export default function AdminDashboard() {
           <button onClick={() => { setActiveTab("overview"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "overview" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><LayoutDashboard size={18}/> Overview</button>
           <button onClick={() => { setActiveTab("pricing"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
           <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
-          <button onClick={() => { setActiveTab("portfolio"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "portfolio" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Palette size={18}/> Portfolio Builder</button>
           <button onClick={() => { setActiveTab("email-center"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "email-center" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Email Center</button>
           <button onClick={() => { setActiveTab("leads"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
           <button onClick={() => { setActiveTab("documents"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "documents" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Documents</button>
@@ -594,8 +565,6 @@ export default function AdminDashboard() {
             <ServicesBuilder data={data} fetchData={fetchData} unlockDefaultServices={unlockDefaultServices} unlocking={unlocking} />
           )}
 
-          {/* Portfolio Builder Tab */}
-          {activeTab === "portfolio" && <PortfolioBuilder data={data} fetchData={fetchData} unlockDefaultPortfolio={unlockDefaultPortfolio} unlocking={unlocking} />}
           {activeTab === "email-center" && <EmailCenterBuilder />}
 
           {/* Documents Tab */}

@@ -15,13 +15,17 @@ export const sendBrevoEmail = async (
   const senderName = senderType === "noreply" ? "TakeIN Studio" : "TakeIN Studio Support";
 
   // Determine recipients
-  const recipients = toEmail 
-    ? [{ email: toEmail, name: "Valued Client" }] 
-    : [
-        { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
+  let recipients = [];
+  if (toEmail) {
+    const emails = toEmail.split(',').map(e => e.trim()).filter(e => e);
+    recipients = emails.map(email => ({ email, name: "Valued Client" }));
+  } else {
+    recipients = [
+        { email: "support@takeinstudio.com", name: "TakeIN Studio" },
         { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" },
         { email: "ashutoshpati7778@gmail.com", name: "Ashutosh Pati" }
       ];
+  }
 
   const payload = {
     sender: {

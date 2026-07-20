@@ -9,23 +9,19 @@ import { useContent } from "@/context/ContentContext";
 
 const categories = [
   { name: "All", icon: Layers },
-  { name: "Business Websites", icon: Briefcase },
-  { name: "Education", icon: GraduationCap },
-  { name: "Healthcare", icon: HeartPulse },
-  { name: "Creative Portfolios", icon: Camera },
-  { name: "E-commerce", icon: Search },
-  { name: "Dashboards & ERP", icon: HardDrive },
+  { name: "Informational", icon: BookOpen },
+  { name: "Transactional", icon: ShoppingCart },
+  { name: "Interactive", icon: Users },
+  { name: "Apps & Software", icon: Code },
   { name: "AI Solutions", icon: Sparkles }
 ];
 
 const gradientMap: Record<string, string> = {
   All: "from-primary to-accent",
-  "Business Websites": "from-blue-500 to-indigo-500",
-  Education: "from-indigo-500 to-purple-500",
-  Healthcare: "from-emerald-500 to-teal-500",
-  "Creative Portfolios": "from-pink-500 to-rose-500",
-  "E-commerce": "from-orange-500 to-amber-500",
-  "Dashboards & ERP": "from-slate-500 to-gray-500",
+  "Informational": "from-blue-500 to-indigo-500",
+  "Transactional": "from-orange-500 to-amber-500",
+  "Interactive": "from-emerald-500 to-teal-500",
+  "Apps & Software": "from-sky-500 to-blue-500",
   "AI Solutions": "from-fuchsia-500 to-pink-500"
 };
 
@@ -58,18 +54,27 @@ export default function WorkPage() {
   const { content } = useContent();
   const isWebsitesCategory = new URLSearchParams(location.search).get("category") === "websites";
 
-  const [projects, setProjects] = useState<any[]>([]);
+  const projects = [
+    // INFORMATIONAL
+    { id: "p1", title: "Business Websites", category: "Informational", desc: "Professional corporate identities and B2B platforms designed to establish credibility and support long-term growth.", color: "from-blue-500/20 to-indigo-500/20", features: ["Corporate identity", "Lead generation", "Service showcase"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p2", title: "Blog & News/Magazine", category: "Informational", desc: "Content-driven publishing platforms optimized for high readership, SEO, and seamless content distribution.", color: "from-indigo-500/20 to-purple-500/20", features: ["Content management", "SEO optimized", "High readership"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p3", title: "Portfolio & Personal", category: "Informational", desc: "Digital resumes and creative showcases for professionals and individuals building their personal brand.", color: "from-pink-500/20 to-rose-500/20", features: ["Creative showcase", "Personal branding", "Media kit"], image: "/placeholder.png", section: "Solution Showcase" },
+    
+    // TRANSACTIONAL / E-COMMERCE
+    { id: "p4", title: "E-commerce Platforms", category: "Transactional", desc: "Scalable online stores and digital marketplaces engineered for high conversions and streamlined product management.", color: "from-orange-500/20 to-amber-500/20", features: ["Secure checkout", "Inventory management", "Sales analytics"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p5", title: "Booking & Reservation", category: "Transactional", desc: "Automated booking systems for travel, clinics, events, and real estate scheduling.", color: "from-emerald-500/20 to-teal-500/20", features: ["Calendar sync", "Automated reminders", "Payment integration"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p6", title: "Membership & Crowdfunding", category: "Transactional", desc: "Gated premium content portals and crowdfunding platforms for exclusive communities.", color: "from-fuchsia-500/20 to-pink-500/20", features: ["Subscription models", "User dashboards", "Payment gateways"], image: "/placeholder.png", section: "Solution Showcase" },
+    
+    // INTERACTIVE
+    { id: "p7", title: "Educational & E-Learning", category: "Interactive", desc: "Comprehensive learning ecosystems, course management systems, and student portals.", color: "from-blue-500/20 to-cyan-500/20", features: ["Course management", "Progress tracking", "Student portals"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p8", title: "Social Networking & Forums", category: "Interactive", desc: "Community platforms, discussion boards, and wikis fostering user engagement and networking.", color: "from-violet-500/20 to-purple-500/20", features: ["User profiles", "Real-time chat", "Content moderation"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p9", title: "Directory & Job Boards", category: "Interactive", desc: "Categorized listings, robust search-driven portals, and specialized job networks.", color: "from-slate-500/20 to-gray-500/20", features: ["Advanced search", "Listing management", "User reviews"], image: "/placeholder.png", section: "Solution Showcase" },
 
-  useEffect(() => {
-    if (content && content['portfolio_items']) {
-      try {
-        const parsed = JSON.parse(content['portfolio_items']);
-        setProjects(parsed);
-      } catch (e) {
-        console.error("Failed to parse portfolio", e);
-      }
-    }
-  }, [content]);
+    // APPS & AI BOTS
+    { id: "p10", title: "Mobile & Web Applications", category: "Apps & Software", desc: "High-performance iOS, Android, and Progressive Web Apps (PWAs) tailored for specific business logic.", color: "from-sky-500/20 to-blue-500/20", features: ["Cross-platform", "Offline capabilities", "Push notifications"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p11", title: "AI Assistants & Bots", category: "AI Solutions", desc: "Intelligent conversational agents and automation workflows to streamline customer support and operations.", color: "from-rose-500/20 to-orange-500/20", features: ["Natural Language Processing", "Workflow automation", "CRM Integration"], image: "/placeholder.png", section: "Solution Showcase" },
+    { id: "p12", title: "Specialized Platforms", category: "Apps & Software", desc: "Custom systems for Real Estate, Non-profit/Charity, Entertainment, and Government services.", color: "from-emerald-500/20 to-cyan-500/20", features: ["Custom workflows", "High security", "Scalable architecture"], image: "/placeholder.png", section: "Solution Showcase" }
+  ];
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);

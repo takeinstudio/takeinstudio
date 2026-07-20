@@ -1,3 +1,3 @@
-# Welcome to your Takein Studio Forge project
+# Welcome to TakeIN Studio
 
 TODO: Document your project here

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { FileText, Download, CheckCircle2, Loader2, Plus, Trash2 } from "lucide-react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
@@ -12,8 +12,10 @@ export default function DocumentsBuilder() {
     ownerName: "",
     developerName: "",
     domainCost: "",
+    domainPaid: false,
     hostingCost: "",
-    totalCost: ""
+    hostingPaid: false,
+    manualTotal: ""
   });
 
   // Dynamic Sections
@@ -37,6 +39,25 @@ export default function DocumentsBuilder() {
       bullets: "Encrypted Admin Authentication: Secure sessions with JWT, password hashing, and brute-force protection.\nAnti-Hacking & XSS Protection: Built-in Cross-Site Scripting (XSS) and injection attack prevention.\nAdvanced Database Security: AES-256 cloud database encryption, secure API tunneling, and cryptographically verified integrity checks for financial records."
     }
   ]);
+
+  const computedTotal = React.useMemo(() => {
+    let sum = 0;
+    sections.forEach(s => {
+      const num = parseInt(s.price.replace(/,/g, '') || "0", 10);
+      if (!isNaN(num)) sum += num;
+    });
+    if (!basicInfo.domainPaid && basicInfo.domainCost) {
+      const num = parseInt(basicInfo.domainCost.replace(/,/g, '') || "0", 10);
+      if (!isNaN(num)) sum += num;
+    }
+    if (!basicInfo.hostingPaid && basicInfo.hostingCost) {
+      const num = parseInt(basicInfo.hostingCost.replace(/,/g, '') || "0", 10);
+      if (!isNaN(num)) sum += num;
+    }
+    return sum.toLocaleString('en-IN');
+  }, [sections, basicInfo]);
+
+  const displayTotal = basicInfo.manualTotal || computedTotal;
 
   const templateRef = useRef<HTMLDivElement>(null);
 
@@ -68,7 +89,8 @@ export default function DocumentsBuilder() {
   };
 
   const handleBasicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBasicInfo({ ...basicInfo, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setBasicInfo({ ...basicInfo, [e.target.name]: value });
   };
 
   const handleSectionChange = (id: string, field: string, value: string) => {
@@ -165,18 +187,30 @@ export default function DocumentsBuilder() {
         {/* Totals */}
         <div className="space-y-4">
           <h4 className="font-bold text-sm text-foreground/80 border-b pb-2">Totals & Domain Setup</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-xs font-semibold text-muted-foreground mb-1">Domain Name Cost</label>
-              <input type="text" name="domainCost" value={basicInfo.domainCost} onChange={handleBasicChange} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none" />
+              <div className="flex justify-between items-center mb-1">
+                <label className="block text-xs font-semibold text-muted-foreground">Domain Name Cost</label>
+                <label className="flex items-center gap-1.5 text-xs text-green-600 font-bold cursor-pointer">
+                  <input type="checkbox" name="domainPaid" checked={basicInfo.domainPaid} onChange={handleBasicChange} className="accent-green-600 w-3.5 h-3.5 rounded" />
+                  Paid?
+                </label>
+              </div>
+              <input type="text" name="domainCost" value={basicInfo.domainCost} onChange={handleBasicChange} disabled={basicInfo.domainPaid} placeholder={basicInfo.domainPaid ? "Paid" : "e.g. 800"} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none disabled:opacity-50" />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-muted-foreground mb-1">Hosting Setup Cost</label>
-              <input type="text" name="hostingCost" value={basicInfo.hostingCost} onChange={handleBasicChange} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none" />
+              <div className="flex justify-between items-center mb-1">
+                <label className="block text-xs font-semibold text-muted-foreground">Hosting Setup Cost</label>
+                <label className="flex items-center gap-1.5 text-xs text-green-600 font-bold cursor-pointer">
+                  <input type="checkbox" name="hostingPaid" checked={basicInfo.hostingPaid} onChange={handleBasicChange} className="accent-green-600 w-3.5 h-3.5 rounded" />
+                  Paid?
+                </label>
+              </div>
+              <input type="text" name="hostingCost" value={basicInfo.hostingCost} onChange={handleBasicChange} disabled={basicInfo.hostingPaid} placeholder={basicInfo.hostingPaid ? "Paid" : "e.g. 2,000"} className="w-full bg-background border border-border/50 rounded-lg px-3 py-2 text-sm focus:border-primary outline-none disabled:opacity-50" />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-brand-orange mb-1">Total Payable</label>
-              <input type="text" name="totalCost" value={basicInfo.totalCost} onChange={handleBasicChange} className="w-full bg-orange-50 border border-orange-200 text-brand-orange font-bold rounded-lg px-3 py-2 text-lg focus:border-primary outline-none" />
+              <label className="block text-xs font-semibold text-brand-orange mb-1">Total Payable (Auto-Calculated)</label>
+              <input type="text" name="manualTotal" value={basicInfo.manualTotal} onChange={handleBasicChange} placeholder={`₹ ${computedTotal}`} className="w-full bg-orange-50 border border-orange-200 text-brand-orange font-bold rounded-lg px-3 py-2 text-lg focus:border-primary outline-none" />
             </div>
           </div>
         </div>
@@ -294,7 +328,7 @@ export default function DocumentsBuilder() {
                               <p className="text-[13px] text-gray-500">Comprehensive Web Platform & Content Management System</p>
                           </div>
                           <div className="text-4xl font-extrabold whitespace-nowrap text-[#1a1a1a]">
-                              ₹ {basicInfo.totalCost || "13,499"}
+                              ₹ {displayTotal || "13,499"}
                           </div>
                       </div>
                       
@@ -392,8 +426,19 @@ export default function DocumentsBuilder() {
                                   <p className="text-[12px] text-gray-500">Yearly Renewal (e.g., .com, .in)</p>
                               </div>
                               <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
-                                  <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
-                                  <span className="text-[10px] text-gray-500">Exact rates depend on preferred domain</span>
+                                  {basicInfo.domainPaid ? (
+                                      <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
+                                  ) : basicInfo.domainCost ? (
+                                      <>
+                                          <span className="text-[14px] font-bold text-gray-900 uppercase tracking-wider block mb-1">₹ {basicInfo.domainCost}</span>
+                                          <span className="text-[10px] text-gray-500">Subject to renewal</span>
+                                      </>
+                                  ) : (
+                                      <>
+                                          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                          <span className="text-[10px] text-gray-500">Exact rates depend on preferred domain</span>
+                                      </>
+                                  )}
                               </div>
                           </div>
 
@@ -404,8 +449,19 @@ export default function DocumentsBuilder() {
                                   <p className="text-[12px] text-gray-500">Yearly Renewal (Speed, Security & Maintenance)</p>
                               </div>
                               <div className="text-center bg-[#fffbf8] border border-[#ffedd5] px-4 py-3 rounded-xl min-w-[200px]">
-                                  <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
-                                  <span className="text-[10px] text-gray-500">Exact rates depend on preferred hosting</span>
+                                  {basicInfo.hostingPaid ? (
+                                      <span className="text-[14px] font-bold text-[#10b981] uppercase tracking-wider block">PAID</span>
+                                  ) : basicInfo.hostingCost ? (
+                                      <>
+                                          <span className="text-[14px] font-bold text-gray-900 uppercase tracking-wider block mb-1">₹ {basicInfo.hostingCost}</span>
+                                          <span className="text-[10px] text-gray-500">Subject to renewal</span>
+                                      </>
+                                  ) : (
+                                      <>
+                                          <span className="text-[10px] font-bold text-gray-900 uppercase tracking-wider block mb-1">TO BE CHECKED</span>
+                                          <span className="text-[10px] text-gray-500">Exact rates depend on preferred hosting</span>
+                                      </>
+                                  )}
                               </div>
                           </div>
                       </div>
@@ -416,7 +472,7 @@ export default function DocumentsBuilder() {
               <div className="bg-[#ff5722] py-6 px-10 text-white flex justify-between items-center relative overflow-hidden">
                   <h4 className="heading font-bold text-[24px] relative z-10">Total Immediate Payable</h4>
                   <div className="text-[32px] font-extrabold text-right tracking-tight relative z-10">
-                      ₹ {basicInfo.totalCost || "13,499"} <span className="text-[14px] font-normal text-white/90 ml-1">+ Domain/Hosting</span>
+                      ₹ {displayTotal || "13,499"} <span className="text-[14px] font-normal text-white/90 ml-1">+ Domain/Hosting</span>
                   </div>
               </div>
 

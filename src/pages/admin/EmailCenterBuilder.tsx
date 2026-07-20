@@ -59,7 +59,7 @@ export default function EmailCenterBuilder() {
     return `
       <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaebed; border-radius: 12px; background-color: #ffffff;">
         <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0;">
-          <img src="https://takeinstudio.com/logo/logo_text.png" alt="TakeIN Studio" style="max-height: 40px; display: block; margin: 0 auto;" />
+          <img src="https://takeinstudio.com/logo/logo_text.png" alt="TakeIN Studio" style="max-height: 45px; display: inline-block; margin: 0 auto; background-color: #ffffff; padding: 8px 16px; border-radius: 8px;" />
         </div>
         <div style="color: #333333; font-size: 15px; line-height: 1.6;">
           ${formattedText}
@@ -102,18 +102,8 @@ export default function EmailCenterBuilder() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-border/40 pb-5">
-        <div>
-          <h2 className="text-2xl font-display font-bold">Email Center</h2>
-          <p className="text-muted-foreground text-sm mt-1">Manage and send platform communications to clients and applicants.</p>
-        </div>
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-          <Send size={18} className="text-primary" />
-        </div>
-      </div>
-
       {/* Mock Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         {[
           { label: "Sent Today", value: "12", icon: Calendar, color: "text-blue-500", bg: "bg-blue-500/10" },
           { label: "Sent This Month", value: "148", icon: Send, color: "text-purple-500", bg: "bg-purple-500/10" },

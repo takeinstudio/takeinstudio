@@ -1,7 +1,8 @@
 export const sendBrevoEmail = async (
   subject: string,
   htmlContent: string,
-  senderType: "support" | "noreply" = "support"
+  senderType: "support" | "noreply" = "support",
+  toEmail?: string
 ) => {
   const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
 
@@ -13,16 +14,21 @@ export const sendBrevoEmail = async (
   const senderEmail = senderType === "noreply" ? "noreply@takeinstudio.com" : "support@takeinstudio.com";
   const senderName = senderType === "noreply" ? "TakeIN Studio" : "TakeIN Studio Support";
 
+  // Determine recipients
+  const recipients = toEmail 
+    ? [{ email: toEmail, name: "Valued Client" }] 
+    : [
+        { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
+        { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" },
+        { email: "ashutoshpati7778@gmail.com", name: "Ashutosh Pati" }
+      ];
+
   const payload = {
     sender: {
       name: senderName,
       email: senderEmail
     },
-    to: [
-      { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
-      { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" },
-      { email: "ashutoshpati7778@gmail.com", name: "Ashutosh Pati" }
-    ],
+    to: recipients,
     subject: subject,
     htmlContent: htmlContent
   };

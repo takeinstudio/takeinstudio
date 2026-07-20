@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, X, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { sendBrevoEmail } from "@/lib/email";
-
 export default function LeadPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const [phone, setPhone] = useState("");
@@ -45,18 +43,6 @@ export default function LeadPopup() {
         message: "Captured from automated website popup.",
         status: "New"
       }]);
-
-      // 2. Send Email via Brevo
-      await sendBrevoEmail(
-        "🚨 NEW QUICK LEAD - TakeIN Studio",
-        `<div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h2 style="color: #ff5722;">New Lead Captured!</h2>
-          <p><strong>Source:</strong> Automated Website Popup</p>
-          <p><strong>Phone Number:</strong> <a href="tel:${phone}" style="font-size: 24px; font-weight: bold; color: #333;">${phone}</a></p>
-          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-          <p style="color: #666; font-size: 12px;">This lead was captured automatically while the user was browsing the website.</p>
-        </div>`
-      );
 
       setSuccess(true);
       localStorage.setItem("takein_lead_captured", "true");

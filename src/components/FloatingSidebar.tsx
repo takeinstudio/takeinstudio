@@ -22,12 +22,6 @@ export default function FloatingSidebar() {
 
   const socialLinks = [
     {
-      name: "WhatsApp",
-      icon: <WhatsAppIcon size={18} />,
-      href: "https://wa.me/918908233590",
-      color: "bg-[#25D366] hover:bg-[#20ba56] text-white shadow-[#25D366]/20",
-    },
-    {
       name: "Instagram",
       icon: <Instagram size={18} />,
       href: "https://instagram.com/takein_studio",
@@ -76,6 +70,15 @@ export default function FloatingSidebar() {
             {link.icon}
           </motion.a>
         ))}
+
+        {/* WhatsApp OTP Protected Icon */}
+        <motion.div
+          whileHover={{ scale: 1.4, x: -6, zIndex: 50 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          <PhoneUnlockButton variant="sidebar-whatsapp" />
+        </motion.div>
 
         {/* Floating Phone Popout Button - inside the same container */}
         <div className="relative">

@@ -1,13 +1,12 @@
 import { supabase } from '@/lib/supabase';
 import { useState, useEffect } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
-import { sendBrevoEmail } from "@/lib/email";
 
 
 
@@ -80,11 +79,6 @@ ${form.message}`;
     a.click();
   };
 
-  const handleWhatsApp = () => {
-    if (!validateForm()) return;
-    window.open(`https://wa.me/918908233590?text=${getMessageBody()}`, "_blank");
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -102,22 +96,6 @@ ${form.message}`;
 
     try {
       await supabase.from('leads').insert([newEnquiry]);
-
-      // Send Email Notification
-      sendBrevoEmail(
-        "🚀 NEW PROJECT INQUIRY - TakeIN Studio",
-        `<div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h2 style="color: #ff5722;">New Project Inquiry!</h2>
-          <p><strong>Name:</strong> ${form.name}</p>
-          <p><strong>Email:</strong> ${form.email}</p>
-          <p><strong>Phone:</strong> ${form.phone}</p>
-          <p><strong>Company:</strong> ${form.company || "N/A"}</p>
-          <p><strong>Service:</strong> ${selectedService ? `${selectedService} (${selectedPlan})` : "General Inquiry"}</p>
-          <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-          <h3 style="color: #666;">Project Details:</h3>
-          <p style="white-space: pre-wrap;">${form.message}</p>
-        </div>`
-      );
 
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");
@@ -282,26 +260,18 @@ ${form.message}`;
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full sm:col-span-2 flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
                   >
-                    {loading ? "Sending to Dashboard..." : "Submit to Admin Dashboard"}
+                    {loading ? "Sending..." : "Submit to Dashboard"}
                     <Send size={16} />
                   </button>
 
                   <button
                     type="button"
                     onClick={handleEmail}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-card border-2 border-border text-foreground font-bold text-xs tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-card border-2 border-border text-foreground font-bold text-sm tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
                   >
-                    <Mail size={14} /> Send via Email
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleWhatsApp}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#25D366]/10 border-2 border-[#25D366]/30 text-[#075E54] font-bold text-xs tracking-wide hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-all duration-300"
-                  >
-                    <MessageSquare size={14} /> Direct WhatsApp
+                    <Mail size={16} /> Send via Email
                   </button>
                 </div>
 

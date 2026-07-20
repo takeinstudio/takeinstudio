@@ -128,3 +128,44 @@ GRANT ALL ON TABLE public.leads TO anon, authenticated;
 GRANT ALL ON TABLE public.testimonials TO anon, authenticated;
 GRANT ALL ON TABLE public.jobs TO anon, authenticated;
 GRANT ALL ON TABLE public.careers TO anon, authenticated;
+
+-- 8. System Config Table (For sensitive data like phone numbers)
+CREATE TABLE IF NOT EXISTS public.system_config (
+    key text PRIMARY KEY,
+    value text NOT NULL,
+    description text
+);
+
+-- Insert encrypted/protected phone numbers and API keys
+INSERT INTO public.system_config (key, value, description)
+VALUES 
+    ('phone_primary', '+918908233590', 'Primary Phone/WhatsApp'),
+    ('phone_secondary', '+919124442040', 'Secondary Phone'),
+    ('brevo_api_key', 'YOUR_BREVO_API_KEY_HERE', 'Brevo SMTP API Key')
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
+
+-- Enable RLS on system_config
+ALTER TABLE public.system_config ENABLE ROW LEVEL SECURITY;
+
+-- Allow ONLY authenticated users to read system_config
+CREATE POLICY "Allow authenticated users to read config"
+ON public.system_config FOR SELECT 
+TO authenticated 
+USING (true);
+
+-- Enable RLS on leads to prevent unauthorized reading/scraping
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous users to insert leads (submit contact form)
+CREATE POLICY "Allow anonymous users to insert leads"
+ON public.leads FOR INSERT
+TO public
+WITH CHECK (true);
+
+-- Allow authenticated admins to read leads (assuming admins are authenticated)
+CREATE POLICY "Allow admins to read leads"
+ON public.leads FOR SELECT
+TO authenticated
+USING (true);
+
+GRANT ALL ON TABLE public.system_config TO anon, authenticated;

@@ -1,13 +1,22 @@
+import { supabase } from "@/lib/supabase";
+
 export const sendBrevoEmail = async (
   subject: string,
   htmlContent: string,
   senderType: "support" | "noreply" = "support",
   toEmail?: string
 ) => {
-  const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
+  // Fetch API key securely from the database
+  const { data: configData, error: configError } = await supabase
+    .from('system_config')
+    .select('value')
+    .eq('key', 'brevo_api_key')
+    .single();
 
-  if (!BREVO_API_KEY) {
-    console.warn("VITE_BREVO_API_KEY is not set. Email not sent.");
+  const BREVO_API_KEY = configData?.value;
+
+  if (configError || !BREVO_API_KEY) {
+    console.error("Failed to load Brevo API Key from secure config. User might not be an admin, or key is missing.");
     return false;
   }
 

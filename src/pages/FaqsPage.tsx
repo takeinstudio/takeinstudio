@@ -5,7 +5,6 @@ import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
-import { sendBrevoEmail } from "@/lib/email";
 
 interface UserQuestion {
   id: string;
@@ -101,19 +100,6 @@ export default function FaqsPage() {
     const updated = [newQ, ...userQuestions];
     setUserQuestions(updated);
     localStorage.setItem("takein_user_faqs", JSON.stringify(updated));
-
-    // Send Email
-    sendBrevoEmail(
-      "🤔 NEW FAQ QUESTION - TakeIN Studio",
-      `<div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-        <h2 style="color: #ff5722;">New Custom Question Submitted!</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 15px;">
-          <p style="margin:0; font-style: italic;">"${question}"</p>
-        </div>
-      </div>`
-    );
 
     setName("");
     setEmail("");

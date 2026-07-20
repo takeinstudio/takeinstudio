@@ -298,16 +298,7 @@ function Hero() {
           </div>
         </div>
 
-        {/* Trusted By Ticker */}
-        <div className="mt-16 text-center overflow-hidden w-full max-w-5xl mx-auto pb-10">
-          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-10">Trusted By Businesses</p>
-          <div className="flex items-center justify-center gap-8 sm:gap-16 opacity-60 flex-wrap sm:flex-nowrap grayscale hover:grayscale-0 transition-all duration-500">
-             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white text-xs">U</div> UTKAL</span>
-             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Globe size={28}/> EduSmart</span>
-             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Zap size={28}/> FITZONE</span>
-             <span className="text-2xl font-black font-display text-gray-800 flex items-center gap-2"><Monitor size={28}/> TechNova</span>
-          </div>
-        </div>
+
       </div>
     </section>
   );

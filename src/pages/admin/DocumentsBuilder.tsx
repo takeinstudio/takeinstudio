@@ -321,8 +321,6 @@ export default function DocumentsBuilder() {
             </div>
           </div>
 
-          <div className="html2pdf__page-break"></div>
-
           {/* PAGE 2 */}
           <div className="pdf-page">
             <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden border border-orange-100 shadow-sm relative z-10 p-12 h-[1051px]">
@@ -419,8 +417,6 @@ export default function DocumentsBuilder() {
                   </div>
               </div>
           </div>
-
-          <div className="html2pdf__page-break"></div>
 
           {/* PAGE 3 */}
           <div className="pdf-page">

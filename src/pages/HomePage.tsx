@@ -87,14 +87,6 @@ function Hero() {
 
   return (
     <section className="relative w-full pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden bg-white flex flex-col">
-      {/* Social Side Dock (Fixed on Desktop) */}
-      <div className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-3 bg-white/80 backdrop-blur-md p-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white">
-        <a href="https://wa.me/918908233590" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-        <a href="https://instagram.com/takeinstudio" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-        <a href="mailto:xpertenzo.in@gmail.com" className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><Mail size={18} /></a>
-        <a href="tel:+918908233590" className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-md"><svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.007.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.082-1.026-3.492-6.817-2.106 1.039c-2.617 1.29-6.22 8.528 2.247 12.632 8.527 4.133 13.064-.972 13.064-.972l-1.601-.078z"/></svg></a>
-      </div>
 
       {/* Ambient Glow Effects */}
       <div className="absolute top-0 left-[-10%] w-[600px] h-[600px] bg-orange-100/40 rounded-full blur-[100px] pointer-events-none" />
@@ -144,59 +136,99 @@ function Hero() {
           {/* Right Side Visual (Mockups & Floating Cards) */}
           <div className="relative w-full h-[500px] lg:h-[650px] flex items-center justify-center mt-10 lg:mt-0">
             
-            {/* The CSS Laptop Mockup */}
-            <div className="relative z-10 w-[95%] max-w-[550px] aspect-[16/10] bg-[#1a1a1a] rounded-t-xl rounded-b-sm border-4 border-gray-800 shadow-[0_30px_60px_rgba(0,0,0,0.4)] overflow-hidden flex flex-col transform lg:translate-x-4">
-               {/* Top Bar */}
-               <div className="h-6 bg-[#0f0f0f] w-full flex items-center px-3 gap-1.5">
-                 <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                 <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+            {/* The Main Abstract Dashboard (Growth/SEO) */}
+            <div className="relative z-10 w-[95%] max-w-[500px] aspect-[16/11] bg-[#0a0a0a] rounded-2xl border border-gray-800 shadow-[0_30px_60px_rgba(0,0,0,0.4)] overflow-hidden flex flex-col transform lg:translate-x-4">
+               {/* Dashboard Header */}
+               <div className="h-14 border-b border-gray-800 w-full flex items-center px-6 gap-4 bg-[#111]">
+                 <div className="flex gap-1.5">
+                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                 </div>
                  <div className="flex-1" />
-                 <div className="w-32 h-3 bg-gray-800 rounded-full" />
+                 <div className="flex items-center gap-2 bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-800">
+                   <TrendingUp size={12} className="text-[#ff6b00]" />
+                   <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">Performance Metric</span>
+                 </div>
                </div>
-               {/* Screen Content */}
-               <div className="flex-1 w-full bg-[#111111] p-6 lg:p-8 flex flex-col justify-center relative overflow-hidden">
-                 <div className="absolute top-6 left-6 flex items-center gap-2">
-                   <div className="w-6 h-6 rounded bg-[#ff6b00]" />
-                   <div className="text-white font-display font-bold text-sm tracking-widest">TakeIN Studio</div>
+               
+               {/* Dashboard Body (Analytics/Growth Graph) */}
+               <div className="flex-1 w-full bg-gradient-to-br from-[#0f0f0f] to-[#050505] p-6 lg:p-8 flex flex-col relative overflow-hidden">
+                 <div className="flex justify-between items-end mb-8 relative z-10">
+                   <div>
+                     <p className="text-gray-500 text-[10px] uppercase font-bold tracking-widest mb-1">Total Organic Traffic</p>
+                     <h2 className="text-white text-4xl lg:text-5xl font-black">+428%</h2>
+                   </div>
+                   <div className="bg-[#ff6b00]/20 text-[#ff6b00] px-3 py-1 rounded-full text-[10px] font-bold flex items-center gap-1">
+                     <ArrowUpRight size={12} /> Live
+                   </div>
                  </div>
-                 <div className="absolute top-6 right-6 hidden sm:flex gap-4 opacity-50 text-[8px] uppercase tracking-widest text-white font-bold">
-                    <span>Home</span><span>About</span><span>Services</span><span>Portfolio</span><span className="bg-[#ff6b00] px-2 py-0.5 rounded text-white opacity-100">Contact</span>
-                 </div>
-
-                 <h2 className="text-white text-3xl lg:text-5xl font-black mt-8 leading-tight tracking-tight">WE DESIGN.<br/>WE BUILD.<br/><span className="text-[#ff6b00]">WE GROW.</span></h2>
-                 <p className="text-gray-400 text-[10px] lg:text-xs mt-3 max-w-[60%]">Your Vision. Our Code. Real Results.</p>
-                 <div className="w-24 h-8 bg-[#ff6b00] text-white text-[10px] font-bold rounded mt-6 flex items-center justify-center">Get Started</div>
                  
-                 {/* Abstract BG code/tech elements */}
-                 <div className="absolute right-[-10%] bottom-[-10%] opacity-[0.03] pointer-events-none transform -rotate-12 scale-150">
-                    <Code2 size={250} />
+                 {/* CSS Bar Chart */}
+                 <div className="flex-1 flex items-end justify-between gap-2 lg:gap-4 mt-auto relative z-10">
+                   {[40, 55, 35, 70, 50, 85, 100].map((height, i) => (
+                     <motion.div 
+                       key={i}
+                       initial={{ height: 0 }}
+                       animate={{ height: `${height}%` }}
+                       transition={{ duration: 1.5, delay: i * 0.1, ease: "easeOut" }}
+                       className={`w-full rounded-t-sm ${i === 6 ? 'bg-[#ff6b00] shadow-[0_0_20px_rgba(255,107,0,0.4)]' : 'bg-gray-800'}`} 
+                     />
+                   ))}
                  </div>
-               </div>
-               {/* Laptop Base Keyboard Deck */}
-               <div className="absolute bottom-[-20px] left-[-6%] right-[-6%] h-5 bg-gradient-to-b from-gray-300 to-gray-400 rounded-b-2xl shadow-xl border-t border-gray-200 z-20 flex items-start justify-center">
-                  <div className="w-24 h-2 bg-gray-200 rounded-b-md" />
+                 
+                 {/* Background Grid */}
+                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
                </div>
             </div>
 
-            {/* The CSS Mobile Mockup */}
+            {/* Floating Code Editor (Web Dev) */}
+            <motion.div 
+               animate={{ y: [10, -10, 10] }} 
+               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+               className="absolute z-20 left-[-5%] sm:left-[-10%] top-[10%] lg:top-[5%] w-[180px] lg:w-[220px] bg-[#1e1e1e] rounded-xl border border-gray-700 shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
+            >
+               <div className="h-8 bg-[#2d2d2d] flex items-center px-3 border-b border-gray-900">
+                  <span className="text-[9px] text-gray-400 font-mono">app.tsx</span>
+               </div>
+               <div className="p-4 flex flex-col gap-2 font-mono text-[8px] lg:text-[10px]">
+                  <p><span className="text-pink-500">import</span> <span className="text-blue-400">React</span> <span className="text-pink-500">from</span> <span className="text-orange-300">'react'</span>;</p>
+                  <p><span className="text-pink-500">export function</span> <span className="text-green-400">Scale</span>() {'{'}</p>
+                  <p className="pl-4"><span className="text-pink-500">return</span> (</p>
+                  <p className="pl-8 text-gray-300">{'<System>'}</p>
+                  <p className="pl-12"><span className="text-blue-300">Fast & Secure</span></p>
+                  <p className="pl-8 text-gray-300">{'</System>'}</p>
+                  <p className="pl-4">);</p>
+                  <p>{'}'}</p>
+               </div>
+            </motion.div>
+
+            {/* Floating Mobile UI (App Dev) */}
             <motion.div 
                animate={{ y: [-8, 8, -8] }} 
-               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-               className="absolute z-30 right-[2%] sm:right-[5%] bottom-[5%] lg:bottom-[10%] w-[130px] lg:w-[150px] aspect-[9/19] bg-[#0a0a0a] rounded-[2.5rem] border-[6px] border-[#222] shadow-[0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
+               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+               className="absolute z-20 right-[0%] sm:right-[5%] bottom-[5%] lg:bottom-[0%] w-[110px] lg:w-[130px] aspect-[9/18] bg-[#0a0a0a] rounded-[2rem] border-[4px] border-[#222] shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden p-2"
             >
-               {/* Notch */}
-               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-4 bg-[#222] rounded-b-xl z-30" />
-               <div className="flex-1 bg-[#111] p-4 pt-10 flex flex-col items-center text-center relative">
-                 <div className="text-[#ff6b00] text-[8px] font-bold uppercase tracking-widest mb-2">Award-Winning</div>
-                 <p className="text-white text-[14px] font-black leading-tight">Driving Growth Through <span className="text-[#ff6b00]">Digital</span> Excellence</p>
-                 <p className="text-gray-500 text-[7px] mt-2 leading-relaxed">We build fast, secure and scalable digital products that grow with your business.</p>
-                 <div className="w-full h-7 bg-[#ff6b00] rounded text-white text-[8px] font-bold flex items-center justify-center mt-4">Get Started</div>
+               <div className="w-full h-full bg-[#111] rounded-2xl flex flex-col p-3 border border-gray-800 relative overflow-hidden">
+                 {/* App Header */}
+                 <div className="flex justify-between items-center mb-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-800" />
+                    <div className="w-12 h-2 bg-gray-800 rounded-full" />
+                 </div>
+                 {/* App Content */}
+                 <div className="w-full h-16 bg-gradient-to-br from-[#ff6b00]/20 to-transparent rounded-xl border border-[#ff6b00]/30 flex items-center justify-center mb-3">
+                    <Smartphone size={16} className="text-[#ff6b00]" />
+                 </div>
+                 <div className="w-[80%] h-2.5 bg-gray-700 rounded-full mb-2" />
+                 <div className="w-[60%] h-2.5 bg-gray-800 rounded-full mb-4" />
                  
-                 <div className="mt-auto grid grid-cols-3 gap-2 w-full pt-4 border-t border-gray-800">
-                    <div className="flex flex-col items-center gap-1"><Globe size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">Web Dev</span></div>
-                    <div className="flex flex-col items-center gap-1"><Smartphone size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">App Dev</span></div>
-                    <div className="flex flex-col items-center gap-1"><Bot size={10} className="text-gray-400" /><span className="text-[6px] text-gray-500">AI</span></div>
+                 {/* App Grid */}
+                 <div className="grid grid-cols-2 gap-2 mt-auto">
+                    <div className="aspect-square bg-gray-800 rounded-lg" />
+                    <div className="aspect-square bg-gray-800 rounded-lg" />
+                 </div>
+                 <div className="absolute -bottom-4 -right-4 text-[#ff6b00] opacity-10 blur-[2px]">
+                   <ShieldCheck size={80} />
                  </div>
                </div>
             </motion.div>

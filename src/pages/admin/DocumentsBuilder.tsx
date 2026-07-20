@@ -69,8 +69,7 @@ export default function DocumentsBuilder() {
         filename: `${basicInfo.projectName ? basicInfo.projectName.replace(new RegExp('\\s+', 'g'), '_') : 'Project'}_Handover.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'css', before: '.pdf-page' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       try {
         await html2pdf().from(element).set(opt).save();

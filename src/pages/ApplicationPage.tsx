@@ -73,20 +73,92 @@ export default function ApplicationPage() {
     
     setIsSubmitting(true);
     try {
-      const payload = {
+      let resume_url = "";
+      let portfolio_url = formData.portfolioUrl || formData.linkedin;
+
+      // 1. Upload Resume PDF if selected
+      if (resumeInputRef.current?.files?.[0]) {
+        const file = resumeInputRef.current.files[0];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+        
+        try {
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('resumes')
+            .upload(fileName, file);
+            
+          if (uploadError) {
+            console.warn("Resume upload storage warning (bucket might not exist yet):", uploadError.message);
+          } else if (uploadData) {
+            const { data } = supabase.storage.from('resumes').getPublicUrl(fileName);
+            resume_url = data.publicUrl;
+          }
+        } catch (storageErr) {
+          console.warn("Resume storage upload failed:", storageErr);
+        }
+      }
+
+      // 2. Upload Portfolio PDF if selected
+      if (portfolioInputRef.current?.files?.[0]) {
+        const file = portfolioInputRef.current.files[0];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+        
+        try {
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('portfolios')
+            .upload(fileName, file);
+            
+          if (uploadError) {
+            console.warn("Portfolio upload storage warning (bucket might not exist yet):", uploadError.message);
+          } else if (uploadData) {
+            const { data } = supabase.storage.from('portfolios').getPublicUrl(fileName);
+            portfolio_url = data.publicUrl;
+          }
+        } catch (storageErr) {
+          console.warn("Portfolio storage upload failed:", storageErr);
+        }
+      }
+
+      const payload: any = {
         name: `${formData.firstName} ${formData.lastName}`.trim(),
         email: formData.email,
         phone: formData.phone,
         role: formData.role,
         experience: formData.experience,
-        portfolio: formData.portfolioUrl || formData.linkedin,
+        portfolio_url: portfolio_url,
+        resume_url: resume_url,
         message: formData.message,
         status: "New"
       };
       
-      await supabase.from('careers').insert([payload]);
+      // Attempt insert with experience column
+      const { error: insertError } = await supabase.from('careers').insert([payload]);
+      
+      // Fallback if 'experience' column is missing from their database schema
+      if (insertError) {
+        if (insertError.code === 'PGRST204' || insertError.message?.includes('experience')) {
+          console.warn("experience column not found in database careers table, falling back to message injection");
+          const fallbackPayload = {
+            name: payload.name,
+            email: payload.email,
+            phone: payload.phone,
+            role: payload.role,
+            portfolio_url: payload.portfolio_url,
+            resume_url: payload.resume_url,
+            message: `[Experience: ${formData.experience}]\n\n${payload.message}`,
+            status: "New"
+          };
+          const { error: fallbackError } = await supabase.from('careers').insert([fallbackPayload]);
+          if (fallbackError) throw fallbackError;
+        } else {
+          throw insertError;
+        }
+      }
+
       setIsSubmitted(true);
     } catch (err) {
+      console.error("Submission error details:", err);
       alert("Error submitting application. Please try again.");
     } finally {
       setIsSubmitting(false);

@@ -160,9 +160,15 @@ export default function RecruitmentHubBuilder({ data, fetchData }: any) {
               )}
 
               <div className="mt-auto grid grid-cols-2 gap-3 border-t border-border/50 pt-4">
-                <button className="flex justify-center items-center gap-1.5 bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-2 rounded-lg text-xs font-bold transition-colors">
-                  <Download size={14} /> Resume
-                </button>
+                {app.resume_url ? (
+                  <a href={app.resume_url.startsWith('http') ? app.resume_url : `https://${app.resume_url}`} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-1.5 bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-2 rounded-lg text-xs font-bold transition-colors">
+                    <Download size={14} /> Resume
+                  </a>
+                ) : (
+                  <button disabled className="flex justify-center items-center gap-1.5 bg-muted/50 text-muted-foreground/50 px-3 py-2 rounded-lg text-xs font-bold cursor-not-allowed">
+                    No Resume
+                  </button>
+                )}
                 {app.portfolio ? (
                   <a href={app.portfolio.startsWith('http') ? app.portfolio : `https://${app.portfolio}`} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-1.5 bg-muted text-foreground hover:bg-muted/80 px-3 py-2 rounded-lg text-xs font-bold transition-colors">
                     <ExternalLink size={14} /> Portfolio

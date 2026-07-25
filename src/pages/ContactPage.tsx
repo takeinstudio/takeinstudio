@@ -7,6 +7,7 @@ import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
+import { sendBrevoEmail } from "@/lib/email";
 
 
 
@@ -96,6 +97,24 @@ ${form.message}`;
 
     try {
       await supabase.from('leads').insert([newEnquiry]);
+
+      // Try to send email notification to takeinstudio@gmail.com
+      try {
+        await sendBrevoEmail(
+          `📞 New Lead Enquiry: ${newEnquiry.name}`,
+          `<h3>New Lead Enquiry Received</h3>
+           <p><strong>Name:</strong> ${newEnquiry.name}</p>
+           <p><strong>Email:</strong> ${newEnquiry.email}</p>
+           <p><strong>Phone:</strong> ${newEnquiry.phone || 'N/A'}</p>
+           <p><strong>Service:</strong> ${newEnquiry.service}</p>
+           <br/>
+           <p><strong>Message / Project Details:</strong></p>
+           <p>${newEnquiry.message.replace(/\n/g, '<br/>')}</p>`,
+          "noreply"
+        );
+      } catch (emailErr) {
+        console.error("Failed to send email notification:", emailErr);
+      }
 
       setLoading(false);
       toast.success("Message received! We'll get back to you within 24 hours 🚀");

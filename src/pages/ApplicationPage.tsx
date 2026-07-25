@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { UploadCloud, CheckCircle2, ArrowLeft, Loader2, X } from "lucide-react";
 import SEO from "@/components/SEO";
 import AnimatedSection from "@/components/AnimatedSection";
+import { sendBrevoEmail } from '@/lib/email';
 
 export default function ApplicationPage() {
   const location = useLocation();
@@ -154,6 +155,27 @@ export default function ApplicationPage() {
         } else {
           throw insertError;
         }
+      }
+
+      // Try to send email notification to takeinstudio@gmail.com
+      try {
+        await sendBrevoEmail(
+          `💼 New Career Application: ${payload.name} (${payload.role})`,
+          `<h3>New Career Application Received</h3>
+           <p><strong>Name:</strong> ${payload.name}</p>
+           <p><strong>Email:</strong> ${payload.email}</p>
+           <p><strong>Phone:</strong> ${payload.phone || 'N/A'}</p>
+           <p><strong>Role:</strong> ${payload.role}</p>
+           <p><strong>Experience:</strong> ${formData.experience || 'N/A'}</p>
+           <p><strong>Portfolio/LinkedIn:</strong> ${payload.portfolio_url || 'N/A'}</p>
+           <p><strong>Resume URL:</strong> ${payload.resume_url ? `<a href="${payload.resume_url}">${payload.resume_url}</a>` : 'Not uploaded (or upload failed)'}</p>
+           <br/>
+           <p><strong>Message/Cover Letter:</strong></p>
+           <p>${(payload.message || '').replace(/\n/g, '<br/>')}</p>`,
+          "noreply"
+        );
+      } catch (emailErr) {
+        console.error("Failed to send email notification:", emailErr);
       }
 
       setIsSubmitted(true);

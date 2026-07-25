@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Phone, X, ArrowRight, Loader2, CheckCircle2, Zap, Tag, Flame } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Link } from "react-router-dom";
+import { sendBrevoEmail } from "@/lib/email";
 
 export default function LeadPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,6 +42,19 @@ export default function LeadPopup() {
         message: "Captured via Mega Offer 10% Discount popup.",
         status: "New"
       }]);
+
+      // Try to send email notification to takeinstudio@gmail.com
+      try {
+        await sendBrevoEmail(
+          `🎉 New Popup Lead Captured: ${phone}`,
+          `<h3>New Discount Offer Lead Captured</h3>
+           <p><strong>Phone:</strong> ${phone}</p>
+           <p><strong>Source:</strong> Mega Offer 10% Discount popup</p>`,
+          "noreply"
+        );
+      } catch (emailErr) {
+        console.error("Failed to send email notification:", emailErr);
+      }
 
       setSuccess(true);
       localStorage.setItem("takein_lead_captured", "true");

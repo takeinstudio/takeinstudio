@@ -6,17 +6,21 @@ export const sendBrevoEmail = async (
   senderType: "support" | "noreply" = "support",
   toEmail?: string
 ) => {
-  // Fetch API key securely from the database
-  const { data: configData, error: configError } = await supabase
-    .from('system_config')
-    .select('value')
-    .eq('key', 'brevo_api_key')
-    .single();
+  // First try to load from environment variable (allows anonymous pages to send emails)
+  let BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
 
-  const BREVO_API_KEY = configData?.value;
+  if (!BREVO_API_KEY) {
+    // Fallback to fetching API key securely from the database (for admin panel)
+    const { data: configData } = await supabase
+      .from('system_config')
+      .select('value')
+      .eq('key', 'brevo_api_key')
+      .single();
+    BREVO_API_KEY = configData?.value;
+  }
 
-  if (configError || !BREVO_API_KEY) {
-    console.error("Failed to load Brevo API Key from secure config. User might not be an admin, or key is missing.");
+  if (!BREVO_API_KEY) {
+    console.error("Failed to load Brevo API Key from environment or database.");
     return false;
   }
 
@@ -30,7 +34,8 @@ export const sendBrevoEmail = async (
     recipients = emails.map(email => ({ email, name: "Valued Client" }));
   } else {
     recipients = [
-        { email: "support@takeinstudio.com", name: "TakeIN Studio" },
+        { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
+        { email: "support@takeinstudio.com", name: "TakeIN Studio Support" },
         { email: "x2ankittripathy@gmail.com", name: "Ankit Tripathy" },
         { email: "ashutoshpati7778@gmail.com", name: "Ashutosh Pati" }
       ];

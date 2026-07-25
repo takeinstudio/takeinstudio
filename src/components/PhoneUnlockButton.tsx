@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Phone, Lock, X, ArrowRight, Loader2, CheckCircle2, Mail, MessageSquare } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendBrevoEmail } from "@/lib/email";
 
 const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -72,6 +73,20 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
         status: 'New'
       }]);
 
+      // Send email notification to takeinstudio@gmail.com
+      try {
+        await sendBrevoEmail(
+          `🔑 Verification Code Requested: ${email}`,
+          `<h3>User Requested Verification OTP</h3>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Phone:</strong> ${phone}</p>
+           <p><strong>Status:</strong> Verification Pending</p>`,
+          "noreply"
+        );
+      } catch (emailErr) {
+        console.error("Failed to send email notification:", emailErr);
+      }
+
       setStep('verify');
     } catch (err: any) {
       setError(err.message || "Failed to send code.");
@@ -103,6 +118,20 @@ export default function PhoneUnlockButton({ variant = 'default' }: { variant?: '
         message: 'Successfully authenticated.',
         status: 'New'
       }]);
+
+      // Send email notification to takeinstudio@gmail.com
+      try {
+        await sendBrevoEmail(
+          `✅ User Verified Contact: ${email}`,
+          `<h3>User Successfully Verified OTP</h3>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Phone:</strong> ${phone}</p>
+           <p><strong>Status:</strong> Verified</p>`,
+          "noreply"
+        );
+      } catch (emailErr) {
+        console.error("Failed to send email notification:", emailErr);
+      }
 
       setIsOpen(false);
     } catch (err: any) {

@@ -31,14 +31,14 @@ export default function AdminDashboard() {
     // Check Authentication on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
-        navigate("/admin");
+        navigate("/login");
       }
     });
 
     // Listen for auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
-        navigate("/admin");
+        navigate("/login");
       }
     });
 
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate("/admin");
+    navigate("/login");
   };
 
   const unlockDefaultPricing = async () => {

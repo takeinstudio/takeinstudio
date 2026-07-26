@@ -15,7 +15,7 @@ import PricingPage from "@/pages/PricingPage";
 import FaqsPage from "@/pages/FaqsPage";
 import CareerPage from "@/pages/CareerPage";
 import ContactPage from "@/pages/ContactPage";
-import AdminLoginPage from "@/pages/AdminLoginPage";
+import LoginPage from "@/pages/LoginPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import TestimonialsPage from "@/pages/TestimonialsPage";
 import ApplicationPage from "@/pages/ApplicationPage";
@@ -56,7 +56,7 @@ function ScrollToTop() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
-  const hideNavFooter = pathname.startsWith("/admin") || pathname.startsWith("/apply");
+  const hideNavFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard") || pathname.startsWith("/apply");
 
   if (hideNavFooter) return <>{children}</>;
 
@@ -110,8 +110,8 @@ const App = () => (
               <Route path="/projects/luxe-lounges-portal" element={<LuxeLoungesProject />} />
               <Route path="/projects/vault-media-server" element={<VaultMediaProject />} />
 
-              <Route path="/admin" element={<AdminLoginPage />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/dashboard" element={<AdminDashboard />} />
 
               {/* Legal */}
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />

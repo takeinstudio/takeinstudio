@@ -1,5 +1,7 @@
-import { 
-  Users, Briefcase, FileText, Send, Activity, Plus 
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import {
+  Users, Briefcase, FileText, Send, Activity, Plus, Bell, KeyRound, CheckCheck
 } from "lucide-react";
 
 export default function OverviewBuilder({ data, setActiveTab }: { data: any, setActiveTab: (tab: string) => void }) {
@@ -7,6 +9,24 @@ export default function OverviewBuilder({ data, setActiveTab }: { data: any, set
   const careerCount = data.careers?.length || 0;
   const servicesCount = data.services?.length || 0;
   const pricingCount = data.pricing?.length || 0;
+
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("vault_notifications")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(10)
+      .then(({ data }) => setNotifications(data || []));
+  }, []);
+
+  const markAllRead = async () => {
+    await supabase.from("vault_notifications").update({ read: true }).eq("read", false);
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  };
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   const portfolioCount = (data.content?.find((c: any) => c.section_key === 'portfolio_items')?.text_value ? JSON.parse(data.content.find((c: any) => c.section_key === 'portfolio_items').text_value).length : 0);
 
@@ -23,9 +43,16 @@ export default function OverviewBuilder({ data, setActiveTab }: { data: any, set
           <h2 className="font-display font-bold text-2xl text-foreground">Welcome Back!</h2>
           <p className="text-muted-foreground text-sm mt-1">Here is the latest overview of your digital agency.</p>
         </div>
-        <div className="md:text-right">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Last Published</p>
-          <p className="text-sm font-medium text-foreground">Today, 10:42 AM</p>
+        <div className="md:text-right flex items-center gap-3">
+          {unreadCount > 0 && (
+            <div className="flex items-center gap-2 bg-orange-50 border border-orange-200 text-orange-700 px-3 py-1.5 rounded-full text-xs font-bold">
+              <Bell size={13} /> {unreadCount} new notification{unreadCount > 1 ? "s" : ""}
+            </div>
+          )}
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Last Published</p>
+            <p className="text-sm font-medium text-foreground">Today, 10:42 AM</p>
+          </div>
         </div>
       </div>
 
@@ -35,6 +62,43 @@ export default function OverviewBuilder({ data, setActiveTab }: { data: any, set
         <MetricCard title="Portfolio Projects" value={portfolioCount} icon={Briefcase} />
         <MetricCard title="Pricing Plans" value={pricingCount} icon={FileText} />
       </div>
+
+      {/* Vault Notifications */}
+      {notifications.length > 0 && (
+        <div className="bg-card border border-border/50 rounded-3xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="font-display font-bold text-lg flex items-center gap-2">
+              <Bell size={18} className="text-orange-500" /> Vault Member Alerts
+              {unreadCount > 0 && (
+                <span className="bg-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full">{unreadCount}</span>
+              )}
+            </h3>
+            {unreadCount > 0 && (
+              <button onClick={markAllRead} className="text-xs font-bold text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
+                <CheckCheck size={13} /> Mark all read
+              </button>
+            )}
+          </div>
+          <div className="space-y-3">
+            {notifications.map((n) => (
+              <div key={n.id} className={`flex items-start gap-4 p-4 rounded-2xl border transition-colors ${
+                n.read ? 'bg-muted/20 border-border/30' : 'bg-orange-50 border-orange-200'
+              }`}>
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                  n.read ? 'bg-muted text-muted-foreground' : 'bg-orange-100 text-orange-600'
+                }`}>
+                  <KeyRound size={15} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-bold ${n.read ? 'text-muted-foreground' : 'text-foreground'}`}>{n.message}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{new Date(n.created_at).toLocaleString()}</p>
+                </div>
+                {!n.read && <span className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0 mt-2" />}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 bg-card border border-border/50 rounded-3xl p-6 shadow-sm">

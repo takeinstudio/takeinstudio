@@ -50,6 +50,7 @@ import VaultMediaProject from "@/pages/projects/VaultMediaProject";
 import AIWebDevPage from "@/pages/vault/AIWebDevPage";
 import AIWebDevCheckout from "@/pages/vault/AIWebDevCheckout";
 import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
+import VaultPage from "@/pages/vault/VaultPage";
 import VaultLogin from "@/pages/vault/VaultLogin";
 import VaultDashboard from "@/pages/vault/VaultDashboard";
 import AIWebDevAccess from "@/pages/vault/AIWebDevAccess";
@@ -130,7 +131,8 @@ const App = () => (
               <Route path="/projects/luxe-lounges-portal" element={<LuxeLoungesProject />} />
               <Route path="/projects/vault-media-server" element={<VaultMediaProject />} />
 
-              {/* Vault */}
+              {/* Vault public pages */}
+              <Route path="/vault" element={<VaultPage />} />
               <Route path="/vault/aiwebdev" element={<AIWebDevPage />} />
               <Route path="/vault/aiwebdev/checkout" element={<AIWebDevCheckout />} />
               <Route path="/vault/aiwebdev/payment-success" element={<AIWebDevPaymentSuccess />} />

@@ -15,6 +15,7 @@ export default function VaultManagerBuilder() {
 
   // Create state
   const [isCreating, setIsCreating] = useState(false);
+  const [isGranting, setIsGranting] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -132,6 +133,45 @@ export default function VaultManagerBuilder() {
     }
   };
 
+  const handleGrantAccess = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.productId) return toast.error("Please select a product");
+
+    setIsSubmitting(true);
+    try {
+      // 1. Insert Purchase
+      await supabase.from("vault_purchases").insert({
+        user_id: selectedCustomer.id,
+        product_id: formData.productId,
+        amount: formData.amount,
+        payment_status: "paid",
+        provider: "razorpay",
+        provider_payment_id: formData.razorpayId || "manual_" + Math.floor(Math.random()*10000)
+      });
+
+      // 2. Grant Entitlement
+      const { error: entError } = await supabase.from("vault_entitlements").insert({
+        user_id: selectedCustomer.id,
+        product_id: formData.productId,
+        status: "active"
+      });
+      
+      // If they already had it, we could just update the status to active, but let's handle conflict
+      if (entError && entError.code === '23505') { // unique violation
+         await supabase.from("vault_entitlements").update({ status: "active" }).eq("user_id", selectedCustomer.id).eq("product_id", formData.productId);
+      }
+
+      toast.success("Access granted to existing customer!");
+      setIsGranting(false);
+      setFormData({ email: "", name: "", password: "", productId: "", razorpayId: "", amount: "99" });
+      viewCustomer(selectedCustomer); // Refresh customer details
+    } catch (err: any) {
+      toast.error(err.message || "Failed to grant access");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   if (selectedCustomer) {
     return (
       <div className="bg-card border border-border/50 rounded-2xl overflow-hidden p-6">
@@ -154,9 +194,45 @@ export default function VaultManagerBuilder() {
 
           {/* Entitlements & Purchases */}
           <div className="md:col-span-2 space-y-6">
-            <div className="bg-muted/30 border border-border/50 rounded-xl overflow-hidden">
-              <div className="p-4 border-b border-border/50 bg-muted/50"><h4 className="font-bold">Active Entitlements</h4></div>
-              <div className="divide-y divide-border/50">
+            
+            {isGranting ? (
+              <div className="bg-muted/30 border border-primary/20 rounded-xl overflow-hidden p-5 shadow-sm">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="font-bold">Grant New Product</h4>
+                  <button onClick={() => setIsGranting(false)} className="text-xs text-muted-foreground hover:text-foreground font-bold">CANCEL</button>
+                </div>
+                <form onSubmit={handleGrantAccess} className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Select Product</label>
+                    <select required value={formData.productId} onChange={e => setFormData({...formData, productId: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm">
+                      <option value="">Select Product...</option>
+                      {products.map(p => (
+                        <option key={p.id} value={p.id}>{p.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Payment Ref</label>
+                      <input type="text" value={formData.razorpayId} onChange={e => setFormData({...formData, razorpayId: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm font-mono" placeholder="pay_xxxx" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Amount</label>
+                      <input type="number" required value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm" />
+                    </div>
+                  </div>
+                  <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+                    {isSubmitting ? "Granting..." : "Grant Access"}
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div className="bg-muted/30 border border-border/50 rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-border/50 bg-muted/50 flex justify-between items-center">
+                  <h4 className="font-bold">Active Entitlements</h4>
+                  <button onClick={() => setIsGranting(true)} className="text-xs bg-primary text-primary-foreground px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5"><Plus size={14}/> Grant Product</button>
+                </div>
+                <div className="divide-y divide-border/50">
                 {customerEntitlements.map(ent => (
                   <div key={ent.id} className="p-4 flex items-center justify-between hover:bg-muted/20">
                     <div>

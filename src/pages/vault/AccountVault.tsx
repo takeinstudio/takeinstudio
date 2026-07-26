@@ -21,7 +21,15 @@ export default function AccountVault() {
         supabase.from("vault_purchases").select("*, vault_products(*)").eq("user_id", session.user.id).order("purchased_at", { ascending: false })
       ]);
 
-      if (profileRes.data) setProfile(profileRes.data);
+      if (profileRes.data) {
+        // Merge vault_profile data with auth metadata (phone lives in auth user metadata from Razorpay)
+        const phone = session.user.phone
+          || session.user.user_metadata?.phone
+          || session.user.user_metadata?.Phone
+          || profileRes.data.phone
+          || null;
+        setProfile({ ...profileRes.data, phone });
+      }
       if (purchasesRes.data) setPurchases(purchasesRes.data);
       
       setLoading(false);
@@ -137,8 +145,6 @@ export default function AccountVault() {
                     <tr className="bg-gray-50 border-b border-gray-200">
                       <th className="px-6 py-4 text-[10px] font-black text-gray-500 uppercase tracking-widest">Product</th>
                       <th className="px-6 py-4 text-[10px] font-black text-gray-500 uppercase tracking-widest">Date</th>
-                      <th className="px-6 py-4 text-[10px] font-black text-gray-500 uppercase tracking-widest">Amount</th>
-                      <th className="px-6 py-4 text-[10px] font-black text-gray-500 uppercase tracking-widest hidden sm:table-cell">Reference</th>
                       <th className="px-6 py-4 text-[10px] font-black text-gray-500 uppercase tracking-widest">Status</th>
                     </tr>
                   </thead>
@@ -150,12 +156,6 @@ export default function AccountVault() {
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-600">
                           {new Date(purchase.purchased_at).toLocaleDateString()}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 font-semibold">
-                          {purchase.currency === 'INR' ? '₹' : purchase.currency} {purchase.amount}
-                        </td>
-                        <td className="px-6 py-4 text-xs font-mono text-gray-400 hidden sm:table-cell">
-                          {purchase.provider_payment_id || purchase.id.split('-')[0]}
                         </td>
                         <td className="px-6 py-4">
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${

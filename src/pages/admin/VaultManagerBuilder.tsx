@@ -211,11 +211,7 @@ export default function VaultManagerBuilder() {
                       ))}
                     </select>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Payment Ref</label>
-                      <input type="text" value={formData.razorpayId} onChange={e => setFormData({...formData, razorpayId: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm font-mono" placeholder="pay_xxxx" />
-                    </div>
+                  <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Amount</label>
                       <input type="number" required value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm" />
@@ -322,11 +318,7 @@ export default function VaultManagerBuilder() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border/50">
-            <div>
-              <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 flex items-center gap-1"><CreditCard size={12}/> Payment Ref (Razorpay ID)</label>
-              <input type="text" value={formData.razorpayId} onChange={e => setFormData({...formData, razorpayId: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm font-mono" placeholder="pay_xxxxxxx" />
-            </div>
+          <div className="grid grid-cols-1 gap-4 pt-2 border-t border-border/50">
             <div>
               <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 block">Amount Paid (INR)</label>
               <input type="number" required value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm" />

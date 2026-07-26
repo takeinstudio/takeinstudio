@@ -252,6 +252,7 @@ export default function VaultManagerBuilder() {
                 {customerEntitlements.length === 0 && <div className="p-6 text-center text-sm text-muted-foreground">No access granted.</div>}
               </div>
             </div>
+            )}
 
             <div className="bg-muted/30 border border-border/50 rounded-xl overflow-hidden">
               <div className="p-4 border-b border-border/50 bg-muted/50"><h4 className="font-bold">Purchase History</h4></div>

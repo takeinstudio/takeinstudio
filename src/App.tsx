@@ -53,6 +53,12 @@ import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
 import VaultLogin from "@/pages/vault/VaultLogin";
 import VaultDashboard from "@/pages/vault/VaultDashboard";
 import AIWebDevAccess from "@/pages/vault/AIWebDevAccess";
+import MyVault from "@/pages/vault/MyVault";
+import ExploreVault from "@/pages/vault/ExploreVault";
+import SupportVault from "@/pages/vault/SupportVault";
+import AccountVault from "@/pages/vault/AccountVault";
+import VaultProtectedRoute from "@/components/vault/VaultProtectedRoute";
+import VaultDashboardLayout from "@/components/vault/VaultDashboardLayout";
 
 const queryClient = new QueryClient();
 
@@ -127,9 +133,15 @@ const App = () => (
               <Route path="/vault/aiwebdev/checkout" element={<AIWebDevCheckout />} />
               <Route path="/vault/aiwebdev/payment-success" element={<AIWebDevPaymentSuccess />} />
               <Route path="/vault/login" element={<VaultLogin />} />
-              <Route path="/vault/dashboard" element={<VaultDashboard />} />
-              <Route path="/vault/aiwebdev/access" element={<AIWebDevAccess />} />
-              <Route path="/vault/aiwebdev/access/:volumeId" element={<AIWebDevAccess />} />
+              
+              <Route path="/vault/dashboard" element={<VaultProtectedRoute><VaultDashboardLayout><VaultDashboard /></VaultDashboardLayout></VaultProtectedRoute>} />
+              <Route path="/vault/dashboard/my-vault" element={<VaultProtectedRoute><VaultDashboardLayout><MyVault /></VaultDashboardLayout></VaultProtectedRoute>} />
+              <Route path="/vault/dashboard/explore" element={<VaultProtectedRoute><VaultDashboardLayout><ExploreVault /></VaultDashboardLayout></VaultProtectedRoute>} />
+              <Route path="/vault/dashboard/support" element={<VaultProtectedRoute><VaultDashboardLayout><SupportVault /></VaultDashboardLayout></VaultProtectedRoute>} />
+              <Route path="/vault/dashboard/account" element={<VaultProtectedRoute><VaultDashboardLayout><AccountVault /></VaultDashboardLayout></VaultProtectedRoute>} />
+              
+              <Route path="/vault/aiwebdev/access" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
+              <Route path="/vault/aiwebdev/access/:volumeId" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
 
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<AdminDashboard />} />

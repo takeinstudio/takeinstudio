@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
+import { Loader2 } from "lucide-react";
 
 // ─── Volume Data (Light Themed & Exact Page Breakdown) ─────────────────────────
 const volumesDetail = [
@@ -165,6 +167,36 @@ Audit Checklist:
 export default function AIWebDevAccess() {
   const { volumeId } = useParams<{ volumeId?: string }>();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyEntitlement = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/vault/login");
+        return;
+      }
+
+      // Check if user has an active entitlement for aiwebdev
+      const { data: entitlements, error } = await supabase
+        .from("vault_entitlements")
+        .select("status, vault_products!inner(slug)")
+        .eq("user_id", session.user.id)
+        .eq("vault_products.slug", "aiwebdev")
+        .eq("status", "active");
+
+      if (error || !entitlements || entitlements.length === 0) {
+        setIsAuthorized(false);
+      } else {
+        setIsAuthorized(true);
+      }
+      setLoading(false);
+    };
+
+    verifyEntitlement();
+  }, [navigate]);
 
   const activeVolId = volumeId || "volume-1";
   const currentVol = volumesDetail.find((v) => v.id === activeVolId) || volumesDetail[0];
@@ -175,6 +207,36 @@ export default function AIWebDevAccess() {
     toast.success("Code snippet copied to clipboard!");
     setTimeout(() => setCopiedCode(null), 2500);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF9F6]">
+        <Loader2 className="w-8 h-8 animate-spin text-[#FF6B00]" />
+      </div>
+    );
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAF9F6] p-8">
+        <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center max-w-lg shadow-sm">
+          <FileCheck size={48} className="mx-auto mb-6 text-gray-300" />
+          <h1 className="font-display text-2xl font-black text-gray-950 mb-2">Unauthorized Access</h1>
+          <p className="text-sm text-gray-500 mb-8 leading-relaxed">
+            You do not have an active entitlement to access the AIWebDev playbook. If you just purchased, please wait for payment verification or contact support.
+          </p>
+          <div className="flex flex-col gap-3">
+            <Link to="/vault/dashboard/explore" className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-xs uppercase shadow-sm">
+              Get Access
+            </Link>
+            <Link to="/vault/dashboard" className="w-full bg-gray-100 text-gray-700 py-3.5 rounded-xl font-bold tracking-widest text-xs uppercase">
+              Return to Vault
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

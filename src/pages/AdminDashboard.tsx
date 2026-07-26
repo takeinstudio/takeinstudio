@@ -16,6 +16,7 @@ import PricingBuilder from "./admin/PricingBuilder";
 import RecruitmentHubBuilder from "./admin/RecruitmentHubBuilder";
 import DocumentsBuilder from "./admin/DocumentsBuilder";
 import EmailCenterBuilder from "./admin/EmailCenterBuilder";
+import SupportCenterBuilder from "./admin/SupportCenterBuilder";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -29,16 +30,27 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Check Authentication on mount
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) {
         navigate("/login");
+        return;
+      }
+      // Deflect Vault Customers
+      const { data: profile } = await supabase.from('vault_profiles').select('role').eq('id', session.user.id).single();
+      if (profile && profile.role === 'customer') {
+        navigate("/vault/dashboard");
       }
     });
 
     // Listen for auth changes
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_OUT' || !session) {
         navigate("/login");
+      } else {
+        const { data: profile } = await supabase.from('vault_profiles').select('role').eq('id', session.user.id).single();
+        if (profile && profile.role === 'customer') {
+          navigate("/vault/dashboard");
+        }
       }
     });
 
@@ -508,6 +520,7 @@ export default function AdminDashboard() {
           <button onClick={() => { setActiveTab("pricing"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "pricing" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Pricing Studio</button>
           <button onClick={() => { setActiveTab("services"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "services" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Services Builder</button>
           <button onClick={() => { setActiveTab("email-center"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "email-center" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Email Center</button>
+          <button onClick={() => { setActiveTab("support-center"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "support-center" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><MessageSquare size={18}/> Vault Support</button>
           <button onClick={() => { setActiveTab("leads"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "leads" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Send size={18}/> Leads & Inquiries</button>
           <button onClick={() => { setActiveTab("documents"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "documents" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><FileText size={18}/> Documents</button>
           <button onClick={() => { setActiveTab("jobs"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "jobs" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Building size={18}/> Job Postings</button>
@@ -563,6 +576,9 @@ export default function AdminDashboard() {
           )}
 
           {activeTab === "email-center" && <EmailCenterBuilder />}
+
+          {/* Vault Support Tab */}
+          {activeTab === "support-center" && <SupportCenterBuilder />}
 
           {/* Documents Tab */}
           {activeTab === "documents" && <DocumentsBuilder />}

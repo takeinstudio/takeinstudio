@@ -1,178 +1,186 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { LogOut, ArrowRight, CheckCircle2, FileCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageSquare, Package, Clock, ShieldCheck, ChevronRight } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 import SEO from "@/components/SEO";
 
 export default function VaultDashboard() {
-  const [session, setSession] = useState<any>(null);
-  const navigate = useNavigate();
+  const [profile, setProfile] = useState<any>(null);
+  const [entitlements, setEntitlements] = useState<any[]>([]);
+  const [supportCount, setSupportCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const rawSession = localStorage.getItem("takein_vault_session");
-    if (rawSession) {
-      try {
-        setSession(JSON.parse(rawSession));
-      } catch (e) {
-        setSession({ email: "vault@takeinstudio.com" });
-      }
-    } else {
-      setSession({ email: "user@takeinstudio.com" });
-    }
+    const fetchData = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+
+      const [profileRes, entRes, suppRes] = await Promise.all([
+        supabase.from("vault_profiles").select("*").eq("id", session.user.id).single(),
+        supabase.from("vault_entitlements").select("*, vault_products(*)").eq("user_id", session.user.id),
+        supabase.from("vault_support_conversations").select("id", { count: "exact" }).eq("customer_id", session.user.id).eq("status", "awaiting_customer")
+      ]);
+
+      if (profileRes.data) setProfile(profileRes.data);
+      if (entRes.data) setEntitlements(entRes.data);
+      if (suppRes.count !== null) setSupportCount(suppRes.count);
+
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("takein_vault_session");
-    navigate("/vault/login");
-  };
+  const getFirstName = (fullName: string) => fullName ? fullName.split(" ")[0] : "";
+  const activeEntitlements = entitlements.filter(e => e.status === "active");
+  const latestEntitlement = activeEntitlements.length > 0 ? activeEntitlements.reduce((a, b) => new Date(a.granted_at) > new Date(b.granted_at) ? a : b) : null;
+  const latestProduct = latestEntitlement?.vault_products;
+
+  if (loading) {
+    return <div className="p-8 animate-pulse text-gray-500">Loading your Vault...</div>;
+  }
 
   return (
     <>
       <SEO
-        title="Vault Dashboard — TakeIN Studio Digital Vault"
+        title="Vault Dashboard — TakeIN Studio Customer Portal"
         description="Access your purchased playbooks, digital volumes, and developer tools."
         url="https://takeinstudio.com/vault/dashboard"
       />
 
-      <div className="min-h-screen bg-[#FCFBF9] text-gray-900 flex flex-col justify-between font-sans">
-        {/* Header */}
-        <header className="border-b border-gray-200 py-4 px-6 sticky top-0 z-30 bg-white/95 backdrop-blur-md shadow-sm">
-          <div className="max-w-5xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <img
-                src="/logo/logo_no_text.png"
-                alt="TakeIN Studio"
-                className="h-7 w-auto mix-blend-multiply object-contain"
-              />
-              <div className="flex items-center text-sm font-display">
-                <span className="text-gray-950 font-black">Take</span>
-                <span className="text-[#FF6B00] font-black">IN</span>
-                <span className="text-gray-400 font-normal ml-1">Vault</span>
-              </div>
-            </div>
+      <div className="p-4 sm:p-8 max-w-5xl mx-auto w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8 border-b border-gray-200 pb-8"
+        >
+          <h1 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
+            Welcome back, {getFirstName(profile?.full_name) || profile?.email.split('@')[0]} 👋
+          </h1>
+          <p className="text-sm text-gray-500 mt-2">
+            Your TakeIN Studio Vault. Access your purchased resources, manage your account and get support.
+          </p>
+        </motion.div>
 
-            <div className="flex items-center gap-4">
-              <span className="text-xs text-gray-500 font-medium hidden sm:inline">
-                {session?.email || "vault@takeinstudio.com"}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-900 border border-gray-200 rounded-full px-3 py-1.5 transition-colors bg-white hover:bg-gray-50"
-              >
-                <LogOut size={13} />
-                Logout
-              </button>
+        {/* Overview Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <Package size={14} />
+              <p className="text-[10px] tracking-widest font-black uppercase">MY PRODUCTS</p>
             </div>
+            <p className="text-2xl font-bold text-gray-900">{entitlements.length}</p>
           </div>
-        </header>
-
-        {/* Dashboard Content */}
-        <main className="flex-1 max-w-5xl mx-auto px-4 sm:px-6 py-10 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
-          >
-            <p className="text-[10px] tracking-[0.25em] font-black text-[#FF6B00] uppercase mb-2">
-              MY VAULT PRODUCTS
+          
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-center gap-2 text-[#FF6B00] mb-2">
+              <CheckCircle2 size={14} />
+              <p className="text-[10px] tracking-widest font-black uppercase">ACTIVE ACCESS</p>
+            </div>
+            <p className="text-2xl font-bold text-gray-900">{activeEntitlements.length}</p>
+          </div>
+          
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <MessageSquare size={14} />
+              <p className="text-[10px] tracking-widest font-black uppercase">SUPPORT</p>
+            </div>
+            <p className="text-2xl font-bold text-gray-900">{supportCount} <span className="text-xs font-normal text-gray-500">Replies</span></p>
+          </div>
+          
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <Clock size={14} />
+              <p className="text-[10px] tracking-widest font-black uppercase">MEMBER SINCE</p>
+            </div>
+            <p className="text-sm font-bold text-gray-900 mt-2">
+              {profile?.created_at ? new Date(profile.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Unknown'}
             </p>
-            <h1 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-              Welcome to your Digital Vault
-            </h1>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Select an unlocked product below to access full curriculum, prompts, and playbooks.
-            </p>
-          </motion.div>
+          </div>
+        </div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
-            {/* AIWebDev Playbook Card */}
+        {latestProduct ? (
+          <div className="grid md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white border border-gray-200 rounded-2xl p-7 flex flex-col justify-between relative overflow-hidden shadow-sm hover:border-[#FF6B00]/40 transition-all duration-300"
+              className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className="bg-green-50 text-green-700 border border-green-200 text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
-                  <CheckCircle2 size={12} />
-                  UNLOCKED ACCESS
-                </span>
-                <span className="text-[10px] font-bold text-[#FF6B00] bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
-                  3 VOLUMES • 53 PAGES
-                </span>
+              <div className="mb-6 border-b border-gray-100 pb-4">
+                <p className="text-[10px] tracking-[0.2em] font-black text-[#FF6B00] uppercase mb-1">
+                  CONTINUE LEARNING
+                </p>
+                <h2 className="font-display text-2xl font-black text-gray-950 tracking-tight">
+                  {latestProduct.name}
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{latestProduct.short_description}</p>
               </div>
 
-              <div>
-                <p className="text-[10px] tracking-[0.2em] font-black text-gray-400 uppercase mb-1">
-                  TAKEIN STUDIO
-                </p>
-                <h2 className="font-display text-2xl font-black text-gray-950 tracking-tight mb-2">
-                  AIWeb<span className="text-[#FF6B00]">Dev</span>
-                </h2>
-                <p className="text-xs text-gray-600 leading-relaxed mb-6">
-                  The AI-Native Web Development Playbook. Learn to understand, build, debug, secure, deploy and deliver modern web applications using AI coding agents.
-                </p>
+              <div className="mb-6 text-sm font-semibold text-gray-700">
+                BUILD <span className="text-gray-300 mx-2">→</span> ENGINEER <span className="text-gray-300 mx-2">→</span> EARN
+              </div>
 
-                <div className="grid grid-cols-3 gap-2 py-3 border-y border-gray-100 mb-6 text-center text-[10px] text-gray-600 font-medium">
-                  <div>
-                    <span className="font-bold block text-gray-900">Vol I (20 Pages)</span>
-                    <span className="text-[9px] text-gray-400">Tool Directory</span>
+              <Link
+                to={`/vault/${latestProduct.slug}/access`}
+                className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-2"
+              >
+                OPEN {latestProduct.name}
+                <ArrowRight size={14} />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm"
+            >
+              <div>
+                <p className="text-[10px] tracking-[0.2em] font-black text-gray-400 uppercase mb-4">
+                  RECENT PURCHASE
+                </p>
+                <div className="flex items-center gap-3 mb-2">
+                  <ShieldCheck size={20} className="text-green-500" />
+                  <h3 className="font-display text-lg font-bold text-gray-950">{latestProduct.name}</h3>
+                </div>
+                <div className="space-y-3 mt-6">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Status</span>
+                    <span className="font-medium text-green-600 capitalize">{latestEntitlement.status}</span>
                   </div>
-                  <div>
-                    <span className="font-bold block text-gray-900">Vol II (15 Pages)</span>
-                    <span className="text-[9px] text-gray-400">Code Blueprints</span>
-                  </div>
-                  <div>
-                    <span className="font-bold block text-gray-900">Vol III (18 Pages)</span>
-                    <span className="text-[9px] text-gray-400">Freelance Manual</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Access Granted</span>
+                    <span className="font-medium text-gray-900">{new Date(latestEntitlement.granted_at).toLocaleDateString()}</span>
                   </div>
                 </div>
               </div>
 
               <Link
-                to="/vault/aiwebdev/access"
-                className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-2"
+                to="/vault/dashboard/account"
+                className="w-full mt-6 bg-gray-50 text-gray-700 py-3.5 rounded-xl font-bold text-xs hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
               >
-                Access AIWebDev Vault
-                <ArrowRight size={14} />
+                VIEW PURCHASE HISTORY
+                <ChevronRight size={14} />
               </Link>
             </motion.div>
-
-            {/* Upcoming / Additional Resources Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white border border-gray-200 rounded-2xl p-7 flex flex-col justify-between shadow-sm opacity-80"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <span className="bg-gray-100 text-gray-600 border border-gray-200 text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full">
-                  ROADMAP & UPDATES
-                </span>
-              </div>
-
-              <div>
-                <p className="text-[10px] tracking-[0.2em] font-black text-gray-400 uppercase mb-1">
-                  FUTURE ADDITIONS
-                </p>
-                <h2 className="font-display text-xl font-black text-gray-950 tracking-tight mb-2">
-                  Vault Expansion Pack
-                </h2>
-                <p className="text-xs text-gray-500 leading-relaxed mb-6">
-                  New industry prompts, advanced multi-agent workflows, debugging cases, and client proposal templates are added periodically.
-                </p>
-              </div>
-
-              <div className="bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 text-center text-xs text-gray-500 font-medium">
-                Included with your Vault Membership
-              </div>
-            </motion.div>
           </div>
-        </main>
-
-        <footer className="border-t border-gray-200 bg-white py-4 text-center text-xs text-gray-500">
-          © 2026 TakeIN Studio. Protected Vault Environment.
-        </footer>
+        ) : (
+          <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center shadow-sm max-w-2xl mx-auto">
+            <Package size={40} className="text-gray-300 mx-auto mb-4" />
+            <h3 className="font-display text-xl font-bold text-gray-950 mb-2">Your Vault is currently empty</h3>
+            <p className="text-sm text-gray-500 mb-6">
+              Explore TakeIN Studio resources and products to start building.
+            </p>
+            <Link
+              to="/vault/dashboard/explore"
+              className="inline-flex bg-[#FF6B00] text-white px-6 py-3 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-all items-center justify-center gap-2"
+            >
+              EXPLORE THE VAULT
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

@@ -46,7 +46,7 @@ export default function SupportVault() {
         .eq("user_id", session.user.id);
       
       if (ownedProducts) {
-        setProducts(ownedProducts.map(op => op.vault_products));
+        setProducts(ownedProducts.map(op => op.vault_products).filter(Boolean));
       }
 
       setLoading(false);
@@ -215,11 +215,11 @@ export default function SupportVault() {
                     >
                       <div className="flex items-start justify-between mb-2">
                         <span className={`text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded-full ${
-                          conv.status === 'resolved' || conv.status === 'closed' ? 'bg-green-100 text-green-700' :
-                          conv.status === 'awaiting_customer' ? 'bg-[#FF6B00]/10 text-[#FF6B00]' :
+                          (conv.status || 'open') === 'resolved' || (conv.status || 'open') === 'closed' ? 'bg-green-100 text-green-700' :
+                          (conv.status || 'open') === 'awaiting_customer' ? 'bg-[#FF6B00]/10 text-[#FF6B00]' :
                           'bg-blue-100 text-blue-700'
                         }`}>
-                          {conv.status.replace('_', ' ')}
+                          {(conv.status || 'open').replace('_', ' ')}
                         </span>
                         <span className="text-xs text-gray-400 font-medium">
                           {new Date(conv.updated_at).toLocaleDateString()}

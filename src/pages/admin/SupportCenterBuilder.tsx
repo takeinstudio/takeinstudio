@@ -226,11 +226,11 @@ export default function SupportCenterBuilder() {
               <div className="flex-1 min-w-0 pr-4">
                 <div className="flex items-center gap-2 mb-1">
                   <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-md ${
-                    conv.status === 'resolved' || conv.status === 'closed' ? 'bg-emerald-500/10 text-emerald-500' :
-                    conv.status === 'awaiting_customer' ? 'bg-orange-500/10 text-orange-500' :
+                    (conv.status || 'open') === 'resolved' || (conv.status || 'open') === 'closed' ? 'bg-emerald-500/10 text-emerald-500' :
+                    (conv.status || 'open') === 'awaiting_customer' ? 'bg-orange-500/10 text-orange-500' :
                     'bg-blue-500/10 text-blue-500'
                   }`}>
-                    {conv.status.replace('_', ' ')}
+                    {(conv.status || 'open').replace('_', ' ')}
                   </span>
                   <span className="text-xs text-muted-foreground">#{conv.id.split('-')[0].toUpperCase()}</span>
                 </div>

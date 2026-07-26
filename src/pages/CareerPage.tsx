@@ -81,7 +81,7 @@ export default function CareerPage() {
                   to="/vault/aiwebdev"
                   className="px-6 py-2.5 rounded-lg bg-orange-500/15 text-orange-400 border border-orange-500/30 text-sm font-bold hover:bg-orange-500/25 transition-all flex items-center justify-center gap-2"
                 >
-                  <BookOpen size={14} /> TakeIN Vault — Learn AI Web Dev
+                  <BookOpen size={14} /> TakeIN Vault — Learn with US
                 </Link>
                 <a
                   href="mailto:takeinstudio@gmail.com"
@@ -187,7 +187,7 @@ export default function CareerPage() {
       <section className="px-4 py-8 bg-gray-50/50">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
+
             {/* Why Join Us */}
             <div>
               <h2 className="font-display text-xl font-bold text-gray-900 mb-4">Why Join Us?</h2>

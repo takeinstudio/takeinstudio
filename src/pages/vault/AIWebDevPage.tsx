@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
   Copy,
   Lock,
+  FileCheck,
 } from "lucide-react";
 import SEO from "@/components/SEO";
 
@@ -29,6 +30,7 @@ interface VolumeData {
   num: string;
   title: string;
   subtitle: string;
+  pdfName: string;
   pages: string;
   description: string;
   items: CurriculumItem[];
@@ -39,14 +41,15 @@ interface FaqItem {
   a: string;
 }
 
-// ─── Curriculum Data ──────────────────────────────────────────────────────────
+// ─── Curriculum Data (Updated PDF Page Breakdown) ──────────────────────────────
 const volumes: VolumeData[] = [
   {
     id: "vol-1",
     num: "I",
     title: "AI-NATIVE FOUNDATIONS",
     subtitle: "Volume I",
-    pages: "28 Pages",
+    pdfName: "Volume_1_Tool_Directory.pdf",
+    pages: "20 Pages",
     description:
       "Understand modern AI-assisted web development, learn the core architecture behind websites, and build your first complete projects.",
     items: [
@@ -81,7 +84,8 @@ const volumes: VolumeData[] = [
     num: "II",
     title: "ADVANCED BUILDING, AGENTS & SECURITY",
     subtitle: "Volume II",
-    pages: "22 Pages",
+    pdfName: "Volume_2_Code_Blueprints.pdf",
+    pages: "15 Pages",
     description:
       "Move beyond basic prompting into reusable agent systems, full-stack development, debugging and application security.",
     items: [
@@ -109,7 +113,8 @@ const volumes: VolumeData[] = [
     num: "III",
     title: "FREELANCING & CLIENT DELIVERY",
     subtitle: "Volume III",
-    pages: "23 Pages",
+    pdfName: "Volume_3_Freelance_Manual.pdf",
+    pages: "18 Pages",
     description:
       "Turn your development workflow into a structured freelance/client-delivery system.",
     items: [
@@ -122,7 +127,7 @@ const volumes: VolumeData[] = [
       { id: "v3-07", num: "07", title: "Outreach System", points: ["Observe", "Demonstrate", "Ask permission"] },
       { id: "v3-08", num: "08", title: "WhatsApp Outreach", points: ["Copy-ready structure"] },
       { id: "v3-09", num: "09", title: "LinkedIn Outreach", points: ["Professional DM structure"] },
-      { id: "v3-[#]", num: "10", title: "Cold Email", points: ["Permission-based email"] },
+      { id: "v3-10", num: "10", title: "Cold Email", points: ["Permission-based email"] },
       { id: "v3-11", num: "11", title: "Website Audit Worksheet", points: ["Performance", "Layout", "CTA", "Security", "Mobile"] },
       { id: "v3-12", num: "12", title: "Qualification Scorecard", points: ["Budget", "Decision maker", "Content", "Timeline"] },
       { id: "v3-13", num: "13", title: "Proposal Generator", points: ["Scope", "Deliverables", "Payments", "Terms"] },
@@ -169,7 +174,7 @@ const faqs: FaqItem[] = [
 
 const deliverables = [
   "3 detailed volumes",
-  "73 pages at current release",
+  "53 pages total across current release",
   "Exact AI prompts",
   "AI development workflows",
   "Website architecture guides",
@@ -261,8 +266,12 @@ function CurriculumAccordion({ volume, defaultOpen = false }: { volume: VolumeDa
             transition={{ duration: 0.25 }}
             style={{ overflow: "hidden" }}
           >
-            <div className="px-5 py-3 bg-gray-50/60 border-t border-gray-100 text-xs text-gray-600 leading-relaxed">
-              {volume.description}
+            <div className="px-5 py-3 bg-gray-50/60 border-t border-gray-100 text-xs text-gray-600 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span>{volume.description}</span>
+              <span className="text-[10px] font-mono text-gray-400 shrink-0 flex items-center gap-1">
+                <FileCheck size={12} className="text-[#FF6B00]" />
+                {volume.pdfName}
+              </span>
             </div>
 
             <div className="divide-y divide-gray-100">
@@ -358,7 +367,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
   );
 }
 
-// ─── Main Standalone Product Page ──────────────────────────────────────────────
+// ─── Main Standalone Product Page (100% Light Theme) ──────────────────────────────
 export default function AIWebDevPage() {
   const curriculumRef = useRef<HTMLDivElement>(null);
 
@@ -378,7 +387,7 @@ export default function AIWebDevPage() {
 
       <div className="bg-[#FCFBF9] min-h-screen text-gray-900 font-sans selection:bg-[#FF6B00] selection:text-white">
 
-        {/* ── Standalone Clean Header Bar ── */}
+        {/* ── Standalone Clean Light Header Bar ── */}
         <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 shadow-sm">
           <div className="max-w-5xl mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2.5">
@@ -423,8 +432,8 @@ export default function AIWebDevPage() {
             </p>
 
             {/* Badges */}
-            <div className="flex flex-wrap gap-2 text-[10px] tracking-wider font-bold text-gray-500 uppercase mb-8">
-              {["3 VOLUMES", "73 PAGES", "PRACTICAL LABS", "EXACT PROMPTS", "CAPSTONES", "CLIENT SYSTEMS"].map((b) => (
+            <div className="flex flex-wrap gap-2 text-[10px] tracking-wider font-bold text-gray-600 uppercase mb-8">
+              {["3 VOLUMES", "53 PAGES TOTAL", "PRACTICAL LABS", "EXACT PROMPTS", "CAPSTONES", "CLIENT SYSTEMS"].map((b) => (
                 <span key={b} className="bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-700">
                   {b}
                 </span>
@@ -453,56 +462,62 @@ export default function AIWebDevPage() {
           </div>
         </section>
 
-        {/* ── PRODUCT FORMAT (3 VOLUMES) ── */}
-        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+        {/* ── PRODUCT FORMAT (3 VOLUMES - LIGHT THEMED) ── */}
+        <section className="py-10 sm:py-14 bg-[#FAFAF8] border-b border-gray-200">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-8">
               <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 PRODUCT FORMAT
               </p>
-              <h2 className="font-display text-xl sm:text-2xl font-black tracking-tight">
+              <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950 tracking-tight">
                 3-Volume Digital Vault
               </h2>
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
-              {volumes.map((vol, i) => (
+              {volumes.map((vol) => (
                 <div
                   key={vol.id}
-                  className="bg-[#121216] border border-white/10 rounded-xl p-5 flex flex-col justify-between"
+                  className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between shadow-sm hover:border-[#FF6B00]/40 transition-colors"
                 >
                   <div>
                     <span className="text-[9px] tracking-widest font-black text-[#FF6B00] uppercase">
                       TAKEIN STUDIO
                     </span>
                     <div className="flex items-baseline gap-2 my-2">
-                      <span className="text-3xl font-black font-display text-white/20">{vol.num}</span>
-                      <h3 className="text-xs font-black font-display uppercase tracking-wider text-white">
+                      <span className="text-3xl font-black font-display text-gray-200">{vol.num}</span>
+                      <h3 className="text-xs font-black font-display uppercase tracking-wider text-gray-950">
                         {vol.title}
                       </h3>
                     </div>
+                    <p className="text-[10px] font-mono text-gray-400 mt-1 flex items-center gap-1">
+                      <FileCheck size={12} className="text-[#FF6B00]" />
+                      {vol.pdfName}
+                    </p>
                   </div>
-                  <div className="border-t border-white/5 pt-3 mt-4 flex items-center justify-between">
-                    <span className="text-[10px] text-white/40">{vol.subtitle}</span>
-                    <span className="text-[10px] font-bold text-[#FF6B00]">{vol.pages}</span>
+                  <div className="border-t border-gray-100 pt-3 mt-4 flex items-center justify-between">
+                    <span className="text-[10px] text-gray-500">{vol.subtitle}</span>
+                    <span className="text-[10px] font-bold text-[#FF6B00] bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100">
+                      {vol.pages}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Stats row */}
-            <div className="grid grid-cols-3 divide-x divide-white/10 border border-white/10 rounded-xl py-4 bg-[#121216]/50 text-center">
+            {/* Stats row - Light */}
+            <div className="grid grid-cols-3 divide-x divide-gray-200 border border-gray-200 rounded-xl py-4 bg-white text-center shadow-sm">
               <div>
-                <p className="font-display text-2xl font-black text-white">3</p>
-                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Volumes</p>
+                <p className="font-display text-2xl font-black text-gray-950">3</p>
+                <p className="text-[9px] tracking-widest text-gray-400 uppercase font-bold">Volumes</p>
               </div>
               <div>
-                <p className="font-display text-2xl font-black text-white">73</p>
-                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Pages</p>
+                <p className="font-display text-2xl font-black text-gray-950">53</p>
+                <p className="text-[9px] tracking-widest text-gray-400 uppercase font-bold">Pages Total</p>
               </div>
               <div>
-                <p className="font-display text-2xl font-black text-white">60+</p>
-                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Topics</p>
+                <p className="font-display text-2xl font-black text-gray-950">60+</p>
+                <p className="text-[9px] tracking-widest text-gray-400 uppercase font-bold">Topics</p>
               </div>
             </div>
           </div>
@@ -526,7 +541,7 @@ export default function AIWebDevPage() {
             {/* Workflow Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
               {["UNDERSTAND", "PROMPT", "BUILD", "INSPECT", "DEBUG", "VERIFY", "DEPLOY", "DELIVER"].map((step, i) => (
-                <div key={step} className="border border-gray-100 rounded-lg p-3 bg-gray-50/50">
+                <div key={step} className="border border-gray-200 rounded-lg p-3 bg-[#FAFAF8]">
                   <span className="text-[9px] font-black text-[#FF6B00] tracking-widest block mb-1">
                     0{i + 1}
                   </span>
@@ -591,7 +606,7 @@ export default function AIWebDevPage() {
                   detail: "Learn acquisition, qualification, proposals, pricing, delivery and retainers.",
                 },
               ].map((card) => (
-                <div key={card.num} className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between">
+                <div key={card.num} className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
                   <div>
                     <span className="text-[10px] font-black text-[#FF6B00] tracking-widest">{card.num}</span>
                     <h3 className="font-display text-sm font-black text-gray-900 tracking-tight my-2">
@@ -629,7 +644,7 @@ export default function AIWebDevPage() {
 
               <div className="sm:col-span-3 space-y-2">
                 {independenceLevels.map((lvl, i) => (
-                  <div key={lvl.level} className="flex items-start gap-3 p-2.5 rounded-lg bg-gray-50/60 border border-gray-100">
+                  <div key={lvl.level} className="flex items-start gap-3 p-2.5 rounded-lg bg-[#FAFAF8] border border-gray-200">
                     <span className="w-5 h-5 rounded-full bg-[#FF6B00]/10 text-[#FF6B00] text-[9px] font-black flex items-center justify-center shrink-0 mt-0.5">
                       {i}
                     </span>
@@ -658,7 +673,7 @@ export default function AIWebDevPage() {
                 What's Inside AIWebDev
               </h2>
               <p className="text-xs text-gray-500">
-                Three volumes. One complete learning and delivery system.
+                Three volumes (53 Pages total). One complete learning and delivery system.
               </p>
             </div>
 
@@ -722,36 +737,37 @@ export default function AIWebDevPage() {
           </div>
         </section>
 
-        {/* ── PROMPT PREVIEW ── */}
-        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+        {/* ── PROMPT PREVIEW (LIGHT THEMED) ── */}
+        <section className="py-10 sm:py-14 bg-[#FAFAF8] border-b border-gray-200 text-gray-900">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="mb-6">
               <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 PROMPT QUALITY
               </p>
-              <h2 className="font-display text-xl font-black">Build with AI</h2>
-              <p className="text-xs text-white/40">A partial preview. The complete prompt library is inside the Vault.</p>
+              <h2 className="font-display text-xl font-black text-gray-950">Build with AI</h2>
+              <p className="text-xs text-gray-500">A partial preview. The complete prompt library is inside the Vault.</p>
             </div>
 
-            <div className="border border-white/10 rounded-xl bg-[#121216] overflow-hidden text-xs">
-              <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-[10px] font-mono text-white/40">
-                context-prompt.md
+            <div className="border border-gray-200 rounded-xl bg-white shadow-sm overflow-hidden text-xs">
+              <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 text-[10px] font-mono text-gray-600 flex items-center justify-between">
+                <span>context-prompt.md</span>
+                <span className="text-[#FF6B00] font-bold">Production Blueprint</span>
               </div>
-              <div className="p-5 font-mono leading-relaxed text-white/70">
-                <p className="mb-3">"You are working inside my existing application.</p>
-                <p className="mb-2 text-white/50">Before writing code:</p>
-                <ol className="list-decimal pl-5 space-y-1 mb-3 text-white/50">
+              <div className="p-5 font-mono leading-relaxed text-gray-800">
+                <p className="mb-3 font-semibold text-gray-900">"You are working inside my existing application.</p>
+                <p className="mb-2 text-gray-600">Before writing code:</p>
+                <ol className="list-decimal pl-5 space-y-1 mb-3 text-gray-600">
                   <li>Inspect the project architecture.</li>
                   <li>Identify reusable components.</li>
                   <li>Identify the current design system.</li>
                   <li>Explain the files you intend to modify.</li>
                   <li>Produce an implementation plan.</li>
                 </ol>
-                <p className="text-white/30 italic">Then..."</p>
+                <p className="text-gray-400 italic">Then..."</p>
               </div>
-              <div className="px-5 py-3 border-t border-white/5 bg-white/5 flex items-center justify-between">
-                <span className="text-[10px] text-white/30">Prompt continues inside the Vault</span>
-                <Link to="/vault/aiwebdev/checkout" className="text-[10px] font-bold text-[#FF6B00] hover:underline uppercase">
+              <div className="px-5 py-3 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+                <span className="text-[10px] text-gray-500">Prompt continues inside the Vault</span>
+                <Link to="/vault/aiwebdev/checkout" className="text-[10px] font-black text-[#FF6B00] hover:underline uppercase">
                   Get Vault Access →
                 </Link>
               </div>
@@ -812,7 +828,7 @@ export default function AIWebDevPage() {
               </p>
             </div>
 
-            <div className="border border-gray-200 rounded-xl overflow-hidden bg-white text-xs">
+            <div className="border border-gray-200 rounded-xl overflow-hidden bg-white text-xs shadow-sm">
               <div className="grid grid-cols-2 px-4 py-2 bg-gray-50 border-b border-gray-200 text-[9px] font-black text-gray-400 uppercase tracking-widest">
                 <span>TASK</span>
                 <span>MODEL ROLE</span>
@@ -848,25 +864,25 @@ export default function AIWebDevPage() {
           </div>
         </section>
 
-        {/* ── ROADMAP ── */}
-        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+        {/* ── ROADMAP (LIGHT THEMED) ── */}
+        <section className="py-10 sm:py-14 bg-[#FAFAF8] border-b border-gray-200">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="mb-4">
               <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 ROADMAP
               </p>
-              <h2 className="font-display text-xl font-black">The Vault doesn't end here.</h2>
-              <p className="text-xs text-white/40 max-w-lg mt-1">
+              <h2 className="font-display text-xl font-black text-gray-950">The Vault doesn't end here.</h2>
+              <p className="text-xs text-gray-500 max-w-lg mt-1">
                 AIWebDev is being developed as an evolving resource library. Future additions may include new prompts, workflows, templates, practical builds and supporting resources.
               </p>
             </div>
 
-            <div className="bg-[#121216] border border-white/10 rounded-xl p-4 inline-block text-xs">
+            <div className="bg-white border border-gray-200 rounded-xl p-4 inline-block text-xs shadow-sm">
               <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest block mb-2">COMING SOON</span>
-              <ul className="space-y-1 text-white/50">
+              <ul className="space-y-1 text-gray-600">
                 {["Additional build missions", "More industry website prompts", "Expanded debugging cases", "Additional workflow templates", "New reusable development assets"].map((item) => (
                   <li key={item} className="flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-[#FF6B00]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00]" />
                     {item}
                   </li>
                 ))}
@@ -937,18 +953,18 @@ export default function AIWebDevPage() {
           </div>
         </section>
 
-        {/* ── FINAL CTA ── */}
-        <section className="py-14 sm:py-20 bg-[#0d0d0d] text-white text-center">
+        {/* ── FINAL CTA (LIGHT THEMED) ── */}
+        <section className="py-14 sm:py-20 bg-white border-t border-gray-200 text-center">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <p className="text-[10px] tracking-[0.25em] text-[#FF6B00]/70 font-black uppercase mb-3">
+            <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-3">
               TAKEIN STUDIO · AIWEBDEV
             </p>
 
-            <h2 className="font-display text-3xl sm:text-5xl font-black tracking-tight mb-4">
+            <h2 className="font-display text-3xl sm:text-5xl font-black tracking-tight text-gray-950 mb-4">
               Stop treating AI like autocomplete.
             </h2>
 
-            <p className="text-sm text-white/50 mb-8 max-w-sm mx-auto">
+            <p className="text-sm text-gray-600 mb-8 max-w-sm mx-auto">
               Learn how to direct it, debug it, verify it, and ship with it.
             </p>
 
@@ -961,7 +977,7 @@ export default function AIWebDevPage() {
               </Link>
               <button
                 onClick={scrollToCurriculum}
-                className="px-6 py-3.5 border border-white/20 text-white/70 text-[11px] font-black tracking-widest uppercase rounded-full hover:border-white/40 hover:text-white transition-colors"
+                className="px-6 py-3.5 border border-gray-950 text-gray-950 text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-gray-950 hover:text-white transition-colors"
               >
                 Explore Curriculum
               </button>
@@ -970,10 +986,10 @@ export default function AIWebDevPage() {
         </section>
 
         {/* ── STANDALONE PAGE FOOTER ── */}
-        <footer className="border-t border-white/5 bg-[#08080a] py-6 text-center text-xs text-gray-500">
+        <footer className="border-t border-gray-200 bg-[#FCFBF9] py-6 text-center text-xs text-gray-500">
           <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-white">TakeIN Studio</span>
+              <span className="font-bold text-gray-900">TakeIN Studio</span>
               <span>— AIWebDev Vault</span>
             </div>
             <p>© 2026 TakeIN Studio. All rights reserved.</p>

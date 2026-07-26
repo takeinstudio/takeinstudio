@@ -68,11 +68,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     pathname.startsWith("/login") ||
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/apply") ||
-    pathname.startsWith("/vault/login") ||
-    pathname.startsWith("/vault/dashboard") ||
-    pathname.startsWith("/vault/aiwebdev/access") ||
-    pathname === "/vault/aiwebdev/checkout" ||
-    pathname === "/vault/aiwebdev/payment-success";
+    pathname.startsWith("/vault");
 
   if (hideNavFooter) return <>{children}</>;
 

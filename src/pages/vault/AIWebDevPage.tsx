@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -6,19 +6,15 @@ import {
   ChevronRight,
   ArrowRight,
   Check,
-  Lock,
+  Shield,
   BookOpen,
   Code2,
-  Terminal,
-  Layers,
-  Zap,
-  Shield,
-  Users,
   Globe,
-  Star,
+  ArrowUpRight,
+  Copy,
+  Lock,
 } from "lucide-react";
 import SEO from "@/components/SEO";
-import AnimatedSection from "@/components/AnimatedSection";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface CurriculumItem {
@@ -43,7 +39,7 @@ interface FaqItem {
   a: string;
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── Curriculum Data ──────────────────────────────────────────────────────────
 const volumes: VolumeData[] = [
   {
     id: "vol-1",
@@ -126,7 +122,7 @@ const volumes: VolumeData[] = [
       { id: "v3-07", num: "07", title: "Outreach System", points: ["Observe", "Demonstrate", "Ask permission"] },
       { id: "v3-08", num: "08", title: "WhatsApp Outreach", points: ["Copy-ready structure"] },
       { id: "v3-09", num: "09", title: "LinkedIn Outreach", points: ["Professional DM structure"] },
-      { id: "v3-10", num: "10", title: "Cold Email", points: ["Permission-based email"] },
+      { id: "v3-[#]", num: "10", title: "Cold Email", points: ["Permission-based email"] },
       { id: "v3-11", num: "11", title: "Website Audit Worksheet", points: ["Performance", "Layout", "CTA", "Security", "Mobile"] },
       { id: "v3-12", num: "12", title: "Qualification Scorecard", points: ["Budget", "Decision maker", "Content", "Timeline"] },
       { id: "v3-13", num: "13", title: "Proposal Generator", points: ["Scope", "Deliverables", "Payments", "Terms"] },
@@ -211,65 +207,14 @@ const modelRouting = [
   { task: "Browser verification", role: "Execution/verification" },
 ];
 
-// ─── Sub-components ────────────────────────────────────────────────────────────
-
-function VolumeCard({ vol, index }: { vol: VolumeData; index: number }) {
-  const colors = [
-    { bg: "bg-[#0d0d0d]", accent: "#FF6B00", border: "border-orange-500/30" },
-    { bg: "bg-[#111116]", accent: "#FF6B00", border: "border-orange-500/20" },
-    { bg: "bg-[#0f0f14]", accent: "#FF6B00", border: "border-orange-500/25" },
-  ];
-  const c = colors[index];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      className={`relative rounded-2xl border ${c.border} ${c.bg} p-7 flex flex-col min-h-[280px] overflow-hidden`}
-    >
-      {/* Corner accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
-        <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-[#FF6B00] opacity-60" />
-      </div>
-
-      {/* Volume label */}
-      <p className="text-[10px] tracking-[0.2em] font-black text-[#FF6B00] mb-3 uppercase">
-        TAKEIN STUDIO
-      </p>
-
-      {/* Volume number - large typographic treatment */}
-      <div className="flex items-start gap-3 mb-4">
-        <span className="text-[64px] font-black leading-none text-white/5 select-none font-display">
-          {vol.num}
-        </span>
-        <div className="mt-2">
-          <p className="text-[11px] tracking-widest text-white/40 uppercase mb-1">
-            {vol.subtitle}
-          </p>
-          <h3 className="text-sm font-black text-white tracking-tight leading-tight font-display">
-            {vol.title}
-          </h3>
-        </div>
-      </div>
-
-      <div className="mt-auto">
-        <div className="w-8 h-px bg-[#FF6B00] mb-3" />
-        <p className="text-[11px] tracking-widest text-[#FF6B00] font-bold">
-          {vol.pages}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
+// ─── Accordion Components ─────────────────────────────────────────────────────
 
 function CurriculumAccordion({ volume, defaultOpen = false }: { volume: VolumeData; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
   const toggleItem = (id: string) => {
-    setOpenItems(prev => {
+    setOpenItems((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
@@ -278,32 +223,31 @@ function CurriculumAccordion({ volume, defaultOpen = false }: { volume: VolumeDa
   };
 
   return (
-    <div className="border border-gray-100 rounded-2xl overflow-hidden">
-      {/* Volume header */}
+    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-5 bg-white hover:bg-gray-50/80 transition-colors text-left"
+        className="w-full flex items-center justify-between px-5 py-4 bg-white hover:bg-gray-50/80 transition-colors text-left"
       >
-        <div className="flex items-center gap-4">
-          <span className="w-8 h-8 rounded-full bg-[#FF6B00]/10 flex items-center justify-center text-[#FF6B00] text-xs font-black">
+        <div className="flex items-center gap-3">
+          <span className="w-7 h-7 rounded-full bg-[#FF6B00]/10 flex items-center justify-center text-[#FF6B00] text-xs font-black">
             {volume.num}
           </span>
           <div>
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2">
               <span className="text-[10px] tracking-widest text-[#FF6B00] font-black uppercase">
                 {volume.subtitle}
               </span>
-              <span className="text-[10px] text-gray-400 tracking-wider">
-                {volume.pages}
+              <span className="text-[10px] text-gray-400 font-medium">
+                • {volume.pages}
               </span>
             </div>
-            <h3 className="text-sm font-black text-gray-900 tracking-tight font-display mt-0.5">
+            <h3 className="text-sm font-black text-gray-900 tracking-tight font-display">
               {volume.title}
             </h3>
           </div>
         </div>
         <ChevronDown
-          size={18}
+          size={16}
           className={`text-gray-400 transition-transform duration-300 shrink-0 ${open ? "rotate-180" : ""}`}
         />
       </button>
@@ -311,37 +255,34 @@ function CurriculumAccordion({ volume, defaultOpen = false }: { volume: VolumeDa
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            key="content"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.25 }}
             style={{ overflow: "hidden" }}
           >
-            {/* Volume description */}
-            <div className="px-6 py-4 bg-gray-50/60 border-t border-gray-100">
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {volume.description}
-              </p>
+            <div className="px-5 py-3 bg-gray-50/60 border-t border-gray-100 text-xs text-gray-600 leading-relaxed">
+              {volume.description}
             </div>
 
-            {/* Curriculum items */}
-            <div className="divide-y divide-gray-100/80">
+            <div className="divide-y divide-gray-100">
               {volume.items.map((item) => (
                 <div key={item.id}>
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-gray-50/60 transition-colors"
+                    className="w-full flex items-center gap-3 px-5 py-3 text-left hover:bg-gray-50/60 transition-colors"
                   >
-                    <span className="text-[10px] font-black text-[#FF6B00]/60 tracking-widest shrink-0 w-6">
+                    <span className="text-[10px] font-black text-[#FF6B00]/70 tracking-widest shrink-0 w-5">
                       {item.num}
                     </span>
-                    <span className="text-sm font-semibold text-gray-800 flex-1 leading-snug">
+                    <span className="text-xs font-bold text-gray-800 flex-1 leading-snug">
                       {item.title}
                     </span>
                     <ChevronRight
-                      size={14}
-                      className={`text-gray-300 shrink-0 transition-transform duration-200 ${openItems.has(item.id) ? "rotate-90" : ""}`}
+                      size={12}
+                      className={`text-gray-300 shrink-0 transition-transform duration-200 ${
+                        openItems.has(item.id) ? "rotate-90" : ""
+                      }`}
                     />
                   </button>
                   <AnimatePresence>
@@ -353,11 +294,11 @@ function CurriculumAccordion({ volume, defaultOpen = false }: { volume: VolumeDa
                         transition={{ duration: 0.2 }}
                         style={{ overflow: "hidden" }}
                       >
-                        <div className="px-6 pb-4 pl-16">
+                        <div className="px-5 pb-3 pl-12">
                           <ul className="space-y-1">
                             {item.points.map((p, i) => (
-                              <li key={i} className="flex items-start gap-2 text-xs text-gray-500 leading-relaxed">
-                                <span className="mt-1.5 w-1 h-1 rounded-full bg-[#FF6B00]/50 shrink-0" />
+                              <li key={i} className="flex items-start gap-2 text-[11px] text-gray-500 leading-relaxed">
+                                <span className="mt-1.5 w-1 h-1 rounded-full bg-[#FF6B00]" />
                                 {p}
                               </li>
                             ))}
@@ -381,17 +322,19 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
   return (
     <div className="space-y-2">
       {items.map((item, i) => (
-        <div key={i} className="border border-gray-100 rounded-xl overflow-hidden">
+        <div key={i} className="border border-gray-200 rounded-xl overflow-hidden bg-white">
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-between px-5 py-3.5 text-left hover:bg-gray-50 transition-colors"
           >
-            <span className="text-sm font-semibold text-gray-900 leading-snug pr-4">
+            <span className="text-xs font-bold text-gray-900 leading-snug pr-4">
               {item.q}
             </span>
             <ChevronDown
-              size={16}
-              className={`text-gray-400 shrink-0 transition-transform duration-300 ${open === i ? "rotate-180" : ""}`}
+              size={14}
+              className={`text-gray-400 shrink-0 transition-transform duration-300 ${
+                open === i ? "rotate-180" : ""
+              }`}
             />
           </button>
           <AnimatePresence>
@@ -400,11 +343,11 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.2 }}
                 style={{ overflow: "hidden" }}
               >
-                <div className="px-5 pb-4">
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.a}</p>
+                <div className="px-5 pb-3.5 pt-1 border-t border-gray-50">
+                  <p className="text-xs text-gray-600 leading-relaxed">{item.a}</p>
                 </div>
               </motion.div>
             )}
@@ -415,49 +358,7 @@ function FaqAccordion({ items }: { items: FaqItem[] }) {
   );
 }
 
-// Sticky floating CTA
-function StickyVaultCTA() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 600);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.3 }}
-          className="fixed bottom-6 right-6 z-40 hidden lg:block"
-        >
-          <div className="bg-[#0d0d0d] text-white rounded-2xl px-5 py-3.5 shadow-2xl border border-white/5 flex items-center gap-4">
-            <div>
-              <p className="text-[10px] tracking-widest text-[#FF6B00] font-black uppercase">
-                AIWebDev
-              </p>
-              <p className="text-xs text-white/60 font-medium">3-Volume Vault</p>
-            </div>
-            <Link
-              to="/vault/aiwebdev/checkout"
-              className="bg-[#FF6B00] text-white text-[10px] font-black tracking-widest px-4 py-2.5 rounded-xl hover:bg-orange-500 transition-colors whitespace-nowrap"
-            >
-              GET ACCESS
-            </Link>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-// ─── Main Page ─────────────────────────────────────────────────────────────────
+// ─── Main Standalone Product Page ──────────────────────────────────────────────
 export default function AIWebDevPage() {
   const curriculumRef = useRef<HTMLDivElement>(null);
 
@@ -471,396 +372,317 @@ export default function AIWebDevPage() {
       <SEO
         title="AIWebDev — The AI-Native Web Development Playbook | TakeIN Studio"
         description="Learn AI-native web development with practical prompts, Antigravity workflows, debugging systems, full-stack security, deployment and freelance client delivery."
-        keywords="AIWebDev, AI web development, AI coding agents, Claude Code, Antigravity IDE, web development playbook, AI-native development, context engineering, Supabase security, freelance web development"
+        keywords="AIWebDev, AI web development, AI coding agents, Claude Code, Antigravity IDE, web development playbook, AI-native development"
         url="https://takeinstudio.com/vault/aiwebdev"
       />
 
-      <StickyVaultCTA />
+      <div className="bg-[#FCFBF9] min-h-screen text-gray-900 font-sans selection:bg-[#FF6B00] selection:text-white">
 
-      {/* ── PAGE WRAPPER ── */}
-      <div className="bg-white min-h-screen">
+        {/* ── Standalone Clean Header Bar ── */}
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 shadow-sm">
+          <div className="max-w-5xl mx-auto flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-2.5">
+              <img
+                src="/logo/logo_no_text.png"
+                alt="TakeIN Studio"
+                className="h-7 w-auto mix-blend-multiply object-contain"
+              />
+              <div className="flex items-center text-sm font-display">
+                <span className="text-gray-950 font-black">Take</span>
+                <span className="text-[#FF6B00] font-black">IN</span>
+                <span className="text-gray-400 font-normal ml-1">Studio / AIWebDev</span>
+              </div>
+            </Link>
 
-        {/* ══════════════════════════════════════════════════════════════
-            HERO
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="relative pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden">
-          {/* Subtle grid bg */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-          {/* Very soft orange glow top-left */}
-          <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[#FF6B00] blur-[160px] opacity-[0.04] pointer-events-none" />
-
-          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Breadcrumb */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 text-[10px] tracking-widest text-gray-400 font-bold uppercase mb-10"
+            <Link
+              to="/vault/aiwebdev/checkout"
+              className="bg-[#FF6B00] text-white text-[10px] font-black tracking-widest uppercase px-4 py-2 rounded-full hover:bg-orange-500 transition-colors shadow-sm"
             >
-              <Link to="/" className="hover:text-[#FF6B00] transition-colors">
-                TakeIN Studio
-              </Link>
-              <span>/</span>
-              <span className="text-[#FF6B00]">AIWebDev</span>
-            </motion.div>
+              Get Vault Access
+            </Link>
+          </div>
+        </header>
 
-            {/* Studio label */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-[10px] tracking-[0.25em] text-gray-400 font-black uppercase mb-5"
-            >
+        {/* ── HERO SECTION ── */}
+        <section className="pt-10 pb-12 sm:pt-14 sm:pb-16 border-b border-gray-100 bg-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-3">
               TAKEIN STUDIO PRESENTS
-            </motion.p>
+            </p>
 
-            {/* Main title */}
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display text-[clamp(56px,10vw,100px)] font-black leading-none tracking-tight text-gray-950 mb-4"
-            >
-              AIWeb
-              <span className="text-[#FF6B00]">Dev</span>
-            </motion.h1>
+            <h1 className="font-display text-4xl sm:text-6xl font-black tracking-tight text-gray-950 mb-3 leading-tight">
+              AIWeb<span className="text-[#FF6B00]">Dev</span>
+            </h1>
 
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.18 }}
-              className="text-xl sm:text-2xl font-display font-semibold text-gray-700 tracking-tight mb-6 max-w-2xl"
-            >
-              The AI-Native<br />
-              Web Development Playbook.
-            </motion.p>
+            <p className="text-lg sm:text-xl font-display font-bold text-gray-800 mb-4 max-w-xl">
+              The AI-Native Web Development Playbook.
+            </p>
 
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-xl mb-8"
-            >
-              Learn to understand, build, debug, secure,
-              deploy and deliver modern web applications
-              using AI.
-            </motion.p>
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl mb-6">
+              Learn to understand, build, debug, secure, deploy and deliver modern web applications using AI coding agents.
+            </p>
 
-            {/* Meta tags */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap gap-x-5 gap-y-2 text-[10px] tracking-widest font-black text-gray-400 uppercase mb-10"
-            >
-              {["3 Volumes", "73 Pages", "Practical Labs", "Exact Prompts", "Capstones", "Client Systems"].map((tag) => (
-                <span key={tag} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-[#FF6B00]" />
-                  {tag}
+            {/* Badges */}
+            <div className="flex flex-wrap gap-2 text-[10px] tracking-wider font-bold text-gray-500 uppercase mb-8">
+              {["3 VOLUMES", "73 PAGES", "PRACTICAL LABS", "EXACT PROMPTS", "CAPSTONES", "CLIENT SYSTEMS"].map((b) => (
+                <span key={b} className="bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-700">
+                  {b}
                 </span>
               ))}
-            </motion.div>
+            </div>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.38 }}
-              className="flex flex-wrap gap-3 mb-10"
-            >
+            <div className="flex flex-wrap gap-3 mb-6">
               <button
                 onClick={scrollToCurriculum}
-                className="px-6 py-3.5 border-2 border-gray-900 text-gray-900 text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300"
+                className="px-5 py-3 border border-gray-950 text-gray-950 text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-gray-950 hover:text-white transition-colors"
               >
                 Explore What's Inside
               </button>
               <Link
                 to="/vault/aiwebdev/checkout"
-                className="px-6 py-3.5 bg-[#FF6B00] text-white text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-orange-500 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all duration-300"
+                className="px-6 py-3 bg-[#FF6B00] text-white text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-colors"
               >
                 Get Vault Access
               </Link>
-            </motion.div>
+            </div>
 
-            {/* Audience line */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-sm text-gray-400 leading-relaxed border-l-2 border-[#FF6B00]/30 pl-4 max-w-lg"
-            >
-              Built for beginners, developers and freelancers
-              who want to use AI as a development system —
-              not just a code generator.
-            </motion.p>
+            <p className="text-xs text-gray-400 border-l-2 border-[#FF6B00] pl-3 max-w-md">
+              Built for beginners, developers and freelancers who want to use AI as a development system — not just a code generator.
+            </p>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            VOLUME VISUALIZATION
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-16 sm:py-20 bg-[#0d0d0d]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-12 text-center">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-3">
+        {/* ── PRODUCT FORMAT (3 VOLUMES) ── */}
+        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 PRODUCT FORMAT
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <h2 className="font-display text-xl sm:text-2xl font-black tracking-tight">
                 3-Volume Digital Vault
               </h2>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {volumes.map((vol, i) => (
-                <VolumeCard key={vol.id} vol={vol} index={i} />
-              ))}
             </div>
 
-            {/* Stats bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 grid grid-cols-3 divide-x divide-white/5 border border-white/5 rounded-2xl"
-            >
-              {[
-                { n: "3", label: "Volumes" },
-                { n: "73", label: "Pages" },
-                { n: "60+", label: "Topics" },
-              ].map((s) => (
-                <div key={s.label} className="py-6 flex flex-col items-center justify-center">
-                  <span className="font-display text-3xl font-black text-white mb-1">{s.n}</span>
-                  <span className="text-[10px] tracking-widest text-white/30 uppercase font-bold">{s.label}</span>
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              {volumes.map((vol, i) => (
+                <div
+                  key={vol.id}
+                  className="bg-[#121216] border border-white/10 rounded-xl p-5 flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="text-[9px] tracking-widest font-black text-[#FF6B00] uppercase">
+                      TAKEIN STUDIO
+                    </span>
+                    <div className="flex items-baseline gap-2 my-2">
+                      <span className="text-3xl font-black font-display text-white/20">{vol.num}</span>
+                      <h3 className="text-xs font-black font-display uppercase tracking-wider text-white">
+                        {vol.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="border-t border-white/5 pt-3 mt-4 flex items-center justify-between">
+                    <span className="text-[10px] text-white/40">{vol.subtitle}</span>
+                    <span className="text-[10px] font-bold text-[#FF6B00]">{vol.pages}</span>
+                  </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
+
+            {/* Stats row */}
+            <div className="grid grid-cols-3 divide-x divide-white/10 border border-white/10 rounded-xl py-4 bg-[#121216]/50 text-center">
+              <div>
+                <p className="font-display text-2xl font-black text-white">3</p>
+                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Volumes</p>
+              </div>
+              <div>
+                <p className="font-display text-2xl font-black text-white">73</p>
+                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Pages</p>
+              </div>
+              <div>
+                <p className="font-display text-2xl font-black text-white">60+</p>
+                <p className="text-[9px] tracking-widest text-white/40 uppercase font-bold">Topics</p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            VALUE PROPOSITION
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white border-b border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-16">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── WHAT THIS IS (VALUE PROP) ── */}
+        <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-8">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-2">
                 WHAT THIS IS
               </p>
-              <h2 className="font-display text-2xl sm:text-4xl font-black text-gray-950 tracking-tight leading-tight mb-6 max-w-2xl">
-                This is not another<br />
-                "100 AI prompts" PDF.
+              <h2 className="font-display text-xl sm:text-3xl font-black text-gray-950 tracking-tight mb-2">
+                This is not another "100 AI prompts" PDF.
               </h2>
-              <p className="text-base text-gray-500 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-gray-500">
                 AIWebDev teaches a repeatable workflow — not a list of prompts to copy.
               </p>
-            </AnimatedSection>
+            </div>
 
-            {/* Workflow steps */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-100 border border-gray-100 rounded-2xl overflow-hidden mb-16">
+            {/* Workflow Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
               {["UNDERSTAND", "PROMPT", "BUILD", "INSPECT", "DEBUG", "VERIFY", "DEPLOY", "DELIVER"].map((step, i) => (
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="bg-white px-5 py-5 flex flex-col gap-2"
-                >
-                  <span className="text-[9px] tracking-widest text-gray-300 font-bold">
+                <div key={step} className="border border-gray-100 rounded-lg p-3 bg-gray-50/50">
+                  <span className="text-[9px] font-black text-[#FF6B00] tracking-widest block mb-1">
                     0{i + 1}
                   </span>
-                  <span className="text-xs font-black text-gray-900 tracking-wider">
+                  <span className="text-xs font-black text-gray-900 tracking-wider uppercase">
                     {step}
                   </span>
-                  {i < 7 && (
-                    <ArrowRight size={10} className="text-[#FF6B00] mt-1 hidden sm:block" />
-                  )}
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* Supporting text */}
-            <AnimatedSection className="grid sm:grid-cols-2 gap-8 max-w-3xl">
-              <div>
-                <h3 className="font-display text-sm font-black text-gray-900 tracking-tight mb-3">
+            <div className="grid sm:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
+              <div className="border-l-2 border-[#FF6B00] pl-4">
+                <h3 className="text-xs font-black text-gray-900 tracking-tight mb-1">
                   You won't just receive prompts to copy.
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  You'll learn why applications work, how client/server architecture fits together,
-                  and how to provide AI agents with the right context.
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  You'll learn why applications work, how client/server architecture fits together, and how to provide AI agents with the right context.
                 </p>
               </div>
-              <div>
-                <h3 className="font-display text-sm font-black text-gray-900 tracking-tight mb-3">
+              <div className="border-l-2 border-gray-200 pl-4">
+                <h3 className="text-xs font-black text-gray-900 tracking-tight mb-1">
                   You'll know how to choose models and recover.
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  How to choose models for different tasks, how to inspect generated code,
-                  and how to recover when the AI gets something wrong.
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  How to choose models for different tasks, how to inspect generated code, and how to recover when the AI gets something wrong.
                 </p>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            WHO THIS IS FOR
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-[#FAFAF8]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-14">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-3">
+        {/* ── WHO THIS IS FOR ── */}
+        <section className="py-12 sm:py-16 bg-[#FAFAF8]">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-8">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 WHO THIS IS FOR
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
+              <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950">
                 Three distinct paths. One system.
               </h2>
-            </AnimatedSection>
+            </div>
 
-            <div className="grid sm:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-3 gap-4">
               {[
                 {
                   num: "01",
                   title: "BEGINNER",
                   desc: "You can describe what you want but don't yet understand how modern web applications fit together.",
                   detail: "Learn the fundamentals while building with AI.",
-                  icon: BookOpen,
                 },
                 {
                   num: "02",
                   title: "DEVELOPER",
                   desc: "You already understand development but want to use coding agents more effectively.",
                   detail: "Learn context engineering, model routing, debugging, security and multi-agent workflows.",
-                  icon: Code2,
                 },
                 {
                   num: "03",
                   title: "FREELANCER",
                   desc: "You want to turn AI-assisted development into a repeatable client-delivery system.",
                   detail: "Learn acquisition, qualification, proposals, pricing, delivery and retainers.",
-                  icon: Globe,
                 },
-              ].map((card, i) => (
-                <AnimatedSection key={card.num} delay={i * 0.1}>
-                  <div className="border border-gray-100 rounded-2xl p-7 bg-white h-full flex flex-col hover:border-[#FF6B00]/20 hover:shadow-sm transition-all duration-300">
-                    <div className="flex items-center justify-between mb-5">
-                      <span className="text-[10px] tracking-widest text-[#FF6B00] font-black">{card.num}</span>
-                      <card.icon size={16} className="text-gray-300" />
-                    </div>
-                    <h3 className="font-display text-base font-black text-gray-900 tracking-tight mb-3">
+              ].map((card) => (
+                <div key={card.num} className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-black text-[#FF6B00] tracking-widest">{card.num}</span>
+                    <h3 className="font-display text-sm font-black text-gray-900 tracking-tight my-2">
                       {card.title}
                     </h3>
-                    <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
-                      {card.desc}
-                    </p>
-                    <p className="text-xs font-semibold text-gray-700 leading-relaxed">
-                      {card.detail}
-                    </p>
+                    <p className="text-xs text-gray-500 leading-relaxed mb-3">{card.desc}</p>
                   </div>
-                </AnimatedSection>
+                  <p className="text-[11px] font-bold text-gray-800 pt-3 border-t border-gray-100">
+                    {card.detail}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            AI INDEPENDENCE JOURNEY
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid sm:grid-cols-2 gap-16 items-start">
-              {/* Left copy */}
-              <AnimatedSection>
-                <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── THE AI INDEPENDENCE JOURNEY ── */}
+        <section className="py-12 sm:py-16 bg-white border-y border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="grid sm:grid-cols-5 gap-8 items-start">
+              <div className="sm:col-span-2">
+                <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-2">
                   THE PROGRESSION
                 </p>
-                <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight mb-6">
+                <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950 mb-3">
                   The AI Independence Journey
                 </h2>
-                <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                <p className="text-xs text-gray-500 leading-relaxed mb-3">
                   The goal isn't to make you dependent on prompts.
                 </p>
-                <p className="text-sm text-gray-700 leading-relaxed font-medium">
+                <p className="text-xs font-bold text-gray-800 leading-relaxed">
                   The goal is to teach you how to direct, inspect and verify AI-generated software.
                 </p>
-              </AnimatedSection>
+              </div>
 
-              {/* Right: levels */}
-              <div className="space-y-1">
+              <div className="sm:col-span-3 space-y-2">
                 {independenceLevels.map((lvl, i) => (
-                  <motion.div
-                    key={lvl.level}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
-                    className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors group"
-                  >
-                    {/* Connector line */}
-                    <div className="flex flex-col items-center shrink-0">
-                      <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-[9px] font-black transition-colors ${i === 5 ? "border-[#FF6B00] bg-[#FF6B00] text-white" : "border-gray-200 text-gray-400 group-hover:border-[#FF6B00]/30"}`}>
-                        {i}
+                  <div key={lvl.level} className="flex items-start gap-3 p-2.5 rounded-lg bg-gray-50/60 border border-gray-100">
+                    <span className="w-5 h-5 rounded-full bg-[#FF6B00]/10 text-[#FF6B00] text-[9px] font-black flex items-center justify-center shrink-0 mt-0.5">
+                      {i}
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[9px] tracking-widest text-gray-400 font-bold uppercase">{lvl.level}</span>
+                        <span className="text-xs font-black text-gray-900">{lvl.title}</span>
                       </div>
-                      {i < 5 && <div className="w-px h-4 bg-gray-100 my-1" />}
+                      <p className="text-[11px] text-gray-500 leading-snug">{lvl.desc}</p>
                     </div>
-                    <div className="pt-1">
-                      <p className="text-[9px] tracking-widest text-gray-400 font-bold uppercase mb-0.5">{lvl.level}</p>
-                      <p className="text-sm font-black text-gray-900 tracking-tight mb-1">{lvl.title}</p>
-                      <p className="text-xs text-gray-500 leading-relaxed">{lvl.desc}</p>
-                    </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            CURRICULUM
-        ══════════════════════════════════════════════════════════════ */}
-        <section ref={curriculumRef} className="py-20 sm:py-28 bg-[#FAFAF8]" id="curriculum">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-14 text-center">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── FULL CURRICULUM ── */}
+        <section ref={curriculumRef} className="py-12 sm:py-16 bg-[#FAFAF8]" id="curriculum">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 CURRICULUM
               </p>
-              <h2 className="font-display text-2xl sm:text-4xl font-black text-gray-950 tracking-tight mb-4">
+              <h2 className="font-display text-xl sm:text-3xl font-black text-gray-950 tracking-tight mb-1">
                 What's Inside AIWebDev
               </h2>
-              <p className="text-base text-gray-500 max-w-xl mx-auto">
+              <p className="text-xs text-gray-500">
                 Three volumes. One complete learning and delivery system.
               </p>
-            </AnimatedSection>
+            </div>
 
             <div className="space-y-3">
               {volumes.map((vol, i) => (
-                <AnimatedSection key={vol.id} delay={i * 0.1}>
-                  <CurriculumAccordion volume={vol} defaultOpen={i === 0} />
-                </AnimatedSection>
+                <CurriculumAccordion key={vol.id} volume={vol} defaultOpen={i === 0} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            PRACTICAL LEARNING — DON'T JUST READ
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-16 max-w-2xl">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── PRACTICAL LEARNING ── */}
+        <section className="py-12 sm:py-16 bg-white border-y border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 HOW YOU LEARN
               </p>
-              <h2 className="font-display text-2xl sm:text-4xl font-black text-gray-950 tracking-tight leading-tight">
-                You don't just read it.<br />
-                You build with it.
+              <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950">
+                You don't just read it. You build with it.
               </h2>
-            </AnimatedSection>
+            </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-14">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
               {[
                 { step: "LEARN", desc: "Understand the concept." },
                 { step: "PROMPT", desc: "Use a production-ready AI instruction." },
@@ -871,414 +693,292 @@ export default function AIWebDevPage() {
                 { step: "VERIFY", desc: "Test the actual result." },
                 { step: "SHIP", desc: "Deploy the application." },
               ].map((item, i) => (
-                <AnimatedSection key={item.step} delay={i * 0.05}>
-                  <div className="border border-gray-100 rounded-xl p-4 hover:border-[#FF6B00]/20 transition-colors h-full">
-                    <p className="text-[9px] tracking-widest font-black text-[#FF6B00] mb-2">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <p className="text-xs font-black text-gray-900 tracking-tight mb-2">
-                      {item.step}
-                    </p>
-                    <p className="text-[11px] text-gray-500 leading-relaxed">{item.desc}</p>
-                  </div>
-                </AnimatedSection>
+                <div key={item.step} className="border border-gray-200 rounded-lg p-3 bg-white">
+                  <span className="text-[9px] font-black text-[#FF6B00] block mb-1">
+                    0{i + 1}
+                  </span>
+                  <p className="text-xs font-black text-gray-900 tracking-tight mb-1">{item.step}</p>
+                  <p className="text-[10px] text-gray-500 leading-snug">{item.desc}</p>
+                </div>
               ))}
             </div>
 
-            {/* Practical components */}
-            <AnimatedSection>
-              <p className="text-[10px] tracking-widest text-gray-400 font-bold uppercase mb-5">
-                INCLUDED THROUGHOUT
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Guided Labs",
-                  "Independent Tasks",
-                  "Debugging Challenges",
-                  "Capstone Projects",
-                  "Verification Checklists",
-                  "Copy-ready Prompts",
-                  "Architecture Exercises",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-semibold text-gray-600 border border-gray-200 rounded-full px-4 py-1.5 hover:border-[#FF6B00]/30 hover:text-gray-800 transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </AnimatedSection>
+            <div className="flex flex-wrap gap-1.5 pt-4 border-t border-gray-100">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mr-2 py-1">INCLUDED THROUGHOUT:</span>
+              {[
+                "Guided Labs",
+                "Independent Tasks",
+                "Debugging Challenges",
+                "Capstone Projects",
+                "Verification Checklists",
+                "Copy-ready Prompts",
+                "Architecture Exercises",
+              ].map((tag) => (
+                <span key={tag} className="text-[10px] font-semibold text-gray-600 border border-gray-200 rounded-md px-2.5 py-0.5">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            PROMPT PREVIEW
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-[#0d0d0d]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-12">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── PROMPT PREVIEW ── */}
+        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 PROMPT QUALITY
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">
-                Build with AI
-              </h2>
-              <p className="text-sm text-white/40 max-w-sm">
-                A partial preview. The complete prompt library is inside the Vault.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.1}>
-              <div className="border border-white/5 rounded-2xl overflow-hidden">
-                {/* Terminal bar */}
-                <div className="bg-white/5 px-5 py-3 flex items-center gap-2 border-b border-white/5">
-                  <div className="flex gap-1.5">
-                    <span className="w-3 h-3 rounded-full bg-red-500/40" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/40" />
-                    <span className="w-3 h-3 rounded-full bg-green-500/40" />
-                  </div>
-                  <span className="text-[10px] tracking-widest text-white/20 font-mono ml-2">
-                    context-prompt.md
-                  </span>
-                </div>
-
-                {/* Prompt content */}
-                <div className="p-7 font-mono text-sm leading-relaxed">
-                  <p className="text-white/60 mb-4">
-                    <span className="text-[#FF6B00]/80">"</span>
-                    You are working inside my existing application.
-                  </p>
-                  <p className="text-white/50 mb-2">Before writing code:</p>
-                  <div className="space-y-1.5 mb-4 pl-4">
-                    {[
-                      "1. Inspect the project architecture.",
-                      "2. Identify reusable components.",
-                      "3. Identify the current design system.",
-                      "4. Explain the files you intend to modify.",
-                      "5. Produce an implementation plan.",
-                    ].map((line) => (
-                      <p key={line} className="text-white/40 text-[13px]">{line}</p>
-                    ))}
-                  </div>
-                  <p className="text-white/30 italic">Then...</p>
-                </div>
-
-                {/* CTA */}
-                <div className="border-t border-white/5 px-7 py-4 flex items-center justify-between">
-                  <p className="text-xs text-white/20">
-                    Prompt continues inside the Vault
-                  </p>
-                  <Link
-                    to="/vault/aiwebdev/checkout"
-                    className="text-[10px] font-black tracking-widest text-[#FF6B00] hover:text-orange-400 transition-colors flex items-center gap-1.5 uppercase"
-                  >
-                    Get Vault Access <ArrowRight size={11} />
-                  </Link>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════════════
-            AI WORKFLOW CONTRAST
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-14 text-center">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
-                THE DIFFERENCE
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-                Don't just ask AI to "make a website."
-              </h2>
-            </AnimatedSection>
-
-            <div className="grid sm:grid-cols-2 gap-6 items-start">
-              {/* Bad */}
-              <AnimatedSection delay={0.05}>
-                <div className="border border-red-100 rounded-2xl overflow-hidden">
-                  <div className="bg-red-50/60 px-5 py-3 border-b border-red-100">
-                    <span className="text-[10px] tracking-widest font-black text-red-400 uppercase">
-                      ✕ BAD
-                    </span>
-                  </div>
-                  <div className="p-7 font-mono">
-                    <p className="text-gray-400 text-sm italic">
-                      "make me a modern website"
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-
-              {/* Good workflow */}
-              <AnimatedSection delay={0.1}>
-                <div className="border border-green-100 rounded-2xl overflow-hidden">
-                  <div className="bg-green-50/60 px-5 py-3 border-b border-green-100">
-                    <span className="text-[10px] tracking-widest font-black text-green-600 uppercase">
-                      ✓ AIWebDev Workflow
-                    </span>
-                  </div>
-                  <div className="p-5">
-                    {["CONTEXT", "ARCHITECTURE", "PLAN", "IMPLEMENT", "RUN", "INSPECT", "DEBUG", "VERIFY"].map((step, i) => (
-                      <div key={step} className="flex items-center gap-3">
-                        <div className="flex flex-col items-center">
-                          <div className="w-6 h-6 rounded-full bg-[#FF6B00]/10 flex items-center justify-center text-[9px] font-black text-[#FF6B00]">
-                            {i + 1}
-                          </div>
-                          {i < 7 && <div className="w-px h-3 bg-gray-100" />}
-                        </div>
-                        <span className="text-xs font-black text-gray-700 tracking-wider py-1.5">
-                          {step}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
+              <h2 className="font-display text-xl font-black">Build with AI</h2>
+              <p className="text-xs text-white/40">A partial preview. The complete prompt library is inside the Vault.</p>
             </div>
 
-            <AnimatedSection delay={0.2} className="mt-8 max-w-xl">
-              <p className="text-sm text-gray-500 leading-relaxed">
-                AIWebDev teaches you how to supervise an AI coding agent instead of blindly accepting generated code.
-              </p>
-            </AnimatedSection>
+            <div className="border border-white/10 rounded-xl bg-[#121216] overflow-hidden text-xs">
+              <div className="bg-white/5 px-4 py-2 border-b border-white/5 text-[10px] font-mono text-white/40">
+                context-prompt.md
+              </div>
+              <div className="p-5 font-mono leading-relaxed text-white/70">
+                <p className="mb-3">"You are working inside my existing application.</p>
+                <p className="mb-2 text-white/50">Before writing code:</p>
+                <ol className="list-decimal pl-5 space-y-1 mb-3 text-white/50">
+                  <li>Inspect the project architecture.</li>
+                  <li>Identify reusable components.</li>
+                  <li>Identify the current design system.</li>
+                  <li>Explain the files you intend to modify.</li>
+                  <li>Produce an implementation plan.</li>
+                </ol>
+                <p className="text-white/30 italic">Then..."</p>
+              </div>
+              <div className="px-5 py-3 border-t border-white/5 bg-white/5 flex items-center justify-between">
+                <span className="text-[10px] text-white/30">Prompt continues inside the Vault</span>
+                <Link to="/vault/aiwebdev/checkout" className="text-[10px] font-bold text-[#FF6B00] hover:underline uppercase">
+                  Get Vault Access →
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            MODEL ROUTING TABLE
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-24 bg-[#FAFAF8] border-b border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-12">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── THE DIFFERENCE ── */}
+        <section className="py-10 sm:py-14 bg-white border-b border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6 text-center">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
+                THE DIFFERENCE
+              </p>
+              <h2 className="font-display text-xl font-black text-gray-950">
+                Don't just ask AI to "make a website."
+              </h2>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <div className="border border-red-200 rounded-xl p-4 bg-red-50/30">
+                <span className="text-[10px] font-black text-red-500 uppercase tracking-widest block mb-2">
+                  ✕ BAD
+                </span>
+                <p className="font-mono text-xs text-gray-500 italic">"make me a modern website"</p>
+              </div>
+
+              <div className="border border-green-200 rounded-xl p-4 bg-green-50/30">
+                <span className="text-[10px] font-black text-green-600 uppercase tracking-widest block mb-2">
+                  ✓ AIWEBDEV WORKFLOW
+                </span>
+                <div className="flex flex-wrap gap-1 text-[10px] font-black tracking-wider text-gray-700">
+                  {["CONTEXT", "→ ARCHITECTURE", "→ PLAN", "→ IMPLEMENT", "→ RUN", "→ INSPECT", "→ DEBUG", "→ VERIFY"].map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-500 text-center mt-4 max-w-md mx-auto">
+              AIWebDev teaches you how to supervise an AI coding agent instead of blindly accepting generated code.
+            </p>
+          </div>
+        </section>
+
+        {/* ── MODEL ROUTING ── */}
+        <section className="py-10 sm:py-14 bg-[#FAFAF8]">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 MODEL ROUTING
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight mb-3">
+              <h2 className="font-display text-xl font-black text-gray-950">
                 Different tasks. Different models.
               </h2>
-              <p className="text-sm text-gray-400 max-w-md">
+              <p className="text-xs text-gray-400">
                 The complete model-routing matrix with current model recommendations is inside the Vault. Model availability changes — we keep it current.
               </p>
-            </AnimatedSection>
+            </div>
 
-            <AnimatedSection delay={0.1}>
-              <div className="border border-gray-100 rounded-2xl overflow-hidden">
-                <div className="grid grid-cols-2 text-[10px] tracking-widest font-black text-gray-400 uppercase px-6 py-3 bg-gray-50 border-b border-gray-100">
-                  <span>TASK</span>
-                  <span>MODEL ROLE</span>
-                </div>
-                {modelRouting.map((row, i) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-2 px-6 py-4 border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors"
-                  >
-                    <span className="text-sm text-gray-700 font-medium">{row.task}</span>
-                    <span className="text-sm text-gray-500">{row.role}</span>
-                  </div>
-                ))}
+            <div className="border border-gray-200 rounded-xl overflow-hidden bg-white text-xs">
+              <div className="grid grid-cols-2 px-4 py-2 bg-gray-50 border-b border-gray-200 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                <span>TASK</span>
+                <span>MODEL ROLE</span>
               </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════════════
-            WHAT YOU RECEIVE
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-14">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
-                INCLUDED
-              </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-                Your Vault Includes
-              </h2>
-            </AnimatedSection>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-              {deliverables.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: Math.floor(i / 3) * 0.05 }}
-                  className="flex items-start gap-3 py-2"
-                >
-                  <Check size={14} className="text-[#FF6B00] shrink-0 mt-0.5" strokeWidth={2.5} />
-                  <span className="text-sm text-gray-700 leading-snug">{item}</span>
-                </motion.div>
+              {modelRouting.map((row, i) => (
+                <div key={i} className="grid grid-cols-2 px-4 py-2.5 border-b border-gray-100 last:border-0">
+                  <span className="font-medium text-gray-800">{row.task}</span>
+                  <span className="text-gray-500">{row.role}</span>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            ROADMAP / MORE COMING
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-24 bg-[#0d0d0d] border-t border-white/5">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-10">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
-                ROADMAP
+        {/* ── WHAT YOU RECEIVE ── */}
+        <section className="py-10 sm:py-14 bg-white border-y border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
+                INCLUDED
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">
-                The Vault doesn't end here.
-              </h2>
-              <p className="text-sm text-white/40 leading-relaxed max-w-lg">
-                AIWebDev is being developed as an evolving resource library.
-                Future additions may include new prompts, workflows, templates,
-                practical builds and supporting resources.
-              </p>
-            </AnimatedSection>
+              <h2 className="font-display text-xl font-black text-gray-950">Your Vault Includes</h2>
+            </div>
 
-            <AnimatedSection delay={0.1}>
-              <div className="border border-white/5 rounded-2xl p-6 inline-block">
-                <p className="text-[10px] tracking-widest text-[#FF6B00] font-black uppercase mb-4">
-                  COMING SOON
-                </p>
-                <ul className="space-y-2">
-                  {[
-                    "Additional build missions",
-                    "More industry website prompts",
-                    "Expanded debugging cases",
-                    "Additional workflow templates",
-                    "New reusable development assets",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-white/40">
-                      <span className="w-1 h-1 rounded-full bg-[#FF6B00]/50 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimatedSection>
+            <div className="grid sm:grid-cols-3 gap-2 text-xs">
+              {deliverables.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 py-1.5 px-2 rounded-md hover:bg-gray-50">
+                  <Check size={12} className="text-[#FF6B00] shrink-0" />
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            HOW ACCESS WORKS
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-14 text-center">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── ROADMAP ── */}
+        <section className="py-10 sm:py-14 bg-[#0d0d0d] text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-4">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
+                ROADMAP
+              </p>
+              <h2 className="font-display text-xl font-black">The Vault doesn't end here.</h2>
+              <p className="text-xs text-white/40 max-w-lg mt-1">
+                AIWebDev is being developed as an evolving resource library. Future additions may include new prompts, workflows, templates, practical builds and supporting resources.
+              </p>
+            </div>
+
+            <div className="bg-[#121216] border border-white/10 rounded-xl p-4 inline-block text-xs">
+              <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest block mb-2">COMING SOON</span>
+              <ul className="space-y-1 text-white/50">
+                {["Additional build missions", "More industry website prompts", "Expanded debugging cases", "Additional workflow templates", "New reusable development assets"].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-[#FF6B00]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── HOW ACCESS WORKS ── */}
+        <section className="py-10 sm:py-14 bg-white border-b border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="mb-6 text-center">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 THE PROCESS
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-                How Access Works
-              </h2>
-            </AnimatedSection>
+              <h2 className="font-display text-xl font-black text-gray-950">How Access Works</h2>
+            </div>
 
-            <div className="grid sm:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-4 gap-3 text-xs">
               {[
                 { n: "01", title: "EXPLORE", desc: "Review exactly what is included." },
                 { n: "02", title: "CHECKOUT", desc: "Proceed to the AIWebDev checkout." },
                 { n: "03", title: "PAYMENT VERIFICATION", desc: "Payment details are manually verified by TakeIN Studio." },
                 { n: "04", title: "VAULT ACCESS", desc: "After successful verification, personal Vault credentials/access instructions are provided." },
-              ].map((step, i) => (
-                <AnimatedSection key={step.n} delay={i * 0.1}>
-                  <div className="flex flex-col h-full">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="font-display text-3xl font-black text-gray-100">{step.n}</span>
-                      <div className="flex-1 h-px bg-gray-100" />
-                      {i < 3 && <ChevronRight size={12} className="text-gray-200" />}
-                    </div>
-                    <h3 className="font-display text-xs font-black text-gray-900 tracking-widest mb-2">{step.title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
-                  </div>
-                </AnimatedSection>
+              ].map((step) => (
+                <div key={step.n} className="border border-gray-200 rounded-xl p-4 bg-white">
+                  <span className="text-lg font-black text-gray-300 font-display block mb-1">{step.n}</span>
+                  <h3 className="font-bold text-gray-900 uppercase tracking-wider mb-1">{step.title}</h3>
+                  <p className="text-gray-500 text-[11px] leading-snug">{step.desc}</p>
+                </div>
               ))}
             </div>
 
-            <AnimatedSection delay={0.3} className="mt-10">
-              <p className="text-xs text-gray-400 border-l-2 border-gray-200 pl-4 max-w-lg">
-                Your Vault credentials are intended for your individual access and should not be publicly shared.
-              </p>
-            </AnimatedSection>
+            <p className="text-[11px] text-gray-400 mt-4 text-center">
+              Your Vault credentials are intended for your individual access and should not be publicly shared.
+            </p>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            SECURITY MESSAGE
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-10 bg-[#FAFAF8] border-b border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection>
-              <div className="flex items-start gap-4 border border-gray-100 rounded-2xl p-6 bg-white">
-                <Shield size={20} className="text-[#FF6B00] shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-black text-gray-900 tracking-widest uppercase mb-2">
-                    PAYMENT & ACCESS
-                  </p>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    Payments are verified before Vault access is activated. TakeIN Studio will never ask for your UPI PIN, OTP, CVV or banking password.
-                  </p>
-                </div>
+        {/* ── PAYMENT & ACCESS NOTE ── */}
+        <section className="py-6 bg-[#FAFAF8] border-b border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 text-xs">
+              <Shield size={16} className="text-[#FF6B00] shrink-0 mt-0.5" />
+              <div>
+                <span className="font-black text-gray-900 uppercase tracking-widest block mb-0.5">
+                  PAYMENT & ACCESS
+                </span>
+                <p className="text-gray-500 leading-relaxed">
+                  Payments are verified before Vault access is activated. TakeIN Studio will never ask for your UPI PIN, OTP, CVV or banking password.
+                </p>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            FAQ
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-20 sm:py-28 bg-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="mb-12 text-center">
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-4">
+        {/* ── FAQ ── */}
+        <section className="py-10 sm:py-14 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <div className="mb-6 text-center">
+              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00] font-black uppercase mb-1">
                 QUESTIONS
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-                Frequently Asked
-              </h2>
-            </AnimatedSection>
+              <h2 className="font-display text-xl font-black text-gray-950">Frequently Asked</h2>
+            </div>
 
-            <AnimatedSection delay={0.1}>
-              <FaqAccordion items={faqs} />
-            </AnimatedSection>
+            <FaqAccordion items={faqs} />
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════════════════════════
-            FINAL CTA
-        ══════════════════════════════════════════════════════════════ */}
-        <section className="py-24 sm:py-36 bg-[#0d0d0d] border-t border-white/5">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <AnimatedSection>
-              <p className="text-[10px] tracking-[0.25em] text-[#FF6B00]/60 font-black uppercase mb-6">
-                TAKEIN STUDIO · AIWEBDEV
-              </p>
-              <h2 className="font-display text-[clamp(32px,6vw,64px)] font-black text-white tracking-tight leading-tight mb-6">
-                Stop treating AI<br />
-                like autocomplete.
-              </h2>
-              <p className="text-base sm:text-lg text-white/40 leading-relaxed mb-12 max-w-lg mx-auto">
-                Learn how to direct it,<br />
-                debug it, verify it,<br />
-                and ship with it.
-              </p>
+        {/* ── FINAL CTA ── */}
+        <section className="py-14 sm:py-20 bg-[#0d0d0d] text-white text-center">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <p className="text-[10px] tracking-[0.25em] text-[#FF6B00]/70 font-black uppercase mb-3">
+              TAKEIN STUDIO · AIWEBDEV
+            </p>
 
-              <div className="flex flex-wrap gap-3 justify-center">
-                <Link
-                  to="/vault/aiwebdev/checkout"
-                  className="px-8 py-4 bg-[#FF6B00] text-white text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-orange-500 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all duration-300"
-                >
-                  Get AIWebDev Vault Access
-                </Link>
-                <button
-                  onClick={scrollToCurriculum}
-                  className="px-8 py-4 border border-white/10 text-white/60 text-[11px] font-black tracking-widest uppercase rounded-full hover:border-white/20 hover:text-white/80 transition-all duration-300"
-                >
-                  Explore Curriculum
-                </button>
-              </div>
-            </AnimatedSection>
+            <h2 className="font-display text-3xl sm:text-5xl font-black tracking-tight mb-4">
+              Stop treating AI like autocomplete.
+            </h2>
+
+            <p className="text-sm text-white/50 mb-8 max-w-sm mx-auto">
+              Learn how to direct it, debug it, verify it, and ship with it.
+            </p>
+
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link
+                to="/vault/aiwebdev/checkout"
+                className="px-6 py-3.5 bg-[#FF6B00] text-white text-[11px] font-black tracking-widest uppercase rounded-full hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-colors"
+              >
+                Get AIWebDev Vault Access
+              </Link>
+              <button
+                onClick={scrollToCurriculum}
+                className="px-6 py-3.5 border border-white/20 text-white/70 text-[11px] font-black tracking-widest uppercase rounded-full hover:border-white/40 hover:text-white transition-colors"
+              >
+                Explore Curriculum
+              </button>
+            </div>
           </div>
         </section>
+
+        {/* ── STANDALONE PAGE FOOTER ── */}
+        <footer className="border-t border-white/5 bg-[#08080a] py-6 text-center text-xs text-gray-500">
+          <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-white">TakeIN Studio</span>
+              <span>— AIWebDev Vault</span>
+            </div>
+            <p>© 2026 TakeIN Studio. All rights reserved.</p>
+          </div>
+        </footer>
 
       </div>
     </>

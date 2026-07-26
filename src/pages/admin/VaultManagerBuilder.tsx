@@ -21,9 +21,7 @@ export default function VaultManagerBuilder() {
     email: "",
     name: "",
     password: "",
-    productId: "",
-    razorpayId: "",
-    amount: "99"
+    productId: ""
   });
 
   const fetchData = async () => {
@@ -107,7 +105,6 @@ export default function VaultManagerBuilder() {
       await supabase.from("vault_purchases").insert({
         user_id: newUserId,
         product_id: formData.productId,
-        amount: formData.amount,
         payment_status: "paid",
         provider: "manual"
       });
@@ -142,7 +139,6 @@ export default function VaultManagerBuilder() {
       await supabase.from("vault_purchases").insert({
         user_id: selectedCustomer.id,
         product_id: formData.productId,
-        amount: formData.amount,
         payment_status: "paid",
         provider: "manual"
       });
@@ -209,13 +205,7 @@ export default function VaultManagerBuilder() {
                       ))}
                     </select>
                   </div>
-                  <div className="grid grid-cols-1 gap-4">
-                    <div>
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 block">Amount</label>
-                      <input type="number" required value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm" />
-                    </div>
-                  </div>
-                  <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+                  <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity mt-4">
                     {isSubmitting ? "Granting..." : "Grant Access"}
                   </button>
                 </form>
@@ -255,7 +245,6 @@ export default function VaultManagerBuilder() {
                   <thead className="text-muted-foreground text-xs uppercase font-semibold border-b border-border/50">
                     <tr>
                       <th className="p-4">Product</th>
-                      <th className="p-4">Amount</th>
                       <th className="p-4">Status</th>
                     </tr>
                   </thead>
@@ -263,7 +252,6 @@ export default function VaultManagerBuilder() {
                     {customerPurchases.map(p => (
                       <tr key={p.id} className="hover:bg-muted/20">
                         <td className="p-4 font-medium">{p.vault_products?.name}</td>
-                        <td className="p-4">{p.currency} {p.amount}</td>
                         <td className="p-4"><span className="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded text-[10px] uppercase font-bold">{p.payment_status}</span></td>
                       </tr>
                     ))}
@@ -311,13 +299,6 @@ export default function VaultManagerBuilder() {
                   <option key={p.id} value={p.id}>{p.name}</option>
                 ))}
               </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 pt-2 border-t border-border/50">
-            <div>
-              <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 block">Amount Paid (INR)</label>
-              <input type="number" required value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm" />
             </div>
           </div>
 

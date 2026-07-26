@@ -113,7 +113,7 @@ export default function ExploreVault() {
 
                 {isOwned ? (
                   <Link
-                    to={`/vault/${product.slug}/access`}
+                    to={`/vault/view/${product.slug}`}
                     className="w-full bg-white border border-gray-200 text-gray-900 py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-gray-50 shadow-sm transition-all flex items-center justify-center gap-2"
                   >
                     OPEN

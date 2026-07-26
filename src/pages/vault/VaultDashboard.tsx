@@ -122,7 +122,7 @@ export default function VaultDashboard() {
               </div>
 
               <Link
-                to={`/vault/${latestProduct.slug}/access`}
+                to={`/vault/view/${latestProduct.slug}`}
                 className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-2"
               >
                 OPEN {latestProduct.name}

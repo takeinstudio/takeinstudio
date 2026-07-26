@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { HelmetProvider } from "react-helmet-async";
@@ -53,7 +53,6 @@ import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
 import VaultPage from "@/pages/vault/VaultPage";
 import VaultLogin from "@/pages/vault/VaultLogin";
 import VaultDashboard from "@/pages/vault/VaultDashboard";
-import AIWebDevAccess from "@/pages/vault/AIWebDevAccess";
 import MyVault from "@/pages/vault/MyVault";
 import ExploreVault from "@/pages/vault/ExploreVault";
 import SupportVault from "@/pages/vault/SupportVault";
@@ -145,8 +144,8 @@ const App = () => (
               <Route path="/vault/dashboard/support" element={<VaultProtectedRoute><VaultDashboardLayout><SupportVault /></VaultDashboardLayout></VaultProtectedRoute>} />
               <Route path="/vault/dashboard/account" element={<VaultProtectedRoute><VaultDashboardLayout><AccountVault /></VaultDashboardLayout></VaultProtectedRoute>} />
               
-              <Route path="/vault/aiwebdev/access" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
-              <Route path="/vault/aiwebdev/access/:volumeId" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
+              <Route path="/vault/aiwebdev/access" element={<Navigate replace to="/vault/view/aiwebdev" />} />
+              <Route path="/vault/aiwebdev/access/:volumeId" element={<Navigate replace to="/vault/view/aiwebdev" />} />
               <Route path="/vault/view/:productId" element={<VaultProtectedRoute><ProductViewer /></VaultProtectedRoute>} />
 
               <Route path="/login" element={<LoginPage />} />

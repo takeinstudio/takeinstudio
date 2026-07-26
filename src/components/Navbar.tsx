@@ -106,18 +106,18 @@ export default function Navbar() {
             </Link>
           </motion.div>
 
-          {/* Prominent AIWebDev Vault CTA */}
+          {/* Prominent login CTA */}
           <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className="ml-1">
             <Link
-              to="/vault/aiwebdev"
-              aria-label="Explore the AIWebDev Vault"
+              to="/login"
+              aria-label="Go to login"
               className={`text-[10px] font-bold tracking-wider px-4 py-2 rounded-full transition-colors duration-200 flex items-center gap-1 text-white focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 ${
-                isVaultActive
+                location.pathname === "/login"
                   ? "bg-[#e05e00] font-black shadow-sm"
                   : "bg-[#FF6B00] hover:bg-[#e05e00]"
               }`}
             >
-              GET THE VAULT
+              LOGIN
               <ArrowUpRight size={13} strokeWidth={2.5} className="shrink-0" />
             </Link>
           </motion.div>
@@ -145,13 +145,13 @@ export default function Navbar() {
           </Link>
 
           <Link
-            to="/vault/aiwebdev"
-            aria-label="Explore the AIWebDev Vault"
+            to="/login"
+            aria-label="Go to login"
             className={`text-[10px] font-bold tracking-wider px-4 py-2 rounded-full text-white flex items-center gap-1 transition-colors ${
-              isVaultActive ? "bg-[#e05e00]" : "bg-[#FF6B00] hover:bg-[#e05e00]"
+              location.pathname === "/login" ? "bg-[#e05e00]" : "bg-[#FF6B00] hover:bg-[#e05e00]"
             }`}
           >
-            GET THE VAULT
+            LOGIN
             <ArrowUpRight size={13} strokeWidth={2.5} />
           </Link>
         </div>
@@ -201,17 +201,17 @@ export default function Navbar() {
                 CONTACT US
               </Link>
 
-              {/* Full-width Visually Distinct Vault CTA for Mobile */}
+              {/* Full-width login CTA for Mobile */}
               <Link
-                to="/vault/aiwebdev"
-                aria-label="Explore the AIWebDev Vault"
+                to="/login"
+                aria-label="Go to login"
                 className={`text-xs font-bold uppercase tracking-widest text-center mt-2 py-3.5 px-4 rounded-xl text-white flex items-center justify-center gap-2 transition-colors ${
-                  isVaultActive
+                  location.pathname === "/login"
                     ? "bg-[#e05e00] shadow-md"
                     : "bg-[#FF6B00] hover:bg-[#e05e00] shadow-sm"
                 }`}
               >
-                GET THE VAULT
+                LOGIN
                 <ArrowRight size={14} strokeWidth={2.5} />
               </Link>
             </div>

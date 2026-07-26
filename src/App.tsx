@@ -50,6 +50,9 @@ import VaultMediaProject from "@/pages/projects/VaultMediaProject";
 import AIWebDevPage from "@/pages/vault/AIWebDevPage";
 import AIWebDevCheckout from "@/pages/vault/AIWebDevCheckout";
 import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
+import VaultLogin from "@/pages/vault/VaultLogin";
+import VaultDashboard from "@/pages/vault/VaultDashboard";
+import AIWebDevAccess from "@/pages/vault/AIWebDevAccess";
 
 const queryClient = new QueryClient();
 
@@ -61,7 +64,15 @@ function ScrollToTop() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
-  const hideNavFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard") || pathname.startsWith("/apply") || pathname === "/vault/aiwebdev/checkout" || pathname === "/vault/aiwebdev/payment-success";
+  const hideNavFooter =
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/apply") ||
+    pathname.startsWith("/vault/login") ||
+    pathname.startsWith("/vault/dashboard") ||
+    pathname.startsWith("/vault/aiwebdev/access") ||
+    pathname === "/vault/aiwebdev/checkout" ||
+    pathname === "/vault/aiwebdev/payment-success";
 
   if (hideNavFooter) return <>{children}</>;
 
@@ -119,6 +130,10 @@ const App = () => (
               <Route path="/vault/aiwebdev" element={<AIWebDevPage />} />
               <Route path="/vault/aiwebdev/checkout" element={<AIWebDevCheckout />} />
               <Route path="/vault/aiwebdev/payment-success" element={<AIWebDevPaymentSuccess />} />
+              <Route path="/vault/login" element={<VaultLogin />} />
+              <Route path="/vault/dashboard" element={<VaultDashboard />} />
+              <Route path="/vault/aiwebdev/access" element={<AIWebDevAccess />} />
+              <Route path="/vault/aiwebdev/access/:volumeId" element={<AIWebDevAccess />} />
 
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<AdminDashboard />} />

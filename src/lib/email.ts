@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 export const sendBrevoEmail = async (
   subject: string,
   htmlContent: string,
-  senderType: "support" | "noreply" | "careers" = "support",
+  senderType: "support" | "noreply" | "careers" | "hello" = "support",
   toEmail?: string
 ) => {
   // First try to load from environment variable (allows anonymous pages to send emails)
@@ -33,6 +33,9 @@ export const sendBrevoEmail = async (
   } else if (senderType === "careers") {
     senderEmail = "careers@takeinstudio.com";
     senderName = "TakeIN Studio Careers";
+  } else if (senderType === "hello") {
+    senderEmail = "hello@takeinstudio.com";
+    senderName = "TakeIN Studio";
   }
 
   // Determine recipients

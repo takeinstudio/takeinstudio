@@ -46,6 +46,11 @@ import NexaHealthProject from "@/pages/projects/NexaHealthProject";
 import LuxeLoungesProject from "@/pages/projects/LuxeLoungesProject";
 import VaultMediaProject from "@/pages/projects/VaultMediaProject";
 
+// Vault
+import AIWebDevPage from "@/pages/vault/AIWebDevPage";
+import AIWebDevCheckout from "@/pages/vault/AIWebDevCheckout";
+import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
+
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
@@ -56,7 +61,7 @@ function ScrollToTop() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
-  const hideNavFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard") || pathname.startsWith("/apply");
+  const hideNavFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard") || pathname.startsWith("/apply") || pathname === "/vault/aiwebdev/checkout" || pathname === "/vault/aiwebdev/payment-success";
 
   if (hideNavFooter) return <>{children}</>;
 
@@ -109,6 +114,11 @@ const App = () => (
               <Route path="/projects/nexa-health-portal" element={<NexaHealthProject />} />
               <Route path="/projects/luxe-lounges-portal" element={<LuxeLoungesProject />} />
               <Route path="/projects/vault-media-server" element={<VaultMediaProject />} />
+
+              {/* Vault */}
+              <Route path="/vault/aiwebdev" element={<AIWebDevPage />} />
+              <Route path="/vault/aiwebdev/checkout" element={<AIWebDevCheckout />} />
+              <Route path="/vault/aiwebdev/payment-success" element={<AIWebDevPaymentSuccess />} />
 
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<AdminDashboard />} />

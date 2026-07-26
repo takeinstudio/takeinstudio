@@ -87,7 +87,7 @@ export default function EmailCenterBuilder() {
     const success = await sendBrevoEmail(
       form.subject,
       htmlBody,
-      form.identity as "support" | "noreply" | "careers",
+      form.identity as "support" | "noreply" | "careers" | "hello",
       form.to
     );
 
@@ -145,6 +145,7 @@ export default function EmailCenterBuilder() {
                     <option value="support">TakeIN Studio Support (support@takeinstudio.com)</option>
                     <option value="noreply">TakeIN Studio (noreply@takeinstudio.com)</option>
                     <option value="careers">TakeIN Studio Careers (careers@takeinstudio.com)</option>
+                    <option value="hello">TakeIN Studio Hello (hello@takeinstudio.com)</option>
                   </select>
                 </div>
                 <div>

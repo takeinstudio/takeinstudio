@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video, CheckCircle2, Code2, Monitor, Layout, Rocket, Settings, Bot, ShieldCheck, Paintbrush, Cloud, Database, Layers } from "lucide-react";
+import { ArrowRight, Globe, Smartphone, Palette, Sparkles, Star, ArrowUpRight, Users, FolderKanban, TrendingUp, Award, LayoutDashboard, Zap, MapPin, Mail, Play, Video, CheckCircle2, Code2, Monitor, Layout, Rocket, Settings, Bot, ShieldCheck, Paintbrush, Cloud, Database, Layers, BookOpen, Lock, ChevronRight } from "lucide-react";
 import { formatPrice } from "@/lib/currency";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -647,6 +647,116 @@ function Services() {
 
 
 
+/* ─── Vault / Courses ─── */
+function VaultCourses() {
+  const modules = [
+    "Claude Code Autonomous Terminal Developer",
+    "21st.dev LEGO Blocks & Motion Psychology",
+    "The Golden Website Prompt Framework",
+    "8-Stage Conversion Architecture",
+    "$100k SaaS Flagship Master Prompt",
+    "Gemini 3 C.R.E.F. Formula & Cheatsheet",
+    "The 6 Levels of AI Independence",
+    "Antigravity IDE & Context Engineering",
+    "Model Routing Matrix & 12 Architectures",
+    "Dual-Track Deployment (GUI vs CLI)",
+    "Conversion Design & Color Psychology",
+    "3-Page Flagship SaaS Capstone Project",
+  ];
+
+  return (
+    <section className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0f172a] overflow-hidden" id="courses">
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto relative z-10 max-w-6xl">
+        {/* Header */}
+        <AnimatedSection className="text-center mb-16">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-black uppercase tracking-widest mb-5">
+            <BookOpen size={12} /> TakeIN Vault · Digital Courses
+          </span>
+          <h2 className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            Learn to Build with <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">AI</span>
+          </h2>
+          <p className="text-slate-400 text-base mt-4 max-w-xl mx-auto leading-relaxed">
+            Premium, practical handbooks for developers who want to ship real products fast using the latest AI tools.
+          </p>
+        </AnimatedSection>
+
+        {/* Course Card */}
+        <AnimatedSection delay={0.1}>
+          <div className="relative bg-[#1e293b] border border-slate-700/60 rounded-3xl overflow-hidden shadow-2xl hover:border-orange-500/30 transition-all duration-500 group">
+            {/* Orange accent bar */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500" />
+
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Left — Course Info */}
+              <div className="p-8 sm:p-12">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/25 text-orange-400 text-[10px] font-black tracking-widest uppercase">Vol I · II · III</span>
+                  <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 text-[10px] font-black tracking-widest uppercase">Live Now</span>
+                </div>
+
+                <h3 className="font-display text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-3">
+                  The AI Web Developer's <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">Playbook</span>
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  A 3-volume technical handbook that teaches you to build premium websites, SaaS platforms, and client projects in hours using Claude Code, Antigravity IDE, and the C.R.E.F. prompt system.
+                </p>
+
+                {/* Highlights */}
+                <div className="space-y-2 mb-8">
+                  {["44 Master Prompts — ready to copy & paste", "3 Volumes covering Tools, Code & Freelancing", "Premium PDF + Interactive In-App Reader", "Lifetime Access — one-time payment"].map((item) => (
+                    <div key={item} className="flex items-center gap-2.5 text-sm text-slate-300">
+                      <CheckCircle2 size={14} className="text-orange-400 flex-shrink-0" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Price + CTA */}
+                <div className="flex items-center gap-5 flex-wrap">
+                  <div>
+                    <div className="text-4xl font-black text-white">₹99</div>
+                    <div className="text-slate-500 text-xs mt-0.5">One-time · No subscription</div>
+                  </div>
+                  <Link
+                    to="/vault/aiwebdev/checkout"
+                    className="flex-1 sm:flex-none bg-orange-500 hover:bg-orange-400 text-white font-black text-xs uppercase tracking-widest px-8 py-4 rounded-2xl shadow-[0_8px_30px_rgba(249,115,22,0.35)] hover:shadow-[0_12px_35px_rgba(249,115,22,0.5)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    Get Instant Access <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right — Module list */}
+              <div className="bg-[#0f172a]/60 border-l border-slate-700/40 p-8 sm:p-12 flex flex-col justify-center">
+                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-5">12 Modules Included</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2">
+                  {modules.map((mod, i) => (
+                    <div key={i} className="flex items-start gap-2.5 text-xs text-slate-400">
+                      <span className="font-mono text-orange-500/60 font-bold flex-shrink-0 mt-0.5">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="leading-snug">{mod}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Bottom CTA */}
+        <AnimatedSection className="text-center mt-10" delay={0.2}>
+          <Link to="/vault" className="inline-flex items-center gap-2 text-slate-400 hover:text-orange-400 text-xs font-bold uppercase tracking-widest transition-colors">
+            <Lock size={12} /> View All Courses in TakeIN Vault <ChevronRight size={12} />
+          </Link>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Testimonials ─── */
 
 
@@ -908,6 +1018,7 @@ export default function HomePage() {
     { id: "tech", visible: true },
     { id: "launch", visible: true },
     { id: "services", visible: true },
+    { id: "vault", visible: true },
     { id: "pricing", visible: true },
     { id: "testimonials", visible: true },
     { id: "stats", visible: true }
@@ -929,6 +1040,7 @@ export default function HomePage() {
     tech: TechnologyShowcase,
     launch: ActiveLaunchSection,
     services: Services,
+    vault: VaultCourses,
     pricing: Pricing,
     testimonials: Testimonials,
     stats: Stats

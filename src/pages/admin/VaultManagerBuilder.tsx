@@ -109,8 +109,7 @@ export default function VaultManagerBuilder() {
         product_id: formData.productId,
         amount: formData.amount,
         payment_status: "paid",
-        provider: "razorpay",
-        provider_payment_id: formData.razorpayId || "manual_" + Math.floor(Math.random()*10000)
+        provider: "manual"
       });
 
       // 4. Grant Entitlement
@@ -145,8 +144,7 @@ export default function VaultManagerBuilder() {
         product_id: formData.productId,
         amount: formData.amount,
         payment_status: "paid",
-        provider: "razorpay",
-        provider_payment_id: formData.razorpayId || "manual_" + Math.floor(Math.random()*10000)
+        provider: "manual"
       });
 
       // 2. Grant Entitlement
@@ -259,7 +257,6 @@ export default function VaultManagerBuilder() {
                       <th className="p-4">Product</th>
                       <th className="p-4">Amount</th>
                       <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Reference</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/50">
@@ -268,7 +265,6 @@ export default function VaultManagerBuilder() {
                         <td className="p-4 font-medium">{p.vault_products?.name}</td>
                         <td className="p-4">{p.currency} {p.amount}</td>
                         <td className="p-4"><span className="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded text-[10px] uppercase font-bold">{p.payment_status}</span></td>
-                        <td className="p-4 text-right font-mono text-xs text-muted-foreground">{p.provider_payment_id || 'manual'}</td>
                       </tr>
                     ))}
                   </tbody>

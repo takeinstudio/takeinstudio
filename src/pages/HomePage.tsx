@@ -746,12 +746,6 @@ function VaultCourses() {
           </div>
         </AnimatedSection>
 
-        {/* Bottom CTA */}
-        <AnimatedSection className="text-center mt-10" delay={0.2}>
-          <Link to="/vault" className="inline-flex items-center gap-2 text-slate-400 hover:text-orange-400 text-xs font-bold uppercase tracking-widest transition-colors">
-            <Lock size={12} /> View All Courses in TakeIN Vault <ChevronRight size={12} />
-          </Link>
-        </AnimatedSection>
       </div>
     </section>
   );

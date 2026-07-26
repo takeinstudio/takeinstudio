@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
-  Globe, Users, Code, Mail, FileText, Building, MapPin, Clock, ArrowRight, Briefcase, Zap
+  Globe, Users, Code, Mail, FileText, Building, MapPin, Clock, ArrowRight, Briefcase, Zap, BookOpen
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SEO from "@/components/SEO";
@@ -77,6 +77,12 @@ export default function CareerPage() {
                 >
                   View Open Roles <ArrowRight size={14} />
                 </a>
+                <Link
+                  to="/vault/aiwebdev"
+                  className="px-6 py-2.5 rounded-lg bg-orange-500/15 text-orange-400 border border-orange-500/30 text-sm font-bold hover:bg-orange-500/25 transition-all flex items-center justify-center gap-2"
+                >
+                  <BookOpen size={14} /> TakeIN Vault — Learn AI Web Dev
+                </Link>
                 <a
                   href="mailto:takeinstudio@gmail.com"
                   className="px-6 py-2.5 rounded-lg bg-white/10 text-white border border-white/10 text-sm font-bold hover:bg-white/20 transition-all flex items-center justify-center gap-2"

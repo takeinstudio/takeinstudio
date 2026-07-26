@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
-import { Send, Search, CheckCircle2, AlertCircle, ArrowLeft, Clock } from "lucide-react";
+import { Send, Search, CheckCircle2, AlertCircle, ArrowLeft, Clock, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SupportCenterBuilder() {

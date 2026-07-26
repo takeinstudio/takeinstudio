@@ -81,7 +81,7 @@ export default function CareerPage() {
                   to="/vault"
                   className="px-6 py-2.5 rounded-lg bg-orange-500/15 text-orange-400 border border-orange-500/30 text-sm font-bold hover:bg-orange-500/25 transition-all flex items-center justify-center gap-2"
                 >
-                  <BookOpen size={14} /> TakeIN Vault — Learn with US
+                  <BookOpen size={14} />Resource Vault - Learn with US
                 </Link>
                 <a
                   href="mailto:takeinstudio@gmail.com"

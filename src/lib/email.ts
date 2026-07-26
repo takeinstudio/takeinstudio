@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 export const sendBrevoEmail = async (
   subject: string,
   htmlContent: string,
-  senderType: "support" | "noreply" = "support",
+  senderType: "support" | "noreply" | "careers" = "support",
   toEmail?: string
 ) => {
   // First try to load from environment variable (allows anonymous pages to send emails)
@@ -24,11 +24,19 @@ export const sendBrevoEmail = async (
     return false;
   }
 
-  const senderEmail = senderType === "noreply" ? "noreply@takeinstudio.com" : "support@takeinstudio.com";
-  const senderName = senderType === "noreply" ? "TakeIN Studio" : "TakeIN Studio Support";
+  let senderEmail = "support@takeinstudio.com";
+  let senderName = "TakeIN Studio Support";
+
+  if (senderType === "noreply") {
+    senderEmail = "noreply@takeinstudio.com";
+    senderName = "TakeIN Studio";
+  } else if (senderType === "careers") {
+    senderEmail = "careers@takeinstudio.com";
+    senderName = "TakeIN Studio Careers";
+  }
 
   // Determine recipients
-  let recipients = [];
+  let recipients: { email: string; name: string }[] = [];
   if (toEmail) {
     const emails = toEmail.split(',').map(e => e.trim()).filter(e => e);
     recipients = emails.map(email => ({ email, name: "Valued Client" }));
@@ -41,15 +49,25 @@ export const sendBrevoEmail = async (
       ];
   }
 
-  const payload = {
+  const payload: any = {
     sender: {
       name: senderName,
       email: senderEmail
     },
-    to: recipients,
     subject: subject,
     htmlContent: htmlContent
   };
+
+  if (recipients.length > 1) {
+    payload.messageVersions = recipients.map(recipient => ({
+      to: [recipient]
+    }));
+  } else if (recipients.length === 1) {
+    payload.to = recipients;
+  } else {
+    console.error("No recipients specified.");
+    return false;
+  }
 
   try {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {

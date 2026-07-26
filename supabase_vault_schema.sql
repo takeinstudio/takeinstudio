@@ -100,7 +100,6 @@ ALTER TABLE public.vault_support_messages ENABLE ROW LEVEL SECURITY;
 -- Profiles Policies
 CREATE POLICY "Users can read own profile" ON public.vault_profiles FOR SELECT USING (auth.uid() = id);
 CREATE POLICY "Admins can read all profiles" ON public.vault_profiles FOR SELECT USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
-CREATE POLICY "Users can update own profile" ON public.vault_profiles FOR UPDATE USING (auth.uid() = id);
 CREATE POLICY "Admins can insert profiles" ON public.vault_profiles FOR INSERT WITH CHECK (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 CREATE POLICY "Users can insert own profile" ON public.vault_profiles FOR INSERT WITH CHECK (auth.uid() = id);
 

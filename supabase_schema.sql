@@ -94,31 +94,31 @@ ALTER TABLE public.careers ENABLE ROW LEVEL SECURITY;
 
 -- 1. Content Table: Public Read, Admin Write
 CREATE POLICY "Allow public read on content" ON public.content FOR SELECT USING (true);
-CREATE POLICY "Allow authenticated full access on content" ON public.content FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on content" ON public.content FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 2. Pricing Table: Public Read, Admin Write
 CREATE POLICY "Allow public read on pricing" ON public.pricing FOR SELECT USING (true);
-CREATE POLICY "Allow authenticated full access on pricing" ON public.pricing FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on pricing" ON public.pricing FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 3. Services Table: Public Read, Admin Write
 CREATE POLICY "Allow public read on services" ON public.services FOR SELECT USING (true);
-CREATE POLICY "Allow authenticated full access on services" ON public.services FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on services" ON public.services FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 4. Leads Table: Public Insert, Admin Read/Write (Public cannot read leads)
 CREATE POLICY "Allow public insert on leads" ON public.leads FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access on leads" ON public.leads FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on leads" ON public.leads FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 5. Testimonials Table: Public Read, Admin Write
 CREATE POLICY "Allow public read on testimonials" ON public.testimonials FOR SELECT USING (true);
-CREATE POLICY "Allow authenticated full access on testimonials" ON public.testimonials FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on testimonials" ON public.testimonials FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 6. Jobs Table: Public Read, Admin Write
 CREATE POLICY "Allow public read on jobs" ON public.jobs FOR SELECT USING (true);
-CREATE POLICY "Allow authenticated full access on jobs" ON public.jobs FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on jobs" ON public.jobs FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- 7. Careers Table: Public Insert, Admin Read/Write (Public cannot read applications)
 CREATE POLICY "Allow public insert on careers" ON public.careers FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow authenticated full access on careers" ON public.careers FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins full access on careers" ON public.careers FOR ALL USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- Grant privileges to anon and authenticated roles
 GRANT ALL ON TABLE public.content TO anon, authenticated;
@@ -147,11 +147,11 @@ ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 -- Enable RLS on system_config
 ALTER TABLE public.system_config ENABLE ROW LEVEL SECURITY;
 
--- Allow ONLY authenticated users to read system_config
-CREATE POLICY "Allow authenticated users to read config"
+-- Allow ONLY admins to read system_config
+CREATE POLICY "Admins read config"
 ON public.system_config FOR SELECT 
 TO authenticated 
-USING (true);
+USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- Enable RLS on leads to prevent unauthorized reading/scraping
 ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
@@ -162,10 +162,10 @@ ON public.leads FOR INSERT
 TO public
 WITH CHECK (true);
 
--- Allow authenticated admins to read leads (assuming admins are authenticated)
-CREATE POLICY "Allow admins to read leads"
+-- Allow authenticated admins to read leads
+CREATE POLICY "Admins read leads"
 ON public.leads FOR SELECT
 TO authenticated
-USING (true);
+USING (EXISTS (SELECT 1 FROM public.vault_profiles WHERE id = auth.uid() AND role = 'admin'));
 
 GRANT ALL ON TABLE public.system_config TO anon, authenticated;

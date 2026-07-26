@@ -68,13 +68,13 @@ export default function VaultLogin() {
         url="https://takeinstudio.com/vault/login"
       />
       <div className="min-h-screen w-full grid grid-cols-1 lg:grid-cols-2 bg-[#FAF9F6] font-sans">
-        
+
         {/* Left Column: Brand Cover & Slogan */}
         <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-cover bg-center select-none bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80')]">
-          
+
           {/* Soft overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/55 z-0" />
-          
+
           {/* Brand Logo Header */}
           <div className="z-10 flex items-center gap-2.5 self-start">
             <img src="/logo/logo_no_text.png" alt="TakeIN Studio" className="h-10 w-auto invert brightness-0" />
@@ -91,12 +91,12 @@ export default function VaultLogin() {
             <p className="text-white/80 text-sm font-semibold leading-relaxed">
               Access your premium resources, training materials, and support directly from the TakeIN Studio team.
             </p>
-            
+
             {/* Accent Pill Badge */}
             <div className="pt-6">
               <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                CUSTOMER PORTAL
+                CAREER PORTAL
               </div>
             </div>
           </div>
@@ -105,11 +105,11 @@ export default function VaultLogin() {
 
         {/* Right Column: Premium Off-White Login Form */}
         <div className="flex flex-col justify-between p-8 sm:p-12 md:p-16 bg-[#FAF9F6] text-foreground relative z-10 min-h-screen">
-          
+
           {/* Floating top-right back button */}
           <div className="self-end mb-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border/80 bg-white/85 hover:bg-white text-xs font-bold text-muted-foreground hover:text-foreground transition-all duration-300 shadow-sm hover:shadow hover:scale-[1.02] backdrop-blur-sm"
             >
               <ArrowLeft size={14} /> BACK TO WEBSITE
@@ -118,7 +118,7 @@ export default function VaultLogin() {
 
           {/* Animated Central Credential Card Form */}
           <div className="my-auto w-full max-w-md mx-auto">
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -135,9 +135,9 @@ export default function VaultLogin() {
               </motion.div>
 
               {/* Input fields form */}
-              <motion.form 
+              <motion.form
                 variants={itemVariants}
-                onSubmit={handleLogin} 
+                onSubmit={handleLogin}
                 className="space-y-5"
               >
                 {/* Email Input */}
@@ -184,8 +184,8 @@ export default function VaultLogin() {
                 </div>
 
                 {/* Submit CTA button */}
-                <motion.button 
-                  type="submit" 
+                <motion.button
+                  type="submit"
                   disabled={loading}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}

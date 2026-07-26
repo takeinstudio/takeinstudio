@@ -8,7 +8,7 @@ const RAZORPAY_URL = "https://rzp.io/rzp/PtIpIG8Z";
 
 const included = [
   "3-Volume Digital Vault",
-  "73 pages at current release",
+  "53 pages total across current release",
   "Exact AI prompts & workflows",
   "Architecture guides & RLS blueprints",
   "Debugging frameworks & capstones",

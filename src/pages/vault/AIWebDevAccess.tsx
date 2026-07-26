@@ -1,33 +1,24 @@
 import { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
-  BookOpen,
-  CheckCircle2,
-  Code2,
-  Terminal,
-  Shield,
-  Layers,
-  Zap,
   ArrowLeft,
   ChevronRight,
-  Download,
-  Lock,
-  Search,
-  FileText,
   Copy,
   Check,
+  FileCheck,
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
 
-// ─── Volume Data ──────────────────────────────────────────────────────────────
+// ─── Volume Data (Light Themed & Exact Page Breakdown) ─────────────────────────
 const volumesDetail = [
   {
     id: "volume-1",
     num: "VOLUME I",
     title: "AI-Native Foundations",
-    pages: "28 Pages",
+    pdfName: "Volume_1_Tool_Directory.pdf",
+    pages: "20 Pages",
     subtitle: "Terminal Workflows, Prompt Architecture & Client-Server Fundamentals",
     chapters: [
       {
@@ -85,7 +76,8 @@ Before writing code:
     id: "volume-2",
     num: "VOLUME II",
     title: "Advanced Building, Agents & Security",
-    pages: "22 Pages",
+    pdfName: "Volume_2_Code_Blueprints.pdf",
+    pages: "15 Pages",
     subtitle: "Multi-Agent Orchestration, 4-Step Debugging & Supabase RLS Blueprints",
     chapters: [
       {
@@ -132,7 +124,8 @@ USING (auth.uid() = id);`,
     id: "volume-3",
     num: "VOLUME III",
     title: "Freelancing & Client Delivery",
-    pages: "23 Pages",
+    pdfName: "Volume_3_Freelance_Manual.pdf",
+    pages: "18 Pages",
     subtitle: "Client Acquisition, Audit Worksheets, Proposals & Maintenance Retainers",
     chapters: [
       {
@@ -171,10 +164,8 @@ Audit Checklist:
 
 export default function AIWebDevAccess() {
   const { volumeId } = useParams<{ volumeId?: string }>();
-  const navigate = useNavigate();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  // Active volume selection based on URL parameter or default to volume-1
   const activeVolId = volumeId || "volume-1";
   const currentVol = volumesDetail.find((v) => v.id === activeVolId) || volumesDetail[0];
 
@@ -193,27 +184,27 @@ export default function AIWebDevAccess() {
         url={`https://takeinstudio.com/vault/aiwebdev/access/${activeVolId}`}
       />
 
-      <div className="min-h-screen bg-[#0d0d0d] text-white flex flex-col">
-        {/* Header Navigation */}
-        <header className="border-b border-white/10 bg-[#121216] sticky top-0 z-30">
+      <div className="min-h-screen bg-[#FCFBF9] text-gray-900 flex flex-col font-sans">
+        {/* Light Header Navigation */}
+        <header className="border-b border-gray-200 bg-white sticky top-0 z-30 shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Link
                 to="/vault/dashboard"
-                className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-900 transition-colors font-medium"
               >
                 <ArrowLeft size={14} />
                 Dashboard
               </Link>
-              <div className="h-4 w-px bg-white/10" />
+              <div className="h-4 w-px bg-gray-200" />
               <div className="flex items-center gap-2">
                 <span className="text-xs font-black text-[#FF6B00]">AIWebDev</span>
-                <span className="text-xs text-white/30">/ Protected Reader</span>
+                <span className="text-xs text-gray-400">/ Protected Reader</span>
               </div>
             </div>
 
             {/* Volume selector tabs */}
-            <div className="flex items-center bg-white/5 p-1 rounded-xl border border-white/5">
+            <div className="flex items-center bg-gray-100 p-1 rounded-xl border border-gray-200">
               {volumesDetail.map((vol) => {
                 const isActive = vol.id === activeVolId;
                 return (
@@ -222,8 +213,8 @@ export default function AIWebDevAccess() {
                     to={`/vault/aiwebdev/access/${vol.id}`}
                     className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-all ${
                       isActive
-                        ? "bg-[#FF6B00] text-white shadow-md"
-                        : "text-white/50 hover:text-white hover:bg-white/5"
+                        ? "bg-[#FF6B00] text-white shadow-sm"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-white"
                     }`}
                   >
                     {vol.num}
@@ -238,38 +229,40 @@ export default function AIWebDevAccess() {
         <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-10 w-full grid md:grid-cols-4 gap-8">
           {/* Sidebar Navigation */}
           <aside className="md:col-span-1 space-y-6">
-            <div className="bg-[#121216] border border-white/10 rounded-2xl p-5">
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
               <p className="text-[10px] tracking-[0.2em] font-black text-[#FF6B00] uppercase mb-1">
                 {currentVol.num}
               </p>
-              <h2 className="font-display text-lg font-black text-white leading-tight mb-2">
+              <h2 className="font-display text-lg font-black text-gray-950 leading-tight mb-1">
                 {currentVol.title}
               </h2>
-              <p className="text-xs text-white/40 mb-4">{currentVol.pages}</p>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-gray-500 mb-4">
+                <FileCheck size={12} className="text-[#FF6B00]" />
+                {currentVol.pdfName} ({currentVol.pages})
+              </div>
 
-              <div className="border-t border-white/5 pt-4 space-y-2">
-                <p className="text-[9px] tracking-widest font-black text-white/30 uppercase mb-2">
+              <div className="border-t border-gray-100 pt-4 space-y-2">
+                <p className="text-[9px] tracking-widest font-black text-gray-400 uppercase mb-2">
                   CHAPTER INDEX
                 </p>
-                {currentVol.chapters.map((ch, i) => (
+                {currentVol.chapters.map((ch) => (
                   <a
                     key={ch.num}
                     href={`#chapter-${ch.num}`}
-                    className="flex items-center justify-between text-xs text-white/60 hover:text-[#FF6B00] py-1.5 transition-colors"
+                    className="flex items-center justify-between text-xs text-gray-600 hover:text-[#FF6B00] py-1.5 transition-colors font-medium"
                   >
                     <span className="truncate pr-2">{ch.num}. {ch.title}</span>
-                    <ChevronRight size={12} className="shrink-0 text-white/20" />
+                    <ChevronRight size={12} className="shrink-0 text-gray-300" />
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Quick Access Card */}
-            <div className="bg-[#121216]/60 border border-white/5 rounded-2xl p-5 text-xs">
-              <p className="text-[10px] font-black tracking-widest text-white/40 uppercase mb-2">
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 text-xs shadow-sm">
+              <p className="text-[10px] font-black tracking-widest text-gray-400 uppercase mb-2">
                 SECURITY REMINDER
               </p>
-              <p className="text-white/50 leading-relaxed">
+              <p className="text-gray-500 leading-relaxed">
                 This Vault resource is authorized exclusively for your registered email. Direct resource URLs remain protected under your session.
               </p>
             </div>
@@ -277,23 +270,26 @@ export default function AIWebDevAccess() {
 
           {/* Reader Body */}
           <div className="md:col-span-3 space-y-8">
-            {/* Title Banner */}
-            <div className="bg-[#121216] border border-white/10 rounded-2xl p-8">
+            <div className="bg-white border border-gray-200 rounded-2xl p-7 shadow-sm">
               <div className="flex items-center gap-3 mb-2">
-                <span className="bg-[#FF6B00]/10 text-[#FF6B00] text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full border border-[#FF6B00]/20">
+                <span className="bg-orange-50 text-[#FF6B00] text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full border border-orange-100">
                   {currentVol.num}
                 </span>
-                <span className="text-xs text-white/40">{currentVol.pages}</span>
+                <span className="text-xs text-gray-500 font-medium">{currentVol.pages}</span>
+                <span className="text-[10px] font-mono text-gray-400 flex items-center gap-1 ml-auto">
+                  <FileCheck size={12} className="text-[#FF6B00]" />
+                  {currentVol.pdfName}
+                </span>
               </div>
-              <h1 className="font-display text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">
+              <h1 className="font-display text-2xl sm:text-3xl font-black text-gray-950 tracking-tight mb-2">
                 {currentVol.title}
               </h1>
-              <p className="text-sm text-white/60 leading-relaxed">
+              <p className="text-sm text-gray-600 leading-relaxed">
                 {currentVol.subtitle}
               </p>
             </div>
 
-            {/* Chapter Details */}
+            {/* Chapters */}
             <div className="space-y-6">
               {currentVol.chapters.map((ch) => (
                 <motion.div
@@ -301,29 +297,28 @@ export default function AIWebDevAccess() {
                   id={`chapter-${ch.num}`}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-[#121216] border border-white/10 rounded-2xl p-7 scroll-mt-24"
+                  className="bg-white border border-gray-200 rounded-2xl p-7 shadow-sm scroll-mt-24"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-xs font-black text-[#FF6B00] tracking-widest">
                       CHAPTER {ch.num}
                     </span>
-                    <span className="h-1 w-1 rounded-full bg-white/20" />
-                    <span className="text-xs text-white/40 italic">{ch.summary}</span>
+                    <span className="h-1 w-1 rounded-full bg-gray-300" />
+                    <span className="text-xs text-gray-500 italic">{ch.summary}</span>
                   </div>
 
-                  <h3 className="font-display text-xl font-black text-white tracking-tight mb-4">
+                  <h3 className="font-display text-xl font-black text-gray-950 tracking-tight mb-4">
                     {ch.title}
                   </h3>
 
-                  <div className="text-sm text-white/70 leading-relaxed whitespace-pre-line font-sans mb-6">
+                  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line font-sans mb-6">
                     {ch.content}
                   </div>
 
-                  {/* Code Snippet Box if available */}
                   {ch.codeSnippet && (
-                    <div className="mt-4 border border-white/10 rounded-xl bg-black/60 overflow-hidden">
-                      <div className="bg-white/5 px-4 py-2.5 flex items-center justify-between border-b border-white/5">
-                        <span className="text-[10px] tracking-widest font-mono text-white/40">
+                    <div className="mt-4 border border-gray-200 rounded-xl bg-gray-900 text-white overflow-hidden shadow-sm">
+                      <div className="bg-gray-800 px-4 py-2.5 flex items-center justify-between border-b border-gray-700">
+                        <span className="text-[10px] tracking-widest font-mono text-gray-300">
                           PROMPT / BLUEPRINT CODE
                         </span>
                         <button
@@ -341,7 +336,7 @@ export default function AIWebDevAccess() {
                           )}
                         </button>
                       </div>
-                      <pre className="p-4 text-xs font-mono text-white/80 overflow-x-auto">
+                      <pre className="p-4 text-xs font-mono text-gray-200 overflow-x-auto">
                         <code>{ch.codeSnippet}</code>
                       </pre>
                     </div>
@@ -351,36 +346,36 @@ export default function AIWebDevAccess() {
             </div>
 
             {/* Bottom Volume Navigation */}
-            <div className="flex items-center justify-between pt-6 border-t border-white/10">
+            <div className="flex items-center justify-between pt-6 border-t border-gray-200">
               <Link
                 to="/vault/dashboard"
-                className="text-xs text-white/50 hover:text-white transition-colors"
+                className="text-xs text-gray-500 hover:text-gray-900 transition-colors font-medium"
               >
                 ← Back to Vault Dashboard
               </Link>
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 {activeVolId !== "volume-1" && (
                   <Link
                     to="/vault/aiwebdev/access/volume-1"
-                    className="text-xs font-bold text-white/70 hover:text-white border border-white/10 rounded-lg px-4 py-2"
+                    className="text-xs font-bold text-gray-700 hover:text-gray-950 border border-gray-200 rounded-lg px-3 py-1.5 bg-white shadow-sm"
                   >
-                    Volume I
+                    Volume I (20 Pages)
                   </Link>
                 )}
                 {activeVolId !== "volume-2" && (
                   <Link
                     to="/vault/aiwebdev/access/volume-2"
-                    className="text-xs font-bold text-white/70 hover:text-white border border-white/10 rounded-lg px-4 py-2"
+                    className="text-xs font-bold text-gray-700 hover:text-gray-950 border border-gray-200 rounded-lg px-3 py-1.5 bg-white shadow-sm"
                   >
-                    Volume II
+                    Volume II (15 Pages)
                   </Link>
                 )}
                 {activeVolId !== "volume-3" && (
                   <Link
                     to="/vault/aiwebdev/access/volume-3"
-                    className="text-xs font-bold text-white/70 hover:text-white border border-white/10 rounded-lg px-4 py-2"
+                    className="text-xs font-bold text-gray-700 hover:text-gray-950 border border-gray-200 rounded-lg px-3 py-1.5 bg-white shadow-sm"
                   >
-                    Volume III
+                    Volume III (18 Pages)
                   </Link>
                 )}
               </div>
@@ -388,8 +383,7 @@ export default function AIWebDevAccess() {
           </div>
         </main>
 
-        {/* Footer */}
-        <footer className="border-t border-white/5 py-4 text-center text-xs text-white/30">
+        <footer className="border-t border-gray-200 bg-white py-4 text-center text-xs text-gray-500">
           © 2026 TakeIN Studio. AIWebDev Protected Playbook Environment.
         </footer>
       </div>

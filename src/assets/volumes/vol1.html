@@ -1,0 +1,2883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Web Developer's Playbook — Volume 1: AI-Native Foundations & Claude Code Mastery</title>
+  <meta name="description" content="Volume 1: AI-Native Web Development Foundations, Claude Code Mastery, 21st.dev Components, Framer Motion, C.R.E.F. Method & Website Architectures.">
+  <meta name="author" content="TakeIN Studio">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* TAKEIN STUDIO EDITORIAL HANDBOOK PRINT ENGINE */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #FFFFFF;
+      color: #0F172A;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.48;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 13mm 16mm 12mm 16mm;
+      margin: 0 auto;
+      position: relative;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+    
+    @media screen {
+      body { background: #0F172A; padding: 25px 0; }
+      .page { box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); border-radius: 4px; margin-bottom: 30px; }
+    }
+    
+    @media print {
+      .no-print { display: none !important; }
+      .page { border: none !important; box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; }
+    }
+
+    /* Subtle Premium Orange Side Frames */
+    .page-frame-left {
+      position: absolute;
+      left: 6mm;
+      top: 10mm;
+      bottom: 10mm;
+      width: 1.5px;
+      background: #FF6B00;
+      opacity: 0.85;
+      z-index: 10;
+    }
+    .page-frame-right {
+      position: absolute;
+      right: 6mm;
+      top: 10mm;
+      bottom: 10mm;
+      width: 1.5px;
+      background: #FF6B00;
+      opacity: 0.85;
+      z-index: 10;
+    }
+
+    /* Subtle Watermark */
+    .page-watermark {
+      position: absolute;
+      right: 12mm;
+      bottom: 22mm;
+      width: 75mm;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header */
+    .page-header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      z-index: 2;
+    }
+    .page-header-left { display: flex; align-items: center; gap: 6px; }
+    .page-header-left img { height: 14px; }
+    .page-header-brand { font-size: 8.5pt; font-weight: 800; color: #0F172A; letter-spacing: -0.01em; }
+    .page-header-title { font-size: 7.5pt; font-weight: 700; color: #64748B; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* Content Container */
+    .page-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      overflow: hidden;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Footer */
+    .page-footer {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 6px;
+      margin-top: auto;
+      font-size: 7.5pt;
+      color: #64748B;
+      z-index: 2;
+    }
+    .page-number-pill {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 3px;
+      font-size: 7.5pt;
+    }
+
+    /* Editorial Typography */
+    h1.doc-title { font-size: 24pt; font-weight: 800; color: #0F172A; line-height: 1.15; letter-spacing: -0.02em; }
+    h2.section-title { font-size: 12.5pt; font-weight: 800; color: #0F172A; border-left: 3.5px solid #FF6B00; padding-left: 8px; margin: 0 0 4px 0; line-height: 1.25; letter-spacing: -0.01em; }
+    h3.subsection-title { font-size: 9.5pt; font-weight: 700; color: #1E293B; margin: 0 0 3px 0; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    /* Editorial Component Cards */
+    .editorial-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 5px; padding: 7px 10px; }
+    .editorial-callout { background: #FFF5EB; border-left: 3.5px solid #FF6B00; padding: 7px 10px; border-radius: 0 5px 5px 0; }
+
+    /* BUILD WITH AI Prompt Component */
+    .prompt-card { background: #0F172A; color: #F8FAFC; border: 1px solid #1E293B; border-radius: 5px; overflow: hidden; }
+    .prompt-card-header { background: #1E293B; padding: 4px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+    .prompt-card-badge { color: #FF6B00; font-weight: 800; font-size: 7.5pt; letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+    .prompt-card-copy { color: #94A3B8; font-size: 7pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .prompt-card-body { padding: 7px 10px; font-family: 'Fira Code', Consolas, monospace; font-size: 7.8pt; line-height: 1.38; color: #E2E8F0; white-space: pre-wrap; word-break: break-all; }
+
+    /* YOUR TASK Workbook Component */
+    .task-card { background: #FAFAFA; border: 1px solid #CBD5E1; border-left: 3.5px solid #0F172A; border-radius: 5px; padding: 7px 10px; }
+    .task-card-header { font-size: 8.5pt; font-weight: 800; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; display: flex; align-items: center; justify-content: space-between; }
+    .task-checkbox-list { display: flex; flex-direction: column; gap: 2px; font-size: 8.2pt; color: #334155; margin-top: 3px; }
+    .task-deliverable-line { margin-top: 5px; padding-top: 3px; border-top: 1px dashed #CBD5E1; font-size: 7.8pt; color: #64748B; font-weight: 600; }
+
+    /* CHECKPOINT Assessment Component */
+    .checkpoint-card { background: #F8FAFC; border: 1.5px solid #0F172A; border-radius: 5px; padding: 8px 11px; }
+    .checkpoint-header { font-size: 8.5pt; font-weight: 800; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #E2E8F0; padding-bottom: 3px; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+    .checkpoint-question { font-size: 8.2pt; font-weight: 600; color: #1E293B; margin-top: 4px; }
+    .checkpoint-answer-line { height: 14px; border-bottom: 1px solid #CBD5E1; margin-bottom: 3px; }
+
+    /* VERIFY Component */
+    .verify-card { background: #F0FDF4; border: 1px solid #BBF7D0; border-left: 3.5px solid #16A34A; border-radius: 5px; padding: 7px 10px; }
+
+    /* COMMON MISTAKE Component */
+    .mistake-card { background: #FEF2F2; border: 1px solid #FECACA; border-left: 3.5px solid #DC2626; border-radius: 5px; padding: 7px 10px; }
+
+    /* PRO TIP Component */
+    .protip-card { background: #EFF6FF; border: 1px solid #BFDBFE; border-left: 3.5px solid #2563EB; border-radius: 5px; padding: 7px 10px; }
+
+    /* Tables */
+    .editorial-table { width: 100%; border-collapse: collapse; font-size: 8.2pt; }
+    .editorial-table th { background: #0F172A; color: #FFFFFF; font-weight: 700; text-align: left; padding: 4px 7px; border: 1px solid #1E293B; font-size: 7.2pt; text-transform: uppercase; letter-spacing: 0.03em; }
+    .editorial-table td { padding: 4px 7px; border: 1px solid #E2E8F0; color: #334155; vertical-align: top; background: #FFFFFF; }
+    .editorial-table tr:nth-child(even) td { background: #F8FAFC; }
+
+    /* Code Block */
+    .code-block { background: #0F172A; color: #F8FAFC; font-family: 'Fira Code', Consolas, monospace; font-size: 7.8pt; line-height: 1.35; padding: 7px 9px; border-radius: 5px; border: 1px solid #1E293B; white-space: pre-wrap; word-break: break-all; }
+
+    /* Grids */
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+    .grid-60-40 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 9px; }
+
+    /* Lists */
+    ul.dense-list, ol.dense-list { margin: 0; padding-left: 13px; }
+    ul.dense-list li, ol.dense-list li { margin-bottom: 2px; }
+  
+    /* THE PREMIUM PROMPT MATRIX */
+    .prompt-matrix-card { border: 1px solid #334155; border-radius: 6px; overflow: hidden; margin-bottom: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .prompt-matrix-header { background: #0F172A; border-bottom: 1px solid #334155; padding: 10px 12px; }
+    .prompt-matrix-body { background: #020617; padding: 12px; font-family: 'Fira Code', monospace; font-size: 7pt; line-height: 1.5; color: #E2E8F0; white-space: pre-wrap; }
+    .prompt-meta-item { display: flex; flex-direction: column; }
+    .prompt-meta-label { color: #64748B; font-size: 5pt; font-weight: 700; margin-bottom: 2px; }
+    .prompt-meta-value { color: #CBD5E1; font-size: 6.5pt; font-family: 'Fira Code', monospace; }
+  </style>
+</head>
+<body>
+
+  <div class="no-print fixed top-3 right-3 z-50 flex items-center gap-2 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-full shadow-xl border border-slate-700">
+    <span class="font-bold text-orange-400">VOL 1 PRINT PREVIEW</span>
+    <button onclick="window.print()" class="bg-orange-600 hover:bg-orange-500 text-white px-3 py-1 rounded-full font-bold transition-all">Print PDF</button>
+  </div>
+
+  <!-- PAGE 1: COVER PAGE -->
+  <div class="page" id="page-1">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOLUME I · AI-NATIVE FOUNDATIONS & CLAUDE CODE</span>
+    </div>
+
+    <div class="page-content flex flex-col justify-center items-center text-center my-auto px-4">
+      <span class="bg-orange-100 text-orange-800 font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider mb-5 border border-orange-300">
+        TAKEIN STUDIO · TECHNICAL HANDBOOK VAULT
+      </span>
+      <h1 class="doc-title text-3xl md:text-4xl max-w-xl mb-3">
+        The AI Web Developer's <span class="text-orange-600">Playbook</span>
+      </h1>
+      <p class="text-slate-600 font-semibold text-sm max-w-lg mb-6">
+        Volume 1: AI-Native Foundations, Claude Code Mastery, 21st.dev Component Libraries, Framer Motion & Prompt Engineering Systems
+      </p>
+      <div class="max-w-xs w-full mb-6 border border-slate-300 rounded-lg overflow-hidden shadow-lg">
+        <img src="./logo/og-image.jpg" alt="Preview Cover" class="w-full">
+      </div>
+      <div class="editorial-card text-left text-xs max-w-lg w-full space-y-1.5 bg-slate-50 border-slate-300">
+        <div class="font-bold text-slate-900 border-b border-slate-200 pb-1 uppercase tracking-wider text-xxs">FIELD GUIDE SYLLABUS & MODULES INCLUDED:</div>
+        <div class="grid grid-cols-2 gap-2 text-slate-700 text-xxs">
+          <div>• 1. Claude Code Autonomous Terminal Developer</div>
+          <div>• 2. 21st.dev LEGO Blocks & Motion Psychology</div>
+          <div>• 3. The Golden Website Prompt Framework</div>
+          <div>• 4. 8-Stage Conversion Architecture</div>
+          <div>• 5. $100k SaaS Flagship Master Prompt</div>
+          <div>• 6. Gemini 3 C.R.E.F. Formula & Cheatsheet</div>
+          <div>• 7. The 6 Levels of AI Independence</div>
+          <div>• 8. Antigravity IDE & Context Engineering (@)</div>
+          <div>• 9. Model Routing Matrix & 12 Architectures</div>
+          <div>• 10. Dual-Track Deployment (GUI vs CLI)</div>
+          <div>• 11. Conversion Design & Color Psychology</div>
+          <div>• 12. 3-Page Flagship SaaS Capstone Project</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 1</span>
+    </div>
+  </div>
+
+  <!-- PAGE 2: SECTION 1 - WHAT IS CLAUDE CODE & NEW WORKFLOW -->
+  <div class="page" id="page-2">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 01. CLAUDE CODE & AI WORKFLOW</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">01. What is Claude Code & The AI Web Development Paradigm Shift</h2>
+      <p class="text-slate-700">
+        Most web developers mistakenly believe Claude Code is "just another AI chatbot". <strong>It is not.</strong> Claude Code is an autonomous AI software engineer that operates directly inside your local computer's terminal. It inspects file trees, executes shell commands, runs test suites, and edits multi-file React architectures without human copy-pasting.
+      </p>
+
+      <div class="editorial-callout">
+        <strong class="text-orange-950 text-xs">THE AI-NATIVE DEVELOPER DEFINITION:</strong>
+        <p class="text-slate-700 text-xs mt-0.5">
+          Claude Code combines a <strong>Senior Product Manager + Lead UI Architect + Full-Stack Engineer + QA Auditor</strong> running directly inside your CLI environment. You act as the Director; the AI agent acts as the execution team.
+        </p>
+      </div>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="editorial-card bg-slate-50 border-slate-300">
+          <strong class="text-slate-900 text-xs uppercase tracking-wider block border-b pb-1 mb-1">TRADITIONAL WORKFLOW (2 – 8 Weeks)</strong>
+          <ul class="dense-list text-slate-600 text-xxs">
+            <li>• Figma wireframing & prototype client approval (5–10 days)</li>
+            <li>• Manual Tailwind CSS component styling & layout (7–14 days)</li>
+            <li>• Backend API integration & database setup (7–14 days)</li>
+            <li>• Cross-browser testing, debugging & Vercel deployment (3–7 days)</li>
+          </ul>
+          <div class="text-slate-500 font-bold mt-1 text-xxs">Total Time: 14 – 60 Days | Cost: $5,000–$25,000</div>
+        </div>
+
+        <div class="editorial-card bg-orange-50/50 border-orange-300">
+          <strong class="text-orange-900 text-xs uppercase tracking-wider block border-b border-orange-200 pb-1 mb-1">TAKEIN AI-NATIVE WORKFLOW (Hours)</strong>
+          <ul class="dense-list text-slate-800 text-xxs">
+            <li>• Golden Website Prompt + 21st.dev Component Library (15 mins)</li>
+            <li>• Claude Code terminal execution & Framer Motion (45 mins)</li>
+            <li>• Builder → Reviewer subagent verification & polish (30 mins)</li>
+            <li>• GitHub Desktop GUI or Vercel CLI 1-click launch (10 mins)</li>
+          </ul>
+          <div class="text-orange-700 font-bold mt-1 text-xxs">Total Time: 2 – 4 Hours | Cost Reduction: 90%</div>
+        </div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.01</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">TERMINAL CLI (BUILD WITH AI · SETUP COMMAND)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body"># Step 1: Install Anthropic's Claude Code CLI globally
+npm install -g @anthropic-ai/claude-code
+
+# Step 2: Initialize workspace & launch autonomous agent
+mkdir my-ai-website && cd my-ai-website
+claude</div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>YOUR TASK · 01.1 — ENVIRONMENT INITIALIZATION</span>
+          <span class="text-orange-600 font-bold">EXERCISE</span>
+        </div>
+        <div class="task-checkbox-list">
+          <div>□ 1. Verify Node.js v18+ is installed on your operating system.</div>
+          <div>□ 2. Execute `claude` in your terminal and complete the Anthropic OAuth browser authentication.</div>
+          <div>□ 3. Type `/help` inside the Claude Code prompt interface to view built-in commands.</div>
+        </div>
+        <div class="task-deliverable-line">DELIVERABLE: Type `claude --version` in terminal. Record output version: ________________________</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 2</span>
+    </div>
+  </div>
+
+  <!-- PAGE 3: SECTION 2 - FRAMER MOTION & 21ST.DEV -->
+  <div class="page" id="page-3">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 02. COMPONENTS & MOTION PSYCHOLOGY</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">02. Essential Toolkit: 21st.dev UI Components & Framer Motion</h2>
+      <p class="text-slate-700">
+        Why do elite SaaS websites (Stripe, Linear, Vercel) feel insanely premium while amateur sites feel cheap? It is <strong>not</strong> the font choice or background color. It is <strong>Motion Psychology</strong> and <strong>Modern Component Primitives</strong>.
+      </p>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="editorial-card border-orange-200 bg-orange-50/40">
+          <strong class="text-orange-950 text-xs">Framer Motion (Visual Authority)</strong>
+          <p class="text-slate-700 text-xxs mt-1">
+            Static web pages feel dead. Motion creates micro-dopamine triggers as users scroll, giving the impression of an expensive native desktop application.
+          </p>
+          <ul class="dense-list text-slate-700 text-xxs mt-1">
+            <li>• <strong>Smooth Scroll Reveals:</strong> Section headers slide up 20px on entry.</li>
+            <li>• <strong>Hover Scale & Glow:</strong> Feature cards scale 1.02× with radial light.</li>
+            <li>• <strong>Staggered Entrance:</strong> Grid elements appear sequentially (100ms offset).</li>
+          </ul>
+        </div>
+
+        <div class="editorial-card border-slate-300 bg-slate-50">
+          <strong class="text-slate-950 text-xs">21st.dev (Modern UI LEGO Blocks)</strong>
+          <p class="text-slate-700 text-xxs mt-1">
+            21st.dev is the open-source library of modern React + Tailwind primitives engineered by top designers specifically for AI code generation.
+          </p>
+          <ul class="dense-list text-slate-700 text-xxs mt-1">
+            <li>• Pre-styled Glassmorphic Navigation Bars</li>
+            <li>• Interactive Pricing Tables with Monthly/Yearly Toggles</li>
+            <li>• Animated Testimonial Marquees & Grid Layouts</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.02</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">NEXT.JS / TAILWIND (BUILD WITH AI · PACKAGE INSTALLATION PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Install the required animation and utility dependencies for modern 21st.dev components:
+
+npm install framer-motion lucide-react clsx tailwind-merge cva
+
+Create a reusable utility file at `lib/utils.ts` with `cn()` helper function for dynamic Tailwind class merging.</div>
+      </div>
+
+      <div class="code-block"><span class="text-orange-400">// Framer Motion Staggered Card Component Blueprint</span>
+import { motion } from 'framer-motion';
+
+export const FeatureCard = ({ title, description, index }: { title: string; description: string; index: number }) => (
+  &lt;motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.12 }}
+    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+    className="p-6 bg-slate-900 border border-slate-800 rounded-xl shadow-xl hover:border-orange-500/50"
+  &gt;
+    &lt;h3 className="text-lg font-bold text-white mb-2"&gt;{title}&lt;/h3&gt;
+    &lt;p className="text-slate-400 text-sm"&gt;{description}&lt;/p&gt;
+  &lt;/motion.div&gt;
+);</div>
+
+      <div class="protip-card">
+        <strong class="text-blue-900 text-xs">💡 PRO TIP · MOTION THRESHOLD RULE:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          Never use animation durations over <strong>0.6s</strong> for UI elements. Slow animations frustrate visitors and destroy conversion rates. Keep entrance transitions between <strong>0.3s and 0.5s</strong> with `easeOut` timing curves.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 3</span>
+    </div>
+  </div>
+
+  <!-- PAGE 4: SECTION 3 - THE GOLDEN WEBSITE PROMPT FRAMEWORK -->
+  <div class="page" id="page-4">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 03. THE GOLDEN WEBSITE PROMPT</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">03. The Golden Website Prompt Framework</h2>
+      <p class="text-slate-700">
+        Vague prompts produce generic, ugly HTML output that looks like a 2012 Bootstrap site. To force Claude Code or Antigravity to generate Apple/Stripe-grade frontend code, you must use the <strong>Golden Website Prompt Architecture</strong>.
+      </p>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="mistake-card">
+          <strong class="text-red-900 text-xs">❌ Vague Prompt (Low Quality Output)</strong>
+          <div class="code-block bg-red-950 border-red-900 text-red-100 p-2 mt-1 text-xxs">Build me a modern AI agency landing page with Tailwind CSS.</div>
+          <p class="text-slate-600 text-xxs mt-1">Result: Plain white background, default blue buttons, no responsive viewports, no animations, boring text blocks.</p>
+        </div>
+
+        <div class="verify-card">
+          <strong class="text-emerald-900 text-xs">✅ Golden Prompt Architecture (5 Core Pillars)</strong>
+          <ol class="dense-list text-slate-800 text-xxs mt-1">
+            <li>1. <strong>Persona & Target Audience:</strong> Who is visiting?</li>
+            <li>2. <strong>Aesthetic Inspiration:</strong> Linear + Apple + Stripe.</li>
+            <li>3. <strong>Tech Stack:</strong> Next.js App Router, Tailwind, Framer Motion.</li>
+            <li>4. <strong>Component Standards:</strong> 21st.dev glowing cards, high contrast.</li>
+            <li>5. <strong>Conversion Goal:</strong> High-intent lead capture.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.03</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">COPY & PASTE INTO CLAUDE CODE (THE GOLDEN WEBSITE MASTER PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as a Lead UI/UX Designer & Senior Next.js Developer. Build a high-converting website.
+
+PROJECT GOAL: Create a flagship website for [INSERT CLIENT / PRODUCT NAME].
+TARGET AUDIENCE: Founders, CTOs, and tech startup leaders looking for premium solutions.
+DESIGN AESTHETIC: Dark theme (#0F172A primary background), Linear + Apple + Vercel aesthetic, TakeIN Orange (#FF6B00) primary call-to-action buttons, high typography contrast.
+
+TECHNICAL REQUIREMENTS:
+- Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion.
+- Fully responsive across mobile (375px), tablet (768px), and desktop (1280px+).
+- Use Framer Motion for smooth section entrance reveals and card hover micro-interactions.
+- Implement 21st.dev modern component primitives (hero badge, glowing border cards, interactive FAQ).
+
+STRUCTURE: Hero Section -> Social Proof Logo Wall -> Problem -> Solution -> Features Grid -> Testimonials -> Pricing -> CTA -> Footer.</div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>YOUR TASK · 03.1 — PROMPT REFACTORING PRACTICE</span>
+          <span class="text-orange-600 font-bold">WORKBOOK</span>
+        </div>
+        <p class="text-slate-700 text-xxs">Refactor this bad prompt: <em>"Make a restaurant website with a menu."</em> using the 5 Golden Pillars:</p>
+        <div class="checkpoint-answer-line mt-2"></div>
+        <div class="checkpoint-answer-line"></div>
+        <div class="checkpoint-answer-line"></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 4</span>
+    </div>
+  </div>
+
+  <!-- PAGE 5: SECTION 4 - UNIVERSAL 8-STAGE STRUCTURE & STORYLINES -->
+  <div class="page" id="page-5">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 04. 8-STAGE CONVERSION STRUCTURE</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">04. Universal 8-Stage Website Structure & Storylines</h2>
+      <p class="text-slate-700">
+        Every high-converting website follows a psychological narrative that takes a cold visitor from initial interest to taking immediate action. Never throw random components onto a page.
+      </p>
+
+      <div class="editorial-card bg-slate-900 text-white my-0.5">
+        <div class="font-bold text-orange-400 text-xs mb-1 uppercase tracking-wider">THE 8-STAGE UNIVERSAL HIGH-CONVERTING PIPELINE:</div>
+        <div class="code-block border-0 p-2 text-xxs bg-slate-950 text-slate-200">Stage 1: Hero (Hook & Clear Value Prop) ──► Stage 2: Social Proof (Logos/Numbers)
+──► Stage 3: Problem (Agitate Visitor Pain) ──► Stage 4: Solution (Your Transformation)
+──► Stage 5: Features Grid (How It Works) ──► Stage 6: Testimonials (Real Case Studies)
+──► Stage 7: Final Offer CTA (Risk Reversal) ──► Stage 8: Conversion Footer</div>
+      </div>
+
+      <h3 class="subsection-title mt-1">The 3 Core Conversion Storyline Frameworks</h3>
+      <div class="grid-3col text-xxs my-0.5">
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">1. Problem-Solution</strong>
+          <p class="text-slate-600 mb-1">Best for SaaS tools & utilities solving immediate headaches.</p>
+          <ol class="dense-list text-slate-700">
+            <li>1. Agitate current manual struggle</li>
+            <li>2. Expose why old tools fail</li>
+            <li>3. Introduce AI automation</li>
+            <li>4. Show measurable speed gains</li>
+            <li>5. Primary trial CTA</li>
+          </ol>
+        </div>
+
+        <div class="editorial-card border-orange-300 bg-orange-50/40">
+          <strong class="text-orange-950 text-xs block mb-1">2. Dream Outcome</strong>
+          <p class="text-slate-700 mb-1">Best for high-ticket agencies, consulting & coaching.</p>
+          <ol class="dense-list text-slate-800">
+            <li>1. Paint the desirable future state</li>
+            <li>2. Identify the strategic bottleneck</li>
+            <li>3. Present your proprietary system</li>
+            <li>4. Case study proof metrics</li>
+            <li>5. Book strategy call CTA</li>
+          </ol>
+        </div>
+
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">3. Founder Story</strong>
+          <p class="text-slate-600 mb-1">Best for personal brands, creators & indie hackers.</p>
+          <ol class="dense-list text-slate-700">
+            <li>1. Personal origin frustration</li>
+            <li>2. The breakthrough discovery</li>
+            <li>3. Building in public</li>
+            <li>4. Community & user praise</li>
+            <li>5. Join movement CTA</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>YOUR TASK · 04.1 — MAP YOUR CLIENT'S STORYLINE</span>
+          <span class="text-orange-600 font-bold">ANALYSIS</span>
+        </div>
+        <p class="text-slate-700 text-xxs">Select one storyline framework above for your current website project and outline Stage 1 (Hero Outcome) vs Stage 3 (Visitor Pain Point):</p>
+        <div class="grid-2col text-xxs mt-2">
+          <div>
+            <span class="font-bold text-slate-900">STAGE 1 HERO HEADLINE:</span>
+            <div class="checkpoint-answer-line"></div>
+          </div>
+          <div>
+            <span class="font-bold text-slate-900">STAGE 3 VISITOR PAIN POINT:</span>
+            <div class="checkpoint-answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 5</span>
+    </div>
+  </div>
+
+  <!-- PAGE 6: SECTION 5 - SPECIALIZED PROMPT VAULT -->
+  <div class="page" id="page-6">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 05. SPECIALIZED PROMPT VAULT</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">05. Specialized Website Prompt Vault</h2>
+      <p class="text-slate-700">
+        Ready-to-use production prompts tailored for specific commercial business models. Copy directly into your AI development agent:
+      </p>
+
+      <div class="space-y-2 text-xs">
+        <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.04</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">PRODUCTION PROMPT (1. SAAS PLATFORM PROMPT (STRIPE + LINEAR VIBE))</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Build a modern SaaS landing page for an AI document analysis platform.
+Style: Dark slate background (#0F172A), glowing border feature cards, subtle grid line overlay.
+Sections:
+- Hero: Glowing pill badge ("AI Document Intelligence 2.0"), gradient headline, dual CTAs ("Start Free Trial" orange button, "View Live Demo" ghost button).
+- Interactive Pricing: Monthly/Yearly toggle with 3 tiers (Starter $29, Pro $79, Enterprise $199).
+- Framer Motion stagger entrance on 3-column feature grid.</div>
+      </div>
+
+        <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.05</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">PRODUCTION PROMPT (2. MINIMAL LUXURY AGENCY PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Create a high-end luxury creative agency website.
+Style: Minimalist high contrast (Black & Pure White), bold editorial typography (Playfair / Inter mix), smooth page transitions.
+Sections:
+- Hero: Full-screen video/image placeholder with overlay text "We Engineer Digital Dominance".
+- Selected Work: 2-column image grid with hover zoom effect and project metadata overlay.
+- Contact: Sleek lead capture form with custom styled input fields.</div>
+      </div>
+
+        <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.06</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">PRODUCTION PROMPT (3. PERSONAL BRAND & FOUNDER PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Create a personal brand website for a tech founder & investor.
+Sections: Hero (Headshot + Cinematic Tagline), Achievements Counter (e.g. "$10M+ Raised", "3x Exits"), Featured Articles, Testimonials Carousel, Contact Form.
+Style: Warm dark mode, crisp typography, subtle gold/orange accent highlights.</div>
+      </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 6</span>
+    </div>
+  </div>
+
+  <!-- PAGE 7: SECTION 5 CONTINUED - $100K SAAS MASTER PROMPT -->
+  <div class="page" id="page-7">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 05. $100K-LEVEL SAAS MASTER PROMPT</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">05. Flagship $100k-Level SaaS Master Prompt</h2>
+      <p class="text-slate-700">
+        Use this comprehensive prompt when building high-value client production sites. It specifies architectural standards, design tokens, error handling, and animation physics.
+      </p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.07</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">FULL SPECIFICATION (FLAGSHIP $100K SAAS MASTER PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as an Elite Principal Software Architect & Lead UI Designer at TakeIN Studio.
+
+Create a world-class $100k-level SaaS web experience.
+
+DESIGN ARCHITECTURE & AESTHETICS:
+- Palette: Background #0F172A (Deep Slate), Accent #FF6B00 (TakeIN Orange), Neutral #F8FAFC, Borders #1E293B.
+- Typography: Inter font family, modular 1.25x type scale, bold high-contrast display headings.
+- Visual Depth: Subtle radial gradient spotlights behind hero elements, glowing border card hover states.
+- Motion Physics: Framer Motion spring physics (stiffness 300, damping 24) on all interactive buttons and cards.
+
+COMPONENT ARCHITECTURE:
+1. Navbar: Glassmorphic sticky header with blur backdrop, brand logo mark, navigation links, and "Get Started" CTA.
+2. Hero: High-converting headline, sub-headline, trust badge, primary CTA button, and interactive product screenshot dashboard mockup with glowing border.
+3. Social Proof: Animated infinite logo marquee featuring top tech brand logos.
+4. Problem vs Solution: Interactive 2-column comparison card displaying "Traditional Way" vs "AI-Powered Way".
+5. Features: 3x3 Bento Grid layout with custom icons, title, description, and hover scale effects.
+6. Testimonials: 3-column testimonial grid with customer avatar images, star ratings, names, and verified badges.
+7. Pricing Table: Monthly / Yearly toggle switch with 3 pricing tiers (Free, Pro, Enterprise) highlighting "Most Popular" tier in orange.
+8. FAQ Accordion: Smooth animated collapsible questions and answers.
+9. CTA Section: Full-bleed banner with high-urgency headline and lead input form.
+10. Footer: 4-column link layout with copyright, legal disclaimers, and social icons.
+
+CODE QUALITY:
+- 100% TypeScript type safety. Clean component modularization in `components/ui/`. Zero console warnings or missing imports. Responsive across mobile (375px), tablet (768px), and desktop (1280px).</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 7</span>
+    </div>
+  </div>
+
+  <!-- PAGE 8: SECTION 6 - GEMINI 3 & C.R.E.F. METHOD -->
+  <div class="page" id="page-8">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 06. GEMINI 3 & C.R.E.F. METHOD</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">06. Mastering Gemini 3: Deep Think & The C.R.E.F. Method</h2>
+      <p class="text-slate-700">
+        Gemini 3 brings <strong>Deep Think multi-step reasoning</strong> and 1M+ token context windows. To unlock maximum precision, construct every prompt using the **C.R.E.F. Formula**:
+      </p>
+
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%;">C.R.E.F. Element</th>
+              <th style="width: 30%;">Strategic Purpose</th>
+              <th>Example Implementation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>C - Context</strong></td>
+              <td>Provide business background & constraints</td>
+              <td>"Building a Next.js 14 lead capture site for a dental clinic in Delhi."</td>
+            </tr>
+            <tr>
+              <td><strong>R - Role</strong></td>
+              <td>Assign specific AI expert persona</td>
+              <td>"Act as a Senior Conversion Rate Optimization Specialist & Lead Engineer."</td>
+            </tr>
+            <tr>
+              <td><strong>E - Explicit Task</strong></td>
+              <td>State the exact step-by-step deliverable</td>
+              <td>"Generate a 3-step booking form component with Zod input validation."</td>
+            </tr>
+            <tr>
+              <td><strong>F - Format</strong></td>
+              <td>Define output structure & syntax</td>
+              <td>"Output ready-to-copy TSX code in a single file block without markdown chatter."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.08</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">GEMINI 3 PRO DEEP THINK (FULL C.R.E.F. PROMPT BLUEPRINT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">[CONTEXT]: I am launching an AI web development agency targeting local healthcare practices.
+[ROLE]: Act as a Senior UX Architect and Full-Stack Next.js Developer.
+[EXPLICIT TASK]: Create an interactive appointment booking component with real-time slot selection, form validation, and instant WhatsApp notification trigger.
+[FORMAT]: Provide production-ready React TSX code using Tailwind CSS and Lucide React icons.</div>
+      </div>
+
+      <div class="verify-card">
+        <strong class="text-emerald-950 text-xs">✓ VERIFICATION PROTOCOL · DEEP THINK EVALUATION:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          When using Gemini 3 Deep Think mode, check the reasoning trace before accepting code. Ensure it has evaluated mobile touch targets (48px minimum) and handled form loading states.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 8</span>
+    </div>
+  </div>
+
+  <!-- PAGE 9: SECTION 6 CONTINUED - GEMINI 3 CHEATSHEET -->
+  <div class="page" id="page-9">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 06. GEMINI 3 CHEATSHEET</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">06. Gemini 3 Developer Cheatsheet: Do's and Don'ts</h2>
+      <p class="text-slate-700">
+        Avoid common prompting traps when directing Gemini 3 for code generation, copywriting, and repository analysis:
+      </p>
+
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">Task Area</th>
+              <th style="width: 38%;">❌ Common Mistake (Don't Do This)</th>
+              <th>✅ AI-Native Prompt (Do This)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Code Generation</strong></td>
+              <td>"Write a contact form." (Generates basic unstyled HTML input tags).</td>
+              <td>"Build a modern contact card component using Tailwind CSS, Framer Motion reveal, and Zod email schema validation."</td>
+            </tr>
+            <tr>
+              <td><strong>Copywriting</strong></td>
+              <td>"Write a headline for my software." (Produces cliché AI filler like 'Unlock your potential!').</td>
+              <td>"Write 3 high-converting headlines using the Problem-Solution storyline. Target: Startup founders struggling with slow websites."</td>
+            </tr>
+            <tr>
+              <td><strong>Repository Analysis</strong></td>
+              <td>Pasting 50 unformatted files in chat window.</td>
+              <td>Using Antigravity `@dir` context tag: "Inspect `@/components` and list unused Tailwind classes or duplicate state hooks."</td>
+            </tr>
+            <tr>
+              <td><strong>Debugging</strong></td>
+              <td>"Fix this bug." (Pasting error without code context).</td>
+              <td>"Here is the terminal error stack trace: [Error]. Inspect `@app/api/contact/route.ts` and apply the smallest safe fix."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>YOUR TASK · 06.1 — AUDIT YOUR PROMPTING HABITS</span>
+          <span class="text-orange-600 font-bold">CHECKLIST</span>
+        </div>
+        <div class="task-checkbox-list">
+          <div>□ 1. Do I always specify the Exact Persona & Role before requesting code?</div>
+          <div>□ 2. Do I provide specific visual aesthetic references (Linear, Vercel, Apple) instead of generic terms?</div>
+          <div>□ 3. Do I inspect the Deep Think reasoning steps before running generated scripts?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 9</span>
+    </div>
+  </div>
+
+  <!-- PAGE 10: SECTION 7 - 6 LEVELS OF AI INDEPENDENCE & ARCHITECTURE -->
+  <div class="page" id="page-10">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 07. AI INDEPENDENCE & WEB ARCHITECTURE</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">07. The 6 Levels of AI Independence & Web Architecture</h2>
+      <p class="text-slate-700">
+        Where do you stand on the AI Developer progression curve? Moving from Level 0 to Level 5 is what separates amateur prompt-copying from running a profitable AI engineering operation.
+      </p>
+
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">Level</th>
+              <th style="width: 22%;">Role Title</th>
+              <th>Operational Capability & Workflow Mastery</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Level 0</strong></td><td>Prompt Copier</td><td>Copies random prompts from social media without understanding frontend architecture or code output.</td></tr>
+            <tr><td><strong>Level 1</strong></td><td>UI Prompter</td><td>Uses v0 or Bolt to generate static UI mockups in English; struggles with multi-page navigation.</td></tr>
+            <tr><td><strong>Level 2</strong></td><td>Feature Builder</td><td>Understands Next.js App Router, Client vs Server components, and basic Supabase database integration.</td></tr>
+            <tr><td><strong>Level 3</strong></td><td>Agent Debugger</td><td>Traces terminal stack traces, reads system logs, and directs AI agents to fix complex state bugs.</td></tr>
+            <tr><td><strong>Level 4</strong></td><td>System Orchestrator</td><td>Configures `.agents/` rules, routes tasks by model complexity, and runs Builder → Reviewer workflows.</td></tr>
+            <tr><td><strong>Level 5</strong></td><td>AI Systems Architect</td><td>Directs multi-agent teams across CLI, IDE, and Browser to ship commercial SaaS and scale agencies.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection-title mt-1">Web Fundamentals: Client vs Server Architecture</h3>
+      <div class="code-block border-orange-500/40"><span class="text-orange-400 font-bold">CLIENT BROWSER (UI View)</span> ──► [HTTPS Request] ──► <span class="text-emerald-400 font-bold">NEXT.JS SERVER (Node Engine)</span>
+        ▲                                                      │
+        │                                                      ▼
+  [State / Hydration] ◄── [HTML + JSON Props] ◄── <span class="text-blue-400 font-bold">DATABASE (Supabase / Postgres)</span></div>
+
+      <div class="editorial-callout text-xxs">
+        <strong class="text-orange-950">CRITICAL ARCHITECTURE RULE:</strong> Keep data fetching on the <strong>Server</strong> (React Server Components) for fast SEO performance and secure database queries. Use `'use client'` strictly for interactive UI elements (Framer Motion, modal toggles, form state).
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 10</span>
+    </div>
+  </div>
+
+  <!-- PAGE 11: SECTION 8 - ANTIGRAVITY IDE & CONTEXT ENGINEERING -->
+  <div class="page" id="page-11">
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 08. ANTIGRAVITY IDE & CONTEXT ENGINEERING</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">08. Antigravity IDE Platform & Context Engineering (@)</h2>
+      <p class="text-slate-700">
+        Antigravity is Google DeepMind's agentic coding platform. Mastering <strong>Context Engineering</strong> using `@` symbols is how you give AI agents exact surgical visibility into your codebase without overwhelming the token context window.
+      </p>
+
+      <div class="editorial-card bg-slate-900 text-white my-0.5">
+        <div class="text-orange-400 font-bold text-xs uppercase tracking-wider mb-1">ANTIGRAVITY TRIPLE-PANE WORKSPACE INTERFACE:</div>
+        <div class="grid-3col text-xxs">
+          <div class="bg-slate-950 p-2 rounded border border-slate-800">
+            <strong class="text-slate-200">1. EXPLORER & RULES</strong>
+            <p class="text-slate-400 mt-1">Displays repository files, `.agents/AGENTS.md` guidelines, and active skill definitions.</p>
+          </div>
+          <div class="bg-slate-950 p-2 rounded border border-slate-800">
+            <strong class="text-slate-200">2. EDITOR & DIFFS</strong>
+            <p class="text-slate-400 mt-1">Shows live code changes with green additions and red deletions before acceptance.</p>
+          </div>
+          <div class="bg-slate-950 p-2 rounded border border-slate-800">
+            <strong class="text-slate-200">3. AGENT PANEL</strong>
+            <p class="text-slate-400 mt-1">Houses agent conversation, execution plans, terminal tasks, and subagent delegation.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title mt-1">Context Engineering (@) Hierarchy Levels</h3>
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">Tag Level</th>
+              <th style="width: 25%;">Syntax Example</th>
+              <th>Use Case & Token Efficiency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Level 1 (Inline)</strong></td><td>No `@` needed</td><td>Trivial inline edits (changing button text, altering hex color tokens).</td></tr>
+            <tr><td><strong>Level 2 (File)</strong></td><td>`@[/components/Hero.tsx]`</td><td>Targeted component refactoring while preserving existing prop signatures.</td></tr>
+            <tr><td><strong>Level 3 (Directory)</strong></td><td>`@[/app/api]`</td><td>Multi-file API route refactoring or adding new database endpoint handlers.</td></tr>
+            <tr><td><strong>Level 4 (Terminal)</strong></td><td>`@[terminal]`</td><td>Pasting build errors or test failure logs directly for agent root-cause diagnosis.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.09</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">ANTIGRAVITY AGENT (CONTEXT ENGINEERING PROMPT EXAMPLE)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Inspect `@[/app/page.tsx]` and `@[/components/Navbar.tsx]`.
+
+Refactor the navigation links so that clicking 'Pricing' performs a smooth Framer Motion scroll to the `#pricing` element. Preserving mobile menu responsiveness.</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 11</span>
+    </div>
+  </div>
+
+  <!-- PAGE NEW: AI BUILDERS -->
+  <div class="page" id="page-new-builders">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · AI-NATIVE GUI BUILDERS</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">08b. Lovable & Bolt: The Rapid Generation Workflow</h2>
+      <p class="text-slate-700">
+        While Antigravity is your professional engineering environment, GUI-based AI builders like <strong>Lovable</strong> and <strong>Bolt.new</strong> are incredible for 0-to-1 rapid prototyping. Use them to generate the initial foundation, then hand off to Antigravity.
+      </p>
+
+      <h3 class="subsection-title mt-1">The Lovable Practical Workflow</h3>
+      <ol class="dense-list text-slate-800 text-xxs mb-2">
+        <li>1. Open <strong>Lovable.dev</strong> and start a new project.</li>
+        <li>2. Define your core requirements using the prompt below.</li>
+        <li>3. Preview the generated UI and inspect obvious problems.</li>
+        <li>4. Iterate using the exact iteration prompt.</li>
+        <li>5. Connect to GitHub to push the repository.</li>
+      </ol>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.10</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">LOVABLE / BOLT INITIAL BUILD (PRIMARY BUILDER)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO LOVABLE/BOLT:
+Build a modern landing page for a [Niche] business. 
+Architecture: Next.js + Tailwind CSS. 
+Visuals: Premium dark mode, high-contrast typography, interactive Framer Motion micro-animations.
+Include a Hero section, Features Grid, and a Contact form. Ensure all components are modular and ready for backend integration later.</div>
+      </div>
+
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.11</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">LOVABLE / BOLT ITERATION PROMPT</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO LOVABLE/BOLT:
+The generation looks good, but the mobile view is broken on the features grid. Also, the hero section feels too generic.
+Please refactor the grid to be 1-column on mobile, and apply a 21st.dev-style glowing border effect to the Hero Call-to-Action button.</div>
+      </div>
+
+      <h3 class="subsection-title mt-2">v0 + 21st.dev Component Workflow</h3>
+      <p class="text-slate-700 text-xxs">
+        v0 and 21st.dev are best used for <strong>component reference work</strong>, not entire architectures. 
+        Workflow: Find/Generate UI &rarr; Understand what you want &rarr; Bring reference into Antigravity &rarr; Adapt.
+      </p>
+
+      <div class="prompt-matrix-card mt-1">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.12</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">ANTIGRAVITY V0 COMPONENT ADAPTATION (STANDARD BUILDER)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I am attaching a UI component reference I generated in v0/found on 21st.dev.
+Please inspect our current project's design system (tailwind config, global css) and adapt this new component to perfectly match our existing aesthetic. Remove any generic AI-looking design patterns and ensure strict responsive behavior across mobile viewports.</div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE ADD-1</span>
+    </div>
+  </div>
+
+<!-- PAGE NEW: GITHUB & HANDOFF -->
+  <div class="page" id="page-new-github">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · GITHUB & THE HANDOFF</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">08c. GitHub for Absolute Beginners</h2>
+      <p class="text-slate-700 text-xs">
+        <strong>Git</strong> is a time machine for your code. <strong>GitHub</strong> is the cloud where that time machine lives. A <strong>Repository</strong> is your project folder. A <strong>Commit</strong> saves your changes. <strong>Push</strong> uploads them, and <strong>Pull</strong> downloads them. <strong>Clone</strong> copies a repository to your local machine.
+      </p>
+      
+      <div class="grid-2col text-xs my-2">
+        <div class="editorial-card bg-slate-50 border-slate-300">
+          <strong class="text-slate-900 text-xs block mb-1">TRACK A: GitHub Desktop (GUI)</strong>
+          <ol class="dense-list text-slate-700 text-xxs">
+            <li>1. Install & Sign in to GitHub Desktop.</li>
+            <li>2. Click "Clone Repository" &rarr; select the one Lovable created.</li>
+            <li>3. Choose a local folder on your computer.</li>
+            <li>4. Open that local folder in Antigravity.</li>
+            <li>5. To save changes: Write a summary in the bottom left, click "Commit", then "Push origin".</li>
+          </ol>
+        </div>
+        <div class="editorial-card bg-slate-900 text-white border-slate-800">
+          <strong class="text-orange-400 text-xs block mb-1">TRACK B: Terminal / CLI</strong>
+          <ol class="dense-list text-slate-300 text-xxs">
+            <li>`git clone [URL]` (Download repo)</li>
+            <li>`git add .` (Stage all changes)</li>
+            <li>`git commit -m "update hero"` (Save)</li>
+            <li>`git push origin main` (Upload)</li>
+            <li>`git pull` (Download latest)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="mistake-card text-xs">
+        <strong class="text-red-900">🚨 ABSOLUTE RULE: NEVER COMMIT SECRETS!</strong>
+        <p class="text-slate-700 mt-1">Never push `.env`, `.env.local`, API keys, or private database credentials to GitHub. Always use a `.gitignore` file.</p>
+      </div>
+
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.13</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">GITHUB PREPARATION AUDIT (QA AUDITOR)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+Prepare this repository safely for GitHub. 
+Inspect the `.gitignore` file, check for any hardcoded secret files, generated build artifacts, or environment variables. Ensure no API keys will be leaked before I commit and push.</div>
+      </div>
+
+      <h3 class="subsection-title mt-2">The Architecture Handoff (Lovable &rarr; Antigravity)</h3>
+      <p class="text-slate-700 text-xxs">When bringing a generated project into Antigravity, you must force the AI to understand the full context before it writes a single line of code.</p>
+
+      <div class="prompt-matrix-card mt-1">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.14</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">REPOSITORY INSPECTION HANDOFF (SENIOR ARCHITECT)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I have imported this project from an AI generator (Lovable/Bolt).
+DO NOT modify anything initially. 
+Run a full inspection of the repository. Identify the framework, dependencies, routing structure, components, state management, backend/DB usage, environment variables, and the design system. Document any obvious risks or technical debt. Provide a recommended list of next steps to make this production-ready.</div>
+      </div>
+
+      <div class="prompt-matrix-card mt-1">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.15</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">MERGE CONFLICT DIAGNOSTIC (THINKING/DEBUGGING MODEL)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I have hit a git merge conflict. DO NOT blindly choose 'ours' or 'theirs'.
+Please inspect the conflicted files. Explain exactly what both sides (my local changes vs the incoming cloud changes) contain and what the intended behavior should be. Recommend a safe resolution strategy that preserves all intended functionality without deleting unrelated work. Verify the project builds correctly after you resolve it.</div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE ADD-2</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 12: SECTION 9 - MODEL ROUTING MATRIX & ARCHITECTURES 1-6 -->
+  <div class="page" id="page-12">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 09. MODEL ROUTING & ARCHITECTURES 1–6</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">09. Official Model Routing Selection Matrix & Architectures (1–6)</h2>
+      <p class="text-slate-700">
+        Using the wrong AI model wastes money and degrades output quality. Use this decision matrix to route development tasks to the optimal AI model:
+      </p>
+
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">Task Complexity</th>
+              <th style="width: 30%;">Recommended AI Model</th>
+              <th>Primary Strengths & Cost Efficiency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Minor UI Edits & CSS</td><td>Gemini 3.5 Flash (Low)</td><td>Instant response speed, minimal token cost, great for rapid styling.</td></tr>
+            <tr><td>Standard Page Building</td><td>Gemini 3.5 Flash (High)</td><td>Primary builder model for React components and CRUD pages.</td></tr>
+            <tr><td>Repo Architecture</td><td>Gemini 3.1 Pro (High)</td><td>Deep reasoning across entire multi-file project structures.</td></tr>
+            <tr><td>Complex Debugging</td><td>Claude Sonnet 4.6 Thinking</td><td>Senior code reviewer for logic bugs and state synchronization.</td></tr>
+            <tr><td>Critical AppSec Audits</td><td>Claude Opus 4.6 Thinking</td><td>High-impact security decisions, payment handlers, RLS logic.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection-title mt-1">Universal Website Architectures (1–6)</h3>
+      <div class="grid-2col text-xxs my-0.5">
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">1. Business Landing Page</strong>
+          <div>Lead capture, hero CTA, services, social proof, contact form. Stack: Next.js + Tailwind.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">2. E-Commerce Storefront</strong>
+          <div>Product grid, shopping cart drawer, Stripe checkout. Stack: Next.js + Supabase + Stripe.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">3. Designer Portfolio</strong>
+          <div>Project showcase, case study modal, MDX blog, contact form. Stack: Next.js + Framer Motion.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">4. Creator & Newsletter Hub</strong>
+          <div>Lead magnet opt-in, bio links, latest podcast/video embeds. Stack: Next.js + Resend API.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">5. Blog & SEO Magazine</strong>
+          <div>Category filters, search index, table of contents, author pages. Stack: Next.js + Supabase DB.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">6. E-Learning Course Portal</strong>
+          <div>Video lesson player, progress tracker, module quiz, certificates. Stack: Next.js + Mux Video.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 12</span>
+    </div>
+  </div>
+
+  <!-- PAGE 13: SECTION 9 CONTINUED - ARCHITECTURES 7-12 & NICHES 1-5 -->
+  <div class="page" id="page-13">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 09. ARCHITECTURES 7–12 & AGENCY NICHES</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">09. Universal Architectures (7–12) & Agency Niche Templates (1–5)</h2>
+
+      <h3 class="subsection-title">Universal Website Architectures (7–12)</h3>
+      <div class="grid-2col text-xxs my-0.5">
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">7. Appointment Booking System</strong>
+          <div>Interactive calendar date picker, time slot selection, SMS confirmation. Stack: Next.js + Twilio.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">8. Real-Time Member Community</strong>
+          <div>User feeds, discussion threads, member profiles, direct messaging. Stack: Next.js + Supabase Realtime.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">9. Filterable Directory Engine</strong>
+          <div>Multi-tag search filters, location maps, listing submissions. Stack: Next.js + Algolia / Postgres.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">10. SaaS Documentation Wiki</strong>
+          <div>Sidebar navigation, search bar, code copy blocks, feedback widgets. Stack: Next.js + Fumadocs / MDX.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">11. Micro-SaaS AI Utility Tool</strong>
+          <div>Prompt input textarea, API token rate limiter, result renderer. Stack: Next.js + OpenAI / Gemini API.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">12. B2B Client Portal Dashboard</strong>
+          <div>File uploads, invoice status, project milestones, client chat. Stack: Next.js + Supabase RLS.</div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title mt-1">TakeIN Agency Niche Templates (1–5)</h3>
+      <div class="grid-2col text-xxs my-0.5">
+        <div class="editorial-card border-orange-200 bg-orange-50/30">
+          <strong class="text-orange-950 text-xs block mb-1">1. Restaurant & Café</strong>
+          <div>Digital QR menu, WhatsApp table reservation CTA, Google Maps embed. Primary Goal: Instant bookings.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">2. Dental & Medical Clinic</strong>
+          <div>Doctor profiles, patient reviews, service list, online appointment form. Primary Goal: Trust & lead capture.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">3. Fitness Gym & Studio</strong>
+          <div>Membership plans, class schedule timetable, free trial pass signup. Primary Goal: Recurring subscriptions.</div>
+        </div>
+        <div class="editorial-card border-orange-200 bg-orange-50/30">
+          <strong class="text-orange-950 text-xs block mb-1">4. Coaching & EdTech Academy</strong>
+          <div>Course syllabus breakdown, student success videos, batch registration. Primary Goal: High ticket enrollments.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">5. Real Estate Brokerage</strong>
+          <div>Property listings grid, filter by price/bhk, virtual tour booking. Primary Goal: High-intent buyer inquiries.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 13</span>
+    </div>
+  </div>
+
+  <!-- PAGE 14: SECTION 10 - NICHES 6-10 & HANDS-ON MISSIONS -->
+  <div class="page" id="page-14">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 10. AGENCY NICHES & HANDS-ON MISSIONS</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">10. Agency Niches (6–10) & Guided Hands-on Missions</h2>
+
+      <div class="grid-2col text-xxs my-0.5">
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">6. Legal & Financial Practice</strong>
+          <div>Practice areas, consultation fee calculator, secure document lead form. Primary Goal: High-retainer clients.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">7. Home Services Contractor</strong>
+          <div>Emergency call CTA button, before/after photo slider, instant quote form. Primary Goal: Immediate phone leads.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">8. Non-Profit Organization</strong>
+          <div>Impact story, recurring donation integration via Stripe, volunteer signup. Primary Goal: Donor conversion.</div>
+        </div>
+        <div class="editorial-card">
+          <strong class="text-slate-900 text-xs block mb-1">9. Event Summit & Conference</strong>
+          <div>Speaker lineup, agenda schedule, ticket tier pricing, sponsor logo wall. Primary Goal: Ticket sales.</div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title mt-1">Guided Hands-on Developer Missions</h3>
+      <div class="space-y-1.5 text-xs">
+        <div class="editorial-card border-slate-300">
+          <strong class="text-slate-950 text-xs block">🧪 LAB 01 (Guided): Hero Section Scaffold</strong>
+          <p class="text-slate-600 text-xxs mt-0.5">Build a responsive Hero section with glowing pill badge using 21st.dev components. Verify desktop and mobile (375px) viewports.</p>
+        </div>
+
+        <div class="editorial-card border-slate-300">
+          <strong class="text-slate-950 text-xs block">🎯 TASK 02 (Partially Guided): 3-Column Services Grid</strong>
+          <p class="text-slate-600 text-xxs mt-0.5">Construct a prompt to build a 3-column Services grid with Framer Motion entry reveals and hover scale effects.</p>
+        </div>
+
+        <div class="editorial-card border-orange-300 bg-orange-50/40">
+          <strong class="text-orange-950 text-xs block">🚀 BUILD MISSION 03: Complete Restaurant Website</strong>
+          <p class="text-slate-800 text-xxs mt-0.5">Build a single-page restaurant website ("Spice & Craft") using the Golden Website Prompt Framework and deploy live.</p>
+        </div>
+
+        <div class="mistake-card">
+          <strong class="text-red-900 text-xs block">🔥 CHALLENGE 04: Debugging Form Persistence</strong>
+          <p class="text-slate-700 text-xxs mt-0.5">The lead capture form submits but does not display success state. Direct Claude Code / Antigravity to fix the state handler!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 14</span>
+    </div>
+  </div>
+
+  <!-- PAGE 15: SECTION 11 - DUAL-TRACK DEPLOYMENT SYSTEMS -->
+  <div class="page" id="page-15">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 11. DUAL-TRACK DEPLOYMENT SYSTEMS</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">11. Dual-Track Deployment Systems (GUI vs CLI)</h2>
+      <p class="text-slate-700">
+        Choose your deployment workflow based on your team's technical comfort. Both tracks ship production websites to Vercel's global CDN:
+      </p>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="editorial-card border-emerald-300 bg-emerald-50/40">
+          <strong class="text-emerald-950 text-xs uppercase tracking-wider block border-b border-emerald-200 pb-1 mb-1">TRACK 1: FAST PATH (0-CODE GITHUB GUI)</strong>
+          <ol class="dense-list text-slate-800 text-xxs">
+            <li>1. Download project ZIP from v0/Bolt export.</li>
+            <li>2. Open GitHub Desktop GUI application.</li>
+            <li>3. Select <em>File > Add Local Repository</em>.</li>
+            <li>4. Type commit summary and click <strong>Commit to main</strong>.</li>
+            <li>5. Click <strong>Publish repository</strong> to GitHub.</li>
+            <li>6. Import repo inside Vercel Dashboard for 1-click launch.</li>
+          </ol>
+          <div class="text-emerald-700 font-bold mt-1 text-xxs">Best For: Beginners & Non-Technical Founders</div>
+        </div>
+
+        <div class="editorial-card border-blue-300 bg-blue-50/40">
+          <strong class="text-blue-950 text-xs uppercase tracking-wider block border-b border-blue-200 pb-1 mb-1">TRACK 2: PRO ARCHITECT (TERMINAL CLI)</strong>
+          <ol class="dense-list text-slate-800 text-xxs">
+            <li>1. Launch terminal in root project directory.</li>
+            <li>2. Run `git init && git add .` command.</li>
+            <li>3. Commit code: `git commit -m "feat: initial commit"`.</li>
+            <li>4. Push to remote: `git push origin main`.</li>
+            <li>5. Deploy directly via CLI: `vercel --prod`.</li>
+            <li>6. Custom domain DNS mapping via Vercel CLI.</li>
+          </ol>
+          <div class="text-blue-700 font-bold mt-1 text-xxs">Best For: Full-Stack AI Engineers & Agencies</div>
+        </div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.10</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">TERMINAL WORKFLOW (VERCEL CLI DEPLOYMENT COMMANDS)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body"># Step 1: Install Vercel CLI tool
+npm install -g vercel
+
+# Step 2: Authenticate and link project
+vercel login
+
+# Step 3: Deploy to production environment instantly
+vercel --prod</div>
+      </div>
+
+      <div class="mistake-card">
+        <strong class="text-red-900 text-xs">⚠ COMMON DEPLOYMENT MISTAKE:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          Never commit `.env.local` or environment secret keys to public GitHub repositories! Always add `.env.local` to your `.gitignore` file before publishing.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 15</span>
+    </div>
+  </div>
+
+  <!-- PAGE 16: SECTION 12 - MODERN DESIGN & CONVERSION PRINCIPLES -->
+  <div class="page" id="page-16">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · 12. MODERN DESIGN & CONVERSION</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">12. Modern Design Principles & Conversion Psychology</h2>
+      <p class="text-slate-700">
+        AI can generate code, but only <strong>Design Knowledge</strong> tells the AI what looks world-class. Master these core design principles:
+      </p>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="editorial-card space-y-1">
+          <strong class="text-slate-900 text-xs block border-b pb-1">Visual Hierarchy & Scale</strong>
+          <div>• <strong>Headline Dominance:</strong> H1 must be at least 2.5× the size of body text.</div>
+          <div>• <strong>Contrast:</strong> Pure white text on deep slate background for maximum LCP readability.</div>
+          <div>• <strong>Color Restraint:</strong> Max 3 colors. Primary background (#0F172A), neutral (#F8FAFC), accent (#FF6B00).</div>
+        </div>
+
+        <div class="editorial-card space-y-1">
+          <strong class="text-slate-900 text-xs block border-b pb-1">Typography & Line Height</strong>
+          <div>• <strong>Font Pair:</strong> Inter for body and display headings. Fira Code for code/prompts.</div>
+          <div>• <strong>Line Height:</strong> 1.5 for body copy, tight 1.15 for display titles.</div>
+          <div>• <strong>Tracking:</strong> `-0.02em` letter spacing on display titles for modern tight look.</div>
+        </div>
+      </div>
+
+      <div class="editorial-callout bg-orange-50/50 border-orange-300">
+        <strong class="text-orange-950 text-xs">THE 3 CONVERSION QUESTIONS EVERY PAGE MUST ANSWER:</strong>
+        <ol class="dense-list text-slate-800 text-xxs mt-1">
+          <li>1. <strong>Why should I trust you?</strong> → Verified client logos, real star ratings, metrics above fold.</li>
+          <li>2. <strong>Why should I care?</strong> → Headline speaks directly to the visitor's pain point, not company features.</li>
+          <li>3. <strong>Why should I act NOW?</strong> → Clear action-oriented CTA button ("Start Building Free", not "Submit").</li>
+        </ol>
+      </div>
+
+      <div class="editorial-table my-0.5">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%;">Section</th>
+              <th style="width: 35%;">Conversion Primary Objective</th>
+              <th>Prompt Specific Command</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Hero</strong></td><td>Hook visitor in under 3 seconds</td><td>"Make H1 outcome-focused. Add trust badge below primary CTA button."</td></tr>
+            <tr><td><strong>Social Proof</strong></td><td>Establish instant authority</td><td>"Display a line of 5 recognized client brand logos with opacity 0.7."</td></tr>
+            <tr><td><strong>Pricing</strong></td><td>Remove purchase friction</td><td>"Include money-back guarantee micro-copy directly beneath CTA."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 16</span>
+    </div>
+  </div>
+
+  <!-- PAGE 17: CAPSTONE PROJECT PART 1 - BRIEF & ARCHITECTURE -->
+  <div class="page" id="page-17">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · CAPSTONE PROJECT (PART 1 OF 3)</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">🏆 Volume 1 Capstone: Flagship SaaS Build (Part 1)</h2>
+
+      <div class="editorial-callout">
+        <strong class="text-orange-950 text-xs">CAPSTONE ASSIGNMENT BRIEF:</strong>
+        <p class="text-slate-800 text-xxs mt-0.5">
+          You have been hired by <strong>"ApexAI Analytics"</strong> (an AI startup) to design, build, and deploy their flagship web platform. This is a comprehensive multi-page handbook assignment.
+        </p>
+      </div>
+
+      <div class="grid-2col text-xs my-0.5">
+        <div class="editorial-card space-y-1">
+          <strong class="text-slate-900 text-xs block border-b pb-1">Business Scenario & Requirements</strong>
+          <div class="text-xxs text-slate-700">• <strong>Company:</strong> ApexAI Analytics</div>
+          <div class="text-xxs text-slate-700">• <strong>Target Audience:</strong> Enterprise CTOs & Data Leads</div>
+          <div class="text-xxs text-slate-700">• <strong>Primary Goal:</strong> High-intent demo requests & trial signups</div>
+          <div class="text-xxs text-slate-700">• <strong>Aesthetic:</strong> Dark Slate (#0F172A) + TakeIN Orange (#FF6B00)</div>
+        </div>
+
+        <div class="editorial-card space-y-1">
+          <strong class="text-slate-900 text-xs block border-b pb-1">Required Pages & Components</strong>
+          <div class="text-xxs text-slate-700">• Glassmorphic Navigation Bar</div>
+          <div class="text-xxs text-slate-700">• Hero Section with Glowing Dashboard Mockup</div>
+          <div class="text-xxs text-slate-700">• 8-Stage Conversion Layout</div>
+          <div class="text-xxs text-slate-700">• Interactive Monthly/Yearly Pricing Table</div>
+          <div class="text-xxs text-slate-700">• Animated FAQ Accordion + Footer</div>
+        </div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.11</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">CAPSTONE PROMPT 1 (PHASE 1 — PLANNING & SCAFFOLD PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as Principal Architect for ApexAI Analytics.
+
+Inspect the repository requirements. Plan a Next.js 14 App Router project structure:
+1. Create `app/page.tsx` for the main high-converting landing page.
+2. Create `components/ui/` for modular component primitives (Hero, Features, Pricing, Testimonials, FAQ, Footer).
+3. Setup Tailwind design tokens: primary slate #0F172A, accent orange #FF6B00.
+4. Output a detailed implementation plan step-by-step before writing code.</div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>STUDENT CAPSTONE CHECKPOINT · PHASE 1</span>
+          <span class="text-orange-600 font-bold">STATUS</span>
+        </div>
+        <div class="task-checkbox-list">
+          <div>□ 1. Next.js 14 project initialized with TypeScript and Tailwind CSS.</div>
+          <div>□ 2. Project planning prompt executed inside Claude Code or Antigravity IDE.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 17</span>
+    </div>
+  </div>
+
+  <!-- PAGE 18: CAPSTONE PROJECT PART 2 - IMPLEMENTATION & BLUEPRINTS -->
+  <div class="page" id="page-18">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · CAPSTONE PROJECT (PART 2 OF 3)</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">🏆 Volume 1 Capstone: Implementation & Blueprints (Part 2)</h2>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.12</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">CAPSTONE PROMPT 2 (PHASE 2 — CODE BUILD & COMPONENT PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Build the full production components for ApexAI Analytics:
+
+1. `components/ui/Hero.tsx`: Title "Turn Raw Data into Predictive Revenue", sub-headline, orange CTA button "Start Free 14-Day Trial", trust badge "Trusted by 500+ Engineering Teams". Add Framer Motion initial opacity 0, y 20 entrance animation.
+2. `components/ui/Features.tsx`: 3x3 Bento grid showcasing AI Auto-Indexing, Real-Time Anomaly Detection, and Custom API Pipelines. Add hover scale 1.02x.
+3. `components/ui/Pricing.tsx`: 3-tier pricing table (Starter $49/mo, Growth $149/mo, Enterprise $499/mo) with interactive billing cycle toggle state.</div>
+      </div>
+
+      <div class="code-block"><span class="text-orange-400">// ApexAI Interactive Pricing Toggle State Blueprint</span>
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export const PricingSection = () => {
+  const [isYearly, setIsYearly] = useState(false);
+
+  return (
+    &lt;section className="py-20 bg-slate-950 text-white" id="pricing"&gt;
+      &lt;div className="max-w-6xl mx-auto px-4 text-center"&gt;
+        &lt;h2 className="text-3xl font-extrabold mb-4"&gt;Flexible Pricing for Every Team&lt;/h2&gt;
+        &lt;div className="flex items-center justify-center gap-4 mb-12"&gt;
+          &lt;span className={!isYearly ? "text-orange-500 font-bold" : "text-slate-400"}&gt;Monthly&lt;/span&gt;
+          &lt;button onClick={() =&gt; setIsYearly(!isYearly)} className="w-14 h-8 bg-slate-800 rounded-full p-1 border border-slate-700"&gt;
+            &lt;motion.div animate={{ x: isYearly ? 24 : 0 }} className="w-6 h-6 bg-orange-500 rounded-full" /&gt;
+          &lt;/button&gt;
+          &lt;span className={isYearly ? "text-orange-500 font-bold" : "text-slate-400"}&gt;Yearly (Save 20%)&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+};</div>
+
+      <div class="mistake-card">
+        <strong class="text-red-900 text-xs block">🔥 INTENTIONAL DEBUGGING CHALLENGE:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          The pricing toggle state changes in React memory, but prices fail to update visually. <strong>Student Task:</strong> Direct Claude Code to inspect state re-renders and fix the conditional pricing calculation!
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 18</span>
+    </div>
+  </div>
+
+  <!-- PAGE 19: CAPSTONE PROJECT PART 3 - DEPLOYMENT & CHECKLIST -->
+  <div class="page" id="page-19">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · CAPSTONE PROJECT (PART 3 OF 3)</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">🏆 Volume 1 Capstone: Deployment & Final QA (Part 3)</h2>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.13</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">CAPSTONE PROMPT 3 (PHASE 3 — VERIFICATION & DEPLOYMENT PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Perform a comprehensive quality audit of ApexAI Analytics:
+1. Run `npm run build` and resolve any TypeScript errors or missing page key warnings.
+2. Verify responsive layout rendering across 375px mobile viewports.
+3. Deploy the application to Vercel production using Track 1 (GitHub Desktop GUI) or Track 2 (Vercel CLI). Output live production URL.</div>
+      </div>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>STUDENT SUBMISSION & SUCCESS CRITERIA</span>
+          <span class="text-orange-600 font-bold">DELIVERABLE</span>
+        </div>
+        <div class="task-checkbox-list">
+          <div>□ 1. Live Vercel Production URL active with custom SSL certificate.</div>
+          <div>□ 2. All 8 conversion sections rendering correctly without horizontal scrollbars on mobile.</div>
+          <div>□ 3. Framer Motion entrance reveals functioning smoothly on page scroll.</div>
+          <div>□ 4. GitHub repository pushed with clean commit history.</div>
+        </div>
+        <div class="task-deliverable-line">PASTE YOUR LIVE VERCEL URL: ________________________________________________</div>
+        <div class="task-deliverable-line">PASTE GITHUB REPOSITORY URL: _______________________________________________</div>
+      </div>
+
+      <div class="checkpoint-card">
+        <div class="checkpoint-header">
+          <span>SELF-ASSESSMENT GRADUATION SCORE</span>
+        </div>
+        <div class="grid-2col text-xxs">
+          <div>• Design Quality (Apple/Linear Vibe): ___ / 10</div>
+          <div>• Mobile Responsiveness (375px): ___ / 10</div>
+          <div>• Animation Physics (Framer Motion): ___ / 10</div>
+          <div>• Deployment Speed & Clean Code: ___ / 10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 19</span>
+    </div>
+  </div>
+
+  
+  <!-- PAGE 20: LOCALHOST VS PRODUCTION -->
+  <div class="page" id="page-20">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 12: From Local Project to Production</h2>
+      
+      <div class="editorial-callout bg-slate-900 border-slate-800 text-white p-6 rounded-md mb-6 shadow-lg">
+        <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> The Final Frontier</h3>
+        <p class="text-slate-300 text-sm">Most tutorials end when the app works on your computer. But a website doesn't exist until it's live on the internet. Deployment is not just a button click; it's a critical engineering skill.</p>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">21. Localhost vs Production</h3>
+      <p class="text-sm text-slate-700 mb-4">
+        <strong>Localhost</strong> is your laptop. When you run <code>npm run dev</code>, you create a tiny temporary server that only you can see. 
+        <strong>Production</strong> is the real world. Your code must be packaged (built), sent to a host, and connected to real databases and domains.
+      </p>
+
+      <div class="bg-slate-50 p-6 rounded border border-slate-200 mb-6 font-mono text-xs">
+        <div class="text-center font-bold text-slate-800 mb-2">THE MENTAL MODEL</div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="bg-white border border-slate-300 px-4 py-2 rounded shadow-sm w-48 text-center">Browser (User)</div>
+          <div class="text-orange-500">↓</div>
+          <div class="bg-slate-800 text-white px-4 py-2 rounded shadow-sm w-48 text-center">Frontend (Vercel)</div>
+          <div class="text-orange-500">↓</div>
+          <div class="bg-indigo-900 text-white px-4 py-2 rounded shadow-sm w-48 text-center">Backend/API (Render/Vercel)</div>
+          <div class="text-orange-500">↓</div>
+          <div class="bg-emerald-900 text-white px-4 py-2 rounded shadow-sm w-48 text-center">Database (Supabase)</div>
+        </div>
+      </div>
+
+      <div class="mistake-card">
+        <strong class="text-red-900 text-xs block">🔥 CRITICAL MISCONCEPTION:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          Vercel, Render, and Supabase are NOT interchangeable. Vercel is optimized for Frontend/React. Render is great for heavy Backends (like Python/FastAPI). Supabase is your Database. Don't try to host a Postgres database directly on Vercel.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 20</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE NEW: DEVTOOLS -->
+  <div class="page" id="page-new-devtools">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · BROWSER DEVTOOLS</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">24b. Browser DevTools for Beginners</h2>
+      <p class="text-slate-700 text-xs">
+        When an AI app breaks, "It doesn't work" is not enough information for Antigravity to fix it. You must learn to open <strong>Developer Tools (F12)</strong>. Focus solely on two tabs:
+      </p>
+      
+      <div class="grid-2col text-xs my-2">
+        <div class="editorial-card bg-slate-50 border-slate-300">
+          <strong class="text-slate-900 text-xs block mb-1">1. The CONSOLE Tab</strong>
+          <p class="text-slate-700 text-xxs">
+            This is where JavaScript errors are logged. If a React component crashes, or a variable is undefined, it prints a red error here.
+          </p>
+        </div>
+        <div class="editorial-card bg-slate-50 border-slate-300">
+          <strong class="text-slate-900 text-xs block mb-1">2. The NETWORK Tab</strong>
+          <p class="text-slate-700 text-xxs">
+            This records every request. <strong>Request</strong> (what you sent) &rarr; <strong>Response</strong> (what the server replied) &rarr; <strong>Status</strong> (200 OK, 403 Forbidden, 500 Error).
+          </p>
+        </div>
+      </div>
+
+      <div class="mistake-card text-xs">
+        <strong class="text-red-900">Example Scenario:</strong>
+        <p class="text-slate-700 mt-1">You click "Submit". Nothing happens. You open the Network tab, click the red failed request (`POST /api/contact`), and see Status: 403. You copy this evidence for Antigravity.</p>
+      </div>
+
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.15b</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">NETWORK FAILURE DIAGNOSTIC (DEBUGGING MODEL)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+My frontend request is failing. 
+In the browser Network tab, the request to `[ENDPOINT]` failed with Status Code: `[CODE]`. 
+The Response Payload says: `[PASTE PAYLOAD OR ERROR]`. 
+Please inspect the backend route and the frontend fetch call to identify the mismatch or missing permission causing this failure.</div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE ADD-3</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 21: ENVIRONMENT VARIABLES -->
+  <div class="page" id="page-21">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">22. Environment Variables From Zero</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        Your application needs to know where the Supabase database is. But if you hardcode the database URL and passwords directly into your source code, anyone can see them on GitHub. <strong>Environment variables</strong> allow you to configure secrets <em>outside</em> the code.
+      </p>
+
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="bg-red-50 border border-red-200 p-4 rounded">
+          <div class="text-red-800 font-bold text-xs mb-2">SERVER ONLY (SECRET)</div>
+          <ul class="text-xxs font-mono text-slate-700 space-y-1">
+            <li>SUPABASE_SERVICE_ROLE_KEY</li>
+            <li>DATABASE_URL</li>
+            <li>OPENAI_API_KEY</li>
+          </ul>
+          <p class="text-xxs text-red-700 mt-2">Never expose these to the browser.</p>
+        </div>
+        <div class="bg-green-50 border border-green-200 p-4 rounded">
+          <div class="text-green-800 font-bold text-xs mb-2">SAFE FOR BROWSER</div>
+          <ul class="text-xxs font-mono text-slate-700 space-y-1">
+            <li>NEXT_PUBLIC_SUPABASE_URL</li>
+            <li>NEXT_PUBLIC_SUPABASE_ANON_KEY</li>
+          </ul>
+          <p class="text-xxs text-green-700 mt-2">The prefix NEXT_PUBLIC_ makes it visible.</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-slate-700 mb-4">
+        Locally, we store these in a file called <code>.env.local</code>. We add this file to <code>.gitignore</code> so it never goes to GitHub. In production, we type these directly into Vercel's dashboard.
+      </p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.14</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">THE ENVIRONMENT AUDIT (DIAGNOSTIC PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Inspect this project's environment-variable usage.
+Do not modify anything yet.
+
+Create a table containing:
+1. Variable name
+2. File where it is referenced
+3. What service it belongs to
+4. Whether it is required
+5. Browser-safe or server-only
+6. Where I should obtain the value
+7. Whether it needs to exist locally
+8. Whether it needs to be configured in production
+
+Do NOT print the actual values of existing secrets.
+Identify missing variables and incorrectly exposed secrets. Explain everything in beginner-friendly English.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 21</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 22: CONNECT SUPABASE -->
+  <div class="page" id="page-22">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">23. Connect Supabase Properly</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        Supabase provides five main tools: <strong>PostgreSQL</strong> (database), <strong>Auth</strong> (users), <strong>Storage</strong> (files), <strong>RLS</strong> (security rules), and <strong>API clients</strong> (communication). Let's connect it properly.
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded border border-slate-200 mb-6 text-xs">
+        <div class="font-bold text-slate-800 mb-2">THE CONNECTION WORKFLOW</div>
+        <ol class="list-decimal pl-5 space-y-1 text-slate-700">
+          <li>Create Supabase project & wait for provisioning</li>
+          <li>Open project settings → API</li>
+          <li>Copy Project URL and anon/public key</li>
+          <li>Create <code>.env.local</code> in your code editor</li>
+          <li>Add <code>NEXT_PUBLIC_SUPABASE_URL=your_url</code></li>
+          <li>Add <code>NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key</code></li>
+          <li>Restart your local development server! (Variables only load on start)</li>
+        </ol>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.15</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">THE DATABASE CONNECTION (IMPLEMENTATION PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">I want to connect this existing application to Supabase.
+First inspect the project. Do not implement anything yet.
+
+Determine: framework, package manager, existing Supabase dependencies, current contact form implementation, and whether a database schema already exists.
+
+My goal is: When a visitor submits the contact form, store the enquiry securely in Supabase.
+Design the smallest appropriate implementation.
+
+Tell me:
+- what I need to configure in Supabase (SQL)
+- which files you will modify
+- what security considerations exist (RLS)
+- how we will verify the integration
+
+Wait for my approval before implementation.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 22</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 23: DEPLOY TO VERCEL -->
+  <div class="page" id="page-23">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">24. Deploy Frontend to Vercel</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        Vercel is the easiest way to host a Next.js or React frontend. The golden rule is: <strong>Vercel connects to GitHub, not to your laptop.</strong>
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded border border-slate-200 mb-6 text-xs">
+        <div class="font-bold text-slate-800 mb-2">THE DEPLOYMENT PIPELINE</div>
+        <div class="flex items-center gap-3 text-slate-700 mb-2">
+          <span class="bg-white px-2 py-1 border rounded">Local Code</span> →
+          <span class="bg-white px-2 py-1 border rounded">Push to GitHub</span> →
+          <span class="bg-white px-2 py-1 border rounded">Vercel Auto-Builds</span> →
+          <span class="bg-white px-2 py-1 border rounded">Live URL</span>
+        </div>
+        <p class="mt-2 text-slate-600">Whenever you push to the `main` branch, Vercel deploys immediately.</p>
+      </div>
+
+      <h4 class="font-bold text-sm text-slate-800 mb-2">"My app works locally but Vercel fails!"</h4>
+      <p class="text-xs text-slate-700 mb-4">
+        This is a rite of passage. Vercel is stricter than your laptop. It checks for TypeScript errors, missing keys, and invalid imports during the <strong>Build</strong> phase. When a build fails, do not panic. Do this:
+      </p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.16</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">THE VERCEL BUILD FIXER (DIAGNOSTIC PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">My Vercel deployment failed during the build phase.
+The application works fine locally using `npm run dev`.
+
+Here is the exact build log error from Vercel:
+[PASTE ENTIRE ERROR LOG HERE]
+
+Please diagnose the root cause. Do not write the code fix yet.
+Explain exactly why this fails in production but not locally, and outline the steps required to resolve it.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 23</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 24: VERCEL & SUPABASE -->
+  <div class="page" id="page-24">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">25. Supabase + Vercel Environments</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        If you deploy to Vercel right now, your website will load but the database will fail. Why? Because <code>.env.local</code> stays on your laptop. Vercel doesn't know your Supabase URL!
+      </p>
+
+      <div class="bg-slate-900 text-white p-5 rounded-md mb-6 shadow-lg">
+        <h4 class="font-bold text-orange-500 mb-2">SYNCING VARIABLES TO PRODUCTION</h4>
+        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-300">
+          <li>Open your Vercel Dashboard → Select Project.</li>
+          <li>Go to <strong>Settings</strong> → <strong>Environment Variables</strong>.</li>
+          <li>Copy <code>NEXT_PUBLIC_SUPABASE_URL</code> from your local `.env.local` and paste it.</li>
+          <li>Copy <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> and paste it.</li>
+          <li>Click <strong>Save</strong>.</li>
+          <li class="text-white font-bold">CRITICAL: Vercel does NOT apply new variables to the running site automatically. You must trigger a Redeploy!</li>
+        </ol>
+      </div>
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.16</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">ENVIRONMENT VARIABLE AUDIT (QA AUDITOR)</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+Please audit all environment variables required for this project. 
+Identify each variable, where it is used, whether it is public or a private secret, and where it must be configured (Local, Vercel, Render). Check if any are missing or pose a security risk if exposed to the frontend. DO NOT print out the actual secret values in your response.</div>
+      </div>
+
+
+      <div class="bg-slate-50 p-4 rounded border border-slate-200 text-xs">
+        <div class="font-bold text-slate-800 mb-2">VERIFICATION WORKFLOW</div>
+        <p class="text-slate-700 mb-2">How to prove it works:</p>
+        <div class="font-mono text-slate-600 bg-white p-3 border rounded">
+          Open Live Website → Submit Form → Open Supabase Table Editor → See Row Appear
+        </div>
+        <p class="text-slate-700 mt-2">If the row doesn't appear: Press F12 in browser, go to Console or Network tab, and look for red errors.</p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 24</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 25: RENDER & APIS -->
+  <div class="page" id="page-25">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2 mt-4">Vercel Deployment Verification</h3>
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.17</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">VERCEL PRE-DEPLOYMENT QA</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I am preparing to deploy this Next.js project to Vercel via GitHub. 
+Please run a pre-deployment check. Ensure the build script works (`npm run build`), there are no unhandled TypeScript or ESLint errors that would crash the Vercel pipeline, and confirm that all required `NEXT_PUBLIC_` environment variables are documented for me to paste into Vercel.</div>
+      </div>
+      
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.18</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">FAILED VERCEL DEPLOYMENT DEBUG</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+My Vercel deployment failed during the build phase. The application works fine locally.
+Here is the exact build log error from Vercel:
+[PASTE ENTIRE ERROR LOG HERE]
+Please diagnose the root cause and explain exactly why this fails in production but not locally, and outline the steps required to resolve it.</div>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2 mt-4">26. Render From Zero</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        If you are building a standard Next.js app, Vercel handles everything. But if your AI-built project uses a dedicated backend like <strong>Python FastAPI</strong> or <strong>Node Express</strong>, Vercel is not the right tool. You need Render.
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded border border-slate-200 mb-6 text-xs">
+        <div class="font-bold text-slate-800 mb-2">DEPLOYING A BACKEND TO RENDER</div>
+        <ol class="list-decimal pl-5 space-y-1 text-slate-700">
+          <li>Render Dashboard → New Web Service</li>
+          <li>Connect GitHub Repository</li>
+          <li><strong>Build Command:</strong> e.g., <code>pip install -r requirements.txt</code> (How it installs dependencies)</li>
+          <li><strong>Start Command:</strong> e.g., <code>uvicorn main:app --host 0.0.0.0 --port 10000</code> (How it runs)</li>
+          <li>Deploy! Wait for the live URL: <code>https://my-api.onrender.com</code></li>
+        </ol>
+      </div>
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.19</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">RENDER DEPLOYMENT PRECHECK</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I am preparing to deploy this backend service to Render.
+Check my requirements file (e.g. package.json or requirements.txt), the host/port bindings (must bind to 0.0.0.0 and process.env.PORT), and the start scripts. Advise on any changes needed to ensure it boots correctly in a Render environment.</div>
+      </div>
+      
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.20</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">RENDER FAILURE DEBUG</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+My Render deployment failed to start, or crashed immediately after starting.
+Here are the recent deployment logs from Render:
+[PASTE LOGS]
+Identify why the service is failing health checks or crashing, and provide the fix.</div>
+      </div>
+
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2">27. Connect Vercel Frontend → Render Backend</h3>
+      <p class="text-sm text-slate-700 mb-4">
+        Locally, your frontend called <code>http://localhost:8000</code>. In production, it must call your new Render URL.
+      </p>
+      
+      <div class="mistake-card">
+        <strong class="text-red-900 text-xs block">🔥 THE CLASSIC PRODUCTION BUG:</strong>
+        <p class="text-slate-700 text-xxs mt-0.5">
+          "Everything worked on my laptop. After deployment, the frontend buttons do nothing." <br>
+          <strong>Reason:</strong> Your live frontend is still trying to call localhost:8000! You must update <code>NEXT_PUBLIC_API_URL=https://my-api.onrender.com</code> in Vercel.
+        </p>
+      </div>
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.21</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">FRONTEND BACKEND CONNECTION DIAGNOSTIC</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+My frontend is deployed on Vercel and backend on Render. They are failing to connect.
+Inspect how the frontend makes API calls, check how CORS is configured on the backend, and verify how environment variables are structured. Help me diagnose why the frontend request never reaches the backend or gets blocked.</div>
+      </div>
+
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 25</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 26: CORS & ENV MAP -->
+  <div class="page" id="page-26">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">28. CORS Without the Headache</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        When your Vercel frontend (Website A) tries to talk to your Render backend (Website B), the browser blocks it by default. This security feature is called <strong>CORS</strong> (Cross-Origin Resource Sharing). Your backend must explicitly give permission.
+      </p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.17</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">CORS CONFIGURATOR (IMPLEMENTATION PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">My frontend is hosted at `https://my-app.vercel.app` and my backend is hosted on Render. I am getting a CORS error in the browser console when calling the API.
+
+Inspect my backend code and configure CORS properly so it accepts requests from the production frontend URL, and `http://localhost:3000` for local development. Explain how you are configuring it securely.</div>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2">29. Full Environment Map</h3>
+      <p class="text-xs text-slate-700 mb-2">Reference this table when debugging missing configuration:</p>
+
+      <table class="w-full text-left border-collapse text-xs mb-4">
+        <thead>
+          <tr class="bg-slate-100 border-b border-slate-300 text-slate-700">
+            <th class="p-2">Variable</th>
+            <th class="p-2 text-center">Local</th>
+            <th class="p-2 text-center">Vercel</th>
+            <th class="p-2 text-center">Render</th>
+            <th class="p-2 text-center">Public?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-200">
+            <td class="p-2 font-mono text-slate-800">Supabase URL</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-slate-400">Maybe</td>
+            <td class="p-2 text-center">Depends</td>
+          </tr>
+          <tr class="border-b border-slate-200 bg-slate-50">
+            <td class="p-2 font-mono text-slate-800">Anon Key</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-slate-400">Maybe</td>
+            <td class="p-2 text-center text-emerald-600 font-bold">Yes (RLS)</td>
+          </tr>
+          <tr class="border-b border-slate-200">
+            <td class="p-2 font-mono text-slate-800">Service Key</td>
+            <td class="p-2 text-center text-slate-400">Only if server</td>
+            <td class="p-2 text-center text-red-600">Server Only</td>
+            <td class="p-2 text-center text-red-600">Server Only</td>
+            <td class="p-2 text-center text-red-600 font-bold">NO</td>
+          </tr>
+          <tr class="border-b border-slate-200 bg-slate-50">
+            <td class="p-2 font-mono text-slate-800">API_URL</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center">—</td>
+            <td class="p-2 text-center text-emerald-600 font-bold">Yes</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 26</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 27: DIAGNOSTIC MISSION -->
+  <div class="page" id="page-27">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">30. The “Environment Variables Are Broken” Mission</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        Theory is useless until you fix a broken system. This is a practical challenge. Your current local repository has a broken configuration. The website loads, but the form fails. Data never reaches Supabase.
+      </p>
+
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>YOUR MISSION OBJECTIVE</span>
+          <span class="text-orange-600 font-bold">ACTIVE TRACING</span>
+        </div>
+        <p class="text-xs text-slate-600 mb-4 px-4 pt-2">
+          Use Claude Code or Antigravity to trace the data flow from the browser all the way to Supabase. You must find the missing link.
+        </p>
+        <div class="task-checkbox-list">
+          <div>□ 1. Inspect the form submit function (Browser).</div>
+          <div>□ 2. Check which environment variable it uses for the API.</div>
+          <div>□ 3. Check the API route/backend handler.</div>
+          <div>□ 4. Verify the database credentials being injected into the backend.</div>
+          <div>□ 5. Fix the `.env.local` to successfully push data to Supabase.</div>
+        </div>
+      </div>
+
+      <div class="editorial-callout bg-indigo-50 border-indigo-200 mt-6">
+        <h4 class="text-indigo-900 font-bold text-xs mb-1">PRO-TIP: DON'T GUESS. VERIFY.</h4>
+        <p class="text-indigo-800 text-xxs">
+          When something breaks, AI will often hallucinate complex code rewrites. Tell the AI: "Stop. Do not write code. Tell me exactly what the value of NEXT_PUBLIC_API_URL is resolving to right now."
+        </p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 27</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 28: DOMAINS & DNS -->
+  <div class="page" id="page-28">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">31. Domains & DNS From Zero</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        <code>my-app.vercel.app</code> is nice, but you want <code>takeinstudio.com</code>. DNS (Domain Name System) is simply the internet's phonebook. It tells traffic where your code lives.
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded border border-slate-200 mb-6 font-mono text-xs text-center">
+        <div class="text-slate-800 mb-1">DOMAIN (GoDaddy/Namecheap)</div>
+        <div class="text-orange-500 mb-1">↓</div>
+        <div class="text-slate-600 mb-1">DNS RECORDS (A Record / CNAME)</div>
+        <div class="text-orange-500 mb-1">↓</div>
+        <div class="text-slate-800">HOST (Vercel)</div>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2">32. GoDaddy → Vercel Workflow</h3>
+      <p class="text-sm text-slate-700 mb-4">
+        Do not try to memorize Vercel's IP address. Always follow Vercel's UI.
+      </p>
+
+      <div class="bg-slate-900 text-white p-5 rounded-md mb-6 shadow-lg">
+        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-300">
+          <li><strong>In Vercel:</strong> Settings → Domains → Add `yourdomain.com`.</li>
+          <li>Vercel will give you an <code>A Record</code> (IP address) and a <code>CNAME</code>.</li>
+          <li><strong>In GoDaddy:</strong> DNS Settings → Add the exact records Vercel showed you.</li>
+          <li><strong>Wait:</strong> DNS propagation can take 5 minutes to 24 hours.</li>
+          <li><strong>In Vercel:</strong> Wait for the SSL certificate to generate automatically.</li>
+        </ol>
+      </div>
+      <div class="prompt-matrix-card mt-4">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.22</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">DNS CONFIGURATION ASSISTANT</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I am connecting a custom domain to Vercel. 
+Vercel is asking me to add these exact records:
+[PASTE VERCEL DNS REQUIREMENTS HERE]
+My domain registrar is [e.g. GoDaddy/Namecheap]. Can you tell me exactly what to click and type in my registrar's DNS settings panel to configure this? Do not hardcode values; interpret the ones I pasted.</div>
+      </div>
+      
+      <div class="prompt-matrix-card mt-2">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-1 pb-1 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.23</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">DOMAIN NOT VERIFYING DEBUG</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+It has been 2 hours since I updated my DNS records, but Vercel still says "Invalid Configuration".
+I entered the following records at my registrar:
+[PASTE RECORDS YOU ENTERED]
+Can you verify if I made a mistake with the CNAME apex/www rules, or if it is just normal DNS propagation delay?</div>
+      </div>
+
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 28</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 29: PRODUCTION DEBUGGING -->
+  <div class="page" id="page-29">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · PART 12: DEPLOYMENT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mb-2">33. Backend Subdomain Architecture</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">
+        For advanced projects, you split traffic using subdomains. <br>
+        <code>www.takeinstudio.com</code> points to Vercel (Frontend). <br>
+        <code>api.takeinstudio.com</code> points to Render (Backend).
+      </p>
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2">34. Production Debugging With AI</h3>
+      <p class="text-sm text-slate-700 mb-2">The most important prompt format for deployment failures:</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 1.18</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">THE PRODUCTION TRIAGE (DIAGNOSTIC PROMPT)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Following Volume I Workflow</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Standard Builder</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Verify Implementation</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">My application is deployed to production, but I am facing an issue.
+[Frontend is on Vercel, Backend is on Render, Database is Supabase].
+
+Symptom: [e.g., 500 server error when logging in / form doesn't submit / CORS error in console].
+
+Here are the deployment logs / console errors:
+[PASTE LOGS]
+
+1. Where exactly in the chain (Browser -> Frontend -> Backend -> DB) is the break occurring?
+2. What specific context or files do you need me to show you to diagnose this further?
+3. What environment variables should I double-check in Vercel/Render?
+
+Do not guess the solution. Walk me through the diagnostic process.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 29</span>
+    </div>
+  </div>
+<!-- PAGE NEW: VOL 1 FINAL MISSION -->
+  <div class="page" id="page-new-mission">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · FINAL CAPSTONE MISSION</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">34b. Volume I Final Mission: The End-to-End Build</h2>
+      <p class="text-slate-700 text-xs mb-2">
+        You must now execute everything you've learned. Do not use one giant prompt. Follow this staged workflow.
+      </p>
+      
+      <div class="task-card mb-2">
+        <div class="task-card-header">
+          <span>STAGE 1: GENERATION</span>
+          <span class="text-orange-600 font-bold">LOVABLE / BOLT</span>
+        </div>
+        <p class="text-slate-700 text-xxs mt-1">Research a local business. Use the Golden Website Prompt to generate their landing page in an AI GUI builder. Iterate once to fix obvious UI flaws.</p>
+      </div>
+
+      <div class="task-card mb-2">
+        <div class="task-card-header">
+          <span>STAGE 2: HANDOFF & GITHUB</span>
+          <span class="text-orange-600 font-bold">GITHUB DESKTOP</span>
+        </div>
+        <p class="text-slate-700 text-xxs mt-1">Connect the repository to GitHub. Clone it locally using GitHub Desktop. Open it in Antigravity and run the Repository Inspection Handoff prompt.</p>
+      </div>
+
+      <div class="task-card mb-2">
+        <div class="task-card-header">
+          <span>STAGE 3: LOCAL ITERATION</span>
+          <span class="text-orange-600 font-bold">ANTIGRAVITY</span>
+        </div>
+        <p class="text-slate-700 text-xxs mt-1">Add a complex 21st.dev interactive component. Run `npm run dev` and test it in your browser. Inspect the Console tab for any warnings.</p>
+      </div>
+
+      <div class="task-card mb-2">
+        <div class="task-card-header">
+          <span>STAGE 4: DEPLOYMENT</span>
+          <span class="text-orange-600 font-bold">VERCEL + DNS</span>
+        </div>
+        <p class="text-slate-700 text-xxs mt-1">Run the Vercel Pre-Deployment prompt. Push to GitHub to trigger Vercel deployment. Add a custom domain (or subdomain) and follow the DNS Configuration steps.</p>
+      </div>
+      
+      <div class="task-card">
+        <div class="task-card-header">
+          <span>STAGE 5: FINAL QA</span>
+          <span class="text-orange-600 font-bold">MOBILE BROWSER</span>
+        </div>
+        <p class="text-slate-700 text-xxs mt-1">Open your live custom domain on your actual phone. Verify touch targets, margins, and the Vercel logs.</p>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE ADD-4</span>
+    </div>
+  </div>
+
+
+  <!-- PAGE 30: VOLUME 1 ASSESSMENT CHECKPOINT & GRADUATION -->
+  <div class="page" id="page-30">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL I · CHECKPOINT & OFFICIAL GRADUATION</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">35. Volume 1 Assessment Checkpoint & Graduation</h2>
+
+      <div class="checkpoint-card">
+        <div class="checkpoint-header">
+          <span>CONCEPTUAL MASTERY CHECKPOINT — ANSWER WITHOUT LOOKING BACK</span>
+        </div>
+        
+        <div class="checkpoint-question">1. Explain the fundamental difference between Claude Code CLI and standard ChatGPT chat UI:</div>
+        <div class="checkpoint-answer-line"></div>
+        <div class="checkpoint-answer-line"></div>
+
+        <div class="checkpoint-question">2. Why should heavy animations never exceed 0.6 seconds in duration on commercial web pages?</div>
+        <div class="checkpoint-answer-line"></div>
+        <div class="checkpoint-answer-line"></div>
+
+        <div class="checkpoint-question">3. State the 5 core pillars of the Golden Website Prompt Framework:</div>
+        <div class="checkpoint-answer-line"></div>
+        <div class="checkpoint-answer-line"></div>
+
+        <div class="checkpoint-question">4. What is the operational difference between Gemini 3.5 Flash and Claude Sonnet 4.6 Thinking?</div>
+        <div class="checkpoint-answer-line"></div>
+      </div>
+
+      <div class="editorial-callout bg-orange-500/10 border-orange-500 mt-2 text-center py-4">
+        <span class="text-orange-600 font-extrabold text-sm uppercase tracking-wider block">🎓 OFFICIAL VOLUME 1 GRADUATION CERTIFICATE</span>
+        <h3 class="text-slate-900 font-extrabold text-lg mt-1">AI-Native Developer Foundations Mastered</h3>
+        <p class="text-slate-600 text-xs max-w-md mx-auto mt-1">
+          You have officially completed Volume 1 of The AI Web Developer's Playbook! Proceed to <strong>Volume 2: UI UX Pro Max & Animations Mastery</strong> to master full-stack Supabase security and advanced subagents!
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume I</span>
+      <span class="page-number-pill">PAGE 30</span>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

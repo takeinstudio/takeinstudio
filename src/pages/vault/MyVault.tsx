@@ -126,10 +126,11 @@ export default function MyVault() {
 
                   {isActive ? (
                     <Link
-                      to={`/vault/${product.slug}/access`}
-                      className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-sm transition-all flex items-center justify-center"
+                      to={`/vault/view/${product.slug}`}
+                      className="w-full bg-[#FF6B00] text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-orange-500 shadow-sm transition-all flex items-center justify-center gap-2"
                     >
-                      CONTINUE
+                      <span>OPEN COURSE</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </Link>
                   ) : isPending ? (
                     <div className="w-full bg-gray-100 text-gray-500 py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase text-center border border-gray-200">

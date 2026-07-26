@@ -58,6 +58,7 @@ import ExploreVault from "@/pages/vault/ExploreVault";
 import SupportVault from "@/pages/vault/SupportVault";
 import AccountVault from "@/pages/vault/AccountVault";
 import UpdatePassword from "@/pages/vault/UpdatePassword";
+import ProductViewer from "@/pages/vault/ProductViewer";
 import VaultProtectedRoute from "@/components/vault/VaultProtectedRoute";
 import VaultDashboardLayout from "@/components/vault/VaultDashboardLayout";
 
@@ -144,6 +145,7 @@ const App = () => (
               
               <Route path="/vault/aiwebdev/access" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
               <Route path="/vault/aiwebdev/access/:volumeId" element={<VaultProtectedRoute><AIWebDevAccess /></VaultProtectedRoute>} />
+              <Route path="/vault/view/:productId" element={<VaultProtectedRoute><ProductViewer /></VaultProtectedRoute>} />
 
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<AdminDashboard />} />

@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Web Developer's Playbook — Volume 2: Build Real Full-Stack Apps With AI</title>
+  <meta name="description" content="Volume 2: Build Real Full-Stack Apps With AI.">
+  <meta name="author" content="TakeIN Studio">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html, body { margin: 0; padding: 0; background: #FFFFFF; color: #0F172A; font-family: 'Inter', system-ui, sans-serif; font-size: 9.5pt; line-height: 1.48; -webkit-font-smoothing: antialiased; }
+    .page { width: 210mm; height: 297mm; padding: 13mm 16mm 12mm 16mm; margin: 0 auto; position: relative; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; page-break-after: always; break-after: page; }
+    @media screen { body { background: #0F172A; padding: 25px 0; } .page { box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); border-radius: 4px; margin-bottom: 30px; } }
+    @media print { .no-print { display: none !important; } .page { border: none !important; box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; } }
+    .page-frame-left { position: absolute; left: 6mm; top: 10mm; bottom: 10mm; width: 1.5px; background: #FF6B00; opacity: 0.85; z-index: 10; }
+    .page-frame-right { position: absolute; right: 6mm; top: 10mm; bottom: 10mm; width: 1.5px; background: #FF6B00; opacity: 0.85; z-index: 10; }
+    .page-watermark { position: absolute; right: 12mm; bottom: 22mm; width: 75mm; opacity: 0.035; pointer-events: none; z-index: 0; }
+    .page-header { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 6px; margin-bottom: 10px; z-index: 2; }
+    .page-header-left { display: flex; align-items: center; gap: 6px; }
+    .page-header-left img { height: 14px; }
+    .page-header-brand { font-size: 8.5pt; font-weight: 800; color: #0F172A; letter-spacing: -0.01em; }
+    .page-header-title { font-size: 7.5pt; font-weight: 700; color: #64748B; letter-spacing: 0.06em; text-transform: uppercase; }
+    .page-content { flex: 1 1 auto; display: flex; flex-direction: column; gap: 9px; overflow: hidden; z-index: 2; position: relative; }
+    .page-footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: auto; font-size: 7.5pt; color: #64748B; z-index: 2; }
+    .page-number-pill { background: #F1F5F9; border: 1px solid #CBD5E1; color: #0F172A; font-weight: 700; padding: 1px 8px; border-radius: 3px; font-size: 7.5pt; }
+    h1.doc-title { font-size: 24pt; font-weight: 800; color: #0F172A; line-height: 1.15; letter-spacing: -0.02em; }
+    h2.section-title { font-size: 12.5pt; font-weight: 800; color: #0F172A; border-left: 3.5px solid #FF6B00; padding-left: 8px; margin: 0 0 4px 0; line-height: 1.25; letter-spacing: -0.01em; }
+    .mistake-card { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 5px; padding: 8px 10px; position: relative; }
+    
+    /* THE PREMIUM PROMPT MATRIX */
+    .prompt-matrix-card { border: 1px solid #334155; border-radius: 6px; overflow: hidden; margin-bottom: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .prompt-matrix-header { background: #0F172A; border-bottom: 1px solid #334155; padding: 10px 12px; }
+    .prompt-matrix-body { background: #020617; padding: 12px; font-family: 'Fira Code', monospace; font-size: 7pt; line-height: 1.5; color: #E2E8F0; white-space: pre-wrap; }
+    .prompt-meta-item { display: flex; flex-direction: column; }
+    .prompt-meta-label { color: #64748B; font-size: 5pt; font-weight: 700; margin-bottom: 2px; }
+    .prompt-meta-value { color: #CBD5E1; font-size: 6.5pt; font-family: 'Fira Code', monospace; }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: Website to Web App -->
+  <div class="page" id="page-1">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · WEBSITE TO WEB APP</span>
+    </div>
+
+    <div class="page-content">
+      
+      <div class="text-center mt-12 mb-8">
+        <span class="text-orange-500 font-bold tracking-widest text-sm uppercase">Volume II</span>
+        <h1 class="doc-title mt-2 mb-4">Build Real Full-Stack Apps With AI</h1>
+        <p class="text-slate-500 text-sm max-w-lg mx-auto">From AI-Assisted Website Builder to AI Application Developer.</p>
+      </div>
+
+      <h2 class="section-title">PART 1: From Website to Web Application</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">01. What Changes After Volume I?</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Volume I built websites. Now, we build software. The core difference is the <strong>User</strong> and their <strong>Data</strong>.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.01</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">The Transition Diagnostic</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Understanding what an existing website needs.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @frontend-files</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 2.02 Requirements</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Inspect my existing project.
+
+Do not modify anything.
+
+Explain which parts are currently:
+1. static frontend
+2. interactive frontend
+3. server-side
+4. API-related
+5. database-related
+6. authentication-related
+
+Then tell me what would need to be added to turn this website into a real web application. Explain it as if I have completed AIWebDev Volume I.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 1</span>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Architecture -->
+  <div class="page" id="page-2">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · ARCHITECTURE</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 2 & 3: Requirements & Architecture</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">02 & 03. Antigravity as Technical Architect</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Never type "Build me a SaaS." Teach your AI to <strong>Plan → Build</strong>. Use this prompt to design your system architecture before writing a single line of code.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.02</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">System Architecture Plan</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Starting a new full-stack project feature.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @requirements</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">Database credentials</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Review & Approve Plan</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as the technical architect for this project.
+
+DO NOT write implementation code yet.
+
+PROJECT: [Insert project idea]
+USERS: [List user types]
+CORE FEATURES: [List main features]
+
+Before implementation:
+1. Inspect the existing repository.
+2. Identify the current framework and dependencies.
+3. Propose the simplest production-appropriate architecture.
+4. Identify frontend responsibilities vs server responsibilities.
+5. Design the database entities and relationships.
+6. Define authentication requirements & authorization boundaries.
+7. Break implementation into phases and identify major security risks.
+
+Prefer the simplest architecture. Explain the plan in beginner-friendly English.
+Wait for my approval before implementation.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 2</span>
+    </div>
+  </div>
+
+  <!-- PAGE 3: Schema Design -->
+  <!-- PAGE NEW: NEXTJS ROUTING -->
+  <div class="page" id="page-new-routing">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · NEXT.JS ROUTING WORKFLOW</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">PART 3.5: App Router Mapping</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">04b. Next.js Routing Workflow</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Before building pages, map out the Next.js App Router structure. Understand the difference between public pages, authenticated dashboards, and API routes.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.02b</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">App Router Mapper</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+Based on our approved architecture, please map out the entire Next.js App Router structure (`app/` directory).
+
+For each route, specify:
+1. The exact folder path (e.g. `app/(dashboard)/layout.tsx`)
+2. Is it a Client Component (`use client`) or Server Component?
+3. Is it public or protected by authentication?
+4. What data does it fetch?
+
+Do not create the files yet. Provide the map for my approval.</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE ADD-1</span>
+    </div>
+  </div>
+
+
+  <div class="page" id="page-3">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · SCHEMA DESIGN</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 4 & 5: Databases Without Fear</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">06. Let AI Design the Schema — But Review It</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Databases are hard to change later. Never let AI dump SQL into your project without explaining the relationships and security models first.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.03</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Database Schema Designer</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Generating SQL for a new feature.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@approved-architecture @supabase-config</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Run SQL in Supabase Dashboard</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">We need a Supabase database for this application.
+
+Do not create anything yet.
+
+Based on the approved requirements, propose the database schema.
+
+For every table show:
+- purpose
+- columns & data types
+- primary key & foreign keys
+- required fields & default values
+- relationships & ownership model
+- required indexes
+- RLS requirements
+
+Also identify data that should NOT be stored.
+Explain the schema before generating SQL.
+Wait for my approval.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 3</span>
+    </div>
+  </div>
+
+  <!-- PAGE 4: Auth Planning -->
+  <div class="page" id="page-4">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · AUTH PLANNING</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 6: Authentication</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">07. Building Authentication (Step 1 & 2)</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Authentication handles "Who are you?" Don't use a magic prompt. Use the engineering loop: Inspect, Plan, Implement, Test.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.04</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Auth Flow — Inspect</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Adding auth to an existing codebase.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Fast model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @routes</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 2.05 Plan</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Inspect the existing authentication architecture of this project.
+
+Do not modify anything.
+
+Determine:
+1. whether authentication already exists
+2. which provider is being used
+3. how sessions are managed
+4. where login/signup UI exists
+5. how protected routes currently work
+
+Explain the current authentication flow. Identify anything missing or insecure.
+Do not implement yet.</div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.05</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Auth Flow — Plan</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Designing the auth architecture.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@inspection-results</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 2.06 Implement</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Design the authentication implementation for this application.
+
+Requirements:
+- Signup, Login, Logout using Supabase
+- Persistent session & Protected dashboard
+- Useful error messages and loading states
+
+Show:
+FILES TO CREATE
+FILES TO MODIFY
+ENVIRONMENT VARIABLES
+SECURITY CONSIDERATIONS
+TEST PLAN
+
+Wait for approval.</div>
+      </div>
+      <h3 class="text-md font-bold text-slate-800 mt-4 mb-2">Authentication Strategies</h3>
+      <p class="text-xs text-slate-700 mb-2"><strong>Magic Links:</strong> Highly secure, no passwords to lose, but users must open their email. Best for B2B.<br><strong>OAuth (Google/GitHub):</strong> 1-click friction, but requires developer console setup. Best for B2C.<br><strong>Email/Password:</strong> Traditional, high friction, requires password reset flows.</p>
+
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 4</span>
+    </div>
+  </div>
+
+  <!-- PAGE 5: Auth Implementation -->
+  <div class="page" id="page-5">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · AUTH IMPLEMENTATION</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">07. Building Authentication (Step 3 & 4)</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Once the plan is approved, execute it. If it fails, use the debug prompt.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.06</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Auth Flow — Implement & Test</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Writing the actual auth code.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong builder model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@approved-auth-plan @ui-components</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">.env.local with real secrets</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Manual Browser Test</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">The authentication implementation plan is approved. Implement it now.
+
+Requirements:
+- Preserve the existing UI. Reuse existing components where possible.
+- Never hard-code credentials. Keep private credentials server-side.
+- Add appropriate error handling (e.g. invalid password, email exists).
+- Do not claim the implementation works until it has been tested.
+
+After implementation:
+1. List every file you changed and why.
+2. Tell me exactly which environment variables I must configure locally.
+3. Tell me exactly how to test the feature in my browser.</div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.07</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Auth Flow — Debug</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Fixing a broken login/signup.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@auth-files @browser-console-errors</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Re-test in browser</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Authentication is not working correctly.
+
+Do NOT rewrite the authentication system.
+Trace the existing flow.
+
+Inspect:
+1. browser console & network requests
+2. authentication response
+3. session creation & cookies
+4. middleware/route protection
+
+Use the actual error evidence available in this project.
+Identify the root cause before modifying code. Apply the smallest appropriate fix.
+After fixing it, explain how I can verify the resolution.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 5</span>
+    </div>
+  </div>
+
+  <!-- PAGE 6: Row Level Security -->
+  <div class="page" id="page-6">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · ROW LEVEL SECURITY</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 9: Row Level Security</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">12. Build RLS With Antigravity</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Hiding Rahul's appointment in the frontend is not security. You must lock the database itself. RLS is how you do it.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.08</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">RLS Architecture Audit</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Securing tables before launch.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong independent reviewer</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@database-schema @supabase/policies</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 2.09 Apply Policies</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Perform a Supabase authorization review.
+
+Goal: A normal authenticated user must only be able to access records they are authorized to access.
+
+Do not modify the database yet.
+
+For every relevant table:
+1. identify who owns each row
+2. identify who may SELECT, INSERT, UPDATE, and DELETE it
+3. identify admin/business-owner exceptions
+4. identify required RLS policies
+
+Look specifically for: missing RLS, overly broad policies, ownership bypasses, and service-role misuse.
+
+Explain the proposed policies first. Generate the migration only after approval.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 6</span>
+    </div>
+  </div>
+
+  <!-- PAGE 7: File Uploads -->
+  <div class="page" id="page-7">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · FILE UPLOADS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 11: File Uploads</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">14. Supabase Storage</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Handling files correctly means knowing the difference between a Public Bucket (logos) and a Private Bucket (invoices).</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.09</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Storage Integration Plan</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Adding profile pictures or document uploads.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong builder model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @schema @file-upload-ui</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Approve Storage Plan</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">We need to implement file uploads using Supabase Storage.
+
+Do not write code yet. First, define the storage architecture:
+1. Do we need a public or private bucket?
+2. What are the file size and type restrictions?
+3. How will the application handle the upload securely?
+4. How is the file URL linked to the database record?
+5. What Storage RLS policies are required?
+
+Provide the implementation plan, the required bucket configuration, and the required SQL for policies. Wait for approval.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 7</span>
+    </div>
+  </div>
+
+  <!-- PAGE 8: API Integration -->
+  <div class="page" id="page-8">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · API INTEGRATION</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 13 & 14: APIs & Documentation</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">17. Stop Letting AI Guess APIs</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">APIs change constantly. If you tell an AI to "integrate Mailchimp," it might hallucinate code from 2021. Give it the docs.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.10</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Documentation-Driven Integration</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Connecting external APIs safely.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @api-docs (or paste URL)</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">API Keys</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Approve Integration Plan</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">I want to integrate this service.
+
+Do not rely solely on memory. Use the documentation/context I provide as the source of truth.
+
+First determine:
+1. current authentication method (e.g. Bearer token)
+2. required package/API endpoints
+3. required environment variables (server vs client)
+4. request and response format
+5. errors we must handle
+
+Compare that against my existing project. Then propose the implementation plan.
+Do not modify code until the integration plan is clear.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 8</span>
+    </div>
+  </div>
+
+  <!-- PAGE 9: Payments -->
+  <div class="page" id="page-9">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · PAYMENTS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 19 & 20: Payments (Razorpay)</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">22. How Online Payments Actually Work</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Never trust a "payment-success" page as proof that somebody paid. Hackers can just type that URL into their browser. Payments require server-side verification.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.11</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Payment Flow Architecture</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Integrating Razorpay or Stripe.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @payment-docs @schema</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">Live Secret Keys</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Approve Payment Architecture</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">I need to integrate a payment provider (e.g. Razorpay).
+
+Do not implement yet. Design the secure payment architecture.
+
+Ensure the design covers:
+1. Server-created orders/intents (never client-side pricing).
+2. The checkout UI flow.
+3. Server-side verification (Webhooks or Server Actions).
+4. Database updates (granting access ONLY after server verification).
+5. Environment variables (Test vs Live, Public vs Secret).
+
+Identify where a malicious user might try to bypass payment, and explain how our architecture prevents it. Wait for approval.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 9</span>
+    </div>
+  </div>
+
+  <!-- PAGE 10: Webhooks -->
+  <div class="page" id="page-10">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · WEBHOOKS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 21: Webhooks</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">24. What Is a Webhook?</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Instead of your app asking "Did they pay yet?", the provider pings your server and says "Payment complete!" This ping is a Webhook.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.12</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Webhook Implementation</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Building server-side listeners for events.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong builder model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @payment-architecture</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Test with Provider CLI</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Implement the webhook endpoint based on our approved payment architecture.
+
+Requirements:
+1. The endpoint MUST verify the webhook signature/authenticity using the provider's secret key. Do not accept unsigned requests.
+2. Ensure the endpoint handles idempotency (don't grant access twice if the provider sends the webhook twice).
+3. Update the database securely based on the event payload.
+4. Add clear server logging for debugging.
+
+Provide instructions on how I can test this webhook locally using the provider's CLI or testing tools.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 10</span>
+    </div>
+  </div>
+
+  
+  <!-- PAGE 11: Digital Vault -->
+  <div class="page" id="page-11">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · DIGITAL VAULT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 22: Build a Real Access System</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">25. Digital Product Vault Mission</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">This is the capstone pattern: commerce, auth, and authorization combined into a single flow.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.13</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Digital Vault Architecture</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Planning a gated content system.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @payment-webhook @auth-logic</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Approve Vault Plan</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">I want to build a Digital Product Vault where users can only access specific resources after a verified payment.
+
+Do not write code yet. Design the architecture.
+
+Requirements:
+1. Product Page → Checkout → Verified Payment → Account Creation → Entitlement → Protected Resources.
+2. Define how the database will track which user bought which product (Entitlements table).
+3. Define the RLS policies required to ensure users cannot download resources they did not buy.
+4. Explain how the webhook from our payment provider updates this Entitlements table securely.
+
+Provide the schema changes and architectural flow for approval.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 11</span>
+    </div>
+  </div>
+
+  <!-- PAGE 12: Production Architectures -->
+  <div class="page" id="page-12">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · PRODUCTION ARCHITECTURES</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 23 & 25: Connect Everything</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">28. Vercel + Render + Supabase</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">A true full-stack production architecture looks like this:</p>
+      
+      <div class="bg-slate-900 text-white p-4 rounded text-center text-xs font-mono mb-6">
+        <div>USER → www.example.com</div>
+        <div class="text-orange-500 my-1">↓</div>
+        <div>VERCEL (Next.js App)</div>
+        <div class="text-orange-500 my-1">↓ HTTPS API call</div>
+        <div>api.example.com → RENDER (FastAPI API)</div>
+        <div class="text-orange-500 my-1">↓</div>
+        <div>SUPABASE (Database) & EXTERNAL APIs</div>
+      </div>
+
+      <h2 class="section-title">PART 26: Production Environment Matrix</h2>
+      <p class="text-xs text-slate-700 mb-2">Not every variable belongs everywhere. Map it out:</p>
+      
+      <table class="w-full text-left border-collapse text-[10px] mb-4">
+        <thead>
+          <tr class="bg-slate-100 border-b border-slate-300 text-slate-700">
+            <th class="p-2">Variable</th>
+            <th class="p-2 text-center">Local</th>
+            <th class="p-2 text-center">Vercel</th>
+            <th class="p-2 text-center">Render</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-200">
+            <td class="p-2 font-mono text-slate-800">Supabase URL & Client Key</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-slate-400">Maybe</td>
+          </tr>
+          <tr class="border-b border-slate-200 bg-slate-50">
+            <td class="p-2 font-mono text-slate-800">Service-role / Payment Key</td>
+            <td class="p-2 text-center text-slate-400">If server</td>
+            <td class="p-2 text-center text-red-600">Server Only</td>
+            <td class="p-2 text-center text-red-600">Server Only</td>
+          </tr>
+          <tr class="border-b border-slate-200">
+            <td class="p-2 font-mono text-slate-800">Backend API_URL</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center text-emerald-600">✓</td>
+            <td class="p-2 text-center">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 12</span>
+    </div>
+  </div>
+
+  <!-- PAGE 13: Debugging -->
+  <div class="page" id="page-13">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · DEBUGGING</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 28: Full-Stack Debugging</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">31. Trace the Entire Request</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">When a button fails in production, do not say "fix it". Trace the error to give AI the right context.</p>
+      <div class="bg-slate-50 border border-slate-200 rounded p-4 mb-4 mt-2">
+        <h4 class="font-bold text-slate-800 text-xs uppercase mb-2 text-orange-600">The 4-Layer Debugging Method</h4>
+        <ul class="text-xxs text-slate-700 space-y-1">
+          <li><strong>1. Frontend (Browser Console):</strong> Did the React component crash before even sending data? Check F12 Console.</li>
+          <li><strong>2. Network (Browser Network Tab):</strong> Did the request fail? (e.g., CORS 403, Not Found 404). Check Payload & Response.</li>
+          <li><strong>3. Server (Vercel/Render Logs):</strong> Did the backend crash while processing? Check terminal or platform logs (Error 500).</li>
+          <li><strong>4. Database (Supabase Logs/RLS):</strong> Did the query get blocked by Row Level Security?</li>
+        </ul>
+      </div>
+
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.14</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Full-Stack Trace</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Diagnosing a complex production failure.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@frontend-route @backend-route @logs</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Implement recommended fix</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">My application is deployed to production, but I am facing an issue.
+
+Symptom: User clicks 'Book Appointment' and nothing happens.
+Here are the deployment logs / Browser Network tab errors:
+[PASTE LOGS HERE]
+
+Do not rewrite the code blindly. Trace the flow:
+1. Did the browser send the request correctly?
+2. Did Vercel route it to the backend?
+3. Did the backend receive the auth tokens?
+4. Did Supabase reject the insert due to RLS?
+
+Identify exactly where the chain breaks, and apply the smallest appropriate fix.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 13</span>
+    </div>
+  </div>
+
+  <!-- PAGE 14: Multi-Agent Workflows -->
+  <div class="page" id="page-14">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · MULTI-AGENT WORKFLOWS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 30 & 31: Multi-Agent Workflows</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">33. Stop Asking One Agent to Do Everything</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">A single AI model cannot plan architecture, write React, configure Postgres, and audit security all in one prompt. You must route the tasks.</p>
+
+      <div class="bg-slate-50 border border-slate-200 p-4 rounded mb-6 text-xs text-slate-700">
+        <ul class="space-y-3">
+          <li><strong>1. The Architect (Reasoning Model):</strong> "Design this feature and wait for approval."</li>
+          <li><strong>2. The Builder (Fast/Coding Model):</strong> "Implement the approved plan exactly."</li>
+          <li><strong>3. The Reviewer (Independent Model):</strong> "Audit the builder's code before I deploy."</li>
+          <li><strong>4. The Debugger (Reasoning Model):</strong> "Trace this stack trace and find the root cause."</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title">PART 32: Agent Rules</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">35. Persistent Project Instructions</h3>
+      <p class="text-sm text-slate-700">Give your AI environment rules like: <em>"Never expose secrets to the frontend. Reuse existing components. Never fabricate test success."</em></p>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 14</span>
+    </div>
+  </div>
+
+  <!-- PAGE 15: Security Audit -->
+  <div class="page" id="page-15">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · SECURITY AUDIT</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">PART 34 & 35: AI Security Review</h2>
+      <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">38. Exact Pre-Launch Security Prompt</h3>
+      
+      <p class="text-sm text-slate-700 mb-4">Never launch a full-stack app without a dedicated security sweep. Treat AI as a malicious auditor.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 2.15</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Pre-Launch Security Audit</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Final check before sending traffic to your app.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong independent reviewer</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project @supabase-schema</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Address CRITICAL findings</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as a strict cybersecurity auditor. Perform a pre-launch security review of this codebase.
+
+Do not modify anything yet.
+
+Look specifically for:
+- Secrets exposed in frontend code/variables.
+- Missing authorization checks on server routes.
+- RLS disabled or misconfigured in Supabase.
+- Trusting user IDs from the client instead of the session.
+- Unvalidated inputs or unrestricted uploads.
+
+Output your findings categorized by: CRITICAL, HIGH, MEDIUM, LOW.
+For each finding, provide: The finding → the exact file/evidence → the impact → the recommended fix. Wait for my instructions.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 15</span>
+    </div>
+  </div>
+
+  <!-- PAGE 16: Capstone Projects -->
+  <div class="page" id="page-16">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · CAPSTONE PROJECTS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <div class="editorial-callout bg-slate-900 border-slate-800 text-white p-6 rounded-md mb-6 shadow-lg mt-8">
+        <h3 class="font-bold text-lg mb-2 text-orange-500 uppercase">Volume II Capstone Projects</h3>
+        <p class="text-slate-300 text-sm">You now have the exact prompts and workflows to build real software. It is time to prove it. Choose one of the following architectures to build from scratch.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-xs">
+        <div class="border border-slate-200 rounded p-4">
+          <strong class="block text-slate-800 mb-2">Project 1: Clinic System</strong>
+          <ul class="list-disc pl-4 text-slate-600">
+            <li>Auth & RLS</li>
+            <li>Book & Cancel Appointments</li>
+            <li>Admin View</li>
+          </ul>
+        </div>
+        <div class="border border-slate-200 rounded p-4">
+          <strong class="block text-slate-800 mb-2">Project 2: Lead CRM</strong>
+          <ul class="list-disc pl-4 text-slate-600">
+            <li>Protected Dashboards</li>
+            <li>Status Pipelines</li>
+            <li>Search & Filter</li>
+          </ul>
+        </div>
+        <div class="border border-slate-200 rounded p-4">
+          <strong class="block text-slate-800 mb-2">Project 3: AI SaaS</strong>
+          <ul class="list-disc pl-4 text-slate-600">
+            <li>External LLM APIs</li>
+            <li>Usage Limits</li>
+            <li>Graceful AI Errors</li>
+          </ul>
+        </div>
+        <div class="border border-slate-200 rounded p-4 bg-orange-50 border-orange-200">
+          <strong class="block text-orange-800 mb-2">Project 4: Digital Vault</strong>
+          <ul class="list-disc pl-4 text-orange-700">
+            <li>Razorpay Webhooks</li>
+            <li>Server-side verification</li>
+            <li>Entitlement logic</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 16</span>
+    </div>
+  </div>
+
+  <!-- PAGE 17: Graduation -->
+  <div class="page" id="page-17">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL II · GRADUATION</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title mt-12 text-center text-2xl mb-8">47. Volume II Graduation</h2>
+      
+      <div class="bg-slate-50 border border-slate-200 rounded p-8 max-w-lg mx-auto text-center mb-8">
+        <h3 class="font-bold text-slate-800 text-lg mb-4">You are now an AI Application Developer.</h3>
+        
+        <ul class="text-left text-sm text-slate-600 space-y-2 mb-8 inline-block">
+          <li>✓ I can ask AI to design an architecture.</li>
+          <li>✓ I can build authentication.</li>
+          <li>✓ I understand Row Level Security.</li>
+          <li>✓ I can integrate payment webhooks securely.</li>
+          <li>✓ I can trace a bug from browser to database.</li>
+          <li>✓ I can use multiple agents intelligently.</li>
+          <li>✓ I can verify instead of assuming AI is correct.</li>
+        </ul>
+
+        <div class="border-t border-slate-200 pt-6">
+          <span class="text-orange-500 font-bold uppercase tracking-widest text-xs block mb-2">NEXT → VOLUME III</span>
+          <strong class="text-xl text-slate-900 block">Turn Your Skills Into a Business</strong>
+          <p class="text-xs text-slate-500 mt-2">Finding niches, factual audits, proposals, delivery, and retainers.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume II</span>
+      <span class="page-number-pill">PAGE 17</span>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Web Developer's Playbook — Volume 3: The Freelance Business</title>
+  <meta name="description" content="Volume 3: Turn Your AI Development Skills Into a Freelance Business.">
+  <meta name="author" content="TakeIN Studio">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html, body { margin: 0; padding: 0; background: #FFFFFF; color: #0F172A; font-family: 'Inter', system-ui, sans-serif; font-size: 9.5pt; line-height: 1.48; -webkit-font-smoothing: antialiased; }
+    .page { width: 210mm; height: 297mm; padding: 13mm 16mm 12mm 16mm; margin: 0 auto; position: relative; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; page-break-after: always; break-after: page; }
+    @media screen { body { background: #0F172A; padding: 25px 0; } .page { box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); border-radius: 4px; margin-bottom: 30px; } }
+    @media print { .no-print { display: none !important; } .page { border: none !important; box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; } }
+    .page-frame-left { position: absolute; left: 6mm; top: 10mm; bottom: 10mm; width: 1.5px; background: #FF6B00; opacity: 0.85; z-index: 10; }
+    .page-frame-right { position: absolute; right: 6mm; top: 10mm; bottom: 10mm; width: 1.5px; background: #FF6B00; opacity: 0.85; z-index: 10; }
+    .page-watermark { position: absolute; right: 12mm; bottom: 22mm; width: 75mm; opacity: 0.035; pointer-events: none; z-index: 0; }
+    .page-header { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 6px; margin-bottom: 10px; z-index: 2; }
+    .page-header-left { display: flex; align-items: center; gap: 6px; }
+    .page-header-left img { height: 14px; }
+    .page-header-brand { font-size: 8.5pt; font-weight: 800; color: #0F172A; letter-spacing: -0.01em; }
+    .page-header-title { font-size: 7.5pt; font-weight: 700; color: #64748B; letter-spacing: 0.06em; text-transform: uppercase; }
+    .page-content { flex: 1 1 auto; display: flex; flex-direction: column; gap: 9px; overflow: hidden; z-index: 2; position: relative; }
+    .page-footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #E2E8F0; padding-top: 6px; margin-top: auto; font-size: 7.5pt; color: #64748B; z-index: 2; }
+    .page-number-pill { background: #F1F5F9; border: 1px solid #CBD5E1; color: #0F172A; font-weight: 700; padding: 1px 8px; border-radius: 3px; font-size: 7.5pt; }
+    h1.doc-title { font-size: 24pt; font-weight: 800; color: #0F172A; line-height: 1.15; letter-spacing: -0.02em; }
+    h2.section-title { font-size: 12.5pt; font-weight: 800; color: #0F172A; border-left: 3.5px solid #FF6B00; padding-left: 8px; margin: 0 0 4px 0; line-height: 1.25; letter-spacing: -0.01em; }
+    
+    /* THE PREMIUM PROMPT MATRIX */
+    .prompt-matrix-card { border: 1px solid #334155; border-radius: 6px; overflow: hidden; margin-bottom: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .prompt-matrix-header { background: #0F172A; border-bottom: 1px solid #334155; padding: 10px 12px; }
+    .prompt-matrix-body { background: #020617; padding: 12px; font-family: 'Fira Code', monospace; font-size: 7pt; line-height: 1.5; color: #E2E8F0; white-space: pre-wrap; }
+    .prompt-meta-item { display: flex; flex-direction: column; }
+    .prompt-meta-label { color: #64748B; font-size: 5pt; font-weight: 700; margin-bottom: 2px; }
+    .prompt-meta-value { color: #CBD5E1; font-size: 6.5pt; font-family: 'Fira Code', monospace; }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: Prospecting & Audits -->
+  <!-- PAGE NEW: NICHE -->
+  <div class="page" id="page-new-niche">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · HIGH-TICKET AGENCY</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">00. The High-Ticket AI Agency</h2>
+      <p class="text-sm text-slate-700 mb-4">You are not selling "AI Web Development." Clients don't care about the tools you use; they care about business outcomes. Sell the result: "I build booking systems that never double-book," or "I build client portals that reduce customer support calls by 50%."</p>
+      
+      <div class="bg-slate-50 border border-slate-200 p-4 rounded mb-6 text-xs text-slate-700">
+        <strong class="text-orange-600 block mb-2">High-Ticket Niche Examples:</strong>
+        <ul class="space-y-2">
+          <li><strong>Real Estate:</strong> "I build custom CRM dashboards for brokers to track leads." (Value: $3k - $8k)</li>
+          <li><strong>Healthcare:</strong> "I build secure, HIPAA-compliant patient intake forms and portals." (Value: $5k - $12k)</li>
+          <li><strong>E-Commerce:</strong> "I build headless storefronts that load in under 1 second." (Value: $4k - $10k)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE ADD-1</span>
+    </div>
+  </div>
+
+
+  <div class="page" id="page-1">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · PROSPECTING & AUDITS</span>
+    </div>
+
+    <div class="page-content">
+      
+      <div class="text-center mt-12 mb-8">
+        <span class="text-orange-500 font-bold tracking-widest text-sm uppercase">Volume III</span>
+        <h1 class="doc-title mt-2 mb-4">The AI-Native Freelance Business</h1>
+        <p class="text-slate-500 text-sm max-w-lg mx-auto">Research → Qualify → Propose → Build → Deliver → Retain.</p>
+      </div>
+
+      <h2 class="section-title">01. Prospect Research & Audits</h2>
+      <p class="text-sm text-slate-700 mb-4">Do not let AI invent metrics. Feed it facts you manually gather (e.g., from Google Maps, broken links on their site, or poor mobile rendering) and let it generate a factual analysis.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.01</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">The Factual Website Audit</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Evaluating a prospect's current website.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">Screenshots, manual notes, competitor URLs</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">Fabricated SEO scores</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent or standard chat UI</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 3.02 Outreach Message</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as a website conversion and technical audit assistant. I am evaluating a potential freelance prospect.
+
+IMPORTANT: Do not invent statistics, PageSpeed scores, traffic numbers, conversion rates, rankings or business information. Only make factual claims supported by information I provide or evidence we actually inspect.
+
+PROSPECT: [Business Name]
+WEBSITE: [URL]
+BUSINESS TYPE: [Type]
+LOCATION: [Location]
+MY OBSERVATIONS: [Paste your manual observations here]
+
+Analyse the available evidence across:
+1. First impression & visual consistency
+2. Mobile usability
+3. Navigation & Calls-to-action
+4. Obvious technical problems
+
+Separate findings into: CONFIRMED OBSERVATIONS, POTENTIAL OPPORTUNITIES, THINGS THAT REQUIRE VERIFICATION.
+Identify the 3 strongest legitimate reasons I could contact this business.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE 1</span>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Outreach -->
+  <div class="page" id="page-2">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · OUTREACH</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">02. AI-Assisted Outreach</h2>
+      <p class="text-sm text-slate-700 mb-4">Cold outreach fails because it sounds like AI. Force the model to sound human, direct, and focused strictly on the facts from your audit.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.02</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Cold Email / LinkedIn DM</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Generating the initial contact message.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Fast model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@audit-results</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">Marketing jargon, buzzwords</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent or standard chat UI</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Send message, set CRM reminder</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Draft a cold outreach message based on the Factual Audit results.
+
+Requirements:
+- Target: The business owner or manager.
+- Platform: [Email / LinkedIn / WhatsApp].
+- Tone: Direct, respectful, zero marketing jargon. Do NOT use words like "synergy," "skyrocket," or "unlock."
+- Structure:
+  1. Quick, personalized hook based on the audit.
+  2. Point out ONE specific, factual problem (e.g., broken mobile booking).
+  3. Offer a very low-friction next step (e.g., a 5-minute loom video, or a quick question).
+
+Keep it under 4 sentences. The goal is a reply, not a sale.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE 2</span>
+    </div>
+  </div>
+
+  <!-- PAGE 3: Discovery & Scopes -->
+  <div class="page" id="page-3">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · DISCOVERY & SCOPES</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">03. Discovery Calls & Scope</h2>
+      <p class="text-sm text-slate-700 mb-4">After a successful call, you have a messy page of notes. AI is incredible at turning messy human thoughts into professional project scopes.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.03</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Discovery Note Analysis</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Post-call processing.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">Rough call notes, prospect budget hints</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">Technical implementation details</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent or standard chat UI</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 3.04 Proposal Draft</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Act as a senior project manager. I just had a discovery call with a prospect.
+
+Here are my raw, unedited notes:
+[PASTE NOTES]
+
+Please analyse these notes and extract:
+1. The Core Business Goal (Why do they want this now?)
+2. Required Features (Must-haves vs Nice-to-haves)
+3. Pain points with their current solution.
+4. Missing Information (What questions do I still need to ask them?)
+5. Red Flags (Are there any scope-creep risks based on what they said?)
+
+Format this as a clean internal brief for me.</div>
+      </div>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.04</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">The Client Proposal</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Sending the official quote.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Strong reasoning model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@internal-brief</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent or standard chat UI</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Wait for client signature</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">Turn the internal brief into a professional client proposal.
+
+Include:
+- Executive Summary (Their goals).
+- Scope of Work (Deliverables: e.g., 5-page site, Supabase Auth, Admin Dashboard).
+- Exclusions (What is NOT included, very important).
+- Timeline estimates.
+- Investment (I will charge $XXXX for this).
+
+Keep the language professional but highly accessible. Do not use overly technical jargon. Explain features in terms of business value.</div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE 3</span>
+    </div>
+  </div>
+
+  <!-- PAGE 4: Delivery -->
+  <!-- PAGE NEW: PM -->
+  <div class="page" id="page-new-pm">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · PROJECT MANAGEMENT</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">03.5 AI Project Management</h2>
+      <p class="text-sm text-slate-700 mb-4">Once the client signs, scope creep is your worst enemy. Use AI to generate strict milestone trackers and client update emails that keep everyone aligned.</p>
+      
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.04b</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Weekly Client Update Email</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+Draft a weekly update email for my client.
+Project: [Project Name]
+What I did this week: [Bullet points of tasks completed]
+What I am doing next week: [Bullet points of upcoming tasks]
+Blockers: [Anything I need from the client]
+
+Keep it professional, concise, and reassuring. Do not use technical jargon. Emphasize that the project is on track.</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE ADD-2</span>
+    </div>
+  </div>
+
+
+  <div class="page" id="page-4">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · DELIVERY</span>
+    </div>
+
+    <div class="page-content">
+      
+      <h2 class="section-title">04. Delivery, Handover & Retainers</h2>
+      <p class="text-sm text-slate-700 mb-4">The project isn't over when the code is written. A professional handover is what turns a one-off client into a recurring retainer.</p>
+
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.05</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Pre-Delivery QA & Handoff</span>
+          </div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="prompt-meta-item"><span class="prompt-meta-label">USE WHEN</span><span class="prompt-meta-value text-emerald-400">Final polish before sending to client.</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RECOMMENDED ROLE</span><span class="prompt-meta-value">Fast model</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">CONTEXT TO ATTACH</span><span class="prompt-meta-value text-blue-400">@project-scope @final-repo</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">DO NOT ATTACH</span><span class="prompt-meta-value text-red-400">None</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">RUN INSIDE</span><span class="prompt-meta-value">Antigravity Agent or standard chat UI</span></div>
+            <div class="prompt-meta-item"><span class="prompt-meta-label">NEXT</span><span class="prompt-meta-value">Prompt 3.06 Upsell Maintenance</span></div>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">I am about to hand over the completed web application to the client.
+
+First, cross-reference the original Scope of Work with the current codebase. Are there any promised features missing?
+
+Second, draft a 'Handover Email' for the client.
+It should include:
+- A link to the live production site.
+- Instructions on how to log in to the admin dashboard.
+- A request for them to review the site by [Date].
+- A polite note that any requested changes beyond the original scope will be quoted separately.</div>
+      </div>
+      <div class="prompt-matrix-card mt-4">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.05b</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Loom Training Script Generator</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+I am recording a 5-minute Loom video to train the client on their new dashboard.
+Please write a short script/outline for me to follow.
+
+Features to cover:
+1. How to log in securely.
+2. How to view new leads.
+3. How to update the content.
+
+Structure the script to be encouraging and clear. Remind them at the end that they can reach out for a retainer if they need ongoing help.</div>
+      </div>
+
+
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE 4</span>
+    </div>
+  </div>
+
+  <!-- PAGE NEW: RETAINERS -->
+  <div class="page" id="page-new-retainers">
+    <div class="page-frame-left"></div>
+    <div class="page-frame-right"></div>
+    <img src="./logo/logo_no_text.png" class="page-watermark" alt="Watermark">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <img src="./logo/logo_text.png" alt="TakeIN Logo">
+        <span class="page-header-brand">TakeIN Studio</span>
+      </div>
+      <span class="page-header-title">VOL III · RETAINERS</span>
+    </div>
+
+    <div class="page-content">
+      <h2 class="section-title">05. Selling the Retainer</h2>
+      <p class="text-sm text-slate-700 mb-4">Web applications require maintenance. Uptime monitoring, dependency updates, and minor feature tweaks. Offer this as a monthly recurring revenue (MRR) package.</p>
+      
+      <div class="prompt-matrix-card">
+        <div class="prompt-matrix-header">
+          <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-700/50">
+            <span class="text-orange-500 font-mono text-[9px] font-bold tracking-widest">AIWEBDEV PROMPT 3.06</span>
+            <span class="text-slate-200 text-[9px] font-mono font-bold uppercase">Retainer Upsell Pitch</span>
+          </div>
+        </div>
+        <div class="prompt-matrix-body">COPY THIS INTO ANTIGRAVITY:
+Draft an email pitching a monthly maintenance retainer to a client whose project I just completed.
+
+The retainer includes:
+- 24/7 Uptime monitoring (via Vercel/Render)
+- Monthly security dependency updates
+- Up to 2 hours of minor UI tweaks per month
+- Priority email support
+
+Frame this as "insurance for their new investment" rather than a technical maintenance plan. Offer it at [Price]/month.</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2026 TakeIN Studio. All rights reserved.</span>
+      <span>AIWebDev Handbook · Volume III</span>
+      <span class="page-number-pill">PAGE ADD-3</span>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

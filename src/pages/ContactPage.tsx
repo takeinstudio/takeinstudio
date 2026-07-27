@@ -317,7 +317,7 @@ ${form.message}`;
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Email</p>
-                    <a href="mailto:takeinstudio@gmail.com" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
+                    <a href="mailto:support@takeinstudio.com" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
                       support@takeinstudio.com
                     </a>
                   </div>
@@ -330,7 +330,9 @@ ${form.message}`;
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
-                    <p className="text-sm text-foreground font-medium mt-0.5 block">+91 9124442040</p>
+                    <a href="tel:+919124442040" className="text-sm text-foreground hover:text-primary transition-colors font-medium mt-0.5 block">
+                      +91 9124442040
+                    </a>
                   </div>
                 </div>
 

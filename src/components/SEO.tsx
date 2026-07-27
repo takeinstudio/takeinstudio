@@ -9,6 +9,7 @@ interface SEOProps {
   url?: string;
   image?: string;
   keywords?: string;
+  canonical?: string;
 }
 
 export default function SEO({ 
@@ -18,7 +19,8 @@ export default function SEO({
   type = "website",
   url = "https://takeinstudio.com",
   image = "https://takeinstudio.com/logo/og-image.jpg",
-  keywords = "web development, custom website design bhubaneswar, affordable web development agency, professional seo services bhubaneswar, UI/UX design, app development, digital agency, TakeIN Studio, TAKEINSTUDIO, takeinstudio, takein studio, Takein studio, Takeinstudio"
+  keywords = "web development, custom website design bhubaneswar, affordable web development agency, professional seo services bhubaneswar, UI/UX design, app development, digital agency, TakeIN Studio, TAKEINSTUDIO, takeinstudio, takein studio, Takein studio, Takeinstudio",
+  canonical
 }: SEOProps) {
   const location = useLocation();
   const currentUrl = url !== "https://takeinstudio.com" 
@@ -31,7 +33,7 @@ export default function SEO({
       <title>{title}</title>
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
-      <link rel="canonical" href={currentUrl} />
+      <link rel="canonical" href={canonical || currentUrl} />
       
       {/* Facebook tags */}
       <meta property="og:type" content={type} />

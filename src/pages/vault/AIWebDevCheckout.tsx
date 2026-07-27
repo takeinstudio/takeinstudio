@@ -180,10 +180,19 @@ export default function AIWebDevCheckout() {
                     />
                   </a>
 
-                  <p className="text-center text-[11px] text-gray-400 leading-relaxed">
+                  <p className="text-center text-[11px] text-gray-400 leading-relaxed mb-4">
                     You'll be redirected to Razorpay — TakeIN Studio's payment partner.
                     After payment, you'll return to a confirmation page.
                   </p>
+
+                  <div className="text-center">
+                    <Link 
+                      to="/vault/login" 
+                      className="text-xs font-bold text-[#FF6B00] hover:text-[#CC5500] hover:underline"
+                    >
+                      Already purchased? Open Dashboard
+                    </Link>
+                  </div>
 
                   {/* Divider */}
                   <div className="border-t border-gray-50 my-6" />

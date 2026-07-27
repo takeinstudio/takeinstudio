@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FileText, Download, Loader2, Plus, Trash2 } from "lucide-react";
-// @ts-ignore
+// @ts-expect-error missing types for html2pdf
 import html2pdf from "html2pdf.js";
 
 export default function DocumentsBuilder() {

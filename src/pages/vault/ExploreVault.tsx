@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 import SEO from "@/components/SEO";
 

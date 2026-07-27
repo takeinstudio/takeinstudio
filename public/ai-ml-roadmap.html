@@ -1,0 +1,3277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI / ML Engineer Career Execution Roadmap | TakeIN Studio</title>
+    <style>
+        :root {
+            --primary: #FF6B00;
+            --primary-light: #FFF8F3;
+            --primary-dark: #CC5500;
+            --bg-color: #FFFFFF;
+            --bg-alt: #F7F7F7;
+            --text-main: #111111;
+            --text-sec: #5F6368;
+            --border-color: #E5E7EB;
+            --success: #059669;
+            --danger: #DC2626;
+            --sidebar-width: 320px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 { color: var(--text-main); font-weight: 700; margin-bottom: 0.5em; line-height: 1.2; }
+        h1 { font-size: 3rem; letter-spacing: -0.03em; margin-bottom: 0.2em; }
+        h2 { font-size: 2rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-top: 2rem; }
+        h4 { font-size: 1.2rem; }
+
+        p { margin-bottom: 1.2rem; color: var(--text-sec); }
+        ul, ol { margin-bottom: 1.2rem; padding-left: 1.5rem; color: var(--text-sec); }
+        li { margin-bottom: 0.5rem; }
+        a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+
+        .takein-eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .takein-tag {
+            display: inline-block;
+            background: #FFE4D6;
+            color: #C04E00;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        .metadata-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            margin-bottom: 3rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-sec);
+        }
+        .metadata-bar span {
+            background: var(--bg-alt);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .container { display: flex; max-width: 1500px; margin: 0 auto; position: relative; }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .sidebar-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 1.5rem; font-weight: 800; }
+        
+        /* Search Box */
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            background: var(--bg-color);
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .sidebar-nav ul { list-style: none; padding-left: 0; }
+        .sidebar-nav > ul > li { margin-bottom: 1rem; }
+        .sidebar-nav a {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+            display: block;
+            padding: 0.4rem 0;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active { color: var(--primary); }
+        .sidebar-nav .nav-group-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        /* Main Content Area */
+        .content { flex: 1; padding: 4rem 5rem; max-width: 1000px; }
+
+        /* Path Divergence block */
+        .path-block {
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .path-card { background: #fff; padding: 1.5rem; border-radius: 6px; border: 1px solid var(--border-color); }
+        .path-card h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        
+        /* Visual Learning Map */
+        .visual-map {
+            background: var(--bg-alt);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            border: 1px solid var(--border-color);
+        }
+        .map-node {
+            display: inline-block;
+            background: #fff;
+            border: 2px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+        .map-node.core { border-color: var(--primary); color: var(--primary); }
+        .map-arrow {
+            color: var(--border-color);
+            font-size: 1.5rem;
+            margin: 0.25rem 0;
+            line-height: 1;
+        }
+
+        /* Module Header */
+        .module-header { margin: 5rem 0 2rem; }
+        .module-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Day Format Block */
+        .day-block {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            background: #fff;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .day-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;}
+        .day-number { font-size: 1.1rem; font-weight: 800; color: var(--text-sec); letter-spacing: 0.05em; }
+        .day-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .depth-badge {
+            margin-left: auto;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            background: var(--bg-alt);
+            color: var(--text-sec);
+            letter-spacing: 0.05em;
+        }
+        .depth-badge.essential { background: var(--primary-light); color: var(--primary); }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-label::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            margin-right: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .skip-box {
+            background: #FFF5F5;
+            border: 1px solid #FED7D7;
+            border-left: 4px solid var(--danger);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+        .skip-box .section-label::before { background: var(--danger); }
+        .skip-box p { color: #9B2C2C; margin-bottom: 0; }
+        .skip-list li { color: #9B2C2C; margin-bottom: 0.25rem; list-style-type: none; padding-left: 1.5rem; position: relative; }
+        .skip-list li::before { content: "✕"; position: absolute; left: 0; color: var(--danger); font-weight: bold; }
+
+        .prompt-box-container { position: relative; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .prompt-box {
+            background: var(--text-main);
+            color: #E5E7EB;
+            padding: 1.5rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); }
+        .copy-btn.copied { background: var(--success); border-color: var(--success); }
+
+        .checkpoint-list { list-style: none; padding-left: 0; }
+        .checkpoint-list li { position: relative; padding-left: 2rem; color: var(--text-main); font-weight: 500; margin-bottom: 0.75rem; }
+        .checkpoint-list li::before { content: "□"; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px;}
+
+        /* Milestones */
+        .milestone-block {
+            background: var(--text-main);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        .milestone-block h3 { color: white; margin-top: 0; font-size: 1.75rem; }
+        .milestone-block p { color: #9CA3AF; font-size: 1.1rem; }
+        .milestone-list { text-align: left; max-width: 400px; margin: 2rem auto 0; list-style: none; padding: 0;}
+        .milestone-list li { color: white; padding-left: 2rem; position: relative; margin-bottom: 1rem; font-size: 1.1rem;}
+        .milestone-list li::before { content: "✓"; position: absolute; left: 0; color: var(--primary); font-weight: bold;}
+
+        /* Project Cards */
+        .project-card { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem; }
+        .project-card h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .project-level { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-sec); font-weight: 800; margin-bottom: 1.5rem; display: block; }
+        .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
+        
+        /* Resource Cards */
+        .resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .resource-card { background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); }
+        .resource-card h4 { margin-bottom: 0.25rem; }
+        .resource-card .creator { font-size: 0.9rem; color: var(--text-sec); margin-bottom: 1rem; display: block; }
+        
+        /* Utility */
+        .hidden { display: none !important; }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .container { flex-direction: column; }
+            .sidebar { 
+                position: fixed; 
+                top: 0; left: -100%; 
+                height: 100vh; 
+                width: 300px; 
+                transition: left 0.3s ease; 
+                z-index: 2000; 
+                box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            }
+            .sidebar.open { left: 0; }
+            .mobile-menu-btn { display: block; }
+            .content { padding: 2rem 1.5rem; width: 100%; max-width: 100%; }
+            .req-grid, .resource-grid, .path-grid { grid-template-columns: 1fr; }
+            .day-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            .depth-badge { margin-left: 0; }
+            h1 { font-size: 2.2rem; }
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; color: black; font-size: 10pt; }
+            .sidebar, .mobile-menu-btn, .search-box, .copy-btn { display: none !important; }
+            .content { padding: 0; max-width: 100%; width: 100%; }
+            .day-block, .project-card, .milestone-block { 
+                break-inside: avoid; 
+                border: 1px solid #ccc; 
+                box-shadow: none; 
+                margin-bottom: 1.5rem; 
+                padding: 1.5rem;
+            }
+            .milestone-block { background: #f0f0f0; color: black; border: 2px solid black; }
+            .milestone-block h3, .milestone-block p, .milestone-list li { color: black; }
+            .prompt-box { background: #f5f5f5; color: black; border-left: 4px solid black; border-radius: 0; padding: 1rem; }
+            a { color: black; text-decoration: underline; }
+            h1, h2, h3 { color: black; }
+            .module-tag { border: 1px solid black; color: black; background: white; }
+            .takein-tag { border: 1px solid #333; background: white; color: black; }
+            .skip-box { border: 1px solid #333; border-left: 4px solid black; background: white; }
+            .skip-box p, .skip-list li { color: black; }
+            @page { margin: 1.5cm; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">TakeIN Studio</div>
+        
+        <input type="text" class="search-box" id="searchInput" placeholder="Search roadmap... (e.g. Docker, RAG)">
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <div class="nav-group-title">Overview</div>
+                <li><a href="#overview">Career Guidance</a></li>
+                <li><a href="#roadmap-visual">Visual Roadmap</a></li>
+                
+                <div class="nav-group-title">Modules</div>
+                <li><a href="#mod-01">00 - Orientation & Setup</a></li>
+<li><a href="#mod-02">01 - Developer Foundations</a></li>
+<li><a href="#mod-04">02 - Python for AI/ML</a></li>
+<li><a href="#mod-07">03 - NumPy / Pandas / Data Handling</a></li>
+<li><a href="#mod-09">04 - Mathematics for AI/ML</a></li>
+<li><a href="#mod-12">05 - Machine Learning Foundations</a></li>
+<li><a href="#mod-14">06 - Supervised Learning</a></li>
+<li><a href="#mod-17">07 - Unsupervised Learning</a></li>
+<li><a href="#mod-19">08 - Feature Engineering & Model Evaluation</a></li>
+<li><a href="#mod-21">09 - Practical ML Systems</a></li>
+<li><a href="#mod-23">10 - Deep Learning Foundations</a></li>
+<li><a href="#mod-25">11 - PyTorch</a></li>
+<li><a href="#mod-28">12 - Neural Network Architectures</a></li>
+<li><a href="#mod-30">13 - Transformers</a></li>
+<li><a href="#mod-32">14 - Modern NLP</a></li>
+<li><a href="#mod-34">15 - Generative AI / LLM Fundamentals</a></li>
+<li><a href="#mod-36">16 - LLM APIs & Structured Outputs</a></li>
+<li><a href="#mod-38">17 - Embeddings & Vector Search</a></li>
+<li><a href="#mod-40">18 - RAG Systems</a></li>
+<li><a href="#mod-42">19 - RAG Evaluation & Reranking</a></li>
+<li><a href="#mod-43">20 - AI Agents</a></li>
+<li><a href="#mod-45">21 - Backend for AI</a></li>
+<li><a href="#mod-48">22 - Production AI / MLOps</a></li>
+<li><a href="#mod-51">23 - AI System Design</a></li>
+<li><a href="#mod-52">24 - Portfolio Engineering</a></li>
+<li><a href="#mod-57">25 - AI/ML Interviews</a></li>
+<li><a href="#mod-59">26 - Resume / GitHub / Applications</a></li>
+
+                
+                <div class="nav-group-title">Execution</div>
+                <li><a href="#projects">Project System</a></li>
+                <li><a href="#resources">Learning Library</a></li>
+                <li><a href="#career">Career & Applications</a></li>
+                <li><a href="#specializations">Specializations</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn">Menu</button>
+
+    <!-- Main Content -->
+    <main class="content" id="mainContent">
+        
+        <header id="overview">
+            <span class="takein-eyebrow">TakeIN Studio Career Execution Series</span>
+            <h1>AI / ML Engineer<br>Career Execution Roadmap</h1>
+            <p>A definitive 60-day structured progression designed to take you from a complete beginner to a production-ready AI/ML Engineer in 2026. This roadmap aggressively cuts filler, enforces scope control, and focuses entirely on engineering execution.</p>
+            
+            <div class="metadata-bar">
+                <span>BEGINNER → AI/ML ENGINEERING</span>
+                <span>CORE ROADMAP</span>
+                <span>PROJECT-DRIVEN</span>
+                <span>2026 EDITION</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Choose Your Destination</h2>
+            <p>Before writing a single line of code, understand that "AI" is a broad umbrella. You do not need to learn everything equally deeply depending on your target role.</p>
+            
+            <div class="path-block">
+                <h3>The Roles</h3>
+                <div class="path-grid">
+                    <div class="path-card">
+                        <h4>AI Engineer <span class="takein-tag">Recommended</span></h4>
+                        <p>Builds applications <em>using</em> AI capabilities (LLM APIs, RAG, Agents). Highly software engineering heavy. Uses Next.js, FastAPI, Python.</p>
+                    </div>
+                    <div class="path-card">
+                        <h4>ML Engineer</h4>
+                        <p>Trains, optimizes, and deploys custom models. Requires stronger math and backend engineering. Uses PyTorch, Docker, MLOps tools.</p>
+                    </div>
+                    <div class="path-card">
+                        <h4>Data Scientist</h4>
+                        <p>Focuses on statistical analysis and extracting business insights. Uses SQL, Pandas, Scikit-Learn. Often less focused on deployment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap-visual">
+            <h2>Visual Learning Map</h2>
+            <div class="visual-map">
+                <div class="map-node core">01. DEVELOPER FOUNDATIONS</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">02. PYTHON + DATA</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">03. APPLIED MATH</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">04. CLASSICAL MACHINE LEARNING</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">05. DEEP LEARNING & PYTORCH</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">06. TRANSFORMERS & NLP</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">07. LLM ENGINEERING (2026 Core)</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">08. RAG + AGENTIC SYSTEMS</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">09. PRODUCTION & MLOPS</div>
+                <div class="map-arrow">↓</div>
+                <div class="map-node core">10. PORTFOLIO & CAREER</div>
+            </div>
+        </section>
+
+        <section id="youtube-resources">
+            <h2>Premium Video Masterclasses</h2>
+            <p>Supplement your daily reading with these highly vetted, world-class YouTube playlists.</p>
+            
+            <div class="path-block" style="border-left: 4px solid var(--primary); background: #FFF8F3;">
+                <div class="path-grid">
+                    <div class="path-card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <span class="takein-eyebrow">MATH FOUNDATION</span>
+                        <h4><a href="https://youtube.com/playlist?list=PLD80i8An1OEGZ2tYimemzwC3xqkU0jKUg" target="_blank">Math for ML Playlist</a></h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">The definitive guide to Linear Algebra and Calculus applied to AI.</p>
+                    </div>
+                    <div class="path-card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <span class="takein-eyebrow">MODERN AI</span>
+                        <h4><a href="https://www.youtube.com/watch?v=sVcwVQRHIc8" target="_blank">Learn RAG From Scratch</a></h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Comprehensive breakdown of Retrieval-Augmented Generation.</p>
+                    </div>
+                    <div class="path-card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <span class="takein-eyebrow">AGENTIC SYSTEMS</span>
+                        <h4><a href="https://www.youtube.com/watch?v=dJrgZrPKJfQ" target="_blank">AI Agents Fundamentals</a></h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Deep dive into LangChain and tool-using LLMs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DYNAMIC MODULES START -->
+        
+        <div id="mod-01" class="module-header">
+            <span class="module-tag">00</span>
+            <h2>Orientation & Setup</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 001</span>
+                    <span class="day-title">Environment Setup</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Install the necessary tools to begin your AI journey.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>VS Code installation & extensions (Python, Jupyter)</li><li>Python 3 installation</li><li>Virtual Environments (venv/conda)</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Docker</li><li>Complex system paths</li><li>Cloud setups</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Global package installations lead to dependency hell. Virtual environments keep your AI projects isolated and reproducible.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Create a folder named `takein-ai-roadmap`. Initialize a virtual environment inside it. Install the `jupyter` package using pip.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">I am setting up my environment for an AI/ML roadmap on a [Mac/Windows] machine. Give me the exact terminal commands to create a python virtual environment, activate it, and install jupyter.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I have VS Code and Python installed.</li><li>I can activate a virtual environment.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You successfully open a Jupyter notebook inside VS Code and execute a cell.</p>
+            </div>
+            
+        <div id="mod-02" class="module-header">
+            <span class="module-tag">01</span>
+            <h2>Developer Foundations</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 002</span>
+                    <span class="day-title">Terminal & Git Basics</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Navigate your system and track code changes like a software engineer.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Navigating directories (cd, ls, mkdir)</li><li>Git init, add, commit, push</li><li>GitHub basic workflow</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rebasing</li><li>Git hooks</li><li>Advanced merge conflict resolution</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>AI Engineers write code. Code lives in Git. You cannot get hired without knowing how to push code to GitHub.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Create a new repo on GitHub. Clone it locally via terminal, add a README, commit, and push it back.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Explain git add, commit, and push in one simple sentence each. Do not explain branching yet.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can navigate folders in the terminal.</li><li>I can push code to GitHub.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You can push a file to GitHub without looking up the commands.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 003</span>
+                    <span class="day-title">Markdown & Documentation</span>
+                    <span class="depth-badge ">[ WORKING KNOWLEDGE ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Learn to communicate technical ideas clearly.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Markdown syntax (Headers, lists, code blocks)</li><li>Writing a solid README</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Complex HTML inside Markdown</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Your portfolio projects are useless if recruiters cannot read a well-formatted README.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Write a Markdown file explaining the difference between AI and ML, including a code block.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Give me a template for a great GitHub project README file using standard Markdown.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write markdown code blocks.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You can format a clean document natively in Markdown.</p>
+            </div>
+            
+        <div id="mod-04" class="module-header">
+            <span class="module-tag">02</span>
+            <h2>Python for AI/ML</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 004</span>
+                    <span class="day-title">Core Syntax & Structures</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Understand foundational Python elements.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Lists, Dictionaries, Sets, Tuples</li><li>List comprehensions</li><li>Functions (args, kwargs)</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Metaclasses</li><li>Complex OOP</li><li>Decorators from scratch</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>JSON (the core of LLM APIs) maps directly to Python dicts. You must master them.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Write a list comprehension that lowercases a list of strings.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Explain Python list comprehensions to me like I am 5, with 3 simple text-processing exercises.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can iterate through dictionaries.</li><li>I can write list comprehensions.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You pass basic HackerRank Python string/list manipulation challenges.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 005</span>
+                    <span class="day-title">Error Handling & Files</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Make your code robust and read external data.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Try/Except blocks</li><li>File I/O (reading text, JSON, CSV)</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Asynchronous file I/O</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>AI scripts will crash when reading messy real-world data or API limits. You must handle errors gracefully.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Write a script that reads a JSON file, handles a missing key gracefully, and saves it to a new file.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Show me the most Pythonic way to open, read, and safely close a JSON file.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can use context managers (`with open`).</li><li>I can catch specific Exceptions.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You can load JSON data into a dictionary without crashing.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 006</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-07" class="module-header">
+            <span class="module-tag">03</span>
+            <h2>NumPy / Pandas / Data Handling</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 007</span>
+                    <span class="day-title">Vectorized Operations with NumPy</span>
+                    <span class="depth-badge ">[ WORKING KNOWLEDGE ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Manipulate arrays of numbers blazingly fast.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>NumPy arrays vs Python lists</li><li>Broadcasting</li><li>Matrix operations in NumPy</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Advanced tensor manipulation (save for PyTorch)</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Machine Learning is just math on giant arrays. NumPy is the C-optimized engine for this in Python.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Create a 3x3 NumPy array. Multiply every element by 5 without using a for-loop.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Explain why NumPy arrays are faster than Python lists, and give a broadcasting example.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I understand what an array shape is.</li><li>I know why loops are bad for math in Python.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You can reshape a 1D array into a 2D matrix.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 008</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-09" class="module-header">
+            <span class="module-tag">04</span>
+            <h2>Mathematics for AI/ML</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 009</span>
+                    <span class="day-title">Applied Linear Algebra</span>
+                    <span class="depth-badge ">[ CONCEPTUAL ONLY ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Understand vectors and dot products.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Scalars, Vectors, Matrices</li><li>Dot Product (Inner Product)</li><li>Cosine Similarity</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Manually inverting 4x4 matrices</li><li>Eigenvectors proofs</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>When you use an LLM embedding API, it returns a vector. Finding similar text is just calculating the dot product.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Calculate the dot product of [1, 0, 2] and [3, 1, 1] on paper.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Explain what a dot product represents geometrically and why it is used for cosine similarity.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I know the difference between a Vector and a Matrix.</li><li>I understand what a Dot Product measures.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You can explain why a dot product of two normalized vectors gives cosine similarity.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 010</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 011</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>FOUNDATION CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>use Git/GitHub natively</li><li>work with Python comfortably</li><li>manipulate datasets with Pandas</li><li>understand vectors/matrices conceptually</li>
+                    </ul>
+                </div>
+                
+        <div id="mod-12" class="module-header">
+            <span class="module-tag">05</span>
+            <h2>Machine Learning Foundations</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 012</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 013</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-14" class="module-header">
+            <span class="module-tag">06</span>
+            <h2>Supervised Learning</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 014</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 015</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 016</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-17" class="module-header">
+            <span class="module-tag">07</span>
+            <h2>Unsupervised Learning</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 017</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 018</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-19" class="module-header">
+            <span class="module-tag">08</span>
+            <h2>Feature Engineering & Model Evaluation</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 019</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 020</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-21" class="module-header">
+            <span class="module-tag">09</span>
+            <h2>Practical ML Systems</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 021</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 022</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>MACHINE LEARNING CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>train classical ML models (Logistic Regression, Random Forest)</li><li>evaluate models with precision/recall</li><li>clean and feature-engineer raw datasets</li>
+                    </ul>
+                </div>
+                
+        <div id="mod-23" class="module-header">
+            <span class="module-tag">10</span>
+            <h2>Deep Learning Foundations</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 023</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 024</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-25" class="module-header">
+            <span class="module-tag">11</span>
+            <h2>PyTorch</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 025</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 026</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 027</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-28" class="module-header">
+            <span class="module-tag">12</span>
+            <h2>Neural Network Architectures</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 028</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 029</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-30" class="module-header">
+            <span class="module-tag">13</span>
+            <h2>Transformers</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 030</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 031</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-32" class="module-header">
+            <span class="module-tag">14</span>
+            <h2>Modern NLP</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 032</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 033</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>DEEP LEARNING CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>build basic PyTorch models</li><li>explain backpropagation conceptually</li><li>understand Transformer architecture basics</li>
+                    </ul>
+                </div>
+                
+        <div id="mod-34" class="module-header">
+            <span class="module-tag">15</span>
+            <h2>Generative AI / LLM Fundamentals</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 034</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 035</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-36" class="module-header">
+            <span class="module-tag">16</span>
+            <h2>LLM APIs & Structured Outputs</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 036</span>
+                    <span class="day-title">APIs & Structured Outputs</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Connect to OpenAI and force strict JSON output.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>API Keys & .env</li><li>REST API requests in Python</li><li>System vs User prompts</li><li>JSON mode & Function Calling</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Fine-tuning models</li><li>Local open-source LLM hosting (for now)</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>80% of modern AI Engineering jobs rely on taking unstructured text and forcing it into structured JSON.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Give a paragraph to the OpenAI API and force it to output strict JSON containing 'price' and 'location'.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Show me how to use Pydantic to enforce a strict JSON output structure (Structured Outputs) with OpenAI.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can load an API key securely.</li><li>I can prompt the model to return valid JSON.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>Your script prints a parsed Python dictionary without raising parsing errors.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 037</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-38" class="module-header">
+            <span class="module-tag">17</span>
+            <h2>Embeddings & Vector Search</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 038</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 039</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-40" class="module-header">
+            <span class="module-tag">18</span>
+            <h2>RAG Systems</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 040</span>
+                    <span class="day-title">Vector Databases & Embeddings</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Convert text to vectors and retrieve them.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Text embeddings</li><li>Chunking strategies</li><li>Vector DBs (Pinecone, Chroma)</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Building a vector index from scratch using HNSW math</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>RAG is the standard architecture for Enterprise AI. You must retrieve relevant data before prompting.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Extract text from a PDF, split it into chunks, generate embeddings, and store them in ChromaDB.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Provide a Python script using sentence-transformers and ChromaDB to store and query 5 text sentences.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can convert text to an embedding.</li><li>I can store and query a Vector DB.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>A query returns the correct text chunk holding the answer.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 041</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-42" class="module-header">
+            <span class="module-tag">19</span>
+            <h2>RAG Evaluation & Reranking</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 042</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-43" class="module-header">
+            <span class="module-tag">20</span>
+            <h2>AI Agents</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 043</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 044</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>AI ENGINEERING CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>call LLM APIs securely</li><li>force structured JSON outputs</li><li>build and query a vector database (RAG)</li><li>implement basic agentic tool use</li>
+                    </ul>
+                </div>
+                
+        <div id="mod-45" class="module-header">
+            <span class="module-tag">21</span>
+            <h2>Backend for AI</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 045</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 046</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 047</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-48" class="module-header">
+            <span class="module-tag">22</span>
+            <h2>Production AI / MLOps</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 048</span>
+                    <span class="day-title">Building an AI API with FastAPI</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Wrap your LLM script into a robust web API.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>REST API basics (GET, POST)</li><li>FastAPI routing</li><li>Pydantic request validation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Advanced GraphQL</li><li>Microservice orchestration</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>An AI Engineer who cannot serve their code is useless to a frontend team. FastAPI is the standard.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Wrap your Structured Output script in a FastAPI POST route. Hit it with Postman.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Show me a minimal FastAPI template with one POST endpoint that accepts a 'query' string and returns JSON.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can start a FastAPI server.</li><li>I can send a POST request.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>Your API runs on localhost and responds correctly.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 049</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 050</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-51" class="module-header">
+            <span class="module-tag">23</span>
+            <h2>AI System Design</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 051</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>PRODUCTION CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>wrap AI models in FastAPI</li><li>write Dockerfiles</li><li>understand stateless AI system design</li>
+                    </ul>
+                </div>
+                
+        <div id="mod-52" class="module-header">
+            <span class="module-tag">24</span>
+            <h2>Portfolio Engineering</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 052</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 053</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 054</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 055</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 056</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-57" class="module-header">
+            <span class="module-tag">25</span>
+            <h2>AI/ML Interviews</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 057</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 058</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+        <div id="mod-59" class="module-header">
+            <span class="module-tag">26</span>
+            <h2>Resume / GitHub / Applications</h2>
+        </div>
+        
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 059</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+            <div class="day-block">
+                <div class="day-header">
+                    <span class="day-number">DAY 060</span>
+                    <span class="day-title">Execution & Application (Continuation)</span>
+                    <span class="depth-badge essential">[ ESSENTIAL ]</span>
+                </div>
+                
+                <div class="section-label">Today's Target</div>
+                <p>Solidify the concepts from this module through applied repetition.</p>
+                
+                <div class="section-label">Learn</div>
+                <ul><li>Module core concepts application</li><li>Debugging</li><li>Code documentation</li></ul>
+
+                <div class="skip-box">
+                    <div class="section-label" style="margin-top: 0; color: #9B2C2C;">Skip For Now</div>
+                    <ul class="skip-list"><li>Rushing ahead</li><li>Copy-pasting without understanding</li></ul>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Why?</strong> These are rabbit holes that delay execution. Revisit them only if you move toward research.</p>
+                </div>
+
+                <div class="section-label">Why It Matters</div>
+                <p>Repetition builds engineering intuition.</p>
+
+                <div class="section-label">Practice & Build</div>
+                <p>Continue building the module's core exercise.</p>
+
+                <div class="section-label">AI Mentor Prompt</div>
+                <div class="prompt-box-container">
+                    <button class="copy-btn">COPY PROMPT</button>
+                    <div class="prompt-box">Review my python code for this topic and point out one area where I can write it more cleanly.</div>
+                </div>
+
+                <div class="section-label">Checkpoint</div>
+                <ul class="checkpoint-list"><li>I can write the syntax from memory.</li></ul>
+
+                <div class="section-label">Move Forward When</div>
+                <p>You feel confident explaining the concept aloud.</p>
+            </div>
+            
+                <div class="milestone-block">
+                    <h3>CAREER-READY CHECKPOINT</h3>
+                    <p>Before proceeding, verify you have internalized these capabilities:</p>
+                    <ul class="milestone-list">
+                        <li>deploy a complex portfolio project</li><li>document architecture in a README</li><li>prepare for technical interviews</li>
+                    </ul>
+                </div>
+                
+        <!-- DYNAMIC MODULES END -->
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <h2>Project System</h2>
+            <p>To break out of tutorial hell, you must build progressively. Do not rely entirely on cliché datasets (Iris, Titanic) for your resume. Use them to learn, but build engineered systems for your portfolio.</p>
+            
+            <div class="project-card">
+                <span class="project-level">LEVEL 01</span>
+                <h4>MINI BUILDS</h4>
+                <p><strong>Goal:</strong> Syntax familiarity and basic logic.</p>
+                <div class="req-grid">
+                    <div>
+                        <strong>Examples</strong>
+                        <ul>
+                            <li>Pandas data cleaner script</li>
+                            <li>Linear Regression from scratch</li>
+                            <li>Web scraper to JSON</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Interview Prep</strong>
+                        <p>"How do you handle missing values in a dataframe?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-level">LEVEL 02</span>
+                <h4>FOUNDATION PROJECTS</h4>
+                <p><strong>Goal:</strong> Model training and classical ML evaluation.</p>
+                <div class="req-grid">
+                    <div>
+                        <strong>Examples</strong>
+                        <ul>
+                            <li>Customer Churn Predictor (XGBoost)</li>
+                            <li>Sentiment Analysis classifier (Scikit-Learn)</li>
+                        </ul>
+                        <strong>Core Requirements</strong>
+                        <ul>
+                            <li>Clean train/test split</li>
+                            <li>Confusion matrix output</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Interview Prep</strong>
+                        <p>"Explain the difference between Random Forest and Gradient Boosting."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-level">LEVEL 03</span>
+                <h4>PORTFOLIO PROJECTS</h4>
+                <p><strong>Goal:</strong> API integration and modern AI engineering.</p>
+                <div class="req-grid">
+                    <div>
+                        <strong>Examples</strong>
+                        <ul>
+                            <li>Corporate PDF Q&A system (RAG) using Pinecone & FastAPI</li>
+                            <li>Specialized Text-to-SQL agent</li>
+                        </ul>
+                        <strong>Core Requirements</strong>
+                        <ul>
+                            <li>Must have a REST API interface</li>
+                            <li>Must use a proper vector database</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Interview Prep</strong>
+                        <p>"How did you handle token limits and chunking in your RAG system?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-level">LEVEL 04</span>
+                <h4>PRODUCTION PROJECTS</h4>
+                <p><strong>Goal:</strong> End-to-end deployment and observability.</p>
+                <div class="req-grid">
+                    <div>
+                        <strong>Examples</strong>
+                        <ul>
+                            <li>LLM Application deployed on Docker/AWS with usage logging</li>
+                        </ul>
+                        <strong>Core Requirements</strong>
+                        <ul>
+                            <li>Dockerfile</li>
+                            <li>Cloud deployment URL</li>
+                            <li>Prompts stored externally, not hardcoded</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Interview Prep</strong>
+                        <p>"How do you manage API key security and cost tracking in production?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <span class="project-level">LEVEL 05</span>
+                <h4>CAPSTONE</h4>
+                <p><strong>Goal:</strong> Autonomous workflows solving a complex, multi-step problem.</p>
+                <div class="req-grid">
+                    <div>
+                        <strong>Examples</strong>
+                        <ul>
+                            <li>Autonomous research agent that browses the web, synthesizes reports, evaluates its own output, and stores results in Postgres.</li>
+                        </ul>
+                        <strong>README Requirements</strong>
+                        <ul>
+                            <li>Architecture diagram</li>
+                            <li>System design trade-offs</li>
+                            <li>Local setup instructions</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Interview Prep</strong>
+                        <p>"How do you monitor and prevent your agent's hallucinations in an autonomous loop?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIALIZATIONS -->
+        <section id="specializations">
+            <h2>Optional Specializations</h2>
+            <p>You do <strong>not</strong> need to learn all of these to get hired as an AI Engineer. Choose one path if it aligns with your specific career goals, or ignore them to focus on core LLM Engineering.</p>
+
+            <div class="path-block">
+                <h4>Computer Vision (CV)</h4>
+                <p><strong>When to choose:</strong> You want to work on self-driving cars, medical imaging, or robotics.</p>
+                <p><strong>Key Skills:</strong> OpenCV, CNNs, ResNet, YOLO, Image Segmentation.</p>
+            </div>
+
+            <div class="path-block">
+                <h4>Reinforcement Learning (RL)</h4>
+                <p><strong>When to choose:</strong> You are interested in trading algorithms, game AI, or robotics.</p>
+                <p><strong>Key Skills:</strong> Q-Learning, Policy Gradients, Deep RL.</p>
+            </div>
+        </section>
+
+        <!-- RESOURCES -->
+        <section id="resources">
+            <h2>Curated Learning Library</h2>
+            <p>TakeIN Studio does not claim ownership of third-party courses. Follow the TakeIN roadmap for sequencing and use these external resources to learn the corresponding concepts. <em>Source attribution: Many links derived from Aadith Sukumar's open-source roadmap.</em></p>
+
+            <div class="resource-grid">
+                <!-- TakeIN Specific -->
+                <div class="resource-card">
+                    <h4>TakeIN Studio / Apna College</h4>
+                    <span class="creator">Primary Content</span>
+                    <ul>
+                        <li><a href="#">Apna College Git & GitHub</a> (Core)</li>
+                        <li><a href="#">100 Days of Machine Learning</a> (Core)</li>
+                        <li><a href="#">100 Days of Deep Learning</a> (Core)</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h4>Mathematics</h4>
+                    <span class="creator">External Sources</span>
+                    <ul>
+                        <li><a href="https://youtube.com/playlist?list=PLD80i8An1OEGZ2tYimemzwC3xqkU0jKUg" target="_blank">Math for ML Playlist</a> (Recommended)</li>
+                        <li><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank">MIT Linear Algebra</a> (Optional Deep Dive)</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Machine & Deep Learning</h4>
+                    <span class="creator">External Sources</span>
+                    <ul>
+                        <li><a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">Andrew Ng ML Specialization</a> (Core)</li>
+                        <li><a href="https://www.coursera.org/learn/neural-networks-deep-learning" target="_blank">DeepLearning.AI NN Course</a> (Core)</li>
+                        <li><a href="https://pytorch.org/tutorials/" target="_blank">Official PyTorch Tutorials</a> (Core)</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Modern AI / RAG</h4>
+                    <span class="creator">External Sources</span>
+                    <ul>
+                        <li><a href="https://www.youtube.com/watch?v=sVcwVQRHIc8" target="_blank">Learn RAG From Scratch</a> (Recommended)</li>
+                        <li><a href="https://www.youtube.com/watch?v=dJrgZrPKJfQ" target="_blank">AI Agents Fundamentals</a> (Recommended)</li>
+                        <li><a href="https://platform.openai.com/docs/" target="_blank">OpenAI API Documentation</a> (Essential)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAREER SECTION -->
+        <section id="career">
+            <h2>From Learning → Opportunities</h2>
+            <p>Completing a roadmap is useless if your presentation is poor. The barrier to entry in AI is rising; your engineering presentation must be flawless.</p>
+
+            <div class="path-block">
+                <h3>When Are You Ready To Apply?</h3>
+                <p>You do NOT need to finish every optional specialization. You should be able to check these boxes:</p>
+                <ul class="checkpoint-list">
+                    <li>I can confidently explain the technical architecture of my strongest portfolio project.</li>
+                    <li>I can build and serve a Python API (FastAPI).</li>
+                    <li>I can work cleanly with Git (branches, commits).</li>
+                    <li>I can explain the difference between training a model and doing inference via an LLM API.</li>
+                    <li>I understand and can explain text embeddings conceptually.</li>
+                    <li>I have built at least one functional RAG application.</li>
+                    <li>I have containerized (Docker) at least one meaningful project.</li>
+                    <li>My GitHub features a project with a high-quality README (Architecture, Setup, Usage).</li>
+                </ul>
+            </div>
+
+            <div class="path-block">
+                <h3>Interview Expectations</h3>
+                <p><strong>System Design:</strong> Be prepared to answer "How would you design a document search system for a 10,000 employee company?" (Focus on chunking, vector DB choice, and LLM context limits).</p>
+                <p><strong>Fundamentals:</strong> Do not forget classical ML. You might apply for an LLM job but still be asked to explain bias vs. variance or how cross-validation works.</p>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    
+    mobileBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        mobileBtn.textContent = sidebar.classList.contains('open') ? 'Close' : 'Menu';
+    });
+
+    // Close sidebar when clicking a link on mobile
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if(window.innerWidth <= 1000) {
+                sidebar.classList.remove('open');
+                mobileBtn.textContent = 'Menu';
+            }
+        });
+    });
+
+    // Copy Prompt Functionality
+    document.addEventListener('click', (e) => {
+        if(e.target.classList.contains('copy-btn')) {
+            const promptText = e.target.nextElementSibling.innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const originalText = e.target.innerText;
+                e.target.innerText = 'COPIED ✓';
+                e.target.classList.add('copied');
+                setTimeout(() => {
+                    e.target.innerText = originalText;
+                    e.target.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    });
+
+    // Client-side Search
+    const searchInput = document.getElementById('searchInput');
+    const days = document.querySelectorAll('.day-block');
+    const modules = document.querySelectorAll('.module-header');
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        
+        if (query === '') {
+            days.forEach(d => d.classList.remove('hidden'));
+            modules.forEach(m => m.classList.remove('hidden'));
+            return;
+        }
+
+        days.forEach(day => {
+            const text = day.innerText.toLowerCase();
+            if(text.includes(query)) {
+                day.classList.remove('hidden');
+            } else {
+                day.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

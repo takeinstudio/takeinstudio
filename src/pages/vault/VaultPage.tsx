@@ -252,7 +252,7 @@ const fallbackCourse = {
   ],
   modules: 12,
   pages: "~64 pages",
-  students: "50+",
+  students: "8+",
   rating: 5,
 };
 
@@ -368,7 +368,7 @@ export default function VaultPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.filter(p => p.status !== "coming_soon" && p.is_published).map((product, idx) => {
-                const studentCount = product.slug === "aiwebdev" ? "35" : "50+";
+                const studentCount = product.slug === "aiwebdev" ? "35" : "8+";
 
                 return (
                   <motion.div

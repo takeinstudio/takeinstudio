@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Instagram, Linkedin, Facebook, Phone, MessageSquare, ChevronLeft } from "lucide-react";
-import PhoneUnlockButton from "./PhoneUnlockButton";
 
 // Premium custom SVG WhatsApp Icon
 const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
@@ -71,14 +70,19 @@ export default function FloatingSidebar() {
           </motion.a>
         ))}
 
-        {/* WhatsApp OTP Protected Icon */}
-        <motion.div
+        {/* WhatsApp Icon */}
+        <motion.a
+          href="https://wa.me/919937012942"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="WhatsApp Support"
           whileHover={{ scale: 1.4, x: -6, zIndex: 50 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className="w-9 h-9 relative rounded-full flex items-center justify-center shadow-sm bg-[#25D366] text-white shadow-[#25D366]/20"
         >
-          <PhoneUnlockButton variant="sidebar-whatsapp" />
-        </motion.div>
+          <WhatsAppIcon size={18} />
+        </motion.a>
 
         {/* Floating Phone Popout Button - inside the same container */}
         <div className="relative">
@@ -123,7 +127,15 @@ export default function FloatingSidebar() {
                   </div>
 
                   <div className="space-y-2.5 p-2">
-                    <PhoneUnlockButton />
+                    <a
+                      href="tel:+919937012942"
+                      className="flex items-center gap-2.5 text-sm font-semibold text-foreground hover:text-primary transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
+                        <Phone size={14} />
+                      </div>
+                      +91 9937012942
+                    </a>
                   </div>
                 </div>
               </motion.div>

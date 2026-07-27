@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { Send, Mail, Globe, Clock, Phone, MessageSquare, User, Building2, CheckCircle2, X, Instagram } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import PhoneUnlockButton from "@/components/PhoneUnlockButton";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -325,7 +324,15 @@ ${form.message}`;
                 </div>
 
                 {/* Phone */}
-                <PhoneUnlockButton />
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Phone size={15} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5 block">+91 9937012942</p>
+                  </div>
+                </div>
 
                 {/* Instagram */}
                 <div className="flex items-start gap-3">

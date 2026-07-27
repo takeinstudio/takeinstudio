@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
   ArrowRight,
+  ArrowLeft,
   Check,
   BookOpen,
   Code2,

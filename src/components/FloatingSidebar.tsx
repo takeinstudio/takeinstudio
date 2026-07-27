@@ -72,7 +72,7 @@ export default function FloatingSidebar() {
 
         {/* WhatsApp Icon */}
         <motion.a
-          href="https://wa.me/919937012942"
+          href="https://wa.me/919124442040"
           target="_blank"
           rel="noopener noreferrer"
           title="WhatsApp Support"
@@ -128,13 +128,13 @@ export default function FloatingSidebar() {
 
                   <div className="space-y-2.5 p-2">
                     <a
-                      href="tel:+919937012942"
+                      href="tel:+919124442040"
                       className="flex items-center gap-2.5 text-sm font-semibold text-foreground hover:text-primary transition-colors"
                     >
                       <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
                         <Phone size={14} />
                       </div>
-                      +91 9937012942
+                      +91 9124442040
                     </a>
                   </div>
                 </div>

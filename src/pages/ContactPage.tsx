@@ -330,7 +330,7 @@ ${form.message}`;
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phone</p>
-                    <p className="text-sm text-foreground font-medium mt-0.5 block">+91 9937012942</p>
+                    <p className="text-sm text-foreground font-medium mt-0.5 block">+91 9124442040</p>
                   </div>
                 </div>
 

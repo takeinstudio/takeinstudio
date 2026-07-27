@@ -5,7 +5,8 @@ export const sendBrevoEmail = async (
   htmlContent: string,
   senderType: "support" | "noreply" | "careers" | "hello" = "support",
   toEmail?: string,
-  bccAdmin: boolean = false
+  bccAdmin: boolean = false,
+  toName: string = "Valued Client"
 ) => {
   // First try to load from environment variable (allows anonymous pages to send emails)
   let BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
@@ -43,7 +44,7 @@ export const sendBrevoEmail = async (
   let recipients: { email: string; name: string }[] = [];
   if (toEmail) {
     const emails = toEmail.split(',').map(e => e.trim()).filter(e => e);
-    recipients = emails.map(email => ({ email, name: "Valued Client" }));
+    recipients = emails.map(email => ({ email, name: toName }));
   } else {
     recipients = [
         { email: "takeinstudio@gmail.com", name: "TakeIN Studio" },
@@ -118,7 +119,7 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
       </div>
     </div>
   `;
-  return sendBrevoEmail(subject, html, "careers", email, true);
+  return sendBrevoEmail(subject, html, "careers", email, true, name);
 };
 
 export const sendManualOnboardEmail = async (email: string, name: string, pass: string) => {
@@ -139,10 +140,10 @@ export const sendManualOnboardEmail = async (email: string, name: string, pass: 
       </div>
     </div>
   `;
-  return sendBrevoEmail(subject, html, "careers", email, true);
+  return sendBrevoEmail(subject, html, "careers", email, true, name);
 };
 
-export const sendProductGrantedEmail = async (email: string, productName: string) => {
+export const sendProductGrantedEmail = async (email: string, productName: string, name: string = "Valued Client") => {
   const subject = `New Resource Granted: ${productName}`;
   const html = `
     <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #f4f4f5;">
@@ -157,5 +158,5 @@ export const sendProductGrantedEmail = async (email: string, productName: string
       </div>
     </div>
   `;
-  return sendBrevoEmail(subject, html, "support", email, true);
+  return sendBrevoEmail(subject, html, "support", email, true, name);
 };

@@ -173,7 +173,7 @@ export default function VaultManagerBuilder() {
 
       // Trigger Email Notification
       const product = products.find(p => p.id === formData.productId);
-      await sendProductGrantedEmail(selectedCustomer.email, product?.name || "Premium Resource");
+      await sendProductGrantedEmail(selectedCustomer.email, product?.name || "Premium Resource", selectedCustomer.full_name || "Valued Client");
 
       toast.success("Access granted to existing customer!");
       setIsGranting(false);

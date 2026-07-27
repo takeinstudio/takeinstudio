@@ -132,7 +132,16 @@ export default function AIMLCheckout() {
                       <ExternalLink size={14} />
                     </a>
 
-                    <p className="text-[10px] text-gray-400 text-center leading-relaxed max-w-xs mx-auto">
+                    <div className="text-center">
+                      <Link 
+                        to="/vault/login" 
+                        className="text-xs font-bold text-[#FF6B00] hover:text-[#CC5500] hover:underline"
+                      >
+                        Already purchased? Open Dashboard
+                      </Link>
+                    </div>
+
+                    <p className="text-[10px] text-gray-400 text-center leading-relaxed max-w-xs mx-auto pt-2">
                       By proceeding, you agree to our Terms of Service and Digital Product Refund Policy.
                     </p>
                   </div>

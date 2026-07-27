@@ -50,6 +50,10 @@ import VaultMediaProject from "@/pages/projects/VaultMediaProject";
 import AIWebDevPage from "@/pages/vault/AIWebDevPage";
 import AIWebDevCheckout from "@/pages/vault/AIWebDevCheckout";
 import AIWebDevPaymentSuccess from "@/pages/vault/AIWebDevPaymentSuccess";
+import AIMLPage from "@/pages/vault/AIMLPage";
+import AIMLCheckout from "@/pages/vault/AIMLCheckout";
+import AIMLPaymentSuccess from "@/pages/vault/AIMLPaymentSuccess";
+import AIMLViewer from "@/pages/vault/AIMLViewer";
 import VaultPage from "@/pages/vault/VaultPage";
 import VaultLogin from "@/pages/vault/VaultLogin";
 import VaultDashboard from "@/pages/vault/VaultDashboard";
@@ -135,6 +139,9 @@ const App = () => (
               <Route path="/vault/aiwebdev" element={<AIWebDevPage />} />
               <Route path="/vault/aiwebdev/checkout" element={<AIWebDevCheckout />} />
               <Route path="/vault/aiwebdev/payment-success" element={<AIWebDevPaymentSuccess />} />
+              <Route path="/vault/ai-ml" element={<AIMLPage />} />
+              <Route path="/vault/ai-ml/checkout" element={<AIMLCheckout />} />
+              <Route path="/vault/ai-ml/payment-success" element={<AIMLPaymentSuccess />} />
               <Route path="/vault/login" element={<VaultLogin />} />
               <Route path="/vault/update-password" element={<UpdatePassword />} />
               
@@ -146,6 +153,7 @@ const App = () => (
               
               <Route path="/vault/aiwebdev/access" element={<Navigate replace to="/vault/view/aiwebdev" />} />
               <Route path="/vault/aiwebdev/access/:volumeId" element={<Navigate replace to="/vault/view/aiwebdev" />} />
+              <Route path="/vault/view/ai-ml" element={<VaultProtectedRoute><AIMLViewer /></VaultProtectedRoute>} />
               <Route path="/vault/view/:productId" element={<VaultProtectedRoute><ProductViewer /></VaultProtectedRoute>} />
 
               <Route path="/login" element={<LoginPage />} />

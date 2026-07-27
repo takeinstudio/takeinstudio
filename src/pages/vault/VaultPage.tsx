@@ -354,103 +354,145 @@ export default function VaultPage() {
       {/* ── Vault Marketplace Grid ── */}
       <section className="bg-white px-4 sm:px-6 py-12 lg:py-16">
         <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-              Premium Resources
-            </span>
-            <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
-            <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest flex items-center gap-1">
-              <Sparkles size={10} /> The Complete Catalog
-            </span>
-          </div>
+          {/* --- ACTIVE RESOURCES --- */}
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Premium Resources
+              </span>
+              <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
+              <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest flex items-center gap-1">
+                <CheckCircle2 size={10} /> Available Now
+              </span>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product, idx) => {
-              const isComingSoon = product.status === "coming_soon" || !product.is_published;
-              const studentCount = product.slug === "aiwebdev" ? "35" : "Upcoming";
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.filter(p => p.status !== "coming_soon" && p.is_published).map((product, idx) => {
+                const studentCount = product.slug === "aiwebdev" ? "35" : "50+";
 
-              return (
-                <motion.div
-                  key={product.id || idx}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="bg-white border border-gray-200 rounded-2xl flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all shadow-sm group overflow-hidden relative"
-                >
-                  <div className={`h-1 w-full ${isComingSoon ? 'bg-gray-200' : 'bg-gradient-to-r from-orange-500 to-amber-400'}`} />
-                  
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[9px] font-black tracking-widest uppercase text-gray-400">
-                        {product.category || "Execution Guide"}
-                      </span>
-                      {isComingSoon ? (
-                        <button 
-                          onClick={() => toast.success(`Thanks for voting! We'll let you know when ${product.name} is ready.`)}
-                          className="bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-gray-200 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full transition-colors"
-                        >
-                          VOTE NOW
-                        </button>
-                      ) : (
+                return (
+                  <motion.div
+                    key={product.id || idx}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    className="bg-white border border-gray-200 rounded-2xl flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all shadow-sm group overflow-hidden relative"
+                  >
+                    <div className="h-1 w-full bg-gradient-to-r from-orange-500 to-amber-400" />
+                    
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[9px] font-black tracking-widest uppercase text-gray-400">
+                          {product.category || "Execution Guide"}
+                        </span>
                         <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full flex items-center gap-1">
                           <CheckCircle2 size={10} /> AVAILABLE
                         </span>
-                      )}
-                    </div>
-
-                    <h3 className="font-display text-xl font-black text-gray-950 tracking-tight leading-tight mb-2 group-hover:text-orange-600 transition-colors">
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 font-medium leading-relaxed mb-6 line-clamp-3">
-                      {product.description || product.short_description}
-                    </p>
-
-                    {/* Stats */}
-                    <div className="flex gap-4 py-3 border-y border-gray-100 mb-6 mt-auto">
-                      <div className="text-center pr-4 border-r border-gray-100">
-                        <div className="text-sm font-black text-gray-900">{studentCount}</div>
-                        <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Students</div>
                       </div>
-                      {!isComingSoon && (
+
+                      <h3 className="font-display text-xl font-black text-gray-950 tracking-tight leading-tight mb-2 group-hover:text-orange-600 transition-colors">
+                        {product.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 font-medium leading-relaxed mb-6 line-clamp-3">
+                        {product.description || product.short_description}
+                      </p>
+
+                      <div className="flex gap-4 py-3 border-y border-gray-100 mb-6 mt-auto">
+                        <div className="text-center pr-4 border-r border-gray-100">
+                          <div className="text-sm font-black text-gray-900">{studentCount}</div>
+                          <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Students</div>
+                        </div>
                         <div className="text-center px-4">
                           <div className="text-sm font-black text-gray-900">5.0★</div>
                           <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Rating</div>
                         </div>
-                      )}
-                    </div>
-
-                    {/* Price and CTA */}
-                    <div className="flex items-center justify-between">
-                      <div>
-                        {isComingSoon ? (
-                          <span className="text-lg font-black text-gray-400">TBA</span>
-                        ) : (
-                          <>
-                            <span className="text-xl font-black text-gray-950">₹{product.price_in || product.price || 99}</span>
-                          </>
-                        )}
                       </div>
-                      
-                      {isComingSoon ? (
-                        <button
-                          onClick={() => toast.success(`Your vote for ${product.name} has been recorded!`)}
-                          className="bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-500 font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg transition-all"
-                        >
-                          VOTE
-                        </button>
-                      ) : (
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-xl font-black text-gray-950">₹{product.price_in || product.price || 99}</span>
+                        </div>
                         <Link
                           to={`/vault/${product.slug}`}
                           className="bg-gray-950 hover:bg-black text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                         >
                           VIEW <ChevronRight size={12} />
                         </Link>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* --- UPCOMING RESOURCES --- */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Vote For Next
+              </span>
+              <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
+              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-1">
+                <Sparkles size={10} /> Upcoming Releases
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.filter(p => p.status === "coming_soon" || !p.is_published).map((product, idx) => {
+                return (
+                  <motion.div
+                    key={product.id || idx}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    className="bg-white border border-gray-200 rounded-2xl flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all shadow-sm group overflow-hidden relative opacity-90"
+                  >
+                    <div className="h-1 w-full bg-gray-200" />
+                    
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[9px] font-black tracking-widest uppercase text-gray-400">
+                          {product.category || "Execution Guide"}
+                        </span>
+                        <button 
+                          onClick={() => toast.success(`Thanks for voting! We'll let you know when ${product.name} is ready.`)}
+                          className="bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-gray-200 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full transition-colors"
+                        >
+                          VOTE NOW
+                        </button>
+                      </div>
+
+                      <h3 className="font-display text-xl font-black text-gray-400 tracking-tight leading-tight mb-2">
+                        {product.name}
+                      </h3>
+                      <p className="text-xs text-gray-400 font-medium leading-relaxed mb-6 line-clamp-3">
+                        {product.description || product.short_description}
+                      </p>
+
+                      <div className="flex gap-4 py-3 border-y border-gray-100 mb-6 mt-auto">
+                        <div className="text-center pr-4 border-r border-gray-100">
+                          <div className="text-sm font-black text-gray-400">Upcoming</div>
+                          <div className="text-[8px] font-black text-gray-300 uppercase tracking-widest">Students</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-lg font-black text-gray-300">TBA</span>
+                        </div>
+                        <button
+                          onClick={() => toast.success(`Your vote for ${product.name} has been recorded!`)}
+                          className="bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-400 font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg transition-all"
+                        >
+                          VOTE
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

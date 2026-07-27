@@ -150,16 +150,15 @@ function AuthWidget() {
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2">6-DIGIT CODE</label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2">VERIFICATION CODE</label>
                 <input
                   type="text"
-                  inputMode="numeric"
-                  maxLength={6}
+                  maxLength={8}
                   value={otp}
-                  onChange={e => setOtp(e.target.value.replace(/\D/g, ""))}
+                  onChange={e => setOtp(e.target.value.trim())}
                   onKeyDown={e => e.key === "Enter" && verifyOtp()}
-                  placeholder="• • • • • •"
-                  className="w-full text-center text-2xl font-black tracking-[0.5em] py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+                  placeholder="Enter code"
+                  className="w-full text-center text-2xl font-black tracking-[0.3em] py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all uppercase"
                 />
                 {error && <p className="text-red-500 text-xs mt-1.5 font-medium">{error}</p>}
               </div>

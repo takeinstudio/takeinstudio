@@ -280,15 +280,22 @@ export default function VaultLogin() {
                   <motion.div variants={itemVariants} className="space-y-2">
                     <button onClick={() => setStep("email")} className="text-xs font-bold text-muted-foreground hover:text-foreground flex items-center gap-1 mb-4"><ArrowLeft size={12}/> Back</button>
                     <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#161514]">Check your email</h1>
-                    <p className="text-muted-foreground text-sm font-semibold">We sent a 6-digit code to <span className="text-foreground">{email}</span></p>
+                    <p className="text-muted-foreground text-sm font-semibold">We sent a code to <span className="text-foreground">{email}</span></p>
                   </motion.div>
 
                   <motion.form variants={itemVariants} onSubmit={handleVerifyOtp} className="space-y-5">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black tracking-widest text-[#5A5755] uppercase block">LOGIN CODE</label>
-                      <input type="text" placeholder="123456" value={otp} onChange={e => setOtp(e.target.value)} className="w-full px-4 py-3.5 rounded-2xl bg-white border border-[#E5E2DE] focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-center text-2xl tracking-[0.5em] font-mono shadow-sm" required maxLength={6} />
+                      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2">VERIFICATION CODE</label>
+                      <input
+                        type="text"
+                        maxLength={8}
+                        value={otp}
+                        onChange={e => setOtp(e.target.value.trim())}
+                        placeholder="Enter code"
+                        className="w-full text-center text-2xl font-black tracking-[0.3em] py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all uppercase"
+                      />
                     </div>
-                    <button type="submit" disabled={loading || otp.length < 6} className="w-full py-4 rounded-2xl bg-primary hover:bg-primary/95 text-white flex items-center justify-center gap-2 text-sm font-bold tracking-wider shadow-lg shadow-primary/20 transition-all disabled:opacity-75 mt-2">
+                    <button type="submit" disabled={loading} className="w-full py-4 rounded-2xl bg-primary hover:bg-primary/95 text-white flex items-center justify-center gap-2 text-sm font-bold tracking-wider shadow-lg shadow-primary/20 transition-all disabled:opacity-75 mt-2">
                       {loading ? <Loader2 className="animate-spin" size={16} /> : "VERIFY CODE"}
                     </button>
                   </motion.form>

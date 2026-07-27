@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, CheckCircle2, Users, Star, Lock, BookOpen,
   Shield, Sparkles, ChevronRight, Download, Mail, Loader2,
-  InputIcon, ArrowLeft, Phone, User,
+  ArrowLeft, Phone, User, Rocket, Compass, Calendar, Code, Briefcase, FileText
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import SEO from "@/components/SEO";
@@ -95,7 +95,6 @@ function AuthWidget() {
 
       <div className="p-6">
         <AnimatePresence mode="wait">
-
           {/* Step 1 — Email */}
           {step === "email" && (
             <motion.div key="email" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-4">
@@ -220,7 +219,7 @@ const fallbackCourse = {
   id: "aiwebdev",
   name: "The AI Web Developer's Playbook",
   slug: "aiwebdev",
-  short_description: "Build premium websites & SaaS platforms in hours using Claude Code, Antigravity IDE & the C.R.E.F. prompt system.",
+  short_description: "Build premium websites & SaaS platforms in hours using modern tools & prompt systems.",
   price: 99,
   currency: "INR",
   highlights: [
@@ -230,7 +229,7 @@ const fallbackCourse = {
     "Lifetime Access · One-time payment",
   ],
   volumes: [
-    "Volume I — AI-Native Foundations & Claude Code",
+    "Volume I — Foundations & Setup",
     "Volume II — Code Blueprints & Architecture",
     "Volume III — Freelance Manual & Client System",
   ],
@@ -246,6 +245,17 @@ const fallbackCourse = {
   students: "50+",
   rating: 5,
 };
+
+const upcomingGuides = [
+  { id: "ai-ml", name: "AI / ML Engineer", icon: Sparkles, color: "text-purple-500", bg: "bg-purple-50", border: "border-purple-200" },
+  { id: "fullstack", name: "Full-Stack Web Developer", icon: Code, color: "text-blue-500", bg: "bg-blue-50", border: "border-blue-200" },
+  { id: "data-science", name: "Data Science & Analyst", icon: Compass, color: "text-emerald-500", bg: "bg-emerald-50", border: "border-emerald-200" },
+  { id: "cybersecurity", name: "Cybersecurity", icon: Shield, color: "text-red-500", bg: "bg-red-50", border: "border-red-200" },
+  { id: "app-dev", name: "App Developer", icon: Phone, color: "text-cyan-500", bg: "bg-cyan-50", border: "border-cyan-200" },
+  { id: "cloud-devops", name: "Cloud / DevOps", icon: Rocket, color: "text-sky-500", bg: "bg-sky-50", border: "border-sky-200" },
+  { id: "sde", name: "Software Engineer (DSA+Prep)", icon: User, color: "text-indigo-500", bg: "bg-indigo-50", border: "border-indigo-200" },
+  { id: "ui-ux", name: "UI/UX Designer", icon: Star, color: "text-rose-500", bg: "bg-rose-50", border: "border-rose-200" },
+];
 
 /* ─── Main Page ─── */
 export default function VaultPage() {
@@ -268,40 +278,39 @@ export default function VaultPage() {
   return (
     <>
       <SEO
-        title="TakeIN Vault — Premium AI & Web Dev Courses"
-        description="Premium digital handbooks for developers. Learn to build with AI."
+        title="TakeIN Vault — Premium Tech Resources & Guides"
+        description="Premium digital handbooks, roadmaps, and execution guides for tech careers."
         url="https://takeinstudio.com/vault"
       />
 
       {/* ── Hero ── */}
-      <section className="bg-white pt-24 pb-10 px-4 sm:px-6 border-b border-gray-100 relative overflow-hidden">
+      <section className="bg-[#fafaf8] pt-24 pb-12 px-4 sm:px-6 border-b border-gray-100 relative overflow-hidden">
         <div className="absolute -top-32 right-0 w-80 h-80 bg-orange-50 rounded-full blur-[80px] pointer-events-none" />
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="flex flex-col lg:flex-row gap-10 items-start">
-
             {/* Left — headline */}
             <div className="flex-1">
-              <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 text-orange-600 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
-                <BookOpen size={11} /> TakeIN Vault
+              <div className="inline-flex items-center gap-2 bg-white border border-gray-200 shadow-sm text-gray-900 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+                <BookOpen size={11} className="text-orange-500" /> The Premium Tech Vault
               </div>
-              <h1 className="font-display text-4xl sm:text-5xl font-black text-gray-950 tracking-tight leading-[1.05] mb-4">
-                Learn to Build<br />
-                <span className="text-orange-500">with AI.</span>
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-gray-950 tracking-tight leading-[1.05] mb-4">
+                Execute Your <br />
+                <span className="text-orange-500">Tech Career.</span>
               </h1>
-              <p className="text-gray-500 text-base leading-relaxed mb-6 max-w-sm">
-                Premium handbooks for developers who want to ship real products fast.
+              <p className="text-gray-500 text-sm sm:text-base font-medium leading-relaxed mb-6 max-w-md">
+                Premium resources, masterclasses, and complete Career Execution Guides to take you from Day 1 to Job Ready.
               </p>
 
               {/* Trust row */}
               <div className="flex flex-wrap gap-4">
                 {[
-                  { icon: Users, text: "50+ Students" },
+                  { icon: Users, text: "Community" },
                   { icon: Star, text: "5.0 Rating" },
                   { icon: Shield, text: "Lifetime Access" },
-                  { icon: Download, text: "Instant Download" },
+                  { icon: Download, text: "Instant Resources" },
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-1.5 text-gray-500">
-                    <Icon size={13} className="text-orange-500" />
+                    <Icon size={13} className="text-gray-400" />
                     <span className="text-xs font-semibold">{text}</span>
                   </div>
                 ))}
@@ -309,17 +318,17 @@ export default function VaultPage() {
             </div>
 
             {/* Right — Auth widget or dashboard button */}
-            <div className="w-full lg:w-80 flex-shrink-0">
+            <div className="w-full lg:w-80 flex-shrink-0 relative z-20">
               {isLoggedIn ? (
                 <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center mb-4">
                     <Lock size={18} className="text-orange-500" />
                   </div>
                   <p className="font-black text-gray-900 text-sm mb-1">You're signed in</p>
-                  <p className="text-xs text-gray-400 mb-4">Access your purchased courses from your Vault dashboard.</p>
+                  <p className="text-xs text-gray-400 mb-4 font-medium">Access your purchased resources from your Vault dashboard.</p>
                   <Link
                     to="/vault/dashboard/my-vault"
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm"
                   >
                     Open My Vault <ArrowRight size={13} />
                   </Link>
@@ -332,17 +341,17 @@ export default function VaultPage() {
         </div>
       </section>
 
-      {/* ── Courses ── */}
-      <section className="bg-[#fafaf8] px-4 sm:px-6 py-12">
+      {/* ── Active Courses ── */}
+      <section className="bg-white px-4 sm:px-6 py-12 lg:py-16">
         <div className="container mx-auto max-w-5xl">
 
           {/* Label */}
           <div className="flex items-center gap-3 mb-8">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-              {loading ? "Loading…" : `${courses.length} Course${courses.length !== 1 ? "s" : ""}`}
+              Premium Resources
             </span>
             <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
-            <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest">Available Now</span>
+            <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest flex items-center gap-1"><Sparkles size={10}/> Available Now</span>
           </div>
 
           {/* Cards */}
@@ -353,9 +362,8 @@ export default function VaultPage() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300"
+                className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
               >
-                {/* Orange top strip */}
                 <div className="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-400" />
 
                 <div className="p-6 sm:p-8">
@@ -374,21 +382,9 @@ export default function VaultPage() {
                   <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950 tracking-tight leading-tight mb-2">
                     {course.name}
                   </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6 max-w-2xl">
                     {course.short_description}
                   </p>
-
-                  {/* Volumes */}
-                  <div className="space-y-2 mb-6">
-                    {(course.volumes || fallbackCourse.volumes).map((v: string, i: number) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-md bg-orange-100 border border-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <span className="text-[8px] font-black text-orange-600">{i + 1}</span>
-                        </div>
-                        <span className="text-sm text-gray-700 font-medium">{v}</span>
-                      </div>
-                    ))}
-                  </div>
 
                   {/* Stats row — mobile horizontal scroll */}
                   <div className="flex gap-4 py-4 border-y border-gray-100 mb-6 overflow-x-auto">
@@ -420,48 +416,100 @@ export default function VaultPage() {
                       <span className="text-3xl font-black text-gray-950">
                         {course.currency === "INR" ? "₹" : "$"}{course.price}
                       </span>
-                      <span className="text-xs text-gray-400 ml-2 font-medium">one-time</span>
+                      <span className="text-[10px] text-gray-400 ml-2 font-bold uppercase tracking-wider">one-time</span>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-2 flex-1 sm:justify-end">
                       <Link
                         to={`/vault/${course.slug}/checkout`}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl shadow-[0_4px_20px_rgba(249,115,22,0.25)] hover:shadow-[0_6px_24px_rgba(249,115,22,0.4)] transition-all flex items-center justify-center gap-2"
+                        className="bg-gray-950 hover:bg-black text-white font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl shadow-[0_4px_14px_rgba(0,0,0,0.1)] transition-all flex items-center justify-center gap-2"
                       >
                         Get Instant Access <ArrowRight size={13} />
                       </Link>
                       <Link
                         to={`/vault/${course.slug}`}
-                        className="border border-gray-200 hover:border-orange-300 text-gray-600 hover:text-orange-600 font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 bg-white"
+                        className="border border-gray-200 hover:border-gray-300 text-gray-600 hover:text-gray-900 font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 bg-white shadow-sm"
                       >
                         View Details <ChevronRight size={12} />
                       </Link>
                     </div>
                   </div>
 
-                  {/* Already enrolled — proper button */}
+                  {/* Already enrolled */}
                   {!isLoggedIn && (
                     <Link
                       to="/vault/login"
-                      className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gray-950 hover:bg-orange-600 text-white text-xs font-black uppercase tracking-widest transition-all duration-300"
+                      className="mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-500 hover:text-orange-600 text-[10px] font-black uppercase tracking-widest transition-all duration-300"
                     >
-                      <Lock size={11} /> Already Enrolled? Access Your Vault
+                      <Lock size={11} /> Already Enrolled? Sign In Here
                     </Link>
                   )}
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Coming soon */}
-          <div className="mt-6 border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center bg-white">
-            <div className="w-9 h-9 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center mx-auto mb-3">
-              <Sparkles size={16} className="text-orange-400" />
+      {/* ── Career Execution Guides (Upcoming) ── */}
+      <section className="bg-[#fafaf8] px-4 sm:px-6 py-12 lg:py-16 border-t border-gray-100">
+        <div className="container mx-auto max-w-5xl">
+          
+          <div className="mb-10 max-w-3xl">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="bg-gray-900 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
+                Coming Soon
+              </span>
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Career Execution Guides
+              </span>
             </div>
-            <p className="text-sm font-black text-gray-700 mb-1">More courses coming soon</p>
-            <p className="text-xs text-gray-400 font-medium">
-              Advanced AI SaaS Builder · Freelance Client OS · Agency Growth System
+            <h2 className="font-display text-3xl font-black text-gray-950 tracking-tight leading-tight mb-3">
+              From Day 1 <ArrowRight className="inline-block mx-1 mb-1 text-gray-400" size={24}/> Job Ready.
+            </h2>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+              Finding resources isn't the problem—knowing exactly what to learn, in what order, and from where is. 
+              Our upcoming Career Execution Guides provide a single structured path to land your dream tech role.
             </p>
+            
+            {/* Features list */}
+            <div className="flex flex-wrap gap-4 text-xs font-semibold text-gray-600">
+              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Calendar size={13} className="text-orange-500"/> Day-by-day plan</span>
+              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Briefcase size={13} className="text-orange-500"/> Best resources</span>
+              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><FileText size={13} className="text-orange-500"/> Resume templates</span>
+              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Code size={13} className="text-orange-500"/> Projects & DSA</span>
+            </div>
+          </div>
+
+          {/* Compact Grid of Guides */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {upcomingGuides.map((guide, idx) => (
+              <motion.div
+                key={guide.id}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between hover:border-gray-300 transition-colors shadow-sm group"
+              >
+                <div className="flex items-start justify-between mb-8">
+                  <div className={`w-10 h-10 rounded-lg ${guide.bg} ${guide.border} border flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>
+                    <guide.icon size={18} className={guide.color} />
+                  </div>
+                  <span className="bg-gray-100 text-gray-500 text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-full">
+                    Vote Now
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-display font-black text-gray-900 text-sm leading-tight mb-1 group-hover:text-orange-600 transition-colors">
+                    {guide.name}
+                  </h3>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    Execution Guide
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
         </div>

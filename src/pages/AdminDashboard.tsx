@@ -18,6 +18,7 @@ import DocumentsBuilder from "./admin/DocumentsBuilder";
 import EmailCenterBuilder from "./admin/EmailCenterBuilder";
 import SupportCenterBuilder from "./admin/SupportCenterBuilder";
 import VaultManagerBuilder from "./admin/VaultManagerBuilder";
+import VaultCatalogBuilder from "./admin/VaultCatalogBuilder";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -525,6 +526,7 @@ export default function AdminDashboard() {
           <div className="pt-4 pb-2">
             <p className="px-4 text-[10px] font-black tracking-widest text-muted-foreground uppercase">Vault Administration</p>
           </div>
+          <button onClick={() => { setActiveTab("vault-catalog"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "vault-catalog" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Briefcase size={18}/> Catalog (Products)</button>
           <button onClick={() => { setActiveTab("vault-customers"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "vault-customers" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><Users size={18}/> Customers</button>
           <button onClick={() => { setActiveTab("support-center"); setMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === "support-center" ? "bg-primary/10 text-primary border border-primary/20" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}><MessageSquare size={18}/> Support Tickets</button>
 
@@ -590,6 +592,7 @@ export default function AdminDashboard() {
           {activeTab === "email-center" && <EmailCenterBuilder />}
 
           {/* Vault Administration */}
+          {activeTab === "vault-catalog" && <VaultCatalogBuilder />}
           {activeTab === "vault-customers" && <VaultManagerBuilder />}
           {activeTab === "support-center" && <SupportCenterBuilder />}
 

@@ -8,7 +8,7 @@ import SEO from "@/components/SEO";
 import { sendWelcomeEmail } from "@/lib/email";
 
 export default function VaultLogin() {
-  const [step, setStep] = useState<"email" | "otp" | "profile">("email");
+  const [step, setStep] = useState<"login" | "email" | "otp" | "profile">("login");
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [name, setName] = useState("");
@@ -51,13 +51,22 @@ export default function VaultLogin() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.verifyOtp({
+      let { data, error: err } = await supabase.auth.verifyOtp({
         email,
         token: otp,
-        type: 'email'
+        type: "email",
       });
 
-      if (error) throw error;
+      // Fallback for brand new users: Supabase treats their first OTP as a "signup" token instead of an "email" token
+      if (err && err.message.toLowerCase().includes("invalid")) {
+        const retry = await supabase.auth.verifyOtp({ email, token: otp, type: "signup" });
+        if (!retry.error) {
+          data = retry.data;
+          err = null;
+        }
+      }
+
+      if (err) throw err;
 
       if (data.session) {
         // Check if user has a complete profile
@@ -195,12 +204,59 @@ export default function VaultLogin() {
           <div className="my-auto w-full max-w-md mx-auto">
             <AnimatePresence mode="wait">
               
-              {/* STEP 1: EMAIL */}
+              {/* STEP 0: STANDARD LOGIN (Default) */}
+              {step === "login" && (
+                <motion.div key="step-login" variants={containerVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
+                  <motion.div variants={itemVariants} className="space-y-2">
+                    <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#161514]">Sign In to Your Vault</h1>
+                    <p className="text-muted-foreground text-sm font-semibold">Enter your email and password to access your resources.</p>
+                  </motion.div>
+
+                  <motion.form variants={itemVariants} onSubmit={handlePasswordLogin} className="space-y-5">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black tracking-widest text-[#5A5755] uppercase block">EMAIL ADDRESS</label>
+                      <div className="relative group">
+                        <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 group-focus-within:text-primary transition-colors" />
+                        <input type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white border border-[#E5E2DE] focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm shadow-sm" required />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[10px] font-black tracking-widest text-[#5A5755] uppercase block">PASSWORD</label>
+                        <button type="button" onClick={() => setStep("email")} className="text-[10px] font-bold text-primary hover:underline uppercase tracking-widest">Forgot?</button>
+                      </div>
+                      <div className="relative group">
+                        <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 group-focus-within:text-primary transition-colors" />
+                        <input type={showPassword ? "text" : "password"} placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-11 pr-11 py-3.5 rounded-2xl bg-white border border-[#E5E2DE] focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm shadow-sm" required />
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground">
+                           {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <button type="submit" disabled={loading || !email || !password} className="w-full py-4 rounded-2xl bg-primary hover:bg-primary/95 text-white flex items-center justify-center gap-2 text-sm font-bold tracking-wider shadow-lg shadow-primary/20 transition-all disabled:opacity-75 mt-2">
+                      {loading ? <Loader2 className="animate-spin" size={16} /> : <span className="flex items-center gap-2">SIGN IN <ArrowRight size={16} /></span>}
+                    </button>
+                  </motion.form>
+                  
+                  {/* Register Option */}
+                  <motion.div variants={itemVariants} className="pt-6 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground font-semibold mb-3 text-center">Don't have an account?</p>
+                    <button onClick={() => setStep("email")} className="w-full py-3.5 rounded-xl bg-white border border-[#E5E2DE] hover:border-primary/40 hover:bg-primary/5 text-foreground flex items-center justify-center text-xs font-bold transition-all shadow-sm">
+                      Create your free account
+                    </button>
+                  </motion.div>
+                </motion.div>
+              )}
+              
+              {/* STEP 1: EMAIL (Now used for Registration / Forgot Password) */}
               {step === "email" && (
                 <motion.div key="step-email" variants={containerVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#161514]">Sign In or Create Account</h1>
-                    <p className="text-muted-foreground text-sm font-semibold">New? We'll send a one-time code — no password needed.</p>
+                    <button onClick={() => setStep("login")} className="text-xs font-bold text-muted-foreground hover:text-foreground flex items-center gap-1 mb-4"><ArrowLeft size={12}/> Back to Login</button>
+                    <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#161514]">Register / Reset</h1>
+                    <p className="text-muted-foreground text-sm font-semibold">We'll send a one-time code to authenticate you instantly.</p>
                   </motion.div>
 
                   <motion.form variants={itemVariants} onSubmit={handleSendOtp} className="space-y-5">
@@ -212,26 +268,9 @@ export default function VaultLogin() {
                       </div>
                     </div>
                     <button type="submit" disabled={loading} className="w-full py-4 rounded-2xl bg-primary hover:bg-primary/95 text-white flex items-center justify-center gap-2 text-sm font-bold tracking-wider shadow-lg shadow-primary/20 transition-all disabled:opacity-75 mt-2">
-                      {loading ? <Loader2 className="animate-spin" size={16} /> : <span className="flex items-center gap-2">CONTINUE WITH EMAIL <ArrowRight size={16} /></span>}
+                      {loading ? <Loader2 className="animate-spin" size={16} /> : <span className="flex items-center gap-2">SEND ONE-TIME CODE <ArrowRight size={16} /></span>}
                     </button>
                   </motion.form>
-                  
-                  {/* Password Fallback for existing users */}
-                  <motion.div variants={itemVariants} className="pt-6 border-t border-border/50">
-                    <p className="text-xs text-muted-foreground font-semibold mb-4 text-center">Already have a password set up?</p>
-                    <form onSubmit={handlePasswordLogin} className="space-y-4">
-                      <div className="relative group">
-                        <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 group-focus-within:text-primary transition-colors" />
-                        <input type={showPassword ? "text" : "password"} placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-11 pr-11 py-3 rounded-xl bg-white border border-[#E5E2DE] focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm shadow-sm" />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground">
-                           {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
-                        </button>
-                      </div>
-                      <button type="submit" disabled={loading || !email || !password} className="w-full py-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-muted flex items-center justify-center text-xs font-bold transition-all disabled:opacity-50">
-                        Sign In with Password
-                      </button>
-                    </form>
-                  </motion.div>
                 </motion.div>
               )}
 

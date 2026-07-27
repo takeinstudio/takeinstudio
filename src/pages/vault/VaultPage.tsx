@@ -42,7 +42,17 @@ function AuthWidget() {
     setError("");
     if (!otp || otp.length < 6) { setError("Enter the 6-digit code from your email."); return; }
     setLoading(true);
-    const { data, error: err } = await supabase.auth.verifyOtp({ email, token: otp, type: "email" });
+    let { data, error: err } = await supabase.auth.verifyOtp({ email, token: otp, type: "email" });
+    
+    // Fallback for brand new users: Supabase treats their first OTP as a "signup" token instead of an "email" token
+    if (err && err.message.toLowerCase().includes("invalid")) {
+      const retry = await supabase.auth.verifyOtp({ email, token: otp, type: "signup" });
+      if (!retry.error) {
+        data = retry.data;
+        err = null;
+      }
+    }
+
     if (err) { setError(err.message); setLoading(false); return; }
 
     // Check if profile already exists

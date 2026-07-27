@@ -59,7 +59,7 @@ export default function ExploreVault() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {products.filter(p => p.status !== "coming_soon").map((product, idx) => {
-            const studentCount = product.slug === "aiwebdev" ? "35" : "50+";
+            const studentCount = product.slug === "aiwebdev" ? "35" : "8+";
 
             return (
               <motion.div

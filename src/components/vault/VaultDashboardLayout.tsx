@@ -86,12 +86,20 @@ export default function VaultDashboardLayout({ children }: { children: React.Rea
         </nav>
         
         <div className="p-4 border-t border-gray-200">
-          <div className="px-4 pb-4 mb-4 border-b border-gray-100">
-            <p className="text-xs text-gray-500 font-medium truncate">
-              {profile?.full_name || profile?.email || "Loading..."}
-            </p>
+          <div className="flex items-center gap-3 p-3 mb-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#FF6B00] to-orange-400 flex items-center justify-center text-white font-bold text-sm shadow-md flex-shrink-0">
+              {profile?.full_name ? profile.full_name.charAt(0).toUpperCase() : (profile?.email ? profile.email.charAt(0).toUpperCase() : "U")}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-gray-900 truncate">
+                {profile?.full_name || "Vault Member"}
+              </p>
+              <p className="text-[10px] text-gray-500 truncate font-medium mt-0.5">
+                {profile?.email || "Loading..."}
+              </p>
+            </div>
           </div>
-          <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors">
+          <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors border border-transparent hover:border-red-100">
             <LogOut size={16}/> Sign Out
           </button>
         </div>

@@ -9,6 +9,7 @@ export default function VaultDashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [entitlements, setEntitlements] = useState<any[]>([]);
   const [supportCount, setSupportCount] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,15 +17,17 @@ export default function VaultDashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return;
 
-      const [profileRes, entRes, suppRes] = await Promise.all([
+      const [profileRes, entRes, suppRes, prodRes] = await Promise.all([
         supabase.from("vault_profiles").select("*").eq("id", session.user.id).single(),
         supabase.from("vault_entitlements").select("*, vault_products(*)").eq("user_id", session.user.id),
-        supabase.from("vault_support_conversations").select("id", { count: "exact" }).eq("customer_id", session.user.id).eq("status", "awaiting_customer")
+        supabase.from("vault_support_conversations").select("id", { count: "exact" }).eq("customer_id", session.user.id).eq("status", "awaiting_customer"),
+        supabase.from("vault_products").select("id", { count: "exact" })
       ]);
 
       if (profileRes.data) setProfile(profileRes.data);
       if (entRes.data) setEntitlements(entRes.data);
       if (suppRes.count !== null) setSupportCount(suppRes.count);
+      if (prodRes.count !== null) setTotalProducts(prodRes.count);
 
       setLoading(false);
     };
@@ -35,6 +38,11 @@ export default function VaultDashboard() {
   const activeEntitlements = entitlements.filter(e => e.status === "active");
   const latestEntitlement = activeEntitlements.length > 0 ? activeEntitlements.reduce((a, b) => new Date(a.granted_at) > new Date(b.granted_at) ? a : b) : null;
   const latestProduct = latestEntitlement?.vault_products;
+  
+  const completionPercentage = totalProducts > 0 ? Math.round((activeEntitlements.length / totalProducts) * 100) : 0;
+  const radius = 28;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (completionPercentage / 100) * circumference;
 
   if (loading) {
     return <div className="p-8 animate-pulse text-gray-500">Loading your Vault...</div>;
@@ -63,13 +71,36 @@ export default function VaultDashboard() {
         </motion.div>
 
         {/* Overview Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-gray-400 mb-2">
-              <Package size={14} />
-              <p className="text-[10px] tracking-widest font-black uppercase">MY PRODUCTS</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+          {/* Progress Ring Card (Takes up 1 column on mobile, 1 column on desktop) */}
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-[#FF6B00] mb-1.5">
+                <Package size={14} />
+                <p className="text-[10px] tracking-widest font-black uppercase">VAULT ACCESS</p>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">{entitlements.length} <span className="text-sm font-medium text-gray-400">/ {totalProducts}</span></p>
+              <p className="text-xs text-gray-500 mt-1 font-medium">Unlocked</p>
             </div>
-            <p className="text-2xl font-bold text-gray-900">{entitlements.length}</p>
+            
+            {/* SVG Circular Progress Ring */}
+            <div className="relative w-16 h-16 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r={radius} className="stroke-gray-100" strokeWidth="6" fill="none" />
+                <motion.circle 
+                  cx="32" cy="32" r={radius} 
+                  className="stroke-[#FF6B00]" 
+                  strokeWidth="6" 
+                  fill="none" 
+                  strokeLinecap="round"
+                  initial={{ strokeDashoffset: circumference }}
+                  animate={{ strokeDashoffset }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  style={{ strokeDasharray: circumference }}
+                />
+              </svg>
+              <span className="absolute text-[11px] font-bold text-gray-900">{completionPercentage}%</span>
+            </div>
           </div>
           
           <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">

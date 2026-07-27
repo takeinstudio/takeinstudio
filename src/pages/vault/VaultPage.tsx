@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -351,177 +352,107 @@ export default function VaultPage() {
         </div>
       </section>
 
-      {/* ── Active Courses ── */}
+      {/* ── Vault Marketplace Grid ── */}
       <section className="bg-white px-4 sm:px-6 py-12 lg:py-16">
-        <div className="container mx-auto max-w-5xl">
-
-          {/* Label */}
+        <div className="container mx-auto max-w-6xl">
           <div className="flex items-center gap-3 mb-8">
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
               Premium Resources
             </span>
             <span className="w-1 h-1 rounded-full bg-gray-300 inline-block" />
-            <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest flex items-center gap-1"><Sparkles size={10}/> Available Now</span>
+            <span className="text-[10px] font-black text-orange-500 uppercase tracking-widest flex items-center gap-1">
+              <Sparkles size={10} /> The Complete Catalog
+            </span>
           </div>
 
-          {/* Cards */}
-          <div className="space-y-6">
-            {courses.map((course, idx) => (
-              <motion.div
-                key={course.id || idx}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <div className="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product, idx) => {
+              const isComingSoon = product.status === "coming_soon" || !product.is_published;
+              const studentCount = product.slug === "aiwebdev" ? "35" : "Upcoming";
 
-                <div className="p-6 sm:p-8">
-                  {/* Badges */}
-                  <div className="flex flex-wrap items-center gap-2 mb-5">
-                    <span className="bg-orange-50 border border-orange-200 text-orange-600 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
-                      Vol I · II · III
-                    </span>
-                    <span className="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
-                      Live Now
-                    </span>
-                    <span className="text-[9px] font-bold text-gray-400">{course.pages}</span>
-                  </div>
-
-                  {/* Title */}
-                  <h2 className="font-display text-xl sm:text-2xl font-black text-gray-950 tracking-tight leading-tight mb-2">
-                    {course.name}
-                  </h2>
-                  <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6 max-w-2xl">
-                    {course.short_description}
-                  </p>
-
-                  {/* Stats row — mobile horizontal scroll */}
-                  <div className="flex gap-4 py-4 border-y border-gray-100 mb-6 overflow-x-auto">
-                    {[
-                      { val: course.modules || 12, label: "Modules" },
-                      { val: course.students || "50+", label: "Students" },
-                      { val: `${course.rating || 5}★`, label: "Rating" },
-                    ].map(({ val, label }) => (
-                      <div key={label} className="text-center flex-shrink-0 px-4 first:pl-0 last:pr-0 border-r border-gray-100 last:border-0">
-                        <div className="text-lg font-black text-gray-950">{val}</div>
-                        <div className="text-[9px] font-black text-gray-400 uppercase tracking-wider">{label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* What's included */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-7">
-                    {(course.included || fallbackCourse.included).map((item: string) => (
-                      <div key={item} className="flex items-center gap-2">
-                        <CheckCircle2 size={13} className="text-orange-500 flex-shrink-0" />
-                        <span className="text-xs text-gray-600 font-medium">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Price + CTAs */}
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <div className="flex-shrink-0">
-                      <span className="text-3xl font-black text-gray-950">
-                        {course.currency === "INR" ? "₹" : "$"}{course.price}
+              return (
+                <motion.div
+                  key={product.id || idx}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className="bg-white border border-gray-200 rounded-2xl flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all shadow-sm group overflow-hidden relative"
+                >
+                  <div className={`h-1 w-full ${isComingSoon ? 'bg-gray-200' : 'bg-gradient-to-r from-orange-500 to-amber-400'}`} />
+                  
+                  <div className="p-6 flex flex-col flex-1">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[9px] font-black tracking-widest uppercase text-gray-400">
+                        {product.category || "Execution Guide"}
                       </span>
-                      <span className="text-[10px] text-gray-400 ml-2 font-bold uppercase tracking-wider">one-time</span>
+                      {isComingSoon ? (
+                        <button 
+                          onClick={() => toast.success(`Thanks for voting! We'll let you know when ${product.name} is ready.`)}
+                          className="bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-gray-200 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full transition-colors"
+                        >
+                          VOTE NOW
+                        </button>
+                      ) : (
+                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full flex items-center gap-1">
+                          <CheckCircle2 size={10} /> AVAILABLE
+                        </span>
+                      )}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-2 flex-1 sm:justify-end">
-                      <Link
-                        to={`/vault/${course.slug}/checkout`}
-                        className="bg-gray-950 hover:bg-black text-white font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl shadow-[0_4px_14px_rgba(0,0,0,0.1)] transition-all flex items-center justify-center gap-2"
-                      >
-                        Get Instant Access <ArrowRight size={13} />
-                      </Link>
-                      <Link
-                        to={`/vault/${course.slug}`}
-                        className="border border-gray-200 hover:border-gray-300 text-gray-600 hover:text-gray-900 font-black text-[11px] uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 bg-white shadow-sm"
-                      >
-                        View Details <ChevronRight size={12} />
-                      </Link>
+                    <h3 className="font-display text-xl font-black text-gray-950 tracking-tight leading-tight mb-2 group-hover:text-orange-600 transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-gray-500 font-medium leading-relaxed mb-6 line-clamp-3">
+                      {product.description || product.short_description}
+                    </p>
+
+                    {/* Stats */}
+                    <div className="flex gap-4 py-3 border-y border-gray-100 mb-6 mt-auto">
+                      <div className="text-center pr-4 border-r border-gray-100">
+                        <div className="text-sm font-black text-gray-900">{studentCount}</div>
+                        <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Students</div>
+                      </div>
+                      {!isComingSoon && (
+                        <div className="text-center px-4">
+                          <div className="text-sm font-black text-gray-900">5.0★</div>
+                          <div className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Rating</div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Price and CTA */}
+                    <div className="flex items-center justify-between">
+                      <div>
+                        {isComingSoon ? (
+                          <span className="text-lg font-black text-gray-400">TBA</span>
+                        ) : (
+                          <>
+                            <span className="text-xl font-black text-gray-950">₹{product.price_in || product.price || 99}</span>
+                          </>
+                        )}
+                      </div>
+                      
+                      {isComingSoon ? (
+                        <button
+                          onClick={() => toast.success(`Your vote for ${product.name} has been recorded!`)}
+                          className="bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-500 font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg transition-all"
+                        >
+                          VOTE
+                        </button>
+                      ) : (
+                        <Link
+                          to={`/vault/${product.slug}`}
+                          className="bg-gray-950 hover:bg-black text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                        >
+                          VIEW <ChevronRight size={12} />
+                        </Link>
+                      )}
                     </div>
                   </div>
-
-                  {/* Already enrolled */}
-                  {!isLoggedIn && (
-                    <Link
-                      to="/vault/login"
-                      className="mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-500 hover:text-orange-600 text-[10px] font-black uppercase tracking-widest transition-all duration-300"
-                    >
-                      <Lock size={11} /> Already Enrolled? Sign In Here
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
-        </div>
-      </section>
-
-      {/* ── Career Execution Guides (Upcoming) ── */}
-      <section className="bg-[#fafaf8] px-4 sm:px-6 py-12 lg:py-16 border-t border-gray-100">
-        <div className="container mx-auto max-w-5xl">
-          
-          <div className="mb-10 max-w-3xl">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="bg-gray-900 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
-                Coming Soon
-              </span>
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                Career Execution Guides
-              </span>
-            </div>
-            <h2 className="font-display text-3xl font-black text-gray-950 tracking-tight leading-tight mb-3">
-              From Day 1 <ArrowRight className="inline-block mx-1 mb-1 text-gray-400" size={24}/> Job Ready.
-            </h2>
-            <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
-              Finding resources isn't the problem—knowing exactly what to learn, in what order, and from where is. 
-              Our upcoming Career Execution Guides provide a single structured path to land your dream tech role.
-            </p>
-            
-            {/* Features list */}
-            <div className="flex flex-wrap gap-4 text-xs font-semibold text-gray-600">
-              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Calendar size={13} className="text-orange-500"/> Day-by-day plan</span>
-              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Briefcase size={13} className="text-orange-500"/> Best resources</span>
-              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><FileText size={13} className="text-orange-500"/> Resume templates</span>
-              <span className="flex items-center gap-1.5 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm"><Code size={13} className="text-orange-500"/> Projects & DSA</span>
-            </div>
-          </div>
-
-          {/* Compact Grid of Guides */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {upcomingGuides.map((guide, idx) => (
-              <motion.div
-                key={guide.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col justify-between hover:border-gray-300 transition-colors shadow-sm group"
-              >
-                <div className="flex items-start justify-between mb-8">
-                  <div className={`w-10 h-10 rounded-lg ${guide.bg} ${guide.border} border flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>
-                    <guide.icon size={18} className={guide.color} />
-                  </div>
-                  <span className="bg-gray-100 text-gray-500 text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded-full">
-                    Vote Now
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-display font-black text-gray-900 text-sm leading-tight mb-1 group-hover:text-orange-600 transition-colors">
-                    {guide.name}
-                  </h3>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                    Execution Guide
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
         </div>
       </section>
     </>

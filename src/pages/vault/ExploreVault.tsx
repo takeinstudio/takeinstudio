@@ -15,7 +15,7 @@ export default function ExploreVault() {
       const { data: { session } } = await supabase.auth.getSession();
       
       const [prodRes, entRes] = await Promise.all([
-        supabase.from("vault_products").select("*").eq("is_published", true),
+        supabase.from("vault_products").select("*").order("created_at", { ascending: true }),
         session ? supabase.from("vault_entitlements").select("*").eq("user_id", session.user.id) : { data: [] }
       ]);
 
@@ -66,12 +66,12 @@ export default function ExploreVault() {
             return (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm relative overflow-hidden"
+                className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm relative overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <span className="text-[10px] font-black tracking-[0.2em] text-gray-400 uppercase">
                     {product.category || "PRODUCT"}
                   </span>
@@ -93,11 +93,11 @@ export default function ExploreVault() {
                   )}
                 </div>
 
-                <div className="mb-6 border-b border-gray-100 pb-6">
-                  <h2 className="font-display text-2xl font-black text-gray-950 tracking-tight mb-2">
+                <div className="mb-5 border-b border-gray-100 pb-5">
+                  <h2 className="font-display text-xl font-black text-gray-950 tracking-tight mb-1.5">
                     {product.name}
                   </h2>
-                  <p className="text-xs text-gray-600 leading-relaxed h-16 line-clamp-3">
+                  <p className="text-[11px] text-gray-600 leading-relaxed h-12 line-clamp-3">
                     {product.description || product.short_description}
                   </p>
                 </div>
@@ -114,26 +114,18 @@ export default function ExploreVault() {
                 {isOwned ? (
                   <Link
                     to={`/vault/view/${product.slug}`}
-                    className="w-full bg-white border border-gray-200 text-gray-900 py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-gray-50 shadow-sm transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-white border border-gray-200 text-gray-900 py-3 rounded-xl font-black tracking-widest text-[10px] uppercase hover:bg-gray-50 shadow-sm transition-all flex items-center justify-center gap-2 mt-auto"
                   >
                     OPEN
                   </Link>
-                ) : isComingSoon ? (
-                  <div className="w-full bg-gray-50 text-gray-400 py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase text-center border border-gray-200 cursor-not-allowed">
-                    NOT YET AVAILABLE
-                  </div>
-                ) : isPending ? (
-                  <div className="w-full bg-gray-50 text-gray-400 py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase text-center border border-gray-200">
-                    PENDING VERIFICATION
-                  </div>
                 ) : (
-                  <a
-                    href={product.checkout_url || `/vault/${product.slug}`}
-                    className="w-full bg-gray-900 text-white py-3.5 rounded-xl font-black tracking-widest text-[11px] uppercase hover:bg-gray-800 shadow-sm transition-all flex items-center justify-center gap-2"
+                  <Link
+                    to={`/vault/${product.slug}`}
+                    className="w-full bg-gray-900 text-white py-3 rounded-xl font-black tracking-widest text-[10px] uppercase hover:bg-gray-800 shadow-sm transition-all flex items-center justify-center gap-2 mt-auto"
                   >
-                    GET ACCESS
+                    EXPLORE {product.name}
                     <ArrowRight size={14} />
-                  </a>
+                  </Link>
                 )}
               </motion.div>
             );

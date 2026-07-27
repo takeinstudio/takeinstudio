@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Users, Plus, Shield, ShieldOff, Loader2, ArrowLeft, Mail, Phone, Calendar, CreditCard, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { sendManualOnboardEmail, sendProductGrantedEmail } from "@/lib/email";
 
 export default function VaultManagerBuilder() {
   const [customers, setCustomers] = useState<any[]>([]);
@@ -20,6 +21,7 @@ export default function VaultManagerBuilder() {
   const [formData, setFormData] = useState({
     email: "",
     name: "",
+    phone: "",
     password: "",
     productId: ""
   });
@@ -98,6 +100,7 @@ export default function VaultManagerBuilder() {
         id: newUserId,
         email: formData.email,
         full_name: formData.name,
+        phone: formData.phone,
         role: "customer"
       });
 
@@ -117,8 +120,12 @@ export default function VaultManagerBuilder() {
       });
 
       toast.success("Customer created & access granted successfully!");
+      
+      // Trigger Welcome Email
+      await sendManualOnboardEmail(formData.email, formData.name, formData.password);
+
       setIsCreating(false);
-      setFormData({ email: "", name: "", password: "", productId: "", razorpayId: "", amount: "99" });
+      setFormData({ email: "", name: "", phone: "", password: "", productId: "" });
       fetchData();
       
     } catch (err: any) {
@@ -135,13 +142,22 @@ export default function VaultManagerBuilder() {
 
     setIsSubmitting(true);
     try {
-      // 1. Insert Purchase
-      await supabase.from("vault_purchases").insert({
-        user_id: selectedCustomer.id,
-        product_id: formData.productId,
-        payment_status: "paid",
-        provider: "manual"
-      });
+      // 1. Check if already purchased to avoid "Paid Paid" duplicates
+      const { data: existingPurchase } = await supabase
+        .from("vault_purchases")
+        .select("id")
+        .eq("user_id", selectedCustomer.id)
+        .eq("product_id", formData.productId)
+        .single();
+
+      if (!existingPurchase) {
+        await supabase.from("vault_purchases").insert({
+          user_id: selectedCustomer.id,
+          product_id: formData.productId,
+          payment_status: "paid",
+          provider: "manual"
+        });
+      }
 
       // 2. Grant Entitlement
       const { error: entError } = await supabase.from("vault_entitlements").insert({
@@ -155,9 +171,13 @@ export default function VaultManagerBuilder() {
          await supabase.from("vault_entitlements").update({ status: "active" }).eq("user_id", selectedCustomer.id).eq("product_id", formData.productId);
       }
 
+      // Trigger Email Notification
+      const product = products.find(p => p.id === formData.productId);
+      await sendProductGrantedEmail(selectedCustomer.email, product?.name || "Premium Resource");
+
       toast.success("Access granted to existing customer!");
       setIsGranting(false);
-      setFormData({ email: "", name: "", password: "", productId: "", razorpayId: "", amount: "99" });
+      setFormData({ email: "", name: "", phone: "", password: "", productId: "" });
       viewCustomer(selectedCustomer); // Refresh customer details
     } catch (err: any) {
       toast.error(err.message || "Failed to grant access");
@@ -286,7 +306,11 @@ export default function VaultManagerBuilder() {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 block">Phone Number</label>
+              <input type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm" placeholder="+91 9876543210" />
+            </div>
             <div>
               <label className="text-xs font-semibold text-muted-foreground uppercase mb-1.5 flex items-center gap-1"><Lock size={12}/> Account Password</label>
               <input type="text" required minLength={6} value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm font-mono" placeholder="Set a secure password" />

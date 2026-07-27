@@ -120,9 +120,9 @@ export default function Footer() {
                 <s.icon size={15} />
               </a>
             ))}
-            
+
             <PhoneUnlockButton variant="footer-whatsapp" />
-            
+
             <a
               href="mailto:takeinstudio@gmail.com"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.06)] flex items-center justify-center text-gray-600 hover:text-[#FF6B00] transition-colors"

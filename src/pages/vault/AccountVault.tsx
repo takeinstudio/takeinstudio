@@ -221,13 +221,12 @@ export default function AccountVault() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Repeat new password"
-                    className={`w-full p-3 pr-10 bg-gray-50 border rounded-xl text-sm font-medium text-gray-900 focus:outline-none transition-all ${
-                      confirmPassword && confirmPassword !== newPassword
+                    className={`w-full p-3 pr-10 bg-gray-50 border rounded-xl text-sm font-medium text-gray-900 focus:outline-none transition-all ${confirmPassword && confirmPassword !== newPassword
                         ? "border-red-300 focus:border-red-400 focus:ring-1 focus:ring-red-100"
                         : confirmPassword && confirmPassword === newPassword
-                        ? "border-green-300 focus:border-green-400 focus:ring-1 focus:ring-green-100"
-                        : "border-gray-200 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00]/20"
-                    }`}
+                          ? "border-green-300 focus:border-green-400 focus:ring-1 focus:ring-green-100"
+                          : "border-gray-200 focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00]/20"
+                      }`}
                   />
                   <button
                     type="button"
@@ -239,9 +238,8 @@ export default function AccountVault() {
                 </div>
                 {/* Live match indicator */}
                 {confirmPassword && (
-                  <p className={`text-[10px] font-bold mt-1.5 flex items-center gap-1 ${
-                    confirmPassword === newPassword ? "text-green-600" : "text-red-500"
-                  }`}>
+                  <p className={`text-[10px] font-bold mt-1.5 flex items-center gap-1 ${confirmPassword === newPassword ? "text-green-600" : "text-red-500"
+                    }`}>
                     {confirmPassword === newPassword
                       ? <><CheckCircle2 size={10} /> Passwords match</>
                       : <><AlertCircle size={10} /> Passwords do not match</>
@@ -313,9 +311,8 @@ export default function AccountVault() {
                           {new Date(purchase.purchased_at).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                            purchase.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
-                          }`}>
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${purchase.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
+                            }`}>
                             {purchase.payment_status}
                           </span>
                         </td>

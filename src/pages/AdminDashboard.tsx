@@ -557,10 +557,12 @@ export default function AdminDashboard() {
         <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
           {/* Header */}
           <header className="mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-3xl font-display font-bold capitalize">{activeTab.replace("-", " ")}</h2>
-              <p className="text-muted-foreground text-sm mt-1">Manage your website data in real-time.</p>
-            </div>
+            {activeTab !== "vault-customers" ? (
+              <div>
+                <h2 className="text-3xl font-display font-bold capitalize">{activeTab.replace("-", " ")}</h2>
+                <p className="text-muted-foreground text-sm mt-1">Manage your website data in real-time.</p>
+              </div>
+            ) : <div />}
             
 
 

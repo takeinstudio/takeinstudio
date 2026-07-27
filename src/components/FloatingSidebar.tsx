@@ -42,11 +42,11 @@ export default function FloatingSidebar() {
   ];
 
   return (
-    <div 
+    <div
       className={`fixed top-1/2 -translate-y-1/2 z-[99] flex items-center transition-transform duration-300 ease-in-out md:translate-x-0 md:right-4 ${isMobileOpen ? "right-3 translate-x-0" : "right-0 translate-x-full"}`}
     >
       {/* Mobile Toggle Button */}
-      <button 
+      <button
         className="md:hidden absolute right-full top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-12 bg-white border border-gray-200 border-r-0 rounded-l-xl shadow-[-4px_0_10px_rgba(0,0,0,0.05)] text-gray-500 hover:text-primary transition-colors"
         onClick={() => setIsMobileOpen(!isMobileOpen)}
       >
@@ -89,9 +89,8 @@ export default function FloatingSidebar() {
             whileHover={{ scale: 1.4, x: -6, zIndex: 50 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            className={`w-9 h-9 relative rounded-full flex items-center justify-center bg-primary text-white shadow-sm ${
-              showPhoneMenu ? "ring-2 ring-primary/45" : ""
-            }`}
+            className={`w-9 h-9 relative rounded-full flex items-center justify-center bg-primary text-white shadow-sm ${showPhoneMenu ? "ring-2 ring-primary/45" : ""
+              }`}
           >
             <motion.div
               animate={{ rotate: showPhoneMenu ? 180 : 0 }}

@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -32,6 +33,25 @@ export default function LoginPage() {
       toast.error(error.message || "Invalid credentials.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!username) {
+      toast.error("Please enter your admin email in the Email Address field to reset the password.");
+      return;
+    }
+    setResetting(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(username, {
+        redirectTo: window.location.origin + '/vault/update-password',
+      });
+      if (error) throw error;
+      toast.success(`Password reset email sent to ${username}! Please check your inbox.`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to send reset email.");
+    } finally {
+      setResetting(false);
     }
   };
 
@@ -193,6 +213,19 @@ export default function LoginPage() {
                 )}
               </motion.button>
             </motion.form>
+
+            {/* Temporary Password Reset Button */}
+            <motion.div variants={itemVariants} className="text-center pt-2">
+              <button 
+                type="button"
+                onClick={handleResetPassword}
+                disabled={resetting}
+                className="text-xs text-muted-foreground font-semibold hover:text-primary transition-colors flex items-center justify-center w-full gap-1"
+              >
+                {resetting ? <Loader2 className="animate-spin" size={12} /> : null}
+                Forgot your admin password? Click here to send a reset link
+              </button>
+            </motion.div>
 
             {/* Assistance Link */}
             <motion.div variants={itemVariants} className="text-center pt-2">
